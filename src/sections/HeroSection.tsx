@@ -79,11 +79,11 @@ export const HeroSection: React.FC = () => {
 
             {/* Action Buttons */}
             <Reveal direction="up" delay={0.4}>
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Magnetic strength={0.3}>
                   <a
                     href="#projects"
-                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-accent-android text-[#05060A] font-sans font-bold text-sm tracking-wide shadow-[0_0_30px_rgba(61,220,132,0.35)] hover:shadow-[0_0_45px_rgba(61,220,132,0.65)] hover:scale-[1.02] transition-all duration-300"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-accent-android text-[#05060A] font-sans font-bold text-xs tracking-wide shadow-[0_0_25px_rgba(61,220,132,0.35)] hover:shadow-[0_0_40px_rgba(61,220,132,0.6)] hover:scale-[1.02] transition-all duration-300"
                   >
                     <span>View Projects</span>
                     <ArrowUpRight className="w-4 h-4" />
@@ -95,10 +95,34 @@ export const HeroSection: React.FC = () => {
                     href="https://play.google.com/store/apps/details?id=com.girvi.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-surface border border-surface-border text-typography-primary font-sans font-medium text-sm hover:border-accent-android/50 hover:bg-surface-hover transition-all duration-300"
+                    className="inline-flex items-center gap-1.5 px-4 py-3 rounded-2xl bg-surface border border-surface-border text-typography-primary font-sans font-medium text-xs hover:border-accent-android/50 hover:bg-surface-hover transition-all duration-300"
                   >
-                    <Play className="w-4 h-4 fill-accent-android text-accent-android" />
-                    <span>Girvi on Play Store</span>
+                    <Play className="w-3.5 h-3.5 fill-accent-android text-accent-android" />
+                    <span>Girvi</span>
+                  </a>
+                </Magnetic>
+
+                <Magnetic strength={0.3}>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.jewellery.invoice"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-3 rounded-2xl bg-surface border border-surface-border text-typography-primary font-sans font-medium text-xs hover:border-accent-cyan/50 hover:bg-surface-hover transition-all duration-300"
+                  >
+                    <Play className="w-3.5 h-3.5 fill-accent-cyan text-accent-cyan" />
+                    <span>JewelBill</span>
+                  </a>
+                </Magnetic>
+
+                <Magnetic strength={0.3}>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.advokosh.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-3 rounded-2xl bg-surface border border-surface-border text-typography-primary font-sans font-medium text-xs hover:border-accent-violet/50 hover:bg-surface-hover transition-all duration-300"
+                  >
+                    <Play className="w-3.5 h-3.5 fill-accent-violet text-accent-violet" />
+                    <span>AdvoKosh</span>
                   </a>
                 </Magnetic>
 
@@ -107,10 +131,10 @@ export const HeroSection: React.FC = () => {
                     href="https://github.com/Vaidik04"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-transparent border border-white/10 text-typography-secondary hover:text-typography-primary hover:border-white/20 font-sans font-medium text-sm transition-all duration-300"
+                    className="inline-flex items-center gap-1.5 px-4 py-3 rounded-2xl bg-transparent border border-white/10 text-typography-secondary hover:text-typography-primary hover:border-white/20 font-sans font-medium text-xs transition-all duration-300"
                   >
-                    <Download className="w-4 h-4" />
-                    <span>GitHub (@Vaidik04)</span>
+                    <Download className="w-3.5 h-3.5" />
+                    <span>GitHub</span>
                   </a>
                 </Magnetic>
               </div>
@@ -170,3 +194,4 @@ export const HeroSection: React.FC = () => {
     </section>
   );
 };
+

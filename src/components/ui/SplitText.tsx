@@ -92,3 +92,4 @@ export const SplitText: React.FC<SplitTextProps> = ({
     </span>
   );
 };
+

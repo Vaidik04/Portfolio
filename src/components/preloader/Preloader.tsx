@@ -122,3 +122,4 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     </AnimatePresence>
   );
 };
+

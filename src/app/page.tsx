@@ -5,6 +5,14 @@ import Lenis from "lenis";
 import { Preloader } from "@/components/preloader/Preloader";
 import { Navbar } from "@/components/navbar/Navbar";
 import { HeroSection } from "@/sections/HeroSection";
+import { AboutSection } from "@/sections/AboutSection";
+import { TechStackSection } from "@/sections/TechStackSection";
+import { ProjectsSection } from "@/sections/ProjectsSection";
+import { ProcessSection } from "@/sections/ProcessSection";
+import { CodeSection } from "@/sections/CodeSection";
+import { ExperienceSection } from "@/sections/ExperienceSection";
+import { ContactSection } from "@/sections/ContactSection";
+import { FooterSection } from "@/sections/FooterSection";
 
 export default function Home() {
   const [booted, setBooted] = useState(false);
@@ -38,23 +46,34 @@ export default function Home() {
       {/* 2. Floating Navbar */}
       <Navbar />
 
-      {/* Main Single Page Content */}
+      {/* Main Single Page Cinematic Content */}
       <main className="relative z-10 flex flex-col min-h-screen">
         {/* 3. Hero Section with 3D Phone Mockup */}
         <HeroSection />
 
-        {/* Section Placeholder Shell (for subsequent phase reviews) */}
-        <div id="about" className="py-24 border-t border-white/5 max-w-7xl mx-auto px-6 w-full text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-android/10 border border-accent-android/20 text-accent-android text-xs font-mono uppercase tracking-widest mb-4">
-            Next Milestone: Section 4 · About & Story
-          </div>
-          <h2 className="text-3xl font-heading font-bold text-typography-primary">
-            Ready for Section 2 Review: Design System & Hero Complete
-          </h2>
-          <p className="text-typography-secondary text-sm max-w-xl mx-auto mt-2">
-            The layout shell, preloader terminal sequence, custom cursor, magnetic pill navbar, and 3D floating phone hero are live and reactive to mouse movement.
-          </p>
-        </div>
+        {/* 4. About Section with Kinetic Scroll Highlight */}
+        <AboutSection />
+
+        {/* 5. Tech Stack & Matrix with Infinite Marquee */}
+        <TechStackSection />
+
+        {/* 6. Projects Showcase (Girvi, AdvoKosh, JewelBill Play Store Links & Modals) */}
+        <ProjectsSection />
+
+        {/* 7. Process & Architecture Deep Dive */}
+        <ProcessSection />
+
+        {/* 8. Production Code IDE Window with Mini Hardware Preview */}
+        <CodeSection />
+
+        {/* 9. Experience & Milestones Timeline */}
+        <ExperienceSection />
+
+        {/* 10. Direct Connection & Contact Generator */}
+        <ContactSection />
+
+        {/* 11. Cinematic Outlined Typography Footer with Live Time */}
+        <FooterSection />
       </main>
     </>
   );

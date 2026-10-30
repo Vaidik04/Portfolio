@@ -139,6 +139,7 @@ const PORTFOLIO_DATA = {
         "8 Offline Court Draft Templates: Bail petition, Maintenance, Vakalatnama, RTI, Consumer Complaint"
       ],
       links: {
+        playStore: "https://play.google.com/store/apps/details?id=com.advokosh.app",
         github: "https://github.com/Vaidik04/AdvoKosh"
       }
     },
@@ -148,8 +149,8 @@ const PORTFOLIO_DATA = {
       subtitle: "Jewellery Billing, Multi-Karat GST & Thermal POS Workstation",
       category: "android",
       featured: true,
-      badge: "Production Workstation",
-      badgeType: "production",
+      badge: "Available on Google Play",
+      badgeType: "playstore",
       platform: "Android (Java 17 & Room)",
       icon: "assets/jewelbill_icon.png",
       heroImage: "assets/jewelbill_screen.png",
@@ -165,6 +166,7 @@ const PORTFOLIO_DATA = {
         "Local database keeping full customer ledger and balance history"
       ],
       links: {
+        playStore: "https://play.google.com/store/apps/details?id=com.jewellery.invoice",
         github: "https://github.com/Vaidik04/InvoiceApp"
       }
     },

@@ -12,3 +12,4 @@ export function formatIndianCurrency(rupees: number) {
     maximumFractionDigits: 0,
   }).format(rupees);
 }
+

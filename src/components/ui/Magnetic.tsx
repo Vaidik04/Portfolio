@@ -53,3 +53,4 @@ export const Magnetic: React.FC<MagneticProps> = ({
     </motion.div>
   );
 };
+

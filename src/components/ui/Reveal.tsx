@@ -57,3 +57,4 @@ export const Reveal: React.FC<RevealProps> = ({
     </motion.div>
   );
 };
+

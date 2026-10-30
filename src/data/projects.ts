@@ -92,6 +92,7 @@ export const PROJECTS: Project[] = [
       "Vector PDF fee notes with 18% GST and dynamic NPCI UPI QR code",
     ],
     links: {
+      playStore: "https://play.google.com/store/apps/details?id=com.advokosh.app",
       github: "https://github.com/Vaidik04/AdvoKosh",
     },
   },
@@ -100,8 +101,8 @@ export const PROJECTS: Project[] = [
     name: "JewelBill (JewelInvoice)",
     tagline: "Jewellery Billing, Multi-Karat GST & Thermal POS Workstation",
     category: "commercial",
-    badge: "Production Workstation",
-    badgeType: "production",
+    badge: "Available on Google Play",
+    badgeType: "playstore",
     platform: "Native Android · Java 17",
     icon: "/assets/jewelbill_icon.png",
     heroImage: "/assets/jewelbill_screen.png",
@@ -122,6 +123,7 @@ export const PROJECTS: Project[] = [
       "Complete customer transaction ledger and balance tracking",
     ],
     links: {
+      playStore: "https://play.google.com/store/apps/details?id=com.jewellery.invoice",
       github: "https://github.com/Vaidik04/InvoiceApp",
     },
   },
@@ -272,3 +274,4 @@ export const PROJECTS: Project[] = [
     },
   },
 ];
+
