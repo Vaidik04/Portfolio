@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 128 128" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">Vaidik Tech — standalone symbol</title>
+  
+  <g transform="translate(5 19)">
+      <path d="M10 10 H31 L57 55 L47 73 C44 79 39 79 35 72 Z" fill="#101827"/>
+      <path d="M51 8 H108 L96 28 H39 Z" fill="#16CDBB"/>
+      <path d="M70 26 H93 L61 75 C57 81 51 82 46 78 L38 73 L63 30 Z" fill="#16CDBB"/>
+    </g>
+</svg>

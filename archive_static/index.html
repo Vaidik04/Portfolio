@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaidik Gandhi — Independent Android Developer & Founder of VaidikTech</title>
+  <meta name="description" content="Portfolio of Vaidik Gandhi: Independent Android Developer & Founder of VaidikTech. Native Android (Kotlin, Jetpack, Compose, Room, MVVM/MVI), Offline-First Architecture, and Edge AI Systems.">
+  <meta name="keywords" content="Vaidik Gandhi, VaidikTech, Android Developer, Girvi, JewelBill, KaamKram, Kotlin, Jetpack Compose, Room Database, Offline-First, AI, MediaPipe, ML Kit, LNCT Bhopal">
+  <meta name="author" content="Vaidik Gandhi">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vaidik Gandhi — Independent Android Developer & Founder of VaidikTech">
+  <meta property="og:description" content="Building practical, offline-first mobile products and intelligent systems from idea to production.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/88609024?v=4">
+  <meta property="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50%' y='65%' font-size='55' font-weight='800' fill='white' text-anchor='middle' font-family='sans-serif'>VG</text></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Ambient Background Overlay -->
+  <div class="bg-grid-overlay"></div>
+
+  <!-- Header & Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo">
+        <div class="brand-icon" style="background: transparent; box-shadow: none;">
+          <img src="assets/vaidiktech_symbol.svg" alt="VaidikTech" style="width: 36px; height: 36px;">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Vaidik Gandhi</span>
+          <span class="brand-subtitle">Founder · VaidikTech</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#pillars" class="nav-link">Philosophy</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#journey" class="nav-link">Journey</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Navigation Actions -->
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="theme-btn" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun"></i>
+        </button>
+
+        <a href="#contact" class="btn-primary" style="padding: 0.6rem 1.25rem; font-size: 0.88rem;">
+          <span>Get in Touch</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+
+        <button id="mobile-toggle-btn" class="mobile-toggle" aria-label="Open Navigation Menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-drawer" class="mobile-menu-drawer">
+    <a href="#about" class="nav-link">About</a>
+    <a href="#pillars" class="nav-link">Philosophy & Principles</a>
+    <a href="#architecture" class="nav-link">Architecture & Code</a>
+    <a href="#projects" class="nav-link">Launched & Featured Projects</a>
+    <a href="#skills" class="nav-link">Skills & Stack</a>
+    <a href="#journey" class="nav-link">Education & Journey</a>
+    <a href="#contact" class="nav-link">Contact & Inquiries</a>
+  </div>
+
+  <main>
+    <!-- =====================================================================
+         HERO SECTION
+         ===================================================================== -->
+    <section id="hero" class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <!-- Hero Text -->
+          <div class="hero-text">
+            <div class="status-badge">
+              <span class="pulse-dot"></span>
+              <span>Available for Android & AI Engineering · Founder @ VaidikTech</span>
+            </div>
+
+            <h1 class="hero-title">
+              Building <span class="text-gradient">practical, offline-first</span> mobile products that solve real-world problems.
+            </h1>
+
+            <p class="hero-subtitle">
+              I am an independent Android developer and the person behind <strong>VaidikTech</strong>. I take software across the entire lifecycle: understanding how people work, designing the user experience, engineering dependable native architecture, and publishing real products.
+            </p>
+
+            <div class="hero-cta">
+              <a href="#projects" class="btn-primary">
+                <i data-lucide="sparkles"></i>
+                <span>Explore Featured Projects</span>
+              </a>
+
+              <a href="https://play.google.com/store/apps/details?id=com.girvi.app" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                <i data-lucide="play" style="color: #10b981;"></i>
+                <span>Girvi on Google Play</span>
+              </a>
+
+              <a href="https://github.com/Vaidik04" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                <i data-lucide="github"></i>
+                <span>GitHub (@Vaidik04)</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Avatar & Spotlight Card -->
+          <div class="hero-avatar-card">
+            <div class="avatar-wrapper">
+              <div class="avatar-img-box">
+                <img src="assets/avatar.png" alt="Vaidik Gandhi" onerror="this.src='https://avatars.githubusercontent.com/u/88609024?v=4'">
+              </div>
+            </div>
+
+            <!-- Floating Badge Card -->
+            <div class="floating-stat-card">
+              <div class="floating-icon">
+                <i data-lucide="award"></i>
+              </div>
+              <div>
+                <div class="val">Live Product</div>
+                <div class="lbl">Girvi · Published on Google Play</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metrics Counter Grid -->
+        <div id="stats-strip-container" class="stats-strip">
+          <!-- Rendered via js/app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         ABOUT & ENGINEERING PHILOSOPHY
+         ===================================================================== -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i data-lucide="user"></i> Background & Vision</span>
+          <h2 class="section-title">Beyond Writing Code: Engineering Useful Technology</h2>
+          <p class="section-description">
+            Software becomes meaningful when it solves a problem for someone outside the development environment. I believe useful software should not force people to change how they work—it should make their existing work easier, faster, and more organised.
+          </p>
+        </div>
+
+        <!-- 4 Philosophy Pillars Grid -->
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-header">
+              <div class="pillar-icon-box"><i data-lucide="users"></i></div>
+              <span class="pillar-tag">User First</span>
+            </div>
+            <div>
+              <h3 class="pillar-title">Build for Actual Users, Not Just Demos</h3>
+              <p class="pillar-subtitle">Problem-Oriented Engineering</p>
+            </div>
+            <p class="pillar-desc">
+              My journey began with curiosity about how technology can solve everyday problems. Over time, that curiosity matured into a commitment to building complete applications—not demonstrations or academic prototypes, but resilient products that businesses and people depend upon daily.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-header">
+              <div class="pillar-icon-box"><i data-lucide="feather"></i></div>
+              <span class="pillar-tag">Clarity</span>
+            </div>
+            <div>
+              <h3 class="pillar-title">Keep Things Simple Without Compromising Power</h3>
+              <p class="pillar-subtitle">Frictionless User Experience</p>
+            </div>
+            <p class="pillar-desc">
+              A large feature checklist does not make an application useful. Good software makes important operations easy to discover and effortless to finish. Business software should reduce effort—not introduce another complicated barrier.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-header">
+              <div class="pillar-icon-box"><i data-lucide="database"></i></div>
+              <span class="pillar-tag">Resilience</span>
+            </div>
+            <div>
+              <h3 class="pillar-title">Offline-First & Local Data Resilience</h3>
+              <p class="pillar-subtitle">Zero Cloud Dependency</p>
+            </div>
+            <p class="pillar-desc">
+              For applications managing financial ledgers and confidential business information, reliability is non-negotiable. I prioritize Room Database, structured SQLite schemas, encrypted storage, and architectures that operate seamlessly without constant internet.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-header">
+              <div class="pillar-icon-box"><i data-lucide="rocket"></i></div>
+              <span class="pillar-tag">Ownership</span>
+            </div>
+            <div>
+              <h3 class="pillar-title">Think Beyond Development</h3>
+              <p class="pillar-subtitle">End-to-End Product Lifecycle</p>
+            </div>
+            <p class="pillar-desc">
+              Building an application does not end when code compiles. User testing, understanding real feedback, maintaining performance, publishing on the Google Play Console, and continuous product iteration are fundamental responsibilities of software engineering.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         CORE ENGINEERING PILLARS
+         ===================================================================== -->
+    <section id="pillars" style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i data-lucide="cpu"></i> Engineering Pillars</span>
+          <h2 class="section-title">Architectural Standards & Rigorous Principles</h2>
+          <p class="section-description">
+            Every product engineered under VaidikTech adheres to strict architectural patterns designed for accuracy, data sovereignty, and hardware efficiency.
+          </p>
+        </div>
+
+        <div id="pillars-grid" class="pillars-grid">
+          <!-- Rendered via js/app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         INTERACTIVE CODE & ARCHITECTURE SHOWCASE
+         ===================================================================== -->
+    <section id="architecture">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i data-lucide="terminal"></i> Inside the Codebase</span>
+          <h2 class="section-title">Architecture, Patterns & Engineering Decisions</h2>
+          <p class="section-description">
+            Inspect real implementation snippets demonstrating monetary math integrity, reactive offline data streams, edge GPU vision processing, and adaptive optimization algorithms.
+          </p>
+        </div>
+
+        <div class="code-showcase-container">
+          <!-- Tabs Navigation -->
+          <div id="code-tabs-nav" class="code-nav-bar">
+            <!-- Rendered via js/app.js -->
+          </div>
+
+          <!-- Tab Content Body -->
+          <div class="code-body">
+            <div class="code-info">
+              <span id="code-info-tag" class="code-info-tag">KOTLIN · ARCHITECTURE</span>
+              <h3 id="code-info-title" class="code-info-title">Integer Paise Financial Pattern</h3>
+              <p id="code-info-desc" class="code-info-desc">
+                Why KaamKram and JewelBill forbid Float & Double in monetary calculations. Storing money strictly as Long (paise) prevents catastrophic fractional currency drift.
+              </p>
+            </div>
+
+            <div class="code-editor-box">
+              <div class="editor-top-bar">
+                <div class="editor-dots">
+                  <div class="editor-dot dot-red"></div>
+                  <div class="editor-dot dot-yellow"></div>
+                  <div class="editor-dot dot-green"></div>
+                </div>
+                <div id="code-editor-filename" class="editor-filename">MoneyMath.kt</div>
+                <button id="copy-snippet-btn" class="copy-code-btn" title="Copy code to clipboard">
+                  <i data-lucide="copy"></i>
+                  <span>Copy</span>
+                </button>
+              </div>
+              <pre class="code-pre"><code id="code-editor-content"></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         PROJECTS SHOWCASE SECTION
+         ===================================================================== -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i data-lucide="layers"></i> Portfolio Showcase</span>
+          <h2 class="section-title">Featured Products & Engineering Systems</h2>
+          <p class="section-description">
+            A comprehensive catalog combining Google Play Store launched products, local flagship systems, and open-source engineering repositories.
+          </p>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="filter-search-bar">
+          <!-- Live Search Bar -->
+          <div class="search-input-wrapper">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" id="project-search-input" placeholder="Search by name, tech (e.g. Kotlin, Room, YOLO, FastAPI), or feature...">
+          </div>
+
+          <!-- Category Pills -->
+          <div class="category-filter-nav">
+            <button class="filter-pill active" data-category="all">All Projects (16)</button>
+            <button class="filter-pill" data-category="android">Android & Mobile Flagships</button>
+            <button class="filter-pill" data-category="ai-vision">AI & Computer Vision</button>
+            <button class="filter-pill" data-category="systems">Distributed & Quantum Systems</button>
+            <button class="filter-pill" data-category="productivity">Productivity & Desktop Tools</button>
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projects-grid" class="projects-grid">
+          <!-- Dynamically populated via js/app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TECHNICAL SKILLS MATRIX
+         ===================================================================== -->
+    <section id="skills" style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i data-lucide="wrench"></i> Technical Capabilities</span>
+          <h2 class="section-title">Skills & Engineering Stack</h2>
+          <p class="section-description">
+            Proficiencies developed through building commercial Android applications, deploying on-device machine learning models, and writing high-concurrency microservices.
+          </p>
+        </div>
+
+        <div class="skills-container">
+          <!-- Mobile & Android -->
+          <div class="skills-category-card">
+            <div class="skills-card-header">
+              <div class="skills-cat-icon"><i data-lucide="smartphone"></i></div>
+              <h3 class="skills-cat-title">Native Android & Mobile</h3>
+            </div>
+            <div id="mobile-skills-list" class="skills-list"></div>
+          </div>
+
+          <!-- AI & Vision -->
+          <div class="skills-category-card">
+            <div class="skills-card-header">
+              <div class="skills-cat-icon"><i data-lucide="eye"></i></div>
+              <h3 class="skills-cat-title">AI, Vision & Machine Learning</h3>
+            </div>
+            <div id="ai-skills-list" class="skills-list"></div>
+          </div>
+
+          <!-- Backend & Systems -->
+          <div class="skills-category-card">
+            <div class="skills-card-header">
+              <div class="skills-cat-icon"><i data-lucide="server"></i></div>
+              <h3 class="skills-cat-title">Backend, Python & Microservices</h3>
+            </div>
+            <div id="backend-skills-list" class="skills-list"></div>
+          </div>
+
+          <!-- Tools & Production -->
+          <div class="skills-category-card">
+            <div class="skills-card-header">
+              <div class="skills-cat-icon"><i data-lucide="tool"></i></div>
+              <h3 class="skills-cat-title">Tools, Hardware & Release</h3>
+            </div>
+            <div id="tools-skills-list" class="skills-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         JOURNEY & EDUCATION TIMELINE
+         ===================================================================== -->
+    <section id="journey">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i data-lucide="graduation-cap"></i> Milestones</span>
+          <h2 class="section-title">Education & Engineering Journey</h2>
+          <p class="section-description">
+            From initial curiosity to founding VaidikTech and shipping products to the Google Play Store.
+          </p>
+        </div>
+
+        <div id="timeline-container" class="timeline-container">
+          <!-- Populated via js/app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         CONTACT & INQUIRY HUB
+         ===================================================================== -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-hub-card">
+          <!-- Left Column -->
+          <div class="contact-left">
+            <span class="section-tag" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3);">
+              <i data-lucide="mail"></i> Let's Collaborate
+            </span>
+
+            <h2 class="contact-headline">Let’s Build Something Useful Together.</h2>
+
+            <p class="contact-subtext">
+              I am interested in connecting with developers, founders, businesses, and engineering leaders who are building meaningful technology products. Whether you want to discuss native Android development, explore an offline-first system, or collaborate on practical products, I value conversations that lead to useful outcomes.
+            </p>
+
+            <div class="contact-badges">
+              <div class="contact-badge-item">
+                <i data-lucide="check-circle" class="badge-check-icon"></i>
+                <span>Open for Android Engineering Roles & Contracts</span>
+              </div>
+              <div class="contact-badge-item">
+                <i data-lucide="check-circle" class="badge-check-icon"></i>
+                <span>Consulting on Local-First & Room SQLite Architecture</span>
+              </div>
+              <div class="contact-badge-item">
+                <i data-lucide="check-circle" class="badge-check-icon"></i>
+                <span>Edge AI & Computer Vision Mobile Integrations</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Message Generator -->
+          <div class="contact-right-box">
+            <h3 class="box-title">Quick Inquiry Generator</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Select your discussion topic to pre-fill an email template:</p>
+
+            <div class="preset-message-tabs">
+              <button class="preset-tab active" data-preset="android">Android App</button>
+              <button class="preset-tab" data-preset="ai">AI / Vision Collaboration</button>
+              <button class="preset-tab" data-preset="general">General Inquiry</button>
+            </div>
+
+            <div id="msg-preview-area" class="message-preview-area"></div>
+
+            <div class="contact-actions-row">
+              <button id="copy-msg-btn" class="copy-msg-btn">
+                <i data-lucide="copy"></i>
+                <span>Copy Draft</span>
+              </button>
+
+              <a id="send-mail-btn" href="#" class="send-mail-btn">
+                <i data-lucide="send"></i>
+                <span>Send via Email</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       SITE FOOTER
+       ===================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon" style="background: transparent; box-shadow: none;">
+              <img src="assets/vaidiktech_symbol.svg" alt="VaidikTech" style="width: 36px; height: 36px;">
+            </div>
+            <div class="brand-text">
+              <span class="brand-title">Vaidik Gandhi</span>
+              <span class="brand-subtitle">Founder · VaidikTech</span>
+            </div>
+          </div>
+          <p class="footer-tagline">
+            Building useful technology, one product at a time. Native Android, Offline-First Architecture, and Edge AI.
+          </p>
+        </div>
+
+        <div class="footer-social-links">
+          <a href="https://github.com/Vaidik04" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="GitHub Profile">
+            <i data-lucide="github"></i>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.girvi.app" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Google Play Store">
+            <i data-lucide="play"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/vaidik-gandhi/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="LinkedIn Profile">
+            <i data-lucide="linkedin"></i>
+          </a>
+          <a href="mailto:vaidikgandhi@gmail.com" class="footer-social-btn" title="Send Email">
+            <i data-lucide="mail"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Vaidik Gandhi · VaidikTech. All rights reserved.</div>
+        <div>Crafted with precision for performance, accessibility, and clean design.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       PROJECT DETAILS MODAL DRAWER
+       ===================================================================== -->
+  <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content-card">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close details modal">
+        <i data-lucide="x"></i>
+      </button>
+      <div id="modal-dynamic-body" class="modal-body">
+        <!-- Rendered via js/app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-msg"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+
