@@ -307,3 +307,4 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
     </div>
   );
 }
+
