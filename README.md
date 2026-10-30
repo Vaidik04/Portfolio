@@ -1,96 +1,79 @@
 # Vaidik Gandhi — Developer Portfolio & Systems Showcase
 
 > **Independent Android Developer · Founder of VaidikTech**  
-> *Native Android (Kotlin, Jetpack, Compose, Room, MVVM/MVI) · Offline-First Architecture · Edge AI & Computer Vision*  
+> *Native Android (Kotlin 2.0+, Jetpack Compose, Room SQLite, SQLCipher, MVVM/MVI) · Offline-First Architecture · On-Device AI & Hardware P2P Swarms*  
 > **Google Play Published App:** [Girvi](https://play.google.com/store/apps/details?id=com.girvi.app) · **GitHub:** [@Vaidik04](https://github.com/Vaidik04)
 
 ---
 
-## 🌟 Highlights of the Portfolio
+## 🌟 The Complete Verified Project Portfolio
 
-This portfolio website consolidates Vaidik Gandhi's entire engineering portfolio across commercial Android applications, cutting-edge machine learning and computer vision systems, distributed architectures, and Python data platforms:
+All project information in this portfolio has been extracted and fact-checked directly against production codebases across `D:\Vakalat`, `D:\SwarmOS`, `D:\GridCare`, `D:\AgriLink`, `D:\GirviAndroid`, `D:\InvoiceApp`, `D:\KaamKram`, `D:\Python`, and [GitHub @Vaidik04](https://github.com/Vaidik04):
 
-1. **Launched Android Flagships:**
-   - **Girvi (गिरवी)**: Digital management solution for pawn & girvi businesses. Published on Google Play. Built with Kotlin, Room, MVVM, and offline-first local storage.
-   - **JewelBill (InvoiceApp)**: Jewellery retail billing, automated GST breakdown, PDF receipt generation, and 1-tap WhatsApp sharing in Java 17 and Room.
-   - **KaamKram (कामक्रम)**: MVI / Clean Architecture Android OS for Indian solo tradespeople, featuring integer paise precision financial calculations and Hindi/English localization.
-   - **FreeAIInvoice**: Zero-cost, privacy-first invoice and GST scanner utilizing Google ML Kit OCR on-device, Jetpack Compose, and CameraX.
-   - **SkyCanvas – AI Air Painter**: Mid-air touchless painting on Android using MediaPipe Hands running on GPU delegates with sub-15ms latency and voice control.
-   - **AdvoKosh**: Confidential, offline-first advocate case dossier and court hearing tracker in Kotlin & Material Design 3.
+### 1. Flagship Commercial Android Applications
+* **[Girvi (गिरवी)](https://play.google.com/store/apps/details?id=com.girvi.app)** *(Published on Google Play · Kotlin, Room DB, MVVM)*  
+  Digital management solution for Indian pawn & girvi businesses. Verified with **Zero `android.permission.INTERNET`** for 100% sandboxed offline privacy. Manages customer pledges, monthly interest calculations, CameraX pledge photos, and fast full-text indexing.
+* **[AdvoKosh (एडवोकोश / Vakalat)](https://github.com/Vaidik04/AdvoKosh)** *(Production Chamber OS · Kotlin 2.0+, Jetpack Compose Material 3, Dagger Hilt)*  
+  Solo advocate case diary and chamber practice management OS. Features **Room v4 encrypted with SQLCipher 256-bit AES-CBC** with keys sealed in hardware **Android Keystore `MasterKey`**. Includes 8 WorkManager alert workers (Cause List 8 PM & 7 AM, 2-hour court countdown), BNS/BNSS/BSA criminal law cross-converter, Section 138 NI Act limitation calculator, 8 offline court draft templates (Bail, Maintenance, Vakalatnama), courtroom voice dictation, and vector PDF fee notes with dynamic NPCI UPI QR codes.
+* **[JewelBill (JewelInvoice / InvoiceApp)](https://github.com/Vaidik04/InvoiceApp)** *(Production Workstation · Java 17, Room SQLite, ESC/POS Thermal Printing)*  
+  Jewellery retail billing workstation supporting multi-karat gold (24K, 22K, 18K, 14K) and silver billing, split CGST/SGST/IGST tax breakdowns, direct Bluetooth ESC/POS 58mm/80mm thermal receipt printing, and 1-tap WhatsApp PDF invoice sharing.
+* **[SwarmOS](https://github.com/Vaidik04/SwarmOS)** *(Production P2P Swarm · Kotlin, Jetpack Compose, Google Nearby Connections)*  
+  Cooperative machine-learning intelligence on nearby Android phones. Allows a cluster of nearby phones to distribute heavy document OCR workloads over local wireless (Wi-Fi Direct & Bluetooth) using Google Nearby Connections `P2P_CLUSTER` with **zero internet**, **zero cloud servers**, and mutual numeric verification digits. Shipped as a fully signed release build (`swarmos-release.jks`).
+* **[GridCare](https://github.com/Vaidik04)** *(Release Candidate RC1 · Kotlin 2.3+, Jetpack Compose, Room SQLite)*  
+  Offline-first solar asset, preventative maintenance & field-service platform for Android. Adheres to OWASP MASVS-L1/L2 and DPDP Act 2023 with verified zero network permissions. Features solar equipment passports, work orders, inspection checklists, and AES-256-GCM + PBKDF2 (600k rounds) encrypted backups. 25/25 unit tests green; 2.61 MB R8-minified production APK.
+* **[KaamKram (कामक्रम)](https://github.com/Vaidik04/KaamKram)** *(Production MVI · Clean Architecture, Kotlin, Room Local-First)*  
+  The Job-to-Payment OS for Indian solo tradespeople (electricians, plumbers, AC technicians). Features **Integer Paise financial math** (`Long` storage, zero float rounding drift), standard Indian number grouping (`₹1,23,456`), Hindi & English localization, and an append-only material audit trail.
+* **[Free AI Invoice & Accounting Assistant](file:///D:/Python/FreeAIInvoice)** *(Kotlin, Jetpack Compose, ML Kit OCR, CameraX)*  
+  A zero-cost, offline-first invoice scanner running Google ML Kit text recognition on-device. Features rule-based GST parsing, P&L reports, duplicate detection, voice logging, and encrypted PIN security without cloud dependency.
+* **[Vyapar Khata (DigitalKhata)](https://github.com/Vaidik04)** *(Kotlin, Room SQLite, Material 3)*  
+  Offline-first credit and debit ledger application replacing paper bahi-khata notebooks for Indian neighborhood kirana stores, featuring auto-balancing credit/debit logs and 1-tap WhatsApp payment reminders.
 
-2. **Advanced AI, Vision & Systems Engineering:**
-   - **AI Disaster SOS Mesh Network**: Life-saving disaster response platform combining YOLOv8 human detection in debris, NLP distress keyword detection, and offline Bluetooth/Wi-Fi Direct peer-to-peer mesh packet hopping with a live Leaflet rescue heatmap dashboard.
-   - **Q-Transit Nexus & QRoute**: Adaptive quantum-inspired urban transportation digital twin featuring Discrete Quantum Particle Swarm Optimization (Adaptive D-QPSO) microservices in FastAPI with SUMO simulation and live WebSockets.
-   - **EcoHealth AI**: Environmental pollution forecasting (AQI, PM2.5, UV) correlated with user symptom journals to predict health risks and issue proactive preventive alerts.
-   - **Stock Tracker Pro**: Quantitative market analysis workstation with Random Forest price forecasting, technical indicators (RSI, MACD), and automated alert triggers.
-   - **CareerConnect MVP**: Deterministic eligibility validator and explainable weighted multi-factor match scoring engine for university student recruitment pipelines.
-   - **NPTEL AI Study Agent**: Desktop screen-capture vision reasoner verifying algorithmic and discrete mathematics questions.
-   - **SwarmOS**: Distributed node coordination and fault-tolerant decentralized scheduling framework in Java 17.
-   - **Focus**: Minimalist offline Pomodoro and habit streak tracker with SQLite analytics.
-
-3. **Interactive Portfolio Capabilities:**
-   - **Multi-Category Filter & Instant Search**: Filter across Android, AI/Vision, Systems, and Productivity with instant real-time text query matching.
-   - **Interactive Code & Architecture Showcase**: Tabbed viewer revealing the Integer Paise Pattern, Offline-First Room Repository, MediaPipe GPU Pipeline, and D-QPSO Quantum Routing algorithms.
-   - **Project Deep-Dive Modals**: Full architectural specs, problem statement, solution design, and direct Google Play & GitHub links.
-   - **Dark / Light Theme Toggle**: Seamless transition with persistent state in `localStorage`.
-   - **Inquiry Generator**: Pre-filled templates for Android Product development, AI collaborations, and general inquiries.
+### 2. AI, Computer Vision, Distributed & Web3 Systems
+* **[AgriLink](https://github.com/Vaidik04)** *(Web3 & AI Vernacular Agriculture Ecosystem · Kotlin, NLP, Solidity, Polygon)*  
+  Decentralized agricultural platform featuring Vernacular Voice AI for live mandi prices, non-transferable Soulbound Token (SBT) farmer credit scores, an on-chain EscrowVault locking MATIC with a 48-hour dispute safeguard, and carbon credit rewards.
+* **[SkyCanvas – AI Air Painter](file:///D:/Python/SkyCanvas)** *(Kotlin, MediaPipe Hands GPU Delegate, CameraX, Android Canvas)*  
+  Touchless mid-air drawing on Android using real-time computer vision hand tracking (<15ms latency on mobile GPU). Draw with your index finger, control shapes via gestures, and switch tools with voice commands.
+* **[AI Disaster Response & SOS Mesh System](https://github.com/Vaidik04/AIDisasterSOS_app)** *(Full-Stack AI · Python, Flask, YOLOv8, Nearby Mesh, React Leaflet)*  
+  Life-saving disaster coordination platform that hops SOS messages through peer-to-peer Wi-Fi Direct and Bluetooth mesh networks during cellular outages. Utilizes YOLOv8 to detect trapped humans in aerial/camera photos, analyzes text/voice distress sentiment, and renders a prioritized rescue heatmap dashboard.
+* **[Q-Transit Nexus & QRoute](https://github.com/Vaidik04/QRoute)** *(Python 3.9+, FastAPI Microservices, Adaptive D-QPSO, SUMO)*  
+  Predictive multimodal digital twin for urban transportation. Employs Discrete Quantum-inspired Particle Swarm Optimization (Adaptive D-QPSO) to dynamically re-route fleets during traffic incidents, broadcasting GeoJSON updates over real-time WebSockets.
+* **[Stock Tracker Pro](https://github.com/Vaidik04/StockTracker-Portfolio-Prediction)** *(Python Desktop · Tkinter, Random Forest Regression, Matplotlib)*  
+  Quantitative analysis and market tracking workstation featuring machine-learning price predictions, RSI/MACD technical indicators, 30-second automated price alerts, and Excel exports.
+* **[CareerConnect MVP](https://github.com/Vaidik04/CareerConnect)** *(Python, FastAPI, Explainable Multi-Factor Matching)*  
+  Opportunity portal for students featuring a deterministic eligibility gatekeeper, explainable weighted match scoring (Skills 35%, Eligibility 25%, Interests 15%), and an interactive Kanban application tracker.
+* **[Vaidik Ratnam Platform](https://vaidikratnam.com)** *(Next.js App Router, TypeScript, Tailwind CSS, Supabase)*  
+  Full-stack digital showcase, custom goldsmithing studio, and Vedic consultation hub engineered for a family-owned Indian jewellery brand.
+* **[Focus Companion](file:///D:/Python/Projects/Focus)** *(Python, SQLite, Pomodoro Engine)*  
+  Minimalist offline deep work companion with custom interval timers, habit streaks, task prioritization, and local SQLite productivity analytics.
 
 ---
 
-## 🚀 Quick Start / Local Preview
+## 🎨 Interactive Capabilities of the Portfolio
 
-You can open and view the portfolio immediately with zero build step required:
+1. **Brand Identity**:
+   - Features the official **VaidikTech brand mark & symbol** (`assets/vaidiktech_symbol.svg`).
+2. **Interactive Code & Architecture Showcase**:
+   - **`EncryptedChamberStorage.kt` (AdvoKosh)**: SQLCipher 256-bit AES-CBC factory with Android Keystore `MasterKey` (AES-256-GCM).
+   - **`NearbyTransport.kt` (SwarmOS)**: Google Nearby Connections `P2P_CLUSTER` air-gapped high-throughput ML cluster.
+   - **`MoneyMath.kt` (Integer Paise Pattern)**: Showing how `inline value class Paise(val amount: Long)` prevents monetary rounding drift in KaamKram and JewelBill.
+   - **`HandLandmarkerHelper.kt` (MediaPipe GPU Delegate)**: Real-time hand landmark pipeline on Android GPU.
+3. **Instant Filter & Search**:
+   - Real-time text search across title, subtitle, summary, and tech stack tags.
+   - Category filtering across All Projects (16), Android & Mobile Flagships, AI & Vision, Distributed & Quantum Systems, and Productivity.
+4. **Rich Modal Project Viewer**:
+   - Displays real app icons, verified screenshots (AdvoKosh, JewelBill), problem statements, architectural solutions, and direct store/repo links.
+5. **Quick Inquiry Generator**:
+   - Pre-formatted templates for Android product development, AI/distributed collaborations, and general outreach with 1-click mailto or clipboard copy.
 
-### Option 1: Direct Browser Launch
-Simply double-click `index.html` in your file explorer, or right-click `index.html` → **Open with Chrome / Edge**.
+---
 
-### Option 2: Run via Node.js or Python Local Server
-```bash
-# In D:\Portfolio
+## 🚀 How to View Locally
 
-# Using Python:
+Simply open [`D:\Portfolio\index.html`](file:///D:/Portfolio/index.html) in your browser:
+```powershell
+cd D:\Portfolio
 python -m http.server 8000
-# Then visit http://localhost:8000 in your browser
-
-# Or using npx:
-npx serve .
-```
-
----
-
-## 🌐 Deploy to GitHub Pages (1-Step)
-
-Because this website is built as an ultra-fast, zero-dependency static application, deploying it to GitHub Pages takes less than a minute:
-
-1. Create a repository on GitHub named `Vaidik04.github.io` (or push to a branch in your repository).
-2. Push this folder's contents:
-   ```bash
-   cd D:\Portfolio
-   git init
-   git add .
-   git commit -m "feat: initial release of Vaidik Gandhi portfolio"
-   git branch -M main
-   git remote add origin https://github.com/Vaidik04/Vaidik04.github.io.git
-   git push -u origin main
-   ```
-3. Your portfolio is immediately live at `https://vaidik04.github.io/`!
-
----
-
-## 📂 Project Directory Structure
-
-```
-D:\Portfolio\
-├── index.html              # Main semantic HTML5 single-page application
-├── css\
-│   └── style.css           # Modern Obsidian Dark design system, responsive styles & animations
-├── js\
-│   ├── data.js             # Comprehensive structured database of 15+ merged projects & skills
-│   └── app.js              # Interactive UI controller (search, filters, modals, code tabs, theme)
-├── assets\
-│   ├── avatar.png          # High-resolution developer avatar
-│   └── b.jpg               # Developer asset / graphic
-└── README.md               # Project documentation & deployment guide
+# Visit http://localhost:8000
 ```
 
 ---

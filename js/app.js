@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (codeInfoTitle) codeInfoTitle.textContent = snippet.title;
     if (codeInfoDesc) codeInfoDesc.textContent = snippet.description;
-    if (codeInfoTag) codeInfoTag.textContent = snippet.language.toUpperCase() + " · ARCHITECTURE";
+    if (codeInfoTag) codeInfoTag.textContent = snippet.language.toUpperCase() + " · ARCHITECTURE SPEC";
     if (codeEditorFile) codeEditorFile.textContent = snippet.file;
     if (codeEditorContent) {
       codeEditorContent.textContent = snippet.code;
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem;">
           <div style="font-size: 2.5rem; margin-bottom: 0.8rem; color: var(--text-muted);"><i data-lucide="search-x"></i></div>
           <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">No projects match your filter</h3>
-          <p style="color: var(--text-secondary); max-width: 400px; margin: 0 auto;">Try searching for another keyword like "Kotlin", "Room", "YOLO", or select "All Projects".</p>
+          <p style="color: var(--text-secondary); max-width: 400px; margin: 0 auto;">Try searching for another keyword like "Kotlin", "Room", "SQLCipher", "Nearby", or select "All Projects".</p>
         </div>
       `;
       if (window.lucide) window.lucide.createIcons();
@@ -211,9 +211,20 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="project-platform">${p.platform}</span>
           </div>
 
-          <div>
-            <h3 class="project-title">${p.title}</h3>
-            <p class="project-subtitle">${p.subtitle}</p>
+          <div style="display: flex; align-items: center; gap: 0.85rem;">
+            ${p.icon ? `
+              <div style="width: 48px; height: 48px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                <img src="${p.icon}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            ` : `
+              <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(56, 189, 248, 0.1); border: 1px solid var(--border-subtle); flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--accent-sky);">
+                <i data-lucide="box"></i>
+              </div>
+            `}
+            <div>
+              <h3 class="project-title" style="font-size: 1.25rem;">${p.title}</h3>
+              <p class="project-subtitle" style="font-size: 0.82rem;">${p.subtitle}</p>
+            </div>
           </div>
 
           <p class="project-summary">${p.summary}</p>
@@ -238,6 +249,11 @@ document.addEventListener("DOMContentLoaded", () => {
               ${p.links.github ? `
                 <a href="${p.links.github}" target="_blank" rel="noopener noreferrer" class="ext-icon-link" title="GitHub Repository">
                   <i data-lucide="github"></i>
+                </a>
+              ` : ''}
+              ${p.links.demo ? `
+                <a href="${p.links.demo}" target="_blank" rel="noopener noreferrer" class="ext-icon-link" title="Live Website / Demo">
+                  <i data-lucide="globe"></i>
                 </a>
               ` : ''}
             </div>
@@ -291,16 +307,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modalBody.innerHTML = `
       <div class="modal-header-section">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
           <span class="${badgeClass}">
             <i data-lucide="award"></i>
             <span>${p.badge}</span>
           </span>
           <span class="project-platform">${p.platform}</span>
         </div>
-        <h2 class="modal-title">${p.title}</h2>
-        <p class="modal-subtitle">${p.subtitle}</p>
+
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+          ${p.icon ? `
+            <div style="width: 58px; height: 58px; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); flex-shrink: 0;">
+              <img src="${p.icon}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          ` : ''}
+          <div>
+            <h2 class="modal-title">${p.title}</h2>
+            <p class="modal-subtitle">${p.subtitle}</p>
+          </div>
+        </div>
       </div>
+
+      ${p.gallery && p.gallery.length > 0 ? `
+        <div class="modal-block">
+          <h4 class="modal-block-title"><i data-lucide="image"></i> Verified Application Screenshots</h4>
+          <div style="display: flex; gap: 0.75rem; overflow-x: auto; padding: 0.5rem 0;">
+            ${p.gallery.map(img => `
+              <div style="flex: 0 0 160px; height: 260px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); background: #000;">
+                <img src="${img}" alt="Screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      ` : ''}
 
       <div class="modal-block">
         <h4 class="modal-block-title"><i data-lucide="alert-circle"></i> The Real-World Problem</h4>
@@ -342,6 +381,12 @@ document.addEventListener("DOMContentLoaded", () => {
           <a href="${p.links.github}" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 0.75rem 1.4rem;">
             <i data-lucide="github"></i>
             <span>Source Code / Repository</span>
+          </a>
+        ` : ''}
+        ${p.links.demo ? `
+          <a href="${p.links.demo}" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 0.75rem 1.4rem;">
+            <i data-lucide="globe"></i>
+            <span>Visit Live Platform</span>
           </a>
         ` : ''}
       </div>
@@ -453,11 +498,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const messagePresets = {
     android: {
       subject: "Android Product Development Inquiry — VaidikTech",
-      body: `Hi Vaidik,\n\nI reviewed your portfolio and was impressed by Girvi and your offline-first Android architecture. I'd love to discuss building or maintaining an Android application for our business.\n\nLet's connect!\nBest regards,`
+      body: `Hi Vaidik,\n\nI reviewed your portfolio and was impressed by Girvi, AdvoKosh, and your offline-first Android architecture. I'd love to discuss building or maintaining a native Android application for our business.\n\nLet's connect!\nBest regards,`
     },
     ai: {
-      subject: "AI & Computer Vision Collaboration",
-      body: `Hi Vaidik,\n\nI saw your work on SkyCanvas (MediaPipe Hands GPU) and your AI Disaster Response SOS system. I'm working on a project in AI/Computer Vision and would like to collaborate.\n\nBest regards,`
+      subject: "AI & Distributed Systems Collaboration",
+      body: `Hi Vaidik,\n\nI saw your work on SwarmOS (P2P Nearby Connections ML Swarm) and SkyCanvas (MediaPipe Hands GPU). I'm working on a project in on-device AI/Computer Vision and would like to collaborate.\n\nBest regards,`
     },
     general: {
       subject: "Connecting with Vaidik Gandhi (Founder, VaidikTech)",

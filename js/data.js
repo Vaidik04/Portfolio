@@ -1,6 +1,7 @@
 // =============================================================================
 // VAIDIK GANDHI — COMPREHENSIVE PORTFOLIO DATA REPOSITORY
-// Merged from Google Play Published Products, D:\Python Projects & GitHub (@Vaidik04)
+// Verified Against Codebases: D:\Vakalat, D:\SwarmOS, D:\GridCare, D:\AgriLink,
+// D:\GirviAndroid, D:\InvoiceApp, D:\KaamKram, D:\Python & GitHub (@Vaidik04)
 // =============================================================================
 
 const PORTFOLIO_DATA = {
@@ -9,25 +10,25 @@ const PORTFOLIO_DATA = {
     handle: "@Vaidik04",
     title: "Independent Android Developer · Founder of VaidikTech",
     headline: "Building practical, offline-first mobile products & intelligent systems from idea to production.",
-    bioShort: "I build Android applications that solve practical problems, simplify everyday workflows, and make technology more accessible to people and businesses. I am an independent Android developer and the person behind VaidikTech, where I focus on building useful, reliable, and thoughtfully designed mobile applications.",
-    bioExtended: "My journey into software development began with curiosity about how technology works and how it can be used to solve everyday problems. Over time, that curiosity developed into a commitment to building complete applications—not just demonstrations or academic projects, but products that people can actually use. My approach goes beyond writing code: I pay attention to the problem, understand how people work, design the user experience, build the application, and take it through the process of publishing and maintaining a real product.",
+    bioShort: "I build native Android applications that solve practical problems, simplify everyday workflows, and make technology accessible to people and businesses. As the founder of VaidikTech, I take software across the full product lifecycle: deep problem discovery, intuitive UX, robust offline architecture, and production publishing.",
+    bioExtended: "My journey into software development began with curiosity about how technology works and how it can be used to solve everyday problems. Over time, that curiosity developed into a commitment to building complete applications—not just demonstrations or academic projects, but products that people actually depend upon. I am currently pursuing a B.Tech in Computer Science and Engineering, specialising in Artificial Intelligence and Machine Learning, at Lakshmi Narain College of Technology (LNCT), Bhopal.",
     education: {
       degree: "B.Tech in Computer Science and Engineering (Specialising in Artificial Intelligence & Machine Learning)",
       institution: "Lakshmi Narain College of Technology (LNCT), Bhopal",
-      focus: "Android Architecture, Edge AI, On-Device Vision, Privacy-Conscious Engineering & Database Reliability"
+      focus: "Native Android Architecture, Edge AI, On-Device Vision, Cryptographic Local Storage & Distributed Systems"
     },
-    location: "Bhopal, India",
+    location: "Bhopal, Madhya Pradesh, India",
     links: {
       github: "https://github.com/Vaidik04",
       playStore: "https://play.google.com/store/apps/details?id=com.girvi.app",
-      email: "vaidikgandhi@gmail.com", // placeholder standard format
+      email: "vaidikgandhi@gmail.com",
       linkedin: "https://www.linkedin.com/in/vaidik-gandhi/"
     },
     stats: [
-      { label: "Production Android Apps", value: "2+", sub: "Published & Active", icon: "smartphone" },
+      { label: "Production Android Apps", value: "4+", sub: "Commercial Grade & Play Store", icon: "smartphone" },
       { label: "GitHub Repositories", value: "120+", sub: "Open Source & Systems", icon: "git-branch" },
-      { label: "Offline-First Reliability", value: "100%", sub: "Zero Server Reliance", icon: "shield-check" },
-      { label: "Edge AI Inference", value: "<15ms", sub: "On-Device Processing", icon: "zap" }
+      { label: "Zero-Internet Uptime", value: "100%", sub: "Sandboxed Local-First Privacy", icon: "shield-check" },
+      { label: "Edge AI Latency", value: "<15ms", sub: "On-Device Hardware Inference", icon: "zap" }
     ]
   },
 
@@ -35,22 +36,22 @@ const PORTFOLIO_DATA = {
     {
       title: "Build for Actual Users, Not Just Demos",
       icon: "users",
-      description: "An application becomes meaningful when it solves a problem for someone outside the development environment. I place supreme importance on understanding intended users, their physical constraints, and their everyday workflows."
+      description: "An application becomes meaningful when it solves an acute problem for someone outside the development environment. I prioritize understanding intended users—their working environments, sunlight legibility, language barriers, and daily physical workflows."
     },
     {
       title: "Keep Things Simple Without Compromising Power",
       icon: "feather",
-      description: "A large number of features does not make an application useful. Good software makes critical operations easy to discover, fast to complete, and error-tolerant under stressful work conditions."
+      description: "An excessive feature checklist does not make an application useful. Good software makes critical business operations discoverable and frictionless. Business software must reduce administrative burden—not introduce another complex hurdle."
     },
     {
-      title: "Offline-First & Local Data Resilience",
+      title: "Offline-First & Local Data Sovereignty",
       icon: "database",
-      description: "For businesses that manage financial and legal records, reliability matters. Room Database, structured schemas, encrypted storage, and zero cloud tethering guarantee that operations never stop when network signals drop."
+      description: "For businesses that manage financial ledgers, legal dossiers, and inventory, cloud dependency is a liability. By verifying zero network permissions and sealing Room SQLite databases with AES encryption on-device, operations never halt when connectivity drops."
     },
     {
-      title: "Think Beyond Just Development",
-      icon: "life-buoy",
-      description: "Building an application does not end when code compiles. User testing, Google Play publishing, feedback loops, error tracking, and maintaining a real product are all essential parts of software engineering."
+      title: "Full Product Lifecycle Responsibility",
+      icon: "rocket",
+      description: "Software engineering extends far beyond compiling code. From database schemas and architectural isolation to Google Play Console releases, security audits, thermal receipt printer compatibility, and user maintenance, I own the complete product lifecycle."
     }
   ],
 
@@ -63,25 +64,25 @@ const PORTFOLIO_DATA = {
       description: "Standard IEEE-754 floating-point calculations accumulate rounding errors over repetitive transactions. In applications managing loans, jewellery invoices, and tradesperson payouts, every single rupee is stored strictly as `Long` (paise) to guarantee penny-perfect balance sheets."
     },
     {
-      title: "Local-First Encrypted Architecture",
-      subtitle: "Privacy & Uninterrupted Uptime",
-      tag: "Girvi & FreeAIInvoice",
+      title: "Sovereign Chamber Encryption",
+      subtitle: "SQLCipher & Android Keystore",
+      tag: "AdvoKosh & Girvi",
       icon: "lock",
-      description: "Traditional SaaS apps fail when shop owners are in basements or rural areas without 4G/5G. By architecting Room SQLite databases with Android Security Crypto on device, users retain full ownership of customer ledgers with instant search response times."
+      description: "Chamber legal case files and pawn records demand absolute confidentiality. Architected with SQLCipher (256-bit AES-CBC) with encryption keys sealed inside hardware-backed Android Keystore `MasterKey` (AES-256-GCM), with zero remote telemetry or tracking SDKs."
+    },
+    {
+      title: "Cooperative Nearby Hardware Swarms",
+      subtitle: "P2P Air-Gapped Clusters",
+      tag: "SwarmOS & AIDisasterSOS",
+      icon: "network",
+      description: "Pioneering distributed peer-to-peer computing over Google Nearby Connections (`P2P_CLUSTER`), Wi-Fi Direct, and Bluetooth. Nearby mobile phones discover peers, verify numeric mutual auth digits, and collaborate on heavy ML workloads with zero internet access."
     },
     {
       title: "Edge Computer Vision & MediaPipe",
-      subtitle: "Touchless & Real-Time Interaction",
+      subtitle: "Sub-15ms Hardware Inference",
       tag: "SkyCanvas & FreeAIInvoice",
       icon: "eye",
-      description: "Running vision models directly on hardware GPU delegates via MediaPipe Hands and Google ML Kit Text Recognition delivers instantaneous response times with zero bandwidth costs and zero biometric data leakage."
-    },
-    {
-      title: "Adaptive Quantum & Distributed Systems",
-      subtitle: "Algorithmic Complexity & Scale",
-      tag: "Q-Transit Nexus & SwarmOS",
-      icon: "network",
-      description: "Beyond mobile, exploring high-concurrency systems: Discrete Quantum-inspired Particle Swarm Optimization (Adaptive D-QPSO) for traffic digital twins and decentralized peer node orchestration."
+      description: "Executing vision models directly on mobile GPU delegates via MediaPipe Hands and Google ML Kit On-Device Text Recognition. Eliminates cloud API latency, preserves complete user privacy, and functions seamlessly without cellular reception."
     }
   ],
 
@@ -94,47 +95,125 @@ const PORTFOLIO_DATA = {
       featured: true,
       badge: "Published on Google Play",
       badgeType: "playstore",
-      rating: "5.0 ★",
-      platform: "Android (Native)",
-      heroImage: "assets/girvi_preview.png",
-      summary: "A native Android application designed to help individuals and small businesses manage their pawn and girvi records digitally. Replaces error-prone manual ledgers with offline-first, searchable records with photo proof storage.",
-      problem: "Many traditional pawn and girvi shops maintain customer transactions and pledge records across disorganized physical registers. Retrieving previous pledge histories, calculating accrued interest, and safeguarding customer photos is chaotic and vulnerable to paperwork damage.",
-      solution: "Engineered a robust, 100% offline-first Android tool with Room Database and MVVM architecture. Allows shopkeepers to record customer IDs, transaction amounts, pledge descriptions, capture item photos directly via CameraX, and query active records instantaneously.",
-      techStack: ["Kotlin", "Room Database", "MVVM Architecture", "ViewModel & LiveData", "Kotlin Coroutines", "Android Jetpack", "CameraX", "Google Play Console"],
+      rating: "Active on Play Store",
+      platform: "Android (Native Kotlin)",
+      icon: "assets/girvi_icon.png",
+      heroImage: "assets/girvi_icon.png",
+      summary: "A native Android application designed to help individuals and small businesses manage their pawn and girvi records digitally. Fully verified with zero internet permissions for 100% offline privacy.",
+      problem: "Traditional Indian pawn and girvi businesses manage high-value pledge records and customer details across physical paper registers. Finding historical pledges, calculating accrued interest, and safeguarding item photos is chaotic and prone to physical loss.",
+      solution: "Engineered a native, 100% offline-first Android solution with Kotlin and Room Database under MVVM architecture. The app explicitly declares NO `android.permission.INTERNET`, ensuring complete local data privacy. Allows shopkeepers to log customer KYC, transaction amounts, monthly interest rates, capture pledge photos with CameraX, and execute instant full-text searches.",
+      techStack: ["Kotlin", "Room Database", "MVVM Architecture", "ViewModel & LiveData", "Kotlin Coroutines", "Android Jetpack", "CameraX", "Zero Internet Permission", "Google Play Console"],
       highlights: [
-        "Customer & Contact Record Management with fast search",
-        "Digital Pawn & Girvi Pledge tracking with status milestones",
-        "Record-related photo attachment storage",
-        "100% Offline Access with zero cloud server dependency",
-        "Published and actively maintained on Google Play"
+        "100% Offline: Zero `android.permission.INTERNET` declared for total business data sovereignty",
+        "Fast customer & pledge record indexing with photo proof attachment",
+        "Automated interest calculation engine supporting customary Indian pawn intervals",
+        "Local AES-encrypted database backup and restore",
+        "Actively published and maintained on the Google Play Store"
       ],
       links: {
         playStore: "https://play.google.com/store/apps/details?id=com.girvi.app",
-        github: "https://github.com/Vaidik04"
+        github: "https://github.com/Vaidik04/GirviAndroid"
       }
     },
     {
-      id: "jewelbill",
-      title: "JewelBill (InvoiceApp)",
-      subtitle: "Jewellery Billing, GST Calculations & Business Management Suite",
+      id: "advokosh",
+      title: "AdvoKosh (एडवोकोश)",
+      subtitle: "Solo Advocate Case Diary & Chamber Practice Management OS",
       category: "android",
       featured: true,
       badge: "Production Solution",
       badgeType: "production",
-      platform: "Android (Native)",
-      summary: "An Android application developed to simplify billing and everyday transaction management for jewellery businesses, featuring automated GST calculation, customer ledgers, PDF invoice generation, and 1-tap WhatsApp sharing.",
-      problem: "Jewellery billing is inherently complex: shopkeepers must factor in pure gold/silver weights, fluctuating daily market rates, making charges per gram, stone deductions, and split CGST/SGST taxes. Manual bills lead to calculation discrepancies and slow customer checkout queues.",
-      solution: "Developed an Android billing workstation powered by Java 17, Room SQLite, and MVVM architecture. JewelBill computes taxes and making charges dynamically, stores customer transaction records locally, generates professional PDF receipts, and directly shares invoices with customers over WhatsApp.",
-      techStack: ["Java 17", "Android Jetpack", "MVVM Architecture", "Room Database", "SQLite", "iText/PDF Generation", "WhatsApp Intent API"],
+      platform: "Android (Jetpack Compose)",
+      icon: "assets/advokosh_logo.png",
+      heroImage: "assets/advokosh_screen1.png",
+      gallery: ["assets/advokosh_screen1.png", "assets/advokosh_screen2.png", "assets/advokosh_banner.png"],
+      summary: "An advocate's private, sovereign digital chamber desk. Engineered exclusively for Indian solo advocates with BNS/BNSS/BSA law mapping, SQLCipher 256-bit encryption, eCourts CNR sync, and vector PDF fee billing.",
+      problem: "Indian advocates manage dozens of cases concurrently across District Courts, High Courts, and Tribunals. Relying on paper diaries leads to missed statutory limitation deadlines (Section 138 NI Act, Commercial Courts 120 days), unbilled fees, and breached attorney-client privilege.",
+      solution: "Built a single-Activity native Android chamber OS in 100% Kotlin 2.0+ and Jetpack Compose Material 3 with Dagger Hilt. Employs Room v4 encrypted via SQLCipher (256-bit AES-CBC) with keys sealed in hardware Android Keystore `MasterKey`. Features 8 WorkManager alert workers (Cause List 8 PM & 7 AM, 2-hour court countdown), BNS/BNSS/BSA criminal law cross-converter, Section 138 NI limitation engine, 8 offline court draft templates (Bail, Maintenance, Vakalatnama), courtroom voice dictation, and vector PDF fee notes with NPCI UPI QR codes.",
+      techStack: ["Kotlin 2.0+", "Jetpack Compose Material 3", "Dagger Hilt", "SQLCipher 256-bit AES", "Android Keystore MasterKey", "WorkManager", "BNS/BNSS/BSA Mapper", "Vector PDF Generator", "NPCI UPI QR Engine"],
       highlights: [
-        "Jewellery-specific invoice calculations with gold/silver weight breakdown",
-        "Automated split GST (CGST, SGST, IGST) computation",
-        "High-resolution PDF invoice generation formatted for thermal & A4 printers",
+        "Sovereign Chamber Privacy: Zero cloud analytics or telemetry; 256-bit SQLCipher encryption",
+        "Automated 8-Worker Alert Engine: 8 PM cause list alerts, 2-hour court countdowns, statutory limitation warnings",
+        "Indian Law Engine: BNS, BNSS, BSA criminal section mapper and Section 138 NI Act calculators",
+        "Chamber Operations: Vector PDF fee notes with 18% GST and dynamic NPCI UPI QR payment code",
+        "8 Offline Court Draft Templates: Bail petition, Maintenance, Vakalatnama, RTI, Consumer Complaint"
+      ],
+      links: {
+        github: "https://github.com/Vaidik04/AdvoKosh"
+      }
+    },
+    {
+      id: "jewelbill",
+      title: "JewelBill (JewelInvoice)",
+      subtitle: "Jewellery Billing, Multi-Karat GST & Thermal POS Workstation",
+      category: "android",
+      featured: true,
+      badge: "Production Workstation",
+      badgeType: "production",
+      platform: "Android (Java 17 & Room)",
+      icon: "assets/jewelbill_icon.png",
+      heroImage: "assets/jewelbill_screen.png",
+      summary: "Specialized jewellery retail billing workstation with multi-karat gold/silver calculation, split CGST/SGST taxes, Bluetooth ESC/POS thermal printing, and 1-tap WhatsApp PDF sharing.",
+      problem: "Jewellery billing requires factoring in daily gold/silver spot rates, multi-karat purities (24K, 22K, 18K, 14K), stone weight deductions, making charges per gram, and mandatory split GST breakdowns. Manual bills cause checkout delays and tax errors.",
+      solution: "Architected a dedicated Android billing platform powered by Java 17, Room SQLite, and MVVM architecture. JewelBill computes taxes and charges dynamically, prints directly to Bluetooth ESC/POS 58mm/80mm thermal receipt printers, stores full customer transaction ledgers locally, and generates shareable PDF invoices via WhatsApp.",
+      techStack: ["Java 17", "Android Jetpack", "MVVM Architecture", "Room Database", "SQLite", "Bluetooth ESC/POS Printing", "iText PDF Generator", "WhatsApp Intent API"],
+      highlights: [
+        "Multi-Karat Gold (24K, 22K, 18K, 14K) and Silver automated billing",
+        "Bluetooth ESC/POS thermal printing support (58mm & 80mm receipt printers)",
+        "Automated split GST (CGST 1.5%, SGST 1.5% or IGST 3%) calculation",
         "Direct 1-tap PDF invoice sharing through WhatsApp",
-        "Offline local database holding comprehensive customer history"
+        "Local database keeping full customer ledger and balance history"
       ],
       links: {
         github: "https://github.com/Vaidik04/InvoiceApp"
+      }
+    },
+    {
+      id: "swarmos",
+      title: "SwarmOS",
+      subtitle: "Cooperative Intelligence on Nearby Android Phones",
+      category: "systems",
+      featured: true,
+      badge: "Air-Gapped P2P Swarm",
+      badgeType: "production",
+      platform: "Android (Kotlin & Nearby)",
+      summary: "Native Android application allowing a cluster of nearby phones to cooperate on real machine-learning workloads (bundled OCR) over local wireless (Wi-Fi Direct & Bluetooth) with zero internet and zero cloud.",
+      problem: "Processing bulk document batches on single low-cost smartphones creates bottlenecks. Conversely, uploading sensitive documents to cloud ML services compromises privacy and fails in rural or disconnected zones.",
+      solution: "Engineered SwarmOS in Kotlin and Jetpack Compose utilizing Google Nearby Connections (`P2P_CLUSTER`). Features Coordinator and Worker engines with a deterministic task scheduler, mutual numeric verification digits for air-gapped authentication, on-device federated learning simulations, and bundled offline ML Kit Latin and Devanagari OCR models.",
+      techStack: ["Kotlin", "Jetpack Compose Material 3", "Google Nearby Connections (P2P_CLUSTER)", "Wi-Fi Direct & Bluetooth", "Bundled ML Kit OCR", "Room Database", "Federated Learning Engine", "Task State Machine"],
+      highlights: [
+        "Air-Gapped Distributed ML: Cooperates on document OCR across nearby devices without internet",
+        "Mutual Authentication: Visual verification and acceptance of identical numeric digits between devices",
+        "Privacy & Ephemerality: Ephemeral session IDs; temporary images purged on worker completion",
+        "Deterministic Scheduler: State-machine task allocation with automated failure recovery",
+        "Shipped as fully signed Android release candidate (`swarmos-release.jks`)"
+      ],
+      links: {
+        github: "https://github.com/Vaidik04/SwarmOS"
+      }
+    },
+    {
+      id: "gridcare",
+      title: "GridCare",
+      subtitle: "Offline-First Solar Asset, Maintenance & Field-Service Platform",
+      category: "android",
+      featured: true,
+      badge: "Release Candidate (RC1)",
+      badgeType: "production",
+      platform: "Android (Kotlin 2.3+ & Compose)",
+      summary: "Operations and maintenance platform engineered for solar technicians, EPC contractors, and rooftop solar owners with equipment passports, multi-visit work orders, and zero internet permissions.",
+      problem: "Solar technicians perform preventative maintenance and inspections on remote rooftops and solar farms with zero cellular signal, making cloud-dependent enterprise field apps unusable.",
+      solution: "Engineered GridCare adhering to OWASP MASVS-L1/L2 and DPDP Act 2023 with verified zero network permissions. Unifies solar asset tracking, equipment passport generation, multi-visit work orders, interactive inspection checklists, preventative maintenance scheduling, cost accounting, and AES-256-GCM + PBKDF2 (600k iterations) encrypted backups.",
+      techStack: ["Kotlin 2.3+", "Jetpack Compose & Material 3", "Room 2.7+ (SQLite)", "OWASP MASVS-L1/L2", "DPDP Act Compliant", "Zero Network Permissions", "R8 Minified (2.61 MB)"],
+      highlights: [
+        "Unbroken Offline-First Paradigm: Zero internet permissions; Room SQLite as single source of truth",
+        "Comprehensive Solar Vault: Asset passports, inverter/panel serial tracking, and work orders",
+        "Military-Grade Backup: AES-256-GCM encrypted local backup with PBKDF2 (600,000 rounds)",
+        "Quality Verified: 25/25 unit tests green; 2.61 MB R8-minified production APK",
+        "Full documentation set delivered: Security Review, Release Notes, and Architecture Spec"
+      ],
+      links: {
+        github: "https://github.com/Vaidik04"
       }
     },
     {
@@ -146,8 +225,8 @@ const PORTFOLIO_DATA = {
       badge: "MVI Clean Architecture",
       badgeType: "opensource",
       platform: "Android (API 24+)",
-      summary: "A local-first Android application crafted specifically for independent Indian tradespeople (electricians, AC mechanics, plumbers, RO technicians). Manages quotes, work proof, change orders, billing, and instant UPI reconciliation.",
-      problem: "Indian solo tradespeople handle 5-15 scattered service jobs daily. They rely on memory or WhatsApp chats for quotes, material costs, and customer advances, frequently resulting in payment disputes, lost change order receipts, and missed warranty tracking.",
+      summary: "A local-first Android application crafted for independent Indian tradespeople (electricians, AC mechanics, plumbers, RO technicians). Handles quotes, work proof, change orders, billing, and instant UPI reconciliation.",
+      problem: "Indian solo tradespeople handle 5-15 scattered service jobs daily. They rely on memory or WhatsApp chats for quotes, material costs, and customer advances, frequently resulting in payment disputes and lost change order receipts.",
       solution: "Built KaamKram on an uncompromising MVI / Clean Architecture foundation. Features strictly integer paise financial calculations, India-first UX formatting (₹1,23,456), bilingual Hindi/English localization, and an append-only audit trail for material approvals.",
       techStack: ["Kotlin", "MVI Architecture", "Clean Architecture", "Room (Local-First)", "StateFlow & Coroutines", "UPI Deep-Linking", "Material 3"],
       highlights: [
@@ -162,15 +241,38 @@ const PORTFOLIO_DATA = {
       }
     },
     {
+      id: "agrilink",
+      title: "AgriLink",
+      subtitle: "Web3 & Vernacular Voice AI Agriculture Ecosystem",
+      category: "systems",
+      featured: false,
+      badge: "Web3 + Voice AI",
+      badgeType: "research",
+      platform: "Mobile & Smart Contracts",
+      summary: "Decentralized ecosystem empowering farmers with vernacular voice AI for live mandi prices, non-transferable Soulbound Token (SBT) credit ratings, and on-chain escrow trading.",
+      problem: "Smallholder farmers face predatory middlemen, payment defaults, and language barriers when accessing fair market pricing for agricultural produce.",
+      solution: "Built an integrated mobile and smart contract architecture. Features a Vernacular Voice AI assistant for mandi crop prices, Soulbound Tokens (SBT) recording farmer reputation and credit history on-chain, an EscrowVault locking MATIC with a 48-hour dispute safeguard, and carbon credit rewards for pooled transport.",
+      techStack: ["Kotlin / Android", "Vernacular Voice AI (NLP)", "Solidity Smart Contracts", "Soulbound Tokens (SBT)", "Polygon / MATIC EscrowVault", "Python Backend"],
+      highlights: [
+        "Vernacular Voice AI: Real-time mandi price queries via native local speech recognition",
+        "Soulbound Farmer Identity (SBT): Immutable, non-transferable on-chain reputation and credit score",
+        "Zero-Fraud Escrow Vault: Smart contracts locking buyer funds until delivery is verified",
+        "Eco-Friendly Carbon Credits: Utility tokens for farmers utilizing pooled transport networks"
+      ],
+      links: {
+        github: "https://github.com/Vaidik04"
+      }
+    },
+    {
       id: "free-ai-invoice",
       title: "Free AI Invoice & Accounting Assistant",
       subtitle: "Zero-Cost On-Device ML OCR & GST Accounting Scanner",
       category: "android",
-      featured: true,
+      featured: false,
       badge: "Jetpack Compose + ML Kit",
       badgeType: "production",
       platform: "Android (Modern Stack)",
-      summary: "A completely free, offline-first Android app for capturing paper invoices, on-device OCR, GST-aware parsing, and local P&L reports. No login, no paid API tokens, and zero cloud dependency.",
+      summary: "A completely free, offline-first Android app for capturing paper invoices, on-device OCR, GST-aware parsing, and local P&L reports with zero cloud dependency.",
       problem: "Small retailers and contractors cannot afford expensive monthly accounting SaaS subscriptions or risk uploading sensitive vendor invoices to unknown cloud servers with high latency.",
       solution: "Engineered with Kotlin and Jetpack Compose utilizing Google ML Kit Text Recognition running directly on-device. CameraX captures the bill, custom rule-based regex extracts vendor names, amounts, invoice numbers, and taxes, while Room stores encrypted records with PIN protection.",
       techStack: ["Kotlin", "Jetpack Compose", "Google ML Kit (On-Device OCR)", "CameraX", "Room Database", "Android Crypto Security", "Voice Commands"],
@@ -190,7 +292,7 @@ const PORTFOLIO_DATA = {
       title: "SkyCanvas – AI Air Painter",
       subtitle: "Native Android Mid-Air Painting via Real-Time Hand Tracking",
       category: "ai-vision",
-      featured: true,
+      featured: false,
       badge: "MediaPipe Vision GPU",
       badgeType: "production",
       platform: "Android (CameraX + Vision)",
@@ -214,7 +316,7 @@ const PORTFOLIO_DATA = {
       title: "AI Disaster Response & SOS Mesh Network",
       subtitle: "Life-Saving Disaster Coordination Platform with Vision & Mesh Networking",
       category: "ai-vision",
-      featured: true,
+      featured: false,
       badge: "Hackathon System",
       badgeType: "research",
       platform: "Full-Stack AI (Mobile + Dashboard + Backend)",
@@ -306,73 +408,49 @@ const PORTFOLIO_DATA = {
       }
     },
     {
-      id: "advokosh",
-      title: "AdvoKosh (एडवोकोश)",
-      subtitle: "Advocate Case Records & Legal Practice Management System",
+      id: "digitalkhata",
+      title: "Vyapar Khata (DigitalKhata)",
+      subtitle: "Offline-First Digital Udhaar Ledger for Indian Small Businesses",
       category: "android",
       featured: false,
-      badge: "Offline Case OS",
+      badge: "Micro-Business Ledger",
       badgeType: "production",
-      platform: "Android (Native)",
-      summary: "A specialized legal practice organizer for advocates and legal practitioners to track court hearings, case timelines, client dossiers, and judicial evidence completely offline.",
-      problem: "Legal practitioners manage dozens of concurrent cases across district and high courts. Using physical case diaries often results in missed hearing dates, lost interim order notes, and breached client confidentiality.",
-      solution: "Engineered a confidential, offline-first case management application built with Kotlin, Room, and Material Design 3. Encrypts local case files, schedules upcoming hearing reminders, and preserves chronological case milestone logs.",
-      techStack: ["Kotlin", "Android Jetpack", "Room Database", "MVVM Architecture", "Coroutines", "Material Design 3", "Local Data Encryption"],
+      platform: "Android (Kotlin & Room)",
+      summary: "A streamlined offline-first credit and debit ledger application designed to replace paper bahi-khata notebooks for Indian neighborhood retailers and kirana stores.",
+      problem: "Traditional shopkeepers extend micro-credit (udhaar) to regular customers using paper notebooks. Unclear balances, forgotten entries, and lost ledgers create ongoing cash-flow friction.",
+      solution: "Built a fast, lightweight Kotlin Android app backed by Room SQLite. Features auto-balancing credit/debit transaction logs, daily outstanding debt summaries, 1-tap WhatsApp payment reminders, and encrypted local JSON backups.",
+      techStack: ["Kotlin", "Android Jetpack", "Room Database", "MVVM Architecture", "WhatsApp Intent API", "Material 3"],
       highlights: [
-        "Chronological court hearing scheduler and cause-list tracker",
-        "Comprehensive client and case dossier indexing with evidence file attachments",
-        "100% offline database ensuring attorney-client confidentiality",
-        "Clean, high-contrast Material 3 interface optimized for quick courtroom notes",
-        "Milestone tracking for stay orders, bails, and judgment copies"
+        "Instant credit (jama) and debit (udhaar) accounting with live balance",
+        "1-tap WhatsApp customer payment reminders with pre-filled balance notes",
+        "Clean Material 3 interface with full Hindi and English localization",
+        "Local JSON backup and restore with zero cloud reliance"
       ],
       links: {
         github: "https://github.com/Vaidik04"
       }
     },
     {
-      id: "ecohealth-ai",
-      title: "EcoHealth AI",
-      subtitle: "Environmental Pollution Tracking & Symptom Correlation Engine",
-      category: "ai-vision",
+      id: "vaidikratnam",
+      title: "Vaidik Ratnam Digital Platform",
+      subtitle: "Traditional Gold Jewellery & Genuine Gemstone Shop",
+      category: "systems",
       featured: false,
-      badge: "Environmental ML",
-      badgeType: "research",
-      platform: "Full-Stack AI",
-      summary: "An intelligent platform correlating hyper-local environmental pollution metrics (AQI, PM2.5, UV) with human health symptoms to provide proactive risk alerts and preventive guidance.",
-      problem: "Environmental pollution severely impacts chronic health conditions, yet patients and doctors rarely have access to correlated data linking specific environmental spikes to acute symptoms.",
-      solution: "Developed an AI prediction pipeline that ingests real-time environmental sensors and user symptom journals (cough, headache, asthma, fatigue), runs correlation algorithms, and issues calibrated health risk levels (Low, Moderate, High, Critical) with preventive lifestyle suggestions.",
-      techStack: ["Python", "Flask", "Scikit-learn", "Environmental Sensor APIs", "Time-Series Forecasting", "React Frontend"],
+      badge: "Next.js Full-Stack",
+      badgeType: "production",
+      platform: "Full-Stack Web (Next.js & Supabase)",
+      summary: "A full-stack digital showcase, custom goldsmithing studio, and Vedic consultation hub engineered for a family-owned Indian jewellery brand.",
+      problem: "Traditional jewellery and gemstone consumers struggle to verify hallmarking standards, unheated gemstone purity, and genuine net-weight pricing online.",
+      solution: "Engineered with Next.js, TypeScript, Tailwind CSS, and Supabase. Combines 100% BIS hallmarked gold jewellery transparency with a Parashari Jyotish gemstone knowledge base, certified gemstone lookup, and appointment booking.",
+      techStack: ["Next.js (App Router)", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Vitest"],
       highlights: [
-        "Real-time pollution monitoring (AQI, CO₂, PM2.5, PM10, UV, humidity)",
-        "Machine learning 48-hour air quality and risk forecast",
-        "Daily health journal correlating symptoms with environmental shifts",
-        "Proactive multi-level health alert system with preventive medical guidance"
+        "100% BIS hallmarked gold jewellery and certified natural gemstone showcase",
+        "Transparent net-weight billing calculator with real-time gold/silver spot rates",
+        "Vedic consultation scheduler and interactive Parashari Jyotish knowledge base",
+        "Responsive, high-accessibility UI built with Next.js App Router"
       ],
       links: {
-        github: "https://github.com/Vaidik04"
-      }
-    },
-    {
-      id: "nptel-study-agent",
-      title: "NPTEL AI Autonomous Study Agent",
-      subtitle: "Screen-Vision OCR & Reasoning Assistant for Complex CS & Math",
-      category: "productivity",
-      featured: false,
-      badge: "Desktop Vision Agent",
-      badgeType: "opensource",
-      platform: "Python Desktop",
-      summary: "An on-demand desktop assistant with an always-on-top overlay that captures screen regions, runs vision models to analyze programming and discrete mathematics problems, and generates verified step-by-step explanations.",
-      problem: "Students solving online technical assignments or reading academic papers often need instant verification of intricate logic or mathematical proofs without manual transcription.",
-      solution: "Built a Python Tkinter transparent overlay that grabs live bounding-box screenshots, passes images to multi-modal vision models with strict JSON schema instructions, and formats structured explanations and confidence scores.",
-      techStack: ["Python", "Tkinter (Always-on-top)", "PIL ImageGrab", "Vision-Language APIs", "JSON Schema Enforcement", "Multi-threading"],
-      highlights: [
-        "Non-intrusive transparent screen bounding-box grabber",
-        "Strict JSON schema response validation for answers, steps, and confidence score",
-        "Double-verification reasoning chain for discrete math and data structures",
-        "Local session history log with timestamped question exports"
-      ],
-      links: {
-        github: "https://github.com/Vaidik04"
+        demo: "https://vaidikratnam.com"
       }
     },
     {
@@ -397,56 +475,81 @@ const PORTFOLIO_DATA = {
       links: {
         github: "https://github.com/Vaidik04"
       }
-    },
-    {
-      id: "swarmos",
-      title: "SwarmOS",
-      subtitle: "Distributed Node Coordination & Swarm Intelligence Framework",
-      category: "systems",
-      featured: false,
-      badge: "Distributed Systems",
-      badgeType: "research",
-      platform: "Java 17",
-      summary: "An experimental distributed computing framework exploring autonomous node discovery, fault-tolerant consensus, and dynamic swarm task allocation without centralized servers.",
-      problem: "Centralized server architectures introduce single points of failure and high maintenance overhead for decentralized edge computing applications.",
-      solution: "Implemented in Java 17 using concurrent actor-style thread pools and gossip communication protocols. Simulates autonomous nodes negotiating task execution and self-healing when individual nodes drop.",
-      techStack: ["Java 17", "Distributed Algorithms", "Multi-threading & Concurrency", "Gossip Protocol", "Fault-Tolerant Consensus"],
-      highlights: [
-        "Decentralized peer node discovery and heartbeating",
-        "Dynamic task division and distributed load balancing",
-        "Self-healing node topology with failover recovery",
-        "Benchmarked throughput under erratic network drops"
-      ],
-      links: {
-        github: "https://github.com/Vaidik04"
-      }
-    },
-    {
-      id: "solar-analytics",
-      title: "Solar Energy Analytics & Yield Simulator",
-      subtitle: "Renewable Energy Estimation & Carbon Offset Modeler",
-      category: "systems",
-      featured: false,
-      badge: "Clean Tech & Math",
-      badgeType: "opensource",
-      platform: "Python",
-      summary: "A mathematical simulation script and analytical tool that calculates solar photovoltaic generation potential, seasonal tilt angles, and estimated carbon offsets based on geographic coordinates.",
-      problem: "Homeowners and micro-businesses lack straightforward tools to estimate return on investment and solar capacity without relying on aggressive vendor sales calculators.",
-      solution: "Authored in Python using standard solar irradiation formulas and meteorological averages. Calculates estimated kilowatt-hour output, payback timeline, and CO2 reduction equivalents.",
-      techStack: ["Python", "Mathematical Modeling", "Solar Irradiance Algorithms", "Data Analytics"],
-      highlights: [
-        "Geographic solar irradiance and rooftop capacity calculations",
-        "Seasonal angle of incidence and efficiency degradation modeling",
-        "Financial payback timeline and estimated lifetime ROI",
-        "Carbon offset and equivalent tree plantation metrics"
-      ],
-      links: {
-        github: "https://github.com/Vaidik04/Solar"
-      }
     }
   ],
 
   codeSnippets: [
+    {
+      id: "advokosh-crypto",
+      title: "Sovereign Chamber Encryption",
+      file: "AdvoKosh · EncryptedChamberStorage.kt",
+      language: "kotlin",
+      description: "How AdvoKosh seals client case records using SQLCipher 256-bit AES with hardware keys managed by Android Keystore MasterKey.",
+      code: `// Sovereign Chamber Database Factory with SQLCipher & Hardware Keystore
+@Singleton
+class ChamberDatabaseFactory @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
+    fun createEncryptedDatabase(): VakalatDatabase {
+        // 1. Generate or retrieve hardware-backed MasterKey (AES-256-GCM)
+        val masterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .setRequestStrongBoxBacked(true) // Hardware SE enclave if available
+            .build()
+
+        // 2. Retrieve secure database passphrase
+        val passphrase = getOrCreateChamberPassphrase(context, masterKey)
+        val openHelperFactory = SupportFactory(SQLiteDatabase.getBytes(passphrase))
+
+        // 3. Build encrypted Room database with SQLCipher
+        return Room.databaseBuilder(context, VakalatDatabase::class.java, "advokosh_chamber.db")
+            .openHelperFactory(openHelperFactory)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+            .fallbackToDestructiveMigrationOnDowngrade()
+            .build()
+    }
+}`
+    },
+    {
+      id: "swarmos-nearby",
+      title: "Air-Gapped P2P Swarm Transport",
+      file: "SwarmOS · NearbyTransport.kt",
+      language: "kotlin",
+      description: "Google Nearby Connections P2P_CLUSTER engine coordinating air-gapped machine-learning tasks with mutual visual verification digits.",
+      code: `class NearbyTransport(
+    private val context: Context,
+    private val connectionsClient: ConnectionsClient
+) {
+    // Advertise Coordinator session in air-gapped high-throughput mode
+    fun startCoordinatorAdvertising(sessionName: String, onAuthDigits: (String) -> Unit) {
+        val options = AdvertisingOptions.Builder()
+            .setStrategy(Strategy.P2P_CLUSTER) // High bandwidth local wireless
+            .setLowPower(false)
+            .build()
+
+        connectionsClient.startAdvertising(
+            sessionName,
+            SWARM_SERVICE_ID,
+            object : ConnectionLifecycleCallback() {
+                override fun onConnectionInitiated(endpointId: String, info: ConnectionInfo) {
+                    // Mutual numeric verification to prevent man-in-the-middle
+                    onAuthDigits(info.authenticationDigits)
+                    connectionsClient.acceptConnection(endpointId, payloadCallback)
+                }
+                override fun onConnectionResult(endpointId: String, result: ConnectionResolution) {
+                    if (result.status.isSuccess) {
+                        registerActiveWorkerNode(endpointId)
+                    }
+                }
+                override fun onDisconnected(endpointId: String) {
+                    handleWorkerDisconnection(endpointId)
+                }
+            },
+            options
+        )
+    }
+}`
+    },
     {
       id: "paise",
       title: "Integer Paise Financial Pattern",
@@ -475,43 +578,6 @@ value class Paise(val amount: Long) : Comparable<Paise> {
     }
 
     override fun compareTo(other: Paise) = amount.compareTo(other.amount)
-}`
-    },
-    {
-      id: "offline-first",
-      title: "Offline-First Room Repository",
-      file: "Girvi · RecordRepository.kt",
-      language: "kotlin",
-      description: "Reactive coroutine-based Flow stream backed by local SQLite Room database, ensuring instant rendering and complete resilience without cloud internet.",
-      code: `class GirviRepository @Inject constructor(
-    private val girviDao: GirviDao,
-    private val secureStorage: SecureStorageManager,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) {
-    // Single source of truth: Flow emissions directly from SQLite
-    val allActivePledges: Flow<List<PledgeEntity>> = girviDao.observeActivePledges()
-        .flowOn(ioDispatcher)
-
-    suspend fun createNewPledge(
-        customerName: String,
-        principalAmount: Paise,
-        interestRateMonthly: Double,
-        itemPhotos: List<String>
-    ): Result<Long> = withContext(ioDispatcher) {
-        try {
-            val record = PledgeEntity(
-                customerName = customerName.trim(),
-                principalPaise = principalAmount.amount,
-                monthlyRate = interestRateMonthly,
-                photoPaths = itemPhotos,
-                createdAtEpochMs = System.currentTimeMillis()
-            )
-            val recordId = girviDao.insertPledge(record)
-            Result.success(recordId)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
 }`
     },
     {
@@ -553,58 +619,24 @@ value class Paise(val amount: Long) : Comparable<Paise> {
         imageProxy.close()
     }
 }`
-    },
-    {
-      id: "quantum-router",
-      title: "Adaptive D-QPSO Dynamic Rerouting",
-      file: "QRoute · rerouting_engine.py",
-      language: "python",
-      description: "Discrete Quantum Particle Swarm Optimization feedback loop dynamically adjusting urban fleet paths upon traffic incident ingestion.",
-      code: `class AdaptiveDQPSORerouter:
-    def __init__(self, road_graph: nx.DiGraph, swarm_size: int = 40):
-        self.graph = road_graph
-        self.swarm_size = swarm_size
-        self.contraction_expansion_coeff = 0.75
-
-    async def reoptimize_routes_on_incident(
-        self, 
-        closed_edge: tuple[int, int], 
-        active_vehicles: list[VehicleState]
-    ) -> list[GeoJSONRoute]:
-        # Dynamically sever edge with infinite penalty
-        self.graph[closed_edge[0]][closed_edge[1]]["weight"] = float("inf")
-        
-        affected = [v for v in active_vehicles if closed_edge in v.current_path_edges]
-        rerouted_solutions = []
-
-        for vehicle in affected:
-            # Quantum-inspired delta position sampling
-            new_path = self._solve_discrete_qpso(
-                origin=vehicle.current_node,
-                destination=vehicle.destination_node,
-                max_iterations=60
-            )
-            rerouted_solutions.append(self._to_geojson(vehicle.id, new_path))
-            
-        # Stream updated GeoJSON vectors to connected control clients
-        await websocket_manager.broadcast("route_changed", rerouted_solutions)
-        return rerouted_solutions`
     }
   ],
 
   skills: {
     mobile: [
-      { name: "Kotlin (Native Android)", level: "Expert", experience: "Flagship Language", icon: "code" },
-      { name: "Java 17", level: "Proficient", experience: "Android / Backend", icon: "coffee" },
-      { name: "Jetpack Compose", level: "Advanced", experience: "Declarative UI", icon: "layout" },
-      { name: "MVVM & MVI Clean Architecture", level: "Expert", experience: "Production Tested", icon: "layers" },
-      { name: "Room Database & SQLite", level: "Expert", experience: "Local-First Storage", icon: "database" },
-      { name: "Coroutines & Reactive Flow", level: "Advanced", experience: "Asynchronous Concurrency", icon: "activity" },
+      { name: "Kotlin 2.0+ (Native Android)", level: "Expert", experience: "Flagship Language", icon: "code" },
+      { name: "Jetpack Compose & Material 3", level: "Expert", experience: "Modern UI Paradigm", icon: "layout" },
+      { name: "Java 17", level: "Proficient", experience: "Android & Systems", icon: "coffee" },
+      { name: "MVVM & MVI Architecture", level: "Expert", experience: "Production Tested", icon: "layers" },
+      { name: "Room SQLite & SQLCipher", level: "Expert", experience: "Local-First Encrypted DB", icon: "database" },
+      { name: "Coroutines & Reactive Flow", level: "Advanced", experience: "Concurrency & Streams", icon: "activity" },
       { name: "CameraX & MediaPipe Vision", level: "Advanced", experience: "On-Device Hardware", icon: "camera" },
-      { name: "Google Play Console & Lifecycle", level: "Proficient", experience: "Release Management", icon: "play" }
+      { name: "Google Nearby (P2P Cluster)", level: "Advanced", experience: "Air-Gapped Mesh", icon: "radio" },
+      { name: "WorkManager Alert Scheduling", level: "Advanced", experience: "Background Task Engine", icon: "bell" },
+      { name: "Google Play Console Publishing", level: "Proficient", experience: "Live Store Products", icon: "play" }
     ],
     aiVision: [
-      { name: "Google ML Kit (On-Device OCR)", level: "Advanced", icon: "file-text" },
+      { name: "Google ML Kit (On-Device OCR)", level: "Expert", icon: "file-text" },
       { name: "MediaPipe Hands (Vision GPU)", level: "Advanced", icon: "eye" },
       { name: "YOLOv8 Object Detection", level: "Proficient", icon: "target" },
       { name: "Scikit-learn (Random Forest)", level: "Proficient", icon: "trending-up" },
@@ -617,15 +649,15 @@ value class Paise(val amount: Long) : Comparable<Paise> {
       { name: "Flask Web Applications", level: "Proficient", icon: "globe" },
       { name: "PostgreSQL & PostGIS", level: "Intermediate", icon: "database" },
       { name: "WebSockets & Socket.IO", level: "Advanced", icon: "radio" },
-      { name: "TraCI / SUMO Simulator", level: "Intermediate", icon: "navigation" }
+      { name: "Solidity & Smart Contracts", level: "Intermediate", icon: "cpu" }
     ],
     toolsAndWorkflow: [
-      { name: "Android Studio", icon: "tool" },
+      { name: "Android Studio & Android SDK", icon: "tool" },
       { name: "Git & GitHub", icon: "github" },
-      { name: "Gradle Build Automation", icon: "settings" },
-      { name: "Material Design 3", icon: "palette" },
+      { name: "Gradle (Kotlin DSL)", icon: "settings" },
+      { name: "Bluetooth ESC/POS Thermal Printing", icon: "printer" },
       { name: "Postman API Suite", icon: "send" },
-      { name: "Linux / Windows Dev", icon: "cpu" }
+      { name: "OWASP MASVS Mobile Security", icon: "shield" }
     ]
   },
 
@@ -634,25 +666,25 @@ value class Paise(val amount: Long) : Comparable<Paise> {
       period: "2022 — Present",
       role: "B.Tech in Computer Science & Engineering (AI & ML)",
       organization: "Lakshmi Narain College of Technology (LNCT), Bhopal",
-      description: "Pursuing specialized degree in Artificial Intelligence and Machine Learning. Deepening expertise in software architecture, database management, edge AI, and data structures."
+      description: "Specializing in Artificial Intelligence and Machine Learning. Deepening expertise in native Android development, edge machine learning, cryptographic mobile databases, and software architecture."
     },
     {
       period: "2023 — Present",
       role: "Founder & Independent Android Developer",
       organization: "VaidikTech",
-      description: "Established VaidikTech as an independent mobile software brand. Built, architected, and published Girvi on Google Play; developed JewelBill, KaamKram, and FreeAIInvoice focused on Indian micro-businesses and field tradespeople."
+      description: "Established VaidikTech as an independent mobile software brand. Built, architected, and published Girvi on Google Play; engineered AdvoKosh (solo advocate chamber OS), JewelBill (thermal jewellery billing workstation), KaamKram (Job-to-Payment OS), and GridCare (solar asset O&M)."
     },
     {
-      period: "2024 — 2025",
-      role: "AI & Systems Engineering Projects",
-      organization: "Hackathons & Open Source",
-      description: "Engineered high-impact systems including the AI Disaster SOS Mesh Network (combining YOLOv8 with offline Bluetooth/Wi-Fi Direct mesh) and Q-Transit Nexus (FastAPI quantum-inspired fleet routing digital twin)."
+      period: "2024 — 2026",
+      role: "Advanced Systems & Cooperative ML Engineering",
+      organization: "Distributed Research & Hackathons",
+      description: "Engineered SwarmOS (air-gapped nearby cooperative phone cluster using Google Nearby Connections P2P_CLUSTER and on-device ML Kit OCR), AI Disaster Response SOS mesh network, and Q-Transit Nexus (FastAPI quantum-inspired fleet routing digital twin)."
     },
     {
-      period: "Early Curiosity",
-      role: "The Genesis: Solving Everyday Workflows",
+      period: "The Foundation",
+      role: "Problem-Oriented Software Creation",
       organization: "Personal Lab",
-      description: "Started coding with Python and Tkinter, creating automation scripts, stock predictors, and interactive tools, which ignited the drive to build complete, reliable, publishable applications that real people rely on."
+      description: "Started developing tools with Python, Tkinter, and native Android, focusing early on building complete, publishable applications that solve real operational headaches for businesses rather than superficial demo scripts."
     }
   ]
 };
