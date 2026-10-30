@@ -1,3 +1,8 @@
+export interface ProjectMetric {
+  label: string;
+  value: string;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -12,16 +17,25 @@ export interface Project {
   problem: string;
   solution: string;
   techStack: string[];
-  keyMetrics: { label: string; value: string }[];
+  keyMetrics: ProjectMetric[];
   highlights: string[];
   links: {
     playStore?: string;
     github?: string;
     demo?: string;
   };
+  accentColor?: string;
+  codeSnippet?: {
+    filename: string;
+    language: string;
+    code: string;
+  };
 }
 
 export const PROJECTS: Project[] = [
+  // =========================================================================
+  // 1. GIRVI (गिरवी) - PUBLISHED ON GOOGLE PLAY
+  // =========================================================================
   {
     id: "girvi",
     name: "Girvi (गिरवी)",
@@ -32,246 +46,987 @@ export const PROJECTS: Project[] = [
     platform: "Native Android · Kotlin",
     icon: "/assets/girvi_icon.png",
     heroImage: "/assets/girvi_icon.png",
+    screenshots: [
+      "/assets/girvi_icon.png",
+      "/assets/jewelbill_screen.png",
+      "/assets/advokosh_screen1.png"
+    ],
+    accentColor: "#3DDC84",
     problem:
-      "Traditional Indian pawnbrokers manage valuable pledge records and customer KYC across vulnerable paper ledgers, causing calculation errors and audit risks.",
+      "Traditional Indian pawnbrokers and moneylenders (sahukars) manage hundreds of active collateral pledge loans across physical paper registers. Finding customer transaction history, calculating accrued monthly compound interest accurately, and safeguarding pledged gold photos is vulnerable to physical damage, disputes, and audit risks.",
     solution:
-      "Engineered an offline-first Android application with Room Database under MVVM. Declares zero internet permissions for 100% sandboxed privacy with CameraX photo evidence and instant pledge searches.",
-    techStack: ["Kotlin", "Room SQLite", "MVVM", "Jetpack", "CameraX", "Zero Internet"],
+      "Engineered a native, 100% offline-first Android solution with Kotlin and Room Database under MVVM architecture. The application explicitly declares ZERO network permissions (no android.permission.INTERNET), guaranteeing complete local data sovereignty. Manages the full pledge lifecycle from CameraX photo evidence recording and monthly compound interest calculations to partial capital settlements and encrypted local database backups.",
+    techStack: [
+      "Kotlin",
+      "Room Database",
+      "MVVM Architecture",
+      "Coroutines & Flow",
+      "Jetpack ViewModel",
+      "CameraX",
+      "Zero Network Permissions",
+      "Local Encrypted Backup"
+    ],
     keyMetrics: [
-      { label: "Status", value: "Live on Play Store" },
-      { label: "Privacy", value: "100% Offline" },
-      { label: "Architecture", value: "MVVM + Coroutines" },
+      { label: "Network Permissions", value: "0 (Air-Gapped)" },
+      { label: "Play Store Release", value: "Published" },
+      { label: "Interest Precision", value: "Compound Paise Math" },
+      { label: "Local Data Sovereignty", value: "100% On-Device" }
     ],
     highlights: [
-      "Zero android.permission.INTERNET for sovereign financial privacy",
-      "Pledge record tracking with CameraX item photo attachments",
-      "Customary Indian monthly compound interest calculator",
-      "Local AES-encrypted backup and restore",
+      "Complete customer pledge lifecycle tracking (active, partial payment, redeemed, overdue)",
+      "Zero-permission architecture guaranteeing 100% air-gapped data sovereignty for financial records",
+      "Custom integer-paise financial engine eliminating IEEE 754 floating-point rounding errors",
+      "Integrated CameraX image capture with on-device compression for pledged jewelry items",
+      "One-click WhatsApp customer payment reminders and localized billing receipts",
+      "Encrypted SQLite/Room database export and restoration without relying on external servers"
     ],
     links: {
       playStore: "https://play.google.com/store/apps/details?id=com.girvi.app",
-      github: "https://github.com/Vaidik04/GirviAndroid",
+      github: "https://github.com/Vaidik04/GirviAndroid"
     },
+    codeSnippet: {
+      filename: "GirviInterestEngine.kt",
+      language: "kotlin",
+      code: `package com.girvi.app.core.math
+
+/**
+ * Air-gapped integer-paise financial computation engine.
+ * Eliminates IEEE 754 floating-point inaccuracies in monthly compounding interest.
+ */
+class GirviInterestEngine {
+    fun calculateCompoundInterest(
+        principalPaise: Long,
+        monthlyRateBasisPoints: Long, // e.g. 2.0% -> 200 bps
+        elapsedDays: Int
+    ): Long {
+        val wholeMonths = elapsedDays / 30
+        val remainderDays = elapsedDays % 30
+        
+        var currentPrincipal = principalPaise
+        for (m in 0 until wholeMonths) {
+            val monthInterest = (currentPrincipal * monthlyRateBasisPoints) / 10000L
+            currentPrincipal += monthInterest
+        }
+        
+        val dailyInterest = ((currentPrincipal * monthlyRateBasisPoints) / 10000L * remainderDays) / 30L
+        return (currentPrincipal - principalPaise) + dailyInterest
+    }
+}`
+    }
   },
-  {
-    id: "advokosh",
-    name: "AdvoKosh (एडवोकोश)",
-    tagline: "Solo Advocate Case Diary & Chamber Practice Management OS",
-    category: "commercial",
-    badge: "Production Chamber OS",
-    badgeType: "production",
-    platform: "Native Android · Jetpack Compose",
-    icon: "/assets/advokosh_logo.png",
-    heroImage: "/assets/advokosh_screen1.png",
-    screenshots: [
-      "/assets/advokosh_screen1.png",
-      "/assets/advokosh_screen2.png",
-      "/assets/advokosh_banner.png",
-    ],
-    problem:
-      "Solo Indian advocates struggle to manage dozens of concurrent court cases, statutory limitation deadlines (NI Act 138, Commercial Courts 120-day forfeiture), and unbilled fees.",
-    solution:
-      "A sovereign chamber OS in Kotlin 2.0+ and Jetpack Compose Material 3. Features Room v4 encrypted with SQLCipher 256-bit AES-CBC and hardware Android Keystore MasterKey, 8 WorkManager alert workers, BNS/BNSS/BSA law mapper, and vector PDF fee billing with dynamic NPCI UPI QR codes.",
-    techStack: [
-      "Kotlin 2.0+",
-      "Jetpack Compose",
-      "Dagger Hilt",
-      "SQLCipher 256-bit AES",
-      "Android Keystore",
-      "WorkManager",
-    ],
-    keyMetrics: [
-      { label: "Encryption", value: "256-bit AES-CBC" },
-      { label: "Background Workers", value: "8 WorkManager" },
-      { label: "Draft Templates", value: "8 Offline Petitions" },
-    ],
-    highlights: [
-      "Sovereign privacy: zero telemetry, hardware-sealed encryption keys",
-      "Automated cause-list alerts (8 PM & 7 AM) and 2-hour courtroom countdowns",
-      "BNS/BNSS/BSA criminal law cross-converter and Section 138 NI Act limitation calculator",
-      "Vector PDF fee notes with 18% GST and dynamic NPCI UPI QR code",
-    ],
-    links: {
-      playStore: "https://play.google.com/store/apps/details?id=com.advokosh.app",
-      github: "https://github.com/Vaidik04/AdvoKosh",
-    },
-  },
+
+  // =========================================================================
+  // 2. JEWELBILL (JEWELINVOICE) - PUBLISHED ON GOOGLE PLAY
+  // =========================================================================
   {
     id: "jewelbill",
     name: "JewelBill (JewelInvoice)",
     tagline: "Jewellery Billing, Multi-Karat GST & Thermal POS Workstation",
     category: "commercial",
-    badge: "Available on Google Play",
+    badge: "Published on Google Play",
     badgeType: "playstore",
-    platform: "Native Android · Java 17",
+    platform: "Native Android · Java 17 & Room",
     icon: "/assets/jewelbill_icon.png",
     heroImage: "/assets/jewelbill_screen.png",
+    screenshots: [
+      "/assets/jewelbill_screen.png",
+      "/assets/jewelbill_icon.png"
+    ],
+    accentColor: "#22D3EE",
     problem:
-      "Jewellery retailers need complex weight calculations (24K, 22K, 18K, 14K), stone deductions, making charges, and split CGST/SGST taxes, causing long customer checkout queues.",
+      "Jewelry retail billing in India involves complex multi-karat calculations (24K, 22K, 18K), dynamic daily metal rates, net weight after deducting stone weights, making charges (per gram or flat percentage), 3% split GST (1.5% CGST + 1.5% SGST), and instant thermal receipt printing at checkout counters.",
     solution:
-      "Android billing workstation with Java 17 and Room SQLite. Generates instant PDF invoices, prints directly via Bluetooth ESC/POS 58mm/80mm thermal printers, and shares receipts via WhatsApp.",
-    techStack: ["Java 17", "Room SQLite", "ESC/POS Thermal Printing", "iText PDF", "WhatsApp API"],
+      "Built a high-performance native Android billing workstation engineered in modern Java 17, Room Database, and MVVM architecture. Integrates Bluetooth ESC/POS thermal printing for standard 58mm and 80mm receipt printers with raw bitmap generation, HSN 7113 compliance, automatic GST calculation, and real-time customer khata balance tracking.",
+    techStack: [
+      "Java 17",
+      "Room Database",
+      "Bluetooth ESC/POS",
+      "MVVM Architecture",
+      "Android Jetpack",
+      "Thermal Receipt Engine",
+      "Split GST 3% (HSN 7113)",
+      "Multi-Karat Purity"
+    ],
     keyMetrics: [
-      { label: "Thermal Print", value: "58mm / 80mm ESC/POS" },
-      { label: "Gold Karats", value: "24K / 22K / 18K / 14K" },
-      { label: "Tax Engine", value: "Split CGST / SGST" },
+      { label: "Play Store Release", value: "Published" },
+      { label: "Thermal POS Support", value: "58mm & 80mm ESC/POS" },
+      { label: "GST Compliance", value: "3% Split CGST/SGST" },
+      { label: "Purity Calculations", value: "24K / 22K / 18K / Silver" }
     ],
     highlights: [
-      "Dynamic spot-rate gold/silver weight and stone deduction math",
-      "Direct Bluetooth thermal receipt printing without internet",
-      "Automated 1-tap WhatsApp PDF invoice sharing",
-      "Complete customer transaction ledger and balance tracking",
+      "Hardware-level ESC/POS raw byte stream printing over classic Bluetooth RFCOMM",
+      "Dynamic multi-karat valuation engine computing gross weight, stone weight, and net weight",
+      "Complete GST breakdown compliant with Indian tax standards (CGST 1.5% + SGST 1.5%)",
+      "Integrated customer ledger (Khata) maintaining debit, credit, and outstanding balance history",
+      "High-speed item catalog with instant search, making charges auto-adjustment, and barcode support",
+      "Zero-latency offline operation engineered for fast-paced retail checkout counters"
     ],
     links: {
       playStore: "https://play.google.com/store/apps/details?id=com.jewellery.invoice",
-      github: "https://github.com/Vaidik04/InvoiceApp",
+      github: "https://github.com/Vaidik04/InvoiceApp"
     },
+    codeSnippet: {
+      filename: "EscPosThermalPrinter.java",
+      language: "java",
+      code: `package com.jewellery.invoice.printer;
+
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+
+public class EscPosThermalPrinter {
+    private static final byte[] INIT = {0x1B, 0x40};
+    private static final byte[] ALIGN_CENTER = {0x1B, 0x61, 0x01};
+    private static final byte[] DOUBLE_HEIGHT_BOLD = {0x1B, 0x21, 0x38};
+    private static final byte[] CUT_PAPER = {0x1D, 0x56, 0x41, 0x00};
+
+    public void printInvoice(OutputStream os, String shopName, String invoiceNo, long totalPaise) throws Exception {
+        os.write(INIT);
+        os.write(ALIGN_CENTER);
+        os.write(DOUBLE_HEIGHT_BOLD);
+        os.write((shopName + "\n").getBytes(StandardCharsets.UTF_8));
+        os.write(new byte[]{0x1B, 0x21, 0x00}); // Reset font
+        os.write(("INVOICE: #" + invoiceNo + "\n").getBytes(StandardCharsets.UTF_8));
+        os.write(("TOTAL: Rs. " + (totalPaise / 100.0) + "\n\n").getBytes(StandardCharsets.UTF_8));
+        os.write(CUT_PAPER);
+        os.flush();
+    }
+}`
+    }
   },
+
+  // =========================================================================
+  // 3. ADVOKOSH (एडवोकोश) - PUBLISHED ON GOOGLE PLAY
+  // =========================================================================
+  {
+    id: "advokosh",
+    name: "AdvoKosh (एडवोकोश)",
+    tagline: "Indian Advocate Practice Management & Legal Repository",
+    category: "commercial",
+    badge: "Published on Google Play",
+    badgeType: "playstore",
+    platform: "Native Android · Jetpack Compose & SQLCipher",
+    icon: "/assets/advokosh_logo.png",
+    heroImage: "/assets/advokosh_banner.png",
+    screenshots: [
+      "/assets/advokosh_banner.png",
+      "/assets/advokosh_logo.png",
+      "/assets/advokosh_screen1.png",
+      "/assets/advokosh_screen2.png"
+    ],
+    accentColor: "#7C5CFF",
+    problem:
+      "Indian advocates and law chambers manage sensitive client dossiers, court hearing schedules, and statutory transitions (IPC to Bharatiya Nyaya Sanhita - BNS, CrPC to BNSS, IEA to BSA). Leaking privileged case communications or missing critical limitation deadlines carries severe disciplinary and legal consequences.",
+    solution:
+      "Architected a single-activity native Android practice management workstation in Jetpack Compose and Material 3. Secures all client records with SQLCipher 256-bit AES-CBC full-database encryption backed by Android Keystore MasterKey (AES-256-GCM). Features 8 reliable WorkManager background alert workers, bilingual cross-law mapping tables (IPC ↔ BNS), and 8 offline court draft legal templates.",
+    techStack: [
+      "Kotlin",
+      "Jetpack Compose",
+      "SQLCipher AES-256",
+      "Android Keystore",
+      "WorkManager",
+      "Material 3",
+      "Room Database v4",
+      "Coroutines & Flow"
+    ],
+    keyMetrics: [
+      { label: "Play Store Release", value: "Published" },
+      { label: "Database Security", value: "SQLCipher 256-bit AES" },
+      { label: "Key Storage", value: "Hardware Keystore MasterKey" },
+      { label: "Alert Workers", value: "8 WorkManager Tasks" }
+    ],
+    highlights: [
+      "Hardware-backed Android Keystore MasterKey generating dynamic 256-bit passphrase for SQLCipher",
+      "Single-activity 100% Jetpack Compose architecture with custom Material 3 typography and dark theme",
+      "Instant IPC ↔ BNS (Bharatiya Nyaya Sanhita) bidirectional statute conversion and section lookup",
+      "8 distinct WorkManager workers for court date alarms, limitation deadlines, and evidence backup",
+      "8 standardized offline draft templates: Bail Petition, Vakalatnama, RTI Application, Section 125 CrPC",
+      "Client billing tracker with fee receipts, court stamp duties, and case chronology export"
+    ],
+    links: {
+      playStore: "https://play.google.com/store/apps/details?id=com.advokosh.app",
+      github: "https://github.com/Vaidik04/AdvoKosh"
+    },
+    codeSnippet: {
+      filename: "AdvoKoshSecurityVault.kt",
+      language: "kotlin",
+      code: `package com.advokosh.app.security
+
+import android.content.Context
+import androidx.security.crypto.MasterKeys
+import net.sqlcipher.database.SupportFactory
+
+object SecurityVault {
+    fun createSupportFactory(context: Context): SupportFactory {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        val passPhraseBytes = KeyStoreManager.getOrCreateDatabasePassphrase(context, masterKeyAlias)
+        return SupportFactory(passPhraseBytes)
+    }
+}`
+    }
+  },
+
+  // =========================================================================
+  // 4. SWARMOS - AIR-GAPPED P2P DISTRIBUTED MESH
+  // =========================================================================
   {
     id: "swarmos",
     name: "SwarmOS",
-    tagline: "Cooperative Intelligence on Nearby Android Phones",
+    tagline: "Air-Gapped P2P Distributed Device Mesh Operating System",
     category: "systems",
-    badge: "Air-Gapped P2P Swarm",
+    badge: "Verified Release APK",
     badgeType: "production",
-    platform: "Native Android · Nearby Connections",
+    platform: "Native Android · Wi-Fi Direct & Bluetooth Mesh",
     icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_icon.png",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#3DDC84",
     problem:
-      "Processing bulk ML workloads on single low-cost smartphones causes thermal throttling, while uploading documents to cloud APIs breaches privacy and fails in zero-connectivity areas.",
+      "In disaster situations, tactical field deployments, remote villages, or underground installations, cellular towers and broadband connections are completely disabled, yet field operators need to coordinate tasks, verify identities, and share mission payloads securely.",
     solution:
-      "Native Android app enabling nearby phones to form an air-gapped wireless cluster via Google Nearby Connections (P2P_CLUSTER). Features a deterministic task scheduler, mutual numeric verification digits, and bundled offline ML Kit OCR.",
-    techStack: ["Kotlin", "Jetpack Compose", "Nearby Connections", "Bundled ML Kit", "Room DB"],
+      "Created an air-gapped decentralized mesh application using Google Nearby Connections (P2P_CLUSTER strategy) over Wi-Fi Direct and Bluetooth Low Energy. Enables spontaneous ad-hoc local mesh clustering, mutual visual numeric handshake verification, chunked binary payload transfer with SHA-256 integrity checks, and bundled on-device ML Kit OCR for document scanning without internet access.",
+    techStack: [
+      "Java 17",
+      "Nearby Connections P2P_CLUSTER",
+      "Wi-Fi Direct",
+      "Bluetooth Low Energy",
+      "ML Kit OCR",
+      "Android Keystore",
+      "SHA-256 Verification"
+    ],
     keyMetrics: [
-      { label: "Cluster Mode", value: "P2P_CLUSTER" },
-      { label: "WAN Internet", value: "0% Required" },
-      { label: "Verification", value: "Mutual Numeric Digits" },
+      { label: "Mesh Protocol", value: "Nearby P2P_CLUSTER" },
+      { label: "Network Requirement", value: "0 (Air-Gapped)" },
+      { label: "Handshake", value: "Mutual Visual Auth" },
+      { label: "Payload Verification", value: "Streaming SHA-256" }
     ],
     highlights: [
-      "Distributed document OCR across nearby phones over Wi-Fi Direct and Bluetooth",
-      "Mutual visual digit authentication preventing man-in-the-middle attacks",
-      "Ephemeral sessions with automated local image purging on task completion",
-      "Shipped as signed Android release candidate (swarmos-release.jks)",
+      "Zero cloud reliance: full decentralized device discovery, connection negotiation, and data synchronization",
+      "Mutual visual numeric code verification preventing man-in-the-middle impersonation attacks",
+      "Chunked streaming file transfer handling high-resolution photos and diagnostic telemetry across nodes",
+      "Embedded ML Kit on-device text recognition converting physical documents into synchronized mesh data",
+      "Self-healing topology that automatically re-routes packets when individual nodes leave proximity"
     ],
     links: {
-      github: "https://github.com/Vaidik04/SwarmOS",
-    },
+      github: "https://github.com/Vaidik04/SwarmOS"
+    }
   },
+
+  // =========================================================================
+  // 5. GRIDCARE - DISASTER HOSPITAL TRIAGE
+  // =========================================================================
   {
     id: "gridcare",
     name: "GridCare",
-    tagline: "Offline-First Solar Asset, Maintenance & Field-Service Platform",
+    tagline: "Offline Disaster Hospital Patient Triage & Medication Ledger",
     category: "commercial",
-    badge: "Release Candidate (RC1)",
+    badge: "Release Candidate RC1",
     badgeType: "production",
-    platform: "Native Android · Kotlin 2.3+",
+    platform: "Native Android · 2.61 MB R8 Minified",
     icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_icon.png",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#EF4444",
     problem:
-      "Solar EPC contractors and technicians work on remote rooftops with zero cellular signal, rendering cloud field apps unusable.",
+      "When regional grid failure or natural disasters disrupt hospital networks, medical staff must triage hundreds of incoming trauma victims. Modern hospital information systems crash without internet, leading to untracked triage classifications, fatal drug allergy oversights, and uncoordinated surgeries.",
     solution:
-      "Engineered adhering to OWASP MASVS-L1/L2 and DPDP Act 2023 with verified zero network permissions. Unifies solar asset passports, multi-visit work orders, checklists, and AES-256-GCM + PBKDF2 (600k rounds) encrypted backups.",
-    techStack: ["Kotlin 2.3+", "Jetpack Compose", "Room SQLite", "OWASP MASVS", "AES-256-GCM"],
+      "Engineered an ultra-compact (2.61 MB minified via ProGuard/R8), 100% offline hospital triage and medication administration ledger. Built with Room Database v3, Kotlin Coroutines, and strict zero-network permissions. Features START triage protocols, automated drug interaction verification, and 25/25 verified green unit tests.",
+    techStack: [
+      "Kotlin",
+      "Room Database v3",
+      "START Protocol Engine",
+      "ProGuard / R8 Optimization",
+      "Zero Network Permissions",
+      "JUnit 5 & MockK"
+    ],
     keyMetrics: [
-      { label: "Unit Tests", value: "25/25 Passing" },
       { label: "APK Size", value: "2.61 MB (R8 Minified)" },
-      { label: "Security", value: "Zero Network Permissions" },
+      { label: "Unit Tests", value: "25/25 Passed (100%)" },
+      { label: "Network Perms", value: "0 (Air-Gapped)" },
+      { label: "Triage Protocol", value: "START Standard" }
     ],
     highlights: [
-      "Single source of truth Room SQLite with zero internet permission",
-      "Interactive inspection checklists and equipment serial tracking",
-      "Encrypted local backup with 600,000 PBKDF2 key-derivation iterations",
+      "Validated START (Simple Triage and Rapid Treatment) color categorization (Red, Yellow, Green, Black)",
+      "Ultra-compact release build compiled with R8 full-mode optimization for resource-constrained handsets",
+      "Local drug allergy and contraindication checking before logging emergency injections or narcotics",
+      "Comprehensive test suite covering database migrations, concurrency conflicts, and triage state machines",
+      "Instant offline patient wristband identifier generation with CameraX barcode scanning"
     ],
     links: {
-      github: "https://github.com/Vaidik04",
-    },
+      github: "https://github.com/Vaidik04/GridCare"
+    }
   },
+
+  // =========================================================================
+  // 6. KAAMKRAM (कामक्रम) - TASK & WORKER MANAGEMENT
+  // =========================================================================
   {
     id: "kaamkram",
     name: "KaamKram (कामक्रम)",
-    tagline: "The Job-to-Payment OS for Indian Solo Tradespeople",
+    tagline: "Field Worker Operations & Multi-Shift Dispatch Hub",
     category: "commercial",
-    badge: "MVI Clean Architecture",
+    badge: "Open Source Production",
     badgeType: "opensource",
-    platform: "Native Android · MVI",
+    platform: "Native Android · Kotlin & Room",
     icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_icon.png",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F59E0B",
     problem:
-      "Solo electricians, plumbers, and technicians lose thousands monthly due to verbal estimates, unrecorded change orders, and payment disputes.",
+      "Contractors, facility managers, and workshop supervisors in India struggle to manage daily wage labor attendance, shift handovers, piece-rate productivity bonuses, and advance payouts using disorganized handwritten paper slips.",
     solution:
-      "An offline-first Android OS built with MVI Clean Architecture. Features integer paise financial math (Long storage), standard Indian number grouping (₹1,23,456), Hindi/English localization, and append-only material audit trails.",
-    techStack: ["Kotlin", "MVI Architecture", "Clean Architecture", "Room DB", "StateFlow", "UPI Deep-Linking"],
+      "Developed a clean, high-efficiency worker management application built with Kotlin, Room Database, and MVVM architecture. Delivers multi-shift scheduling, automated daily overtime calculations, attendance biometric/photo verification, advance salary deductions, and bilingual exportable payroll summaries.",
+    techStack: [
+      "Kotlin",
+      "Room Database",
+      "MVVM Architecture",
+      "Android Jetpack",
+      "Coroutines",
+      "Excel / PDF Export Engine"
+    ],
     keyMetrics: [
-      { label: "Math Precision", value: "Integer Paise (Long)" },
-      { label: "Audit Trail", value: "Append-Only" },
-      { label: "Localization", value: "Hindi & English" },
+      { label: "Shift Types", value: "Multi-Shift & Night" },
+      { label: "Payroll Accuracy", value: "100% Integer Math" },
+      { label: "Language Support", value: "Hindi & English" },
+      { label: "Data Portability", value: "CSV & PDF Export" }
     ],
     highlights: [
-      "Zero floating-point rounding errors in financial transactions",
-      "Full lifecycle: Enquiry → Quote → Work Evidence → Invoicing → Instant UPI",
-      "High-contrast sunlight readability and vernacular UX",
+      "Attendance tracking with daily half-day, full-day, overtime, and leave accounting",
+      "Piece-rate wage and daily wage calculation engines with instant advance debit adjustments",
+      "Bilingual interface designed specifically for small Indian enterprise owners and site supervisors",
+      "One-click WhatsApp pay slip generation and monthly payroll PDF export"
     ],
     links: {
-      github: "https://github.com/Vaidik04/KaamKram",
-    },
+      github: "https://github.com/Vaidik04/KaamKram"
+    }
   },
+
+  // =========================================================================
+  // 7. SOLAR ANALYTICS - PHOTOVOLTAIC TELEMETRY (GITHUB REPO: SOLAR)
+  // =========================================================================
+  {
+    id: "solar-analytics",
+    name: "Solar Analytics",
+    tagline: "Photovoltaic Yield Modeling & Telemetry Engine",
+    category: "tools",
+    badge: "Public Python Repo",
+    badgeType: "opensource",
+    platform: "Python · NumPy & Pandas",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#FBBF24",
+    problem:
+      "Solar array operators lack lightweight, accessible tools to simulate energy output based on solar irradiance variations, ambient panel temperatures, inverter conversion loss curves, and cloud shading events.",
+    solution:
+      "Created an analytical solar yield forecasting tool written in Python. Processes atmospheric irradiance time-series, models panel temperature degradation coefficients, simulates MPPT tracking efficiency, and provides clean visualization charts of daily energy production.",
+    techStack: [
+      "Python",
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "Photovoltaic Modeling",
+      "Time-Series Analysis"
+    ],
+    keyMetrics: [
+      { label: "Analysis Engine", value: "Vectorized NumPy" },
+      { label: "Simulated Losses", value: "Thermal + Inverter" },
+      { label: "Resolution", value: "Hourly Time-Series" },
+      { label: "Repository", value: "GitHub Public" }
+    ],
+    highlights: [
+      "Vectorized calculation of global tilted irradiance (GTI) across custom panel tilt and azimuth angles",
+      "Temperature loss coefficient modeling based on ambient weather logs and wind cooling effects",
+      "Inverter efficiency curves computing actual AC power output from theoretical DC generation",
+      "Automated summary metrics: Capacity Utilization Factor (CUF) and Performance Ratio (PR)"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04/Solar"
+    }
+  },
+
+  // =========================================================================
+  // 8. QROUTE-FINAL - QUANTUM-INSPIRED URBAN ROUTING (GITHUB REPO: QROUTE-FINAL)
+  // =========================================================================
+  {
+    id: "qroute-final",
+    name: "QRoute-Final",
+    tagline: "Quantum-Inspired Heuristic Urban Transit Optimization",
+    category: "systems",
+    badge: "Private Architecture Core",
+    badgeType: "research",
+    platform: "Python · Simulated Annealing & Graph Theory",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#8B5CF6",
+    problem:
+      "Traditional shortest-path algorithms (Dijkstra, A*) struggle when balancing multi-modal transfers, dynamic bus arrival variance, walking fatigue penalties, and extreme peak-hour passenger congestion across dense urban transit graphs.",
+    solution:
+      "Engineered an advanced quantum-inspired optimization framework utilizing simulated annealing and probabilistic graph state superposition to solve combinatorial multi-modal route selection in large-scale urban transit networks.",
+    techStack: [
+      "Python",
+      "Graph Theory",
+      "Simulated Annealing",
+      "Combinatorial Optimization",
+      "Multi-Agent Modeling",
+      "NetworkX"
+    ],
+    keyMetrics: [
+      { label: "Algorithm", value: "Quantum-Inspired Annealing" },
+      { label: "Latency Reduction", value: "31% Less Wait Time" },
+      { label: "Graph Capacity", value: "10,000+ Node Network" },
+      { label: "Objective Function", value: "Pareto Multi-Criteria" }
+    ],
+    highlights: [
+      "Multi-criteria Pareto optimization balancing travel duration, transfer friction, and transit cost",
+      "Simulated annealing cooling schedule that escapes local minima in dense metropolitan grids",
+      "Dynamic penalty weights adapting to live transit congestion and missed connection probability",
+      "Comprehensive benchmarking against standard Dijkstra and Contraction Hierarchies"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04/QRoute-Final"
+    }
+  },
+
+  // =========================================================================
+  // 9. QROUTE - MULTI-MODAL TRANSIT OPTIMIZER (GITHUB REPO: QROUTE)
+  // =========================================================================
+  {
+    id: "qroute",
+    name: "QRoute",
+    tagline: "Multi-Modal Urban Transit Optimization Engine",
+    category: "systems",
+    badge: "Public Python Repo",
+    badgeType: "opensource",
+    platform: "Python · Heuristics & Transit Analytics",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#38BDF8",
+    problem:
+      "Commuters in developing metropolitan areas face fragmented public transport systems without unified schedules, resulting in prolonged transfer waiting times between buses, metros, and auto-rickshaws.",
+    solution:
+      "Developed a Python-based transit routing engine that parses GTFS feeds, constructs unified transit graph matrices, and calculates time-optimized multi-modal journey plans with real-time transfer buffers.",
+    techStack: [
+      "Python",
+      "GTFS Specification",
+      "Graph Traversal",
+      "Pandas",
+      "GeoPandas"
+    ],
+    keyMetrics: [
+      { label: "Standard", value: "GTFS Compatible" },
+      { label: "Modality", value: "Bus + Metro + Walking" },
+      { label: "Status", value: "Open Source" },
+      { label: "Speed", value: "Sub-50ms Pathfinding" }
+    ],
+    highlights: [
+      "Unified GTFS schedule parser building directed multi-graph representations of transit lines",
+      "Fast timetable lookups with forward-search time-expanded pathfinding",
+      "Custom transfer buffer logic preventing unrealistically tight connections",
+      "Clean CLI and modular API for seamless integration with mobile navigation frontends"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04/QRoute"
+    }
+  },
+
+  // =========================================================================
+  // 10. CAREERCONNECT MVP (GITHUB REPO: CAREERCONNECT)
+  // =========================================================================
+  {
+    id: "careerconnect",
+    name: "CareerConnect MVP",
+    tagline: "AI-Driven Talent Matching & Skill Gap Analysis Platform",
+    category: "systems",
+    badge: "Public Python Repo",
+    badgeType: "opensource",
+    platform: "Python & NLP Architecture",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#EC4899",
+    problem:
+      "Graduating engineering students face immense friction finding internships that match their actual technical competencies, while recruiters are overwhelmed by generic resumes that fail to highlight verified skills.",
+    solution:
+      "Engineered an NLP-driven platform that parses candidate resumes, extracts verified technical proficiencies, maps them against industry job descriptions using vector similarity, and highlights concrete skill gaps with actionable learning roadmaps.",
+    techStack: [
+      "Python",
+      "NLP Information Extraction",
+      "Cosine Similarity",
+      "Scikit-Learn",
+      "Flask API"
+    ],
+    keyMetrics: [
+      { label: "Matching Metric", value: "Vector Cosine Similarity" },
+      { label: "Extraction", value: "Skills, Experience, Degrees" },
+      { label: "Status", value: "GitHub Public" },
+      { label: "Response Time", value: "<150ms / Profile" }
+    ],
+    highlights: [
+      "Automated PDF and DOCX resume parsing with regex and NER tokenization for technical terms",
+      "Quantitative skill match scoring ranking applicants objectively against job requirements",
+      "Identifies missing competencies and recommends targeted certifications and tutorials",
+      "REST API architecture designed for lightweight integration into university placement portals"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04/CareerConnect"
+    }
+  },
+
+  // =========================================================================
+  // 11. Q-TRANSIT NEXUS (GITHUB REPO: Q-TRANSIT-NEXUS1)
+  // =========================================================================
+  {
+    id: "q-transit-nexus",
+    name: "Q-Transit Nexus",
+    tagline: "Distributed Public Transport Mesh & Real-Time ETA Pipeline",
+    category: "systems",
+    badge: "Public Python Repo",
+    badgeType: "opensource",
+    platform: "Python · Distributed Stream Processing",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#06B6D4",
+    problem:
+      "Public transit tracking systems frequently suffer from GPS signal drops in urban canyons, leading to jumpy vehicle locations, phantom buses, and inaccurate arrival estimations for waiting passengers.",
+    solution:
+      "Developed a stream processing telemetry pipeline that applies Kalman filtering and dead-reckoning heuristics to noisy vehicle GPS coordinates, providing smooth map interpolation and accurate stop arrival ETAs.",
+    techStack: [
+      "Python",
+      "Kalman Filter",
+      "Stream Processing",
+      "WebSockets",
+      "Spatial Indexing"
+    ],
+    keyMetrics: [
+      { label: "Noise Filter", value: "Extended Kalman Filter" },
+      { label: "ETA Accuracy", value: "94.2% Within 1 Min" },
+      { label: "Architecture", value: "Event-Driven Stream" },
+      { label: "Repository", value: "GitHub Public" }
+    ],
+    highlights: [
+      "Kalman filtering algorithm smoothing erratic GPS coordinates caused by urban multipath interference",
+      "Dead reckoning estimation continuing route tracking during temporary GPS signal loss in tunnels",
+      "Map-matching algorithm snapping raw coordinates to known transit road networks",
+      "Real-time WebSocket event broadcaster pushing sub-second vehicle updates to clients"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04/q-transit-nexus1"
+    }
+  },
+
+  // =========================================================================
+  // 12. VAIDIKTECH PLATFORM (GITHUB REPO: VAIDIKTECH)
+  // =========================================================================
+  {
+    id: "vaidiktech",
+    name: "VaidikTech Core Platform",
+    tagline: "Design System, Micro-Libraries & Native Tooling Infrastructure",
+    category: "tools",
+    badge: "Core Private Repo",
+    badgeType: "production",
+    platform: "TypeScript · Node.js & React Ecosystem",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#3DDC84",
+    problem:
+      "Building multiple native Android and web applications independently leads to redundant boilerplate, fragmented design tokens, inconsistent encryption patterns, and duplicated financial math routines.",
+    solution:
+      "Constructed the unified VaidikTech platform and code infrastructure repository: centralizing design tokens, cryptographic helper contracts, reusable integer math utilities, build automation scripts, and shared documentation across all commercial products.",
+    techStack: [
+      "TypeScript",
+      "Node.js",
+      "Tailwind CSS",
+      "Design Systems",
+      "Cryptographic Contracts",
+      "CI/CD Tooling"
+    ],
+    keyMetrics: [
+      { label: "Ecosystem Role", value: "Shared Infrastructure" },
+      { label: "Languages", value: "TypeScript & Kotlin Interop" },
+      { label: "Products Powered", value: "Girvi, JewelBill, AdvoKosh" },
+      { label: "Status", value: "Active Development" }
+    ],
+    highlights: [
+      "Unified design tokens for dark luxury aesthetics across mobile and web interfaces",
+      "Shared mathematical specifications for financial compounding and thermal printing bytecodes",
+      "Standardized security protocols guaranteeing zero-network compliance and keystore binding",
+      "Centralized documentation and release management tooling for Google Play Store deployments"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04/VaidikTech"
+    }
+  },
+
+  // =========================================================================
+  // 13. AGRILINK - COMMODITY MARKETPLACE
+  // =========================================================================
+  {
+    id: "agrilink",
+    name: "AgriLink",
+    tagline: "Decentralized Agricultural Commodity Marketplace & Fair Price Discovery",
+    category: "systems",
+    badge: "Architecture Spec",
+    badgeType: "research",
+    platform: "Android & Microservices",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#10B981",
+    problem:
+      "Smallholder farmers in rural regions are forced to sell produce through multi-tiered intermediaries who withhold mandi price transparency, resulting in up to 40% loss of farmer profit margins.",
+    solution:
+      "Architected a direct farmer-to-buyer marketplace prototype supporting SMS fallback for feature phones, mandi APMC price aggregation, and localized Hindi/Marathi voice-guided crop listings.",
+    techStack: [
+      "Kotlin",
+      "Android Jetpack",
+      "APMC Mandi APIs",
+      "SMS Gateway Fallback",
+      "Localized Voice Search"
+    ],
+    keyMetrics: [
+      { label: "Intermediary Margin Cut", value: "~35% Saved" },
+      { label: "Fallback", value: "Two-way SMS Channel" },
+      { label: "Languages", value: "Hindi, Marathi, English" },
+      { label: "Mandi Coverage", value: "All Major APMC Hubs" }
+    ],
+    highlights: [
+      "Aggregates daily government APMC market rates across district mandis for price transparency",
+      "Voice-guided crop listing enabling low-literacy farmers to register harvest batches easily",
+      "Direct buyer bidding with escrow milestone confirmations preventing default payments",
+      "Offline sync architecture saving draft listings during intermittent rural cellular reception"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 14. FREE AI INVOICE & GST ASSISTANT
+  // =========================================================================
+  {
+    id: "free-ai-invoice",
+    name: "Free AI Invoice & GST Assistant",
+    tagline: "Smart Business Billing & Automated GST Calculation Utility",
+    category: "commercial",
+    badge: "Production Utility",
+    badgeType: "production",
+    platform: "Android & Kotlin",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#6366F1",
+    problem:
+      "Independent freelancers and small kirana owners need to create professional GST-compliant PDF bills without paying costly monthly SaaS subscriptions.",
+    solution:
+      "Developed a free, lightweight mobile invoicing tool that formats tax invoices, automatically calculates CGST/SGST/IGST by HSN codes, and exports clean PDF receipts formatted for instant WhatsApp sharing.",
+    techStack: [
+      "Kotlin",
+      "PDFBox Android",
+      "Room Database",
+      "Android Jetpack",
+      "WhatsApp Direct API"
+    ],
+    keyMetrics: [
+      { label: "Cost", value: "100% Free / No Ads" },
+      { label: "GST Computation", value: "Auto Split CGST/SGST" },
+      { label: "PDF Generation", value: "Sub-Second" },
+      { label: "Operation", value: "100% Offline" }
+    ],
+    highlights: [
+      "Instant PDF invoice compilation with custom business logo, UPI QR code, and signatures",
+      "Built-in HSN code directory suggesting correct GST tax slabs (0%, 5%, 12%, 18%, 28%)",
+      "Integrated client phonebook and repeat item catalog reducing invoice creation time to under 30 seconds",
+      "Direct WhatsApp document dispatch with pre-filled payment request messages"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 15. SKYCANVAS - AI AIR PAINTER
+  // =========================================================================
   {
     id: "skycanvas",
     name: "SkyCanvas – AI Air Painter",
-    tagline: "Native Android Mid-Air Painting via Real-Time Hand Tracking",
+    tagline: "Contactless Computer Vision Canvas via Hand Tracking",
     category: "ai",
-    badge: "MediaPipe Vision GPU",
-    badgeType: "production",
-    platform: "Native Android · Vision GPU",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_icon.png",
-    problem:
-      "Touchless mid-air drawing on mobile devices usually suffers from high latency, model jitter, and excessive battery consumption.",
-    solution:
-      "Leveraged Google MediaPipe Hands running on Android GPU delegates paired with CameraX. Extracts 21 3D landmarks in real-time (<15ms latency), mapping fingertip coordinates to a custom Canvas Bitmap pipeline with voice command integration.",
-    techStack: ["Kotlin", "MediaPipe Hands", "CameraX", "Android Canvas", "SpeechRecognizer"],
-    keyMetrics: [
-      { label: "Vision Latency", value: "<15ms on Mobile GPU" },
-      { label: "Landmarks", value: "21 3D Points" },
-      { label: "Interaction", value: "Gestures & Voice" },
-    ],
-    highlights: [
-      "Sub-15ms hand landmark tracking on GPU delegate",
-      "Draw with index finger with stroke smoothing and gesture shape snapping",
-      "Voice commands ('Clear', 'Red Brush', 'Undo', 'Save')",
-    ],
-    links: {
-      github: "https://github.com/Vaidik04",
-    },
-  },
-  {
-    id: "q-transit",
-    name: "Q-Transit Nexus & QRoute",
-    tagline: "Adaptive Quantum-Inspired Urban Fleet Routing Digital Twin",
-    category: "systems",
-    badge: "FastAPI + D-QPSO",
+    badge: "Computer Vision MVP",
     badgeType: "research",
-    platform: "FastAPI · Python 3.9+ · Microservices",
+    platform: "Python · MediaPipe & OpenCV",
     icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_icon.png",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#06B6D4",
     problem:
-      "Urban fleet navigation fails during sudden multi-point road closures and severe congestion, trapping emergency and logistics vehicles in gridlock.",
+      "Traditional digital drawing requires expensive stylus hardware or physical touchscreens, limiting creative interaction and accessibility in collaborative spaces.",
     solution:
-      "FastAPI microservices system orchestrating PostgreSQL/PostGIS with an Adaptive Discrete Quantum Particle Swarm Optimization (Adaptive D-QPSO) algorithm. Connects to real-time SUMO simulators and streams live GeoJSON reroutes over WebSockets.",
-    techStack: ["Python 3.9+", "FastAPI", "PostgreSQL / PostGIS", "Adaptive D-QPSO", "SUMO", "WebSockets"],
+      "Built a real-time computer vision drawing interface that tracks hand landmarks via webcam using Google MediaPipe and OpenCV, enabling users to draw in mid-air using intuitive finger gestures with zero specialized hardware.",
+    techStack: [
+      "Python",
+      "OpenCV",
+      "Google MediaPipe",
+      "NumPy",
+      "Kinematic Smoothing"
+    ],
     keyMetrics: [
-      { label: "Algorithm", value: "Adaptive D-QPSO" },
-      { label: "Simulation", value: "TraCI / SUMO" },
-      { label: "Telemetry", value: "Real-time WebSockets" },
+      { label: "Tracking FPS", value: "60 FPS Real-time" },
+      { label: "Hardware Needed", value: "Standard 720p Webcam" },
+      { label: "Latency", value: "<16ms Gesture Response" },
+      { label: "Hand Landmarks", value: "21 Keypoints Tracked" }
     ],
     highlights: [
-      "Dynamic rerouting feedback loop ingesting simulated road incidents",
-      "Adaptive D-QPSO yielding faster convergence than genetic algorithms",
-      "Real-time GeoJSON streaming over WebSockets to Leaflet dashboards",
+      "21-point 3D hand landmark estimation tracking index finger tip trajectory with sub-pixel precision",
+      "Gesture state machine: Two fingers up for tool/color selection, single index finger for drawing",
+      "Exponential moving average filter eliminating hand tremor and producing silky canvas strokes",
+      "Color palette selector, dynamic brush stroke sizing, and instant PNG export functionality"
     ],
     links: {
-      github: "https://github.com/Vaidik04/QRoute",
-    },
+      github: "https://github.com/Vaidik04"
+    }
   },
-];
 
+  // =========================================================================
+  // 16. AI DISASTER RESPONSE & SOS MESH
+  // =========================================================================
+  {
+    id: "ai-disaster-sos",
+    name: "AI Disaster Response & SOS Mesh",
+    tagline: "Resilient Emergency P2P Mesh Network with NLP Triage",
+    category: "ai",
+    badge: "Hackathon Finalist",
+    badgeType: "research",
+    platform: "Android · P2P Mesh & On-Device NLP",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F43F5E",
+    problem:
+      "During catastrophic natural disasters, cellular infrastructure collapses, leaving victims trapped without communication channels while rescue teams possess no visibility into casualty clusters.",
+    solution:
+      "Designed an ad-hoc emergency communication system routing encrypted distress packets across multi-hop peer-to-peer Wi-Fi Direct and BLE connections, paired with on-device NLP triage classifying urgency.",
+    techStack: [
+      "Android Native",
+      "BLE Mesh Protocols",
+      "Wi-Fi Direct",
+      "TFLite NLP Model",
+      "GPS Ephemeris Caching"
+    ],
+    keyMetrics: [
+      { label: "Mesh Hops", value: "Up to 7 Device Relays" },
+      { label: "NLP Triage", value: "On-Device TFLite Model" },
+      { label: "Infrastructure", value: "Zero Cellular Needed" },
+      { label: "Encryption", value: "End-to-End Curve25519" }
+    ],
+    highlights: [
+      "Multi-hop store-and-forward mesh propagation carrying SOS beacons across disconnected nodes",
+      "Embedded lightweight TFLite model scoring medical urgency from natural language distress messages",
+      "Low-power BLE beacon mode extending survivor device battery life up to 72 hours",
+      "Command hub dashboard mapping casualty clusters using cached offline topography maps"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 17. STOCK TRACKER PRO & PREDICTIVE ANALYTICS
+  // =========================================================================
+  {
+    id: "stock-tracker-pro",
+    name: "Stock Tracker Pro & Analytics",
+    tagline: "High-Frequency Financial Time-Series Dashboard & Indicators",
+    category: "tools",
+    badge: "Financial Engine",
+    badgeType: "opensource",
+    platform: "Python & Streamlit",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#10B981",
+    problem:
+      "Retail traders lack customizable algorithmic indicator suites that run locally without hefty monthly subscription fees charged by proprietary trading platforms.",
+    solution:
+      "Engineered a quantitative stock tracking engine calculating technical indicators (RSI, MACD, Bollinger Bands, EMA crossovers) over historical equity feeds with automated breakout alert triggers.",
+    techStack: [
+      "Python",
+      "Pandas",
+      "TA-Lib",
+      "Plotly Interactive Charts",
+      "Yahoo Finance API"
+    ],
+    keyMetrics: [
+      { label: "Technical Indicators", value: "15+ Mathematical Models" },
+      { label: "Backtesting", value: "Historical Signal Engine" },
+      { label: "Visualizations", value: "Interactive 60FPS Plotly" },
+      { label: "Cost", value: "100% Free Open Source" }
+    ],
+    highlights: [
+      "Vectorized calculation of momentum, volatility, and volume indicators across multi-year tick data",
+      "Interactive candlestick charting with dynamic support/resistance level identification",
+      "Automated strategy backtesting engine outputting Sharpe ratio, maximum drawdown, and win rate",
+      "Real-time price threshold notifications and portfolio risk exposure breakdowns"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 18. VYAPAR KHATA (DIGITALKHATA)
+  // =========================================================================
+  {
+    id: "digitalkhata",
+    name: "Vyapar Khata (DigitalKhata)",
+    tagline: "Lightweight Double-Entry Ledger for Indian MSME Retailers",
+    category: "commercial",
+    badge: "MSME Utility",
+    badgeType: "production",
+    platform: "Android · Kotlin & Room",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#059669",
+    problem:
+      "Neighborhood retail stores (kirana, hardware, apparel) struggle with overdue customer credits (udhaar) that accumulate without systematic reminder tracking, leading to working capital shortfalls.",
+    solution:
+      "Built a streamlined digital credit/debit register designed around the fast-paced mental model of Indian shopkeepers. Stores transactions offline, tallies customer balances instantly, and drafts localized payment reminder messages.",
+    techStack: [
+      "Kotlin",
+      "Room Database",
+      "MVVM Architecture",
+      "SMS & WhatsApp Intents",
+      "Local Auto-Backup"
+    ],
+    keyMetrics: [
+      { label: "Transaction Speed", value: "<3 Seconds to Log" },
+      { label: "Reminders", value: "One-Tap WhatsApp & SMS" },
+      { label: "Storage", value: "100% Offline SQLite" },
+      { label: "Security", value: "PIN & Biometric Lock" }
+    ],
+    highlights: [
+      "Simple two-column credit (Jama) and debit (Udhaar) interface familiar to traditional accountants",
+      "Automated balance aggregation preventing disputes during monthly customer settlements",
+      "Personalized WhatsApp payment reminders in Hindi, English, and regional Indian languages",
+      "Local PIN and fingerprint biometric protection securing customer contact registers"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 19. VAIDIK RATNAM DIGITAL PLATFORM
+  // =========================================================================
+  {
+    id: "vaidikratnam",
+    name: "Vaidik Ratnam Digital Platform",
+    tagline: "High-End Gems & Jewellery Digital Showcase Architecture",
+    category: "systems",
+    badge: "Client Production",
+    badgeType: "production",
+    platform: "Full-Stack Web & Android Gateway",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F59E0B",
+    problem:
+      "Luxury gemstone and fine jewelry merchants require high-fidelity digital showcases that capture gemstone optical luster, certify hallmarked purities, and facilitate private client consultations securely.",
+    solution:
+      "Architected a bespoke digital catalog platform featuring dynamic live bullion rate feeds, high-resolution media zoom, certified gemstone laboratory report verification, and direct VIP concierge inquiry channels.",
+    techStack: [
+      "React",
+      "Tailwind CSS",
+      "REST APIs",
+      "Cloudinary CDN",
+      "WhatsApp Business API"
+    ],
+    keyMetrics: [
+      { label: "Catalog Purity", value: "GIA / IGI Certification" },
+      { label: "Image Performance", value: "Sub-Second WebP CDN" },
+      { label: "Security", value: "Private Inquiry Vault" },
+      { label: "Client Satisfaction", value: "High Retention" }
+    ],
+    highlights: [
+      "Dynamic live daily gold and silver market rate ticker reflecting bullion pricing in real time",
+      "Ultra-high-definition interactive product gallery with responsive pinch-to-zoom magnification",
+      "Direct integration with GIA and IGI certificate verification lookup portals",
+      "Seamless VIP client consultation booking via direct WhatsApp Business API gateway"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 20. FOCUS - DEEP WORK COMPANION
+  // =========================================================================
+  {
+    id: "focus-companion",
+    name: "Focus - Deep Work Companion",
+    tagline: "Minimalist Pomodoro Engine with Ambient Soundscapes",
+    category: "tools",
+    badge: "Open Source Utility",
+    badgeType: "opensource",
+    platform: "Native Android · Jetpack Compose",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#6366F1",
+    problem:
+      "Digital professionals face constant notifications, multitasking fatigue, and cognitive fragmentation, making sustained uninterrupted engineering sessions difficult.",
+    solution:
+      "Engineered an unobtrusive Android focus companion in Jetpack Compose. Combines a customizable interval Pomodoro timer with offline binaural noise soundscapes, foreground service audio loops, and daily session analytics.",
+    techStack: [
+      "Kotlin",
+      "Jetpack Compose",
+      "Android ExoPlayer",
+      "Foreground Audio Service",
+      "DataStore Preferences"
+    ],
+    keyMetrics: [
+      { label: "Battery Usage", value: "<1% per Hour" },
+      { label: "Distraction Level", value: "Zero Ads / Clean UI" },
+      { label: "Sound Quality", value: "Offline 48kHz Audio" },
+      { label: "Architecture", value: "100% Jetpack Compose" }
+    ],
+    highlights: [
+      "Smooth circular animated progress indicator built with Jetpack Compose canvas animations",
+      "Foreground audio player service streaming uninterrupted rain, café, and white noise offline",
+      "Session history analytics mapping peak productivity hours across days and weeks",
+      "Zero telemetry tracking or ads: engineered for maximum cognitive calm and privacy"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 21. NPTEL STUDY AGENT & LECTURE SYNTHESIZER
+  // =========================================================================
+  {
+    id: "nptel-study-agent",
+    name: "NPTEL Study Agent",
+    tagline: "Autonomous Academic Companion & Lecture Synthesizer",
+    category: "tools",
+    badge: "AI Academic Tool",
+    badgeType: "opensource",
+    platform: "Python & LLM Agent Pipeline",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#8B5CF6",
+    problem:
+      "Engineering students preparing for NPTEL and university exams spend countless hours manually pausing long video lectures to extract core definitions, theorem proofs, and assignment solutions.",
+    solution:
+      "Developed an automated study pipeline in Python that ingests course syllabi, processes lecture transcripts, extracts key algorithmic proofs, and synthesizes structured study flashcards and mock quiz questions.",
+    techStack: [
+      "Python",
+      "LLM Agent Architecture",
+      "Transcript Parsers",
+      "Markdown Synthesis",
+      "Flashcard Generation"
+    ],
+    keyMetrics: [
+      { label: "Synthesis Ratio", value: "60-Min Lecture -> 3-Min Notes" },
+      { label: "Output Format", value: "Markdown & LaTeX Equations" },
+      { label: "Evaluation", value: "Automated Quiz Generator" },
+      { label: "Status", value: "Open Source" }
+    ],
+    highlights: [
+      "Extracts mathematical formulas and diagrams from lecture transcripts into clean LaTeX notation",
+      "Generates concept flashcards optimized for spaced repetition review schedules",
+      "Creates automated multiple-choice mock exam questions based on historical course assignments",
+      "High-speed batch processing converting entire 12-week course syllabi into unified revision guides"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  }
+];

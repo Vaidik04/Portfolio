@@ -104,3 +104,4 @@ export const FooterSection: React.FC = () => {
     </footer>
   );
 };
+
