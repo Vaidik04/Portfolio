@@ -42,7 +42,7 @@ export default function SkillsPage() {
             Engineering Stack & Architecture
           </h1>
           <p className="text-typography-secondary text-base sm:text-lg max-w-3xl mt-4 font-sans leading-relaxed">
-            Native Android performance, hardware-grade database encryption, air-gapped wireless mesh clustering, and mathematical precision across 21 production and research projects.
+            Native Android performance, hardware-grade database encryption, air-gapped wireless mesh clustering, computer vision pipelines, and mathematical precision across 23+ production and research projects.
           </p>
         </div>
 

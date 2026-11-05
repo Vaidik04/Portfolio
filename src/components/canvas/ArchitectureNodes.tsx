@@ -12,11 +12,11 @@ export const ArchitectureNodes: React.FC = () => {
   // 3D MVVM & Keystore Nodes
   const nodes = useMemo(() => {
     return [
-      { id: "ui", label: "Compose UI", pos: new THREE.Vector3(-3.5, 1.2, 0), color: "#3DDC84" },
-      { id: "vm", label: "ViewModel", pos: new THREE.Vector3(-1.2, 0.4, 0), color: "#7C5CFF" },
-      { id: "repo", label: "Repository", pos: new THREE.Vector3(1.2, -0.4, 0), color: "#22D3EE" },
-      { id: "room", label: "Room SQLite", pos: new THREE.Vector3(3.5, 0.8, 0), color: "#F59E0B" },
-      { id: "keystore", label: "Hardware Keystore", pos: new THREE.Vector3(3.5, -1.4, 0), color: "#EC4899" },
+      { id: "ui", label: "Compose M3 UI", pos: new THREE.Vector3(-3.5, 1.2, 0), color: "#3DDC84" },
+      { id: "vm", label: "StateFlow ViewModel", pos: new THREE.Vector3(-1.2, 0.4, 0), color: "#7C5CFF" },
+      { id: "repo", label: "Clean Repository", pos: new THREE.Vector3(1.2, -0.4, 0), color: "#22D3EE" },
+      { id: "room", label: "Room SQLite 2.6+", pos: new THREE.Vector3(3.5, 0.8, 0), color: "#F59E0B" },
+      { id: "keystore", label: "Keystore AES-256", pos: new THREE.Vector3(3.5, -1.4, 0), color: "#EC4899" },
     ];
   }, []);
 
@@ -92,3 +92,4 @@ export const ArchitectureNodes: React.FC = () => {
     </group>
   );
 };
+

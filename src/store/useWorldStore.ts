@@ -79,3 +79,4 @@ export const useWorldStore = create<WorldState>((set) => ({
   glitchMode: false,
   setGlitchMode: (glitchMode) => set({ glitchMode }),
 }));
+

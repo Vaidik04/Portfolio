@@ -134,3 +134,4 @@ export const AssemblingPhone: React.FC = () => {
     </group>
   );
 };
+

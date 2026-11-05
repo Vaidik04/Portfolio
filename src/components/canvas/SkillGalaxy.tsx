@@ -13,16 +13,18 @@ export const SkillGalaxy: React.FC = () => {
   // Generate constellation nodes for core skills
   const nodes = useMemo(() => {
     const list = [
-      { name: "Kotlin", color: "#7C5CFF", size: 0.45, speed: 0.6 },
-      { name: "Jetpack Compose", color: "#3DDC84", size: 0.5, speed: -0.5 },
-      { name: "Room SQLite", color: "#22D3EE", size: 0.42, speed: 0.8 },
-      { name: "SQLCipher 256", color: "#F59E0B", size: 0.48, speed: -0.7 },
-      { name: "CameraX & Vision", color: "#EC4899", size: 0.38, speed: 0.9 },
+      { name: "Kotlin 2.0+ (K2)", color: "#7C5CFF", size: 0.46, speed: 0.6 },
+      { name: "Jetpack Compose M3", color: "#3DDC84", size: 0.5, speed: -0.5 },
+      { name: "Android 15 (SDK 35)", color: "#22D3EE", size: 0.45, speed: 0.7 },
+      { name: "Room SQLite 2.6+", color: "#38BDF8", size: 0.42, speed: 0.8 },
+      { name: "SQLCipher 4.5+ AES", color: "#F59E0B", size: 0.48, speed: -0.7 },
+      { name: "MediaPipe GPU 0.10+", color: "#EC4899", size: 0.42, speed: 0.9 },
+      { name: "OpenCV 4.10+", color: "#F43F5E", size: 0.4, speed: -0.85 },
       { name: "Google Nearby P2P", color: "#10B981", size: 0.42, speed: -0.6 },
-      { name: "WorkManager", color: "#38BDF8", size: 0.36, speed: 1.0 },
-      { name: "Java 17", color: "#F97316", size: 0.4, speed: -0.8 },
-      { name: "Python Systems", color: "#6366F1", size: 0.46, speed: 0.5 },
-      { name: "ProGuard / R8", color: "#A855F7", size: 0.35, speed: -1.1 },
+      { name: "WorkManager 2.9+", color: "#06B6D4", size: 0.36, speed: 1.0 },
+      { name: "Python 3.12+", color: "#6366F1", size: 0.46, speed: 0.5 },
+      { name: "Next.js 14.2+", color: "#E2E8F0", size: 0.38, speed: -0.75 },
+      { name: "FastAPI 0.115+", color: "#14B8A6", size: 0.38, speed: 0.65 },
     ];
 
     return list.map((item, i) => {
@@ -115,3 +117,4 @@ export const SkillGalaxy: React.FC = () => {
     </group>
   );
 };
+

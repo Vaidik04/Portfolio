@@ -123,3 +123,4 @@ export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComple
     </AnimatePresence>
   );
 };
+

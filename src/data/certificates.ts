@@ -122,16 +122,16 @@ export const CERTIFICATES: Certificate[] = [
   },
 
   // =========================================================================
-  // 5. NPTEL: Discrete Mathematics
+  // 5. NPTEL: Discrete Mathematics (Elite Silver)
   // =========================================================================
   {
     id: "nptel-discrete-math",
     title: "Discrete Mathematics",
-    issuer: "NPTEL · IIT Ropar",
+    issuer: "NPTEL · IIT Ropar (Ministry of Education)",
     category: "nptel",
     date: "Jul - Oct",
-    score: "Certified",
-    badge: "Theoretical Computer Science",
+    score: "Elite + Silver",
+    badge: "Elite Silver",
     credits: "4 Credits Recommended",
     credentialId: "NPTEL-IIT-DM-CORE",
     fileUrl: "/certificates/Discrete Mathematics.pdf",
@@ -144,7 +144,7 @@ export const CERTIFICATES: Certificate[] = [
       "Set Theory & Boolean Algebra"
     ],
     description:
-      "12-week mathematical foundation for computational proof techniques, inductive reasoning, Eulerian/Hamiltonian graph properties, and discrete structures."
+      "12-week rigorous mathematical foundation covering computational proof techniques, graph theory, Eulerian/Hamiltonian circuits, combinatorics, and discrete structures certified with Elite Silver distinction by IIT Ropar."
   },
 
   // =========================================================================

@@ -65,3 +65,4 @@ export const WorldCanvas: React.FC = () => {
     </div>
   );
 };
+

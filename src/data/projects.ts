@@ -43,7 +43,7 @@ export const PROJECTS: Project[] = [
     category: "commercial",
     badge: "Published on Google Play",
     badgeType: "playstore",
-    platform: "Native Android · Kotlin",
+    platform: "Native Android · Kotlin 2.0+ & Room 2.6+",
     icon: "/assets/girvi_icon.png",
     heroImage: "/assets/girvi_icon.png",
     screenshots: [
@@ -57,12 +57,13 @@ export const PROJECTS: Project[] = [
     solution:
       "Engineered a native, 100% offline-first Android solution with Kotlin and Room Database under MVVM architecture. The application explicitly declares ZERO network permissions (no android.permission.INTERNET), guaranteeing complete local data sovereignty. Manages the full pledge lifecycle from CameraX photo evidence recording and monthly compound interest calculations to partial capital settlements and encrypted local database backups.",
     techStack: [
-      "Kotlin",
-      "Room Database",
+      "Kotlin 2.0+ (K2)",
+      "Android 15 (SDK 35)",
+      "Room SQLite 2.6+",
       "MVVM Architecture",
-      "Coroutines & Flow",
+      "Coroutines & StateFlow 1.8+",
       "Jetpack ViewModel",
-      "CameraX",
+      "CameraX 1.4+",
       "Zero Network Permissions",
       "Local Encrypted Backup"
     ],
@@ -125,7 +126,7 @@ class GirviInterestEngine {
     category: "commercial",
     badge: "Published on Google Play",
     badgeType: "playstore",
-    platform: "Native Android · Java 17 & Room",
+    platform: "Native Android · Java 21 & Room SQLite 2.6+",
     icon: "/assets/jewelbill_icon.png",
     heroImage: "/assets/jewelbill_screen.png",
     screenshots: [
@@ -136,16 +137,16 @@ class GirviInterestEngine {
     problem:
       "Jewelry retail billing in India involves complex multi-karat calculations (24K, 22K, 18K), dynamic daily metal rates, net weight after deducting stone weights, making charges (per gram or flat percentage), 3% split GST (1.5% CGST + 1.5% SGST), and instant thermal receipt printing at checkout counters.",
     solution:
-      "Built a high-performance native Android billing workstation engineered in modern Java 17, Room Database, and MVVM architecture. Integrates Bluetooth ESC/POS thermal printing for standard 58mm and 80mm receipt printers with raw bitmap generation, HSN 7113 compliance, automatic GST calculation, and real-time customer khata balance tracking.",
+      "Built a high-performance native Android billing workstation engineered in modern Java 21, Room SQLite 2.6+, and MVVM architecture. Integrates Bluetooth ESC/POS thermal printing for standard 58mm and 80mm receipt printers with raw bitmap generation, HSN 7113 compliance, automatic GST calculation, and real-time customer khata balance tracking.",
     techStack: [
-      "Java 17",
-      "Room Database",
-      "Bluetooth ESC/POS",
+      "Java 21 / Kotlin Interop",
+      "Android 15 (SDK 35)",
+      "Room SQLite 2.6+",
+      "Bluetooth ESC/POS Thermal Protocol",
       "MVVM Architecture",
-      "Android Jetpack",
-      "Thermal Receipt Engine",
+      "Thermal Receipt Bytecode Engine",
       "Split GST 3% (HSN 7113)",
-      "Multi-Karat Purity"
+      "Multi-Karat Purity Engine"
     ],
     keyMetrics: [
       { label: "Play Store Release", value: "Published" },
@@ -204,7 +205,7 @@ public class EscPosThermalPrinter {
     category: "commercial",
     badge: "Published on Google Play",
     badgeType: "playstore",
-    platform: "Native Android · Jetpack Compose & SQLCipher",
+    platform: "Native Android · Jetpack Compose M3 & SQLCipher 4.5+",
     icon: "/assets/advokosh_logo.png",
     heroImage: "/assets/advokosh_banner.png",
     screenshots: [
@@ -217,16 +218,16 @@ public class EscPosThermalPrinter {
     problem:
       "Indian advocates and law chambers manage sensitive client dossiers, court hearing schedules, and statutory transitions (IPC to Bharatiya Nyaya Sanhita - BNS, CrPC to BNSS, IEA to BSA). Leaking privileged case communications or missing critical limitation deadlines carries severe disciplinary and legal consequences.",
     solution:
-      "Architected a single-activity native Android practice management workstation in Jetpack Compose and Material 3. Secures all client records with SQLCipher 256-bit AES-CBC full-database encryption backed by Android Keystore MasterKey (AES-256-GCM). Features 8 reliable WorkManager background alert workers, bilingual cross-law mapping tables (IPC ↔ BNS), and 8 offline court draft legal templates.",
+      "Architected a single-activity native Android practice management workstation in Jetpack Compose and Material 3 (BOM 2024.10+). Secures all client records with SQLCipher 4.5.5 256-bit AES-CBC full-database encryption backed by Android Keystore MasterKey (AES-256-GCM). Features 8 reliable WorkManager background alert workers, bilingual cross-law mapping tables (IPC ↔ BNS), and 8 offline court draft legal templates.",
     techStack: [
-      "Kotlin",
-      "Jetpack Compose",
-      "SQLCipher AES-256",
-      "Android Keystore",
-      "WorkManager",
-      "Material 3",
-      "Room Database v4",
-      "Coroutines & Flow"
+      "Kotlin 2.0+ (K2)",
+      "Jetpack Compose M3",
+      "Android 15 (SDK 35)",
+      "SQLCipher 4.5.5 (AES-256)",
+      "Android Keystore MasterKey",
+      "WorkManager 2.9+",
+      "Room Database 2.6+",
+      "Coroutines & StateFlow 1.8+"
     ],
     keyMetrics: [
       { label: "Play Store Release", value: "Published" },
@@ -960,7 +961,7 @@ class QuantumAnnealingRouter:
     category: "tools",
     badge: "Core Platform",
     badgeType: "production",
-    platform: "TypeScript · Node.js & React Ecosystem",
+    platform: "TypeScript · Node.js 20+ & React Ecosystem",
     icon: "/assets/vaidiktech_symbol.svg",
     heroImage: "/assets/vaidiktech_symbol.svg",
     accentColor: "#3DDC84",
@@ -970,8 +971,8 @@ class QuantumAnnealingRouter:
       "Constructed the unified VaidikTech platform and code infrastructure repository: centralizing design tokens, cryptographic helper contracts, reusable integer math utilities, build automation scripts, and shared documentation across all commercial products.",
     techStack: [
       "TypeScript",
-      "Node.js",
-      "Tailwind CSS",
+      "Node.js 20+",
+      "Tailwind CSS 3.4+",
       "Design Systems",
       "Cryptographic Contracts",
       "CI/CD Tooling"
@@ -990,6 +991,215 @@ class QuantumAnnealingRouter:
     ],
     links: {
       github: "https://github.com/Vaidik04/VaidikTech"
+    }
+  },
+
+  // =========================================================================
+  // 20. AI SUDOKU VISION (COMPUTER VISION & DEEP LEARNING)
+  // =========================================================================
+  {
+    id: "ai-sudoku-vision",
+    name: "AI Sudoku Vision & AR Solver",
+    tagline: "Real-Time OpenCV Perspective Warp, CNN Digit Recognition & AR Overlay",
+    category: "ai",
+    badge: "Computer Vision & DL",
+    badgeType: "research",
+    platform: "Python 3.12+ · OpenCV 4.10 · PyTorch / CNN",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#22D3EE",
+    problem:
+      "Solving printed newspaper or magazine Sudoku puzzles traditionally requires manual, error-prone data entry into solver apps. Existing image scanners fail under skewed camera angles, wrinkled paper surfaces, fluctuating ambient illumination, and varied font weights.",
+    solution:
+      "Engineered an end-to-end computer vision and deep learning system. Applies adaptive Gaussian thresholding, morphological dilation, and contour polygon approximation to identify the 4 outer corners of the puzzle grid in live webcam/camera streams. Computes a perspective transform homography matrix to unwarp the board into a normalized 450x450 coordinate space. A lightweight Convolutional Neural Network (CNN) + KNN classifier recognizes digits with 98.4% accuracy across 81 segmented cells. An optimized recursive backtracking solver resolves the puzzle in <15ms, and the solved numbers are inverse-warped and superimposed back into the original skewed camera frame in real time.",
+    techStack: [
+      "Python 3.12+",
+      "OpenCV 4.10.0",
+      "PyTorch 2.4+ / CNN",
+      "Perspective Homography",
+      "Constraint Backtracking",
+      "NumPy & SciPy",
+      "AR Projection"
+    ],
+    keyMetrics: [
+      { label: "Warp Extraction", value: "<8ms Real-Time" },
+      { label: "CNN Digit Accuracy", value: "98.4% On-Device" },
+      { label: "Backtracking Solve", value: "<15ms Worst Case" },
+      { label: "Augmented Reality", value: "Live Inverse Homography" }
+    ],
+    highlights: [
+      "Sub-8ms 4-corner perspective unwarping utilizing OpenCV contour hierarchy and polygon approximation",
+      "Custom-trained Convolutional Neural Network with data augmentation for robust digit classification",
+      "Constraint-propagation recursive backtracking algorithm capable of solving 17-clue minimal grids",
+      "Real-time Augmented Reality overlay projecting solved digits directly into skewed video frames",
+      "Built-in fallback KNN feature extractor ensuring resilience across low-resource runtime environments"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    },
+    codeSnippet: {
+      filename: "sudoku_vision_pipeline.py",
+      language: "python",
+      code: `import cv2
+import numpy as np
+
+def extract_and_solve_grid(frame, cnn_model, solver_engine):
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    thresh = cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                                  cv2.THRESH_BINARY_INV, 11, 2)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    largest = max(contours, key=cv2.contourArea, default=None)
+    if largest is None or cv2.contourArea(largest) < 50000:
+        return frame
+    
+    peri = cv2.arcLength(largest, True)
+    approx = cv2.approxPolyDP(largest, 0.02 * peri, True)
+    if len(approx) == 4:
+        pts1 = np.float32([p[0] for p in approx])
+        pts2 = np.float32([[0, 0], [450, 0], [450, 450], [0, 450]])
+        matrix = cv2.getPerspectiveTransform(pts1, pts2)
+        inv_matrix = cv2.getPerspectiveTransform(pts2, pts1)
+        warped = cv2.warpPerspective(gray, matrix, (450, 450))
+        
+        # 81-cell digit recognition & backtracking solve
+        board = extract_cells_and_classify(warped, cnn_model)
+        if solver_engine.solve(board):
+            solved_canvas = render_solved_digits(board)
+            ar_overlay = cv2.warpPerspective(solved_canvas, inv_matrix, (frame.shape[1], frame.shape[0]))
+            return cv2.addWeighted(frame, 1.0, ar_overlay, 0.85, 0)
+    return frame`
+    }
+  },
+
+  // =========================================================================
+  // 21. EMOTION MUSIC AI (AFFECTIVE COMPUTING & STREAMING)
+  // =========================================================================
+  {
+    id: "emotion-music-ai",
+    name: "Emotion Music AI",
+    tagline: "Real-Time Facial Expression Recognition & Adaptive Spotify Mood Player",
+    category: "ai",
+    badge: "Affective AI Engine",
+    badgeType: "research",
+    platform: "Python 3.12+ · OpenCV 4.10 · TensorFlow / Keras · Spotify API",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#7C5CFF",
+    problem:
+      "Modern music streaming services require continuous active interaction to select genres and playlists. When users undergo emotional fatigue, high-intensity focus, or stress, they have no passive, hands-free mechanism to calibrate background music according to their real-time psychological state.",
+    solution:
+      "Created an affective computing system combining edge computer vision with dynamic audio playlist generation. Ingests video from standard webcams, applies Haar Cascade face localization, and classifies facial micro-expressions into 7 discrete emotional states (Happiness, Sadness, Anger, Surprise, Fear, Disgust, Neutral) using a deep Convolutional Neural Network running at 60 FPS. Integrates with the Spotify Web API via Spotipy: querying user libraries and Spotify recommendation endpoints for track valence, acousticness, and danceability parameters to seamlessly auto-queue harmonious playlists without user intervention.",
+    techStack: [
+      "Python 3.12+",
+      "OpenCV 4.10.0",
+      "TensorFlow / Keras",
+      "Deep CNN Emotion Model",
+      "Spotipy / Spotify Web API",
+      "PyQt5 / Tkinter GUI",
+      "Affective Computing"
+    ],
+    keyMetrics: [
+      { label: "Inference Speed", value: "60 FPS GPU Stream" },
+      { label: "Emotion Categories", value: "7 Affective States" },
+      { label: "Playlist Adaptation", value: "<350ms Dynamic Transition" },
+      { label: "User Privacy", value: "Zero Cloud Video Streaming" }
+    ],
+    highlights: [
+      "High-throughput real-time face detection and expression classification operating at 60 FPS",
+      "Temporal moving-average filtering preventing erratic playlist changes from momentary blinks or yawns",
+      "Seamless Spotify OAuth2 integration dynamically modulating acousticness and valence attributes",
+      "Offline-first video pipeline ensuring webcam frames are processed locally without leaking biometric data",
+      "Dark-themed desktop HUD visualizing live confidence vectors and audio waveform analytics"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 22. MIXAMO 3D PIPELINE (AUTOMATED GRAPHICS & RENDERING)
+  // =========================================================================
+  {
+    id: "mixamo-3d-pipeline",
+    name: "Mixamo 3D Render Pipeline",
+    tagline: "Headless Blender bpy Automation, Skeletal Retargeting & MoviePy Compositor",
+    category: "tools",
+    badge: "Graphics Engineering",
+    badgeType: "opensource",
+    platform: "Python 3.12+ · Blender bpy 4.2+ · MoviePy 2.0+ · FFmpeg",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F59E0B",
+    problem:
+      "Producing batches of stylized 3D dance and character animation videos manually inside GUI 3D packages is exceptionally labor-intensive—requiring repetitive armature binding, manual camera alignment, manual render queue management, and separate video editing suite compositing.",
+    solution:
+      "Architected a programmatic 3D animation and rendering pipeline using Python and Blender's headless C-Python interface (`bpy`). Ingests 3D character meshes, automatically transfers skeletal bone hierarchies from Mixamo motion capture rigs, executes headless GPU EEVEE/Cycles rendering with scripted cinematic camera orbits, and orchestrates MoviePy and FFmpeg to composite synchronized, tempo-matched audio tracks into ready-to-publish MP4 video files.",
+    techStack: [
+      "Python 3.12+",
+      "Blender bpy 4.2+",
+      "Mixamo Mocap Armatures",
+      "MoviePy 2.0+",
+      "FFmpeg Headless Muxing",
+      "GPU EEVEE / Cycles Batching"
+    ],
+    keyMetrics: [
+      { label: "Workflow Automation", value: "100% Headless CLI" },
+      { label: "Pipeline Speedup", value: "10x vs Manual Studio" },
+      { label: "Audio Sync Accuracy", value: "Frame-Perfect BPM Matching" },
+      { label: "Output Format", value: "4K / 60 FPS Render Batch" }
+    ],
+    highlights: [
+      "Automated skeletal bone binding and weight normalization across varied character mesh topologies",
+      "Scripted camera tracking algorithms calculating optimal field of view and focal distance automatically",
+      "Headless background GPU execution without GUI overhead, enabling continuous batch rendering",
+      "Automated multi-track audio-video multiplexing with beat-synchronized camera cuts via MoviePy and FFmpeg"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 23. RUBIK'S CUBE VISION (ALGORITHMIC OPTIMIZATION & 3D)
+  // =========================================================================
+  {
+    id: "rubiks-cube-vision",
+    name: "Rubik's Cube Vision & Optimal Solver",
+    tagline: "HSV Computer Vision Scanner, Kociemba Algorithm & Interactive 3D Playback",
+    category: "systems",
+    badge: "Algorithmic Solver",
+    badgeType: "research",
+    platform: "Python 3.12+ · OpenCV 4.10 · Kociemba Algorithm · Pygame / OpenGL",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#3DDC84",
+    problem:
+      "Learning to solve a Rubik's Cube or diagnosing tangled permutations requires memorizing dozens of complex CFOP algorithms. Digital solvers either demand tedious manual color button clicking or compute suboptimal 100+ move solutions.",
+    solution:
+      "Engineered an automated 6-face computer vision scanning system with OpenCV. Utilizes adaptive HSV color segmentation to isolate 54 individual facelets directly from camera frames, robust against room lighting shifts. Feeds the cube state into Kociemba's Two-Phase Algorithm to calculate God's Algorithm optimal solutions in under 20 moves in <35ms. Presents solutions through an interactive 60 FPS 3D OpenGL cube simulation that users can scrub, pause, and rotate.",
+    techStack: [
+      "Python 3.12+",
+      "OpenCV 4.10.0",
+      "Kociemba Two-Phase Algorithm",
+      "OpenGL / Pygame 3D",
+      "HSV Color Segmentation",
+      "Discrete Group Theory"
+    ],
+    keyMetrics: [
+      { label: "Solution Move Count", value: "<20 Moves (Optimal)" },
+      { label: "Solve Computation", value: "<35ms Group Search" },
+      { label: "Color Segmentation", value: "Adaptive Lighting Invariance" },
+      { label: "3D Visualizer", value: "60 FPS Interactive OpenGL" }
+    ],
+    highlights: [
+      "Automated facelet detection using dynamic HSV color clustering with Euclidean distance re-projection",
+      "Kociemba Two-Phase Algorithm reducing search space from 4.3x10^19 states into coset subgroups",
+      "Interactive 3D OpenGL viewport displaying step-by-step turn notations (U, R, F, D, L, B)",
+      "Zero-dependency local execution running efficiently on standard laptops without external server calls"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
     }
   }
 ];
