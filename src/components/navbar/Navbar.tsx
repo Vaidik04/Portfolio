@@ -75,10 +75,10 @@ export const Navbar: React.FC = () => {
             className="absolute -bottom-px left-6 right-6 h-[1.5px] bg-gradient-to-r from-accent-violet via-accent-cyan to-accent-android origin-left rounded-full"
           />
 
-          {/* Brand Logo */}
+          {/* Brand Logo & VaidikTech Link */}
           <Magnetic strength={0.25}>
-            <Link href="/" className="flex items-center gap-2.5 group pl-1">
-              <div className="w-8 h-8 rounded-full bg-surface-elevated border border-surface-border flex items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:border-accent-android/40">
+            <div className="flex items-center gap-2.5 pl-1">
+              <Link href="/" className="w-8 h-8 rounded-full bg-surface-elevated border border-surface-border flex items-center justify-center p-1.5 transition-transform duration-300 hover:scale-105 hover:border-accent-android/40">
                 <Image
                   src="/assets/vaidiktech_symbol.svg"
                   alt="VaidikTech"
@@ -86,23 +86,25 @@ export const Navbar: React.FC = () => {
                   height={20}
                   className="w-full h-full object-contain"
                 />
-              </div>
+              </Link>
               <div className="flex flex-col">
-                <span className="text-xs font-heading font-bold text-typography-primary leading-tight group-hover:text-accent-android transition-colors">
+                <Link
+                  href="/"
+                  className="text-xs font-heading font-bold text-typography-primary leading-tight hover:text-accent-android transition-colors"
+                >
                   Vaidik Gandhi
-                </span>
+                </Link>
                 <a
                   href="https://vaidiktech.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[9px] font-mono tracking-wider text-accent-android uppercase hover:underline"
                   title="Visit VaidikTech (vaidiktech.app)"
-                  onClick={(e) => e.stopPropagation()}
                 >
                   Founder · VaidikTech
                 </a>
               </div>
-            </Link>
+            </div>
           </Magnetic>
 
           {/* Desktop Nav Links */}

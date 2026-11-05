@@ -120,7 +120,7 @@ export const AboutSection: React.FC = () => {
                     src="/assets/vaidik_portrait_pro.jpg"
                     alt="Vaidik Gandhi"
                     fill
-                    className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     priority
                   />
                   {/* Subtle Ambient Vignette Bottom Overlay for text legibility */}
