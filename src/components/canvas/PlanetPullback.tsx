@@ -43,7 +43,7 @@ export const PlanetPullback: React.FC = () => {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -4]}>
+    <group ref={groupRef} position={[0, 0, -4]} visible={false}>
       {/* Central Cyber Planet Sphere */}
       <mesh ref={coreRef}>
         <icosahedronGeometry args={[1.4, 3]} />

@@ -4,12 +4,10 @@ import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { CameraRig } from "./CameraRig";
 import { CosmicDust } from "./CosmicDust";
-import { CyberGridFloor } from "./CyberGridFloor";
 import { PointerLight } from "./PointerLight";
 import { AssemblingPhone } from "./AssemblingPhone";
 import { CodePortalTunnel } from "./CodePortalTunnel";
 import { SkillGalaxy } from "./SkillGalaxy";
-import { ProjectFlightDeck } from "./ProjectFlightDeck";
 import { ArchitectureNodes } from "./ArchitectureNodes";
 import { PlanetPullback } from "./PlanetPullback";
 import * as THREE from "three";
@@ -47,15 +45,13 @@ export const WorldCanvas: React.FC = () => {
           {/* Continuous Camera Rig */}
           <CameraRig />
 
-          {/* Ambient Cosmic Field & Floor Grid */}
+          {/* Ambient Cosmic Stardust Field */}
           <CosmicDust />
-          <CyberGridFloor />
 
           {/* 3D Scene Components */}
           <AssemblingPhone />
           <CodePortalTunnel />
           <SkillGalaxy />
-          <ProjectFlightDeck />
           <ArchitectureNodes />
           <PlanetPullback />
         </Suspense>

@@ -86,7 +86,7 @@ export const CodePortalTunnel: React.FC = () => {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -4]}>
+    <group ref={groupRef} position={[0, 0, -4]} visible={false}>
       {/* Hyper-Speed Stardust Stream */}
       <points ref={pointsRef}>
         <bufferGeometry>

@@ -109,7 +109,7 @@ export const SkillGalaxy: React.FC = () => {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -2]}>
+    <group ref={groupRef} position={[0, 0, -2]} visible={false}>
       {/* Dynamic Laser Connections */}
       <lineSegments ref={lineRef} geometry={lineGeom}>
         <lineBasicMaterial color="#3DDC84" transparent opacity={0.25} />

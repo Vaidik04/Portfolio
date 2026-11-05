@@ -93,6 +93,7 @@ export const ArchitectureNodes: React.FC = () => {
     <group
       ref={groupRef}
       position={[0, 0, -1.5]}
+      visible={false}
       onPointerOver={() => (isHovered.current = true)}
       onPointerOut={() => (isHovered.current = false)}
     >

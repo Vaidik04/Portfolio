@@ -9,26 +9,6 @@ export const AssemblingPhone: React.FC = () => {
   const { scrollProgress } = useWorldStore();
   const groupRef = useRef<THREE.Group>(null);
 
-  // Define components of the 3D phone that explode outwards and snap together
-  const parts = useMemo(() => {
-    return [
-      // Screen Glass
-      { id: "screen", startPos: new THREE.Vector3(0, 0, 3.5), targetPos: new THREE.Vector3(0, 0, 0.12), size: [2.2, 4.4, 0.04], color: "#060A14", emissive: "#3DDC84", emissiveIntensity: 0.3 },
-      // Aluminum Chassis / Frame
-      { id: "frame", startPos: new THREE.Vector3(0, 4.5, 0), targetPos: new THREE.Vector3(0, 0, 0), size: [2.35, 4.55, 0.2], color: "#0F1424", emissive: "#7C5CFF", emissiveIntensity: 0.2 },
-      // Back Glass Plate
-      { id: "back", startPos: new THREE.Vector3(0, 0, -3.5), targetPos: new THREE.Vector3(0, 0, -0.11), size: [2.28, 4.48, 0.02], color: "#080C18", emissive: "#22D3EE", emissiveIntensity: 0.15 },
-      // Camera Island
-      { id: "cameraBump", startPos: new THREE.Vector3(-2.5, 2.5, 0), targetPos: new THREE.Vector3(-0.65, 1.45, -0.15), size: [0.85, 1.2, 0.08], color: "#05070E", emissive: "#3DDC84", emissiveIntensity: 0.4 },
-      // Power Button
-      { id: "powerBtn", startPos: new THREE.Vector3(2.5, 0.5, 0), targetPos: new THREE.Vector3(1.18, 0.5, 0), size: [0.06, 0.45, 0.06], color: "#3DDC84", emissive: "#3DDC84", emissiveIntensity: 0.9 },
-      // Volume Rocker
-      { id: "volumeBtn", startPos: new THREE.Vector3(-2.5, 0.8, 0), targetPos: new THREE.Vector3(-1.18, 0.8, 0), size: [0.06, 0.85, 0.06], color: "#7C5CFF", emissive: "#7C5CFF", emissiveIntensity: 0.9 },
-    ];
-  }, []);
-
-  const partRefs = useRef<THREE.Mesh[]>([]);
-
   // Orbiting satellite chips
   const satellites = useMemo(() => {
     return [
@@ -54,17 +34,6 @@ export const AssemblingPhone: React.FC = () => {
     groupRef.current.position.x = THREE.MathUtils.damp(groupRef.current.position.x, targetX, 4, delta);
     const targetScale = isMobile ? 0.72 : 1.0;
     groupRef.current.scale.set(targetScale, targetScale, targetScale);
-
-    // Assembly interpolation: progress 0.0 (assembled) -> explodes as user scrolls down towards 0.2
-    const explodeT = THREE.MathUtils.clamp(scrollProgress * 5.5, 0, 1);
-    const easeExplode = 1 - Math.pow(1 - explodeT, 3); // Cubic ease out
-
-    parts.forEach((part, idx) => {
-      const mesh = partRefs.current[idx];
-      if (mesh) {
-        mesh.position.lerpVectors(part.targetPos, part.startPos, easeExplode);
-      }
-    });
 
     // Idle floating and pointer tilt
     const pointer = state.pointer;
@@ -115,12 +84,6 @@ export const AssemblingPhone: React.FC = () => {
           </mesh>
         </group>
       ))}
-
-      {/* Subtle Ambient Depth Ring */}
-      <mesh rotation={[Math.PI / 2.5, 0, 0]} position={[0, 0, -0.5]}>
-        <ringGeometry args={[2.6, 2.65, 64]} />
-        <meshBasicMaterial color="#3DDC84" transparent opacity={0.15} side={THREE.DoubleSide} />
-      </mesh>
     </group>
   );
 };
