@@ -223,3 +223,4 @@ export const CERTIFICATES: Certificate[] = [
       "Mastery of end-to-end Python engineering across 100 consecutive days of production challenges, building real-world automation scripts, data scrapers, desktop interfaces, and web applications."
   }
 ];
+
