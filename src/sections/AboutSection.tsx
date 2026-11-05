@@ -110,7 +110,7 @@ export const AboutSection: React.FC = () => {
               <TiltCard className="p-3 bg-gradient-to-b from-surface-elevated to-surface group cursor-pointer">
                 <div className="relative w-full h-72 sm:h-80 rounded-xl overflow-hidden bg-[#0A0D16]">
                   <Image
-                    src="/assets/avatar.png"
+                    src="/assets/vaidik_portrait_pro.jpg"
                     alt="Vaidik Gandhi"
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105 filter grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100"
