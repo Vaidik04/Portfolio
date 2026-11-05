@@ -19,6 +19,7 @@ import {
   ArrowRight,
   Code2,
   Smartphone,
+  Calendar,
 } from "lucide-react";
 
 export function generateStaticParams() {
@@ -87,6 +88,10 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
                 </span>
                 <span className="text-xs font-mono text-typography-muted">
                   {project.platform}
+                </span>
+                <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-white/[0.04] text-accent-android border border-white/10 flex items-center gap-1.5">
+                  <Calendar className="w-3 h-3" />
+                  <span>{project.timeline}</span>
                 </span>
               </div>
               <h1 className="text-3xl sm:text-5xl font-heading font-black tracking-tight text-typography-primary">

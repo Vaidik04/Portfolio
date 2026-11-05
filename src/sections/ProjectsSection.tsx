@@ -23,6 +23,7 @@ import {
   Code2,
   ChevronRight,
   Smartphone,
+  Calendar,
 } from "lucide-react";
 
 export const ProjectsSection: React.FC = () => {
@@ -160,7 +161,7 @@ export const ProjectsSection: React.FC = () => {
 
                   <div className="flex flex-col gap-4">
                     {/* Top Status & Badge */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-2">
                       <span
                         className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold uppercase flex items-center gap-1.5 ${
                           project.badgeType === "playstore"
@@ -181,9 +182,10 @@ export const ProjectsSection: React.FC = () => {
                         <span>{project.badge}</span>
                       </span>
 
-                      <span className="text-[10px] font-mono text-typography-muted">
-                        {project.platform.split("·")[0]}
-                      </span>
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-typography-muted bg-white/[0.04] border border-white/5 px-2 py-0.5 rounded-md flex-shrink-0">
+                        <Calendar className="w-2.5 h-2.5 text-accent-android/70" />
+                        <span>{project.timeline}</span>
+                      </div>
                     </div>
 
                     {/* App Identity Row */}
@@ -341,6 +343,10 @@ export const ProjectsSection: React.FC = () => {
                       </span>
                       <span className="text-xs font-mono text-typography-muted">
                         {activeModalProject.platform}
+                      </span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/[0.04] text-accent-android border border-white/10 flex items-center gap-1">
+                        <Calendar className="w-2.5 h-2.5" />
+                        <span>{activeModalProject.timeline}</span>
                       </span>
                     </div>
                     <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-typography-primary">

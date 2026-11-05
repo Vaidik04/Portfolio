@@ -19,6 +19,7 @@ import {
   ArrowLeft,
   LayoutGrid,
   List,
+  Calendar,
 } from "lucide-react";
 
 export default function ProjectsPage() {
@@ -174,8 +175,8 @@ export default function ProjectsPage() {
                   )}
 
                   <div className="flex flex-col gap-4">
-                    {/* Badge & Platform */}
-                    <div className="flex items-center justify-between">
+                    {/* Badge & Timeline */}
+                    <div className="flex items-center justify-between gap-2">
                       <span
                         className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold uppercase flex items-center gap-1.5 ${
                           project.badgeType === "playstore"
@@ -196,9 +197,10 @@ export default function ProjectsPage() {
                         <span>{project.badge}</span>
                       </span>
 
-                      <span className="text-[10px] font-mono text-typography-muted">
-                        {project.platform.split("·")[0]}
-                      </span>
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-typography-muted bg-white/[0.04] border border-white/5 px-2 py-0.5 rounded-md flex-shrink-0">
+                        <Calendar className="w-2.5 h-2.5 text-accent-android/70" />
+                        <span>{project.timeline}</span>
+                      </div>
                     </div>
 
                     {/* App Identity */}
@@ -347,6 +349,10 @@ export default function ProjectsPage() {
                           }`}
                         >
                           {project.badge}
+                        </span>
+                        <span className="text-[10px] font-mono text-typography-muted bg-white/[0.03] border border-white/5 px-2 py-0.5 rounded-md flex items-center gap-1">
+                          <Calendar className="w-2.5 h-2.5 text-accent-android/70" />
+                          <span>{project.timeline}</span>
                         </span>
                       </div>
                       <p className="text-xs text-typography-secondary line-clamp-1">

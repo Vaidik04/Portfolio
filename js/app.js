@@ -203,12 +203,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return `
         <div class="project-card ${p.featured ? 'featured-card' : ''}" data-project-id="${p.id}">
-          <div class="card-top-meta">
+          <div class="card-top-meta" style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
             <span class="${badgeClass}">
               <i data-lucide="${isPlaystore ? 'play' : 'layers'}"></i>
               <span>${p.badge}</span>
             </span>
-            <span class="project-platform">${p.platform}</span>
+            <div style="display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); padding: 0.2rem 0.5rem; border-radius: 6px;">
+              <i data-lucide="calendar" style="width: 12px; height: 12px; color: var(--accent-emerald);"></i>
+              <span>${p.timeline || p.platform}</span>
+            </div>
           </div>
 
           <div style="display: flex; align-items: center; gap: 0.85rem;">
@@ -307,12 +310,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modalBody.innerHTML = `
       <div class="modal-header-section">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
-          <span class="${badgeClass}">
-            <i data-lucide="award"></i>
-            <span>${p.badge}</span>
-          </span>
-          <span class="project-platform">${p.platform}</span>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="${badgeClass}">
+              <i data-lucide="award"></i>
+              <span>${p.badge}</span>
+            </span>
+            <span class="project-platform">${p.platform}</span>
+          </div>
+          ${p.timeline ? `
+            <div style="display: flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-emerald); background: rgba(61,220,132,0.1); border: 1px solid rgba(61,220,132,0.25); padding: 0.2rem 0.6rem; border-radius: 6px;">
+              <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
+              <span>${p.timeline}</span>
+            </div>
+          ` : ''}
         </div>
 
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">

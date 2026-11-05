@@ -68,17 +68,17 @@ export const CertificationsSection: React.FC = () => {
           <Reveal direction="left" delay={0.2}>
             <div className="flex flex-wrap items-center gap-3">
               <div className="px-4 py-2 rounded-2xl bg-surface-elevated border border-white/10 flex items-center gap-3">
-                <Award className="w-5 h-5 text-accent-android" />
+                <Sparkles className="w-5 h-5 text-accent-cyan" />
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-typography-muted block">Elite Honor</span>
-                  <span className="text-xs font-mono font-bold text-typography-primary">IIT Kharagpur (75% Elite)</span>
+                  <span className="text-[10px] font-mono uppercase text-typography-muted block">Elite Silver · Top Tier</span>
+                  <span className="text-xs font-mono font-bold text-typography-primary">IIT Ropar (87% Elite Silver)</span>
                 </div>
               </div>
               <div className="px-4 py-2 rounded-2xl bg-surface-elevated border border-white/10 flex items-center gap-3">
-                <Sparkles className="w-5 h-5 text-accent-cyan" />
+                <Award className="w-5 h-5 text-accent-android" />
                 <div>
                   <span className="text-[10px] font-mono uppercase text-typography-muted block">Elite Silver</span>
-                  <span className="text-xs font-mono font-bold text-typography-primary">IIT Ropar (Elite Silver)</span>
+                  <span className="text-xs font-mono font-bold text-typography-primary">IIT Kharagpur (75% Elite Silver)</span>
                 </div>
               </div>
             </div>
