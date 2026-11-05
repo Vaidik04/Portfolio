@@ -9,7 +9,6 @@ import { SkillGalaxy } from "./SkillGalaxy";
 import { ProjectFlightDeck } from "./ProjectFlightDeck";
 import { ArchitectureNodes } from "./ArchitectureNodes";
 import { PlanetPullback } from "./PlanetPullback";
-import { EffectComposer, Bloom, ChromaticAberration } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 
@@ -17,7 +16,13 @@ export const WorldCanvas: React.FC = () => {
   const { glitchMode } = useWorldStore();
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#05060A]">
+    <div
+      className={`fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#05060A] transition-all duration-300 ${
+        glitchMode
+          ? "filter invert-[0.1] contrast-125 saturate-150 [text-shadow:_0_0_8px_#3DDC84]"
+          : ""
+      }`}
+    >
       <Canvas
         camera={{ position: [0, 0, 7.5], fov: 45 }}
         gl={{
@@ -25,12 +30,12 @@ export const WorldCanvas: React.FC = () => {
           powerPreference: "high-performance",
           toneMapping: THREE.ACESFilmicToneMapping,
         }}
-        dpr={[1, 1.5]}
+        dpr={[1, 2]}
       >
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[10, 15, 10]} intensity={1.2} color="#FFFFFF" />
-        <pointLight position={[-10, -5, -10]} intensity={0.8} color="#7C5CFF" />
-        <pointLight position={[5, -8, 5]} intensity={0.6} color="#3DDC84" />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 15, 10]} intensity={1.5} color="#FFFFFF" />
+        <pointLight position={[-10, -5, -10]} intensity={1.0} color="#7C5CFF" />
+        <pointLight position={[5, -8, 5]} intensity={0.8} color="#3DDC84" />
 
         <Suspense fallback={null}>
           {/* Continuous Camera Rig */}
@@ -43,26 +48,8 @@ export const WorldCanvas: React.FC = () => {
           <ProjectFlightDeck />
           <ArchitectureNodes />
           <PlanetPullback />
-
-          {/* Cinematic Post-Processing */}
-          <EffectComposer multisampling={0}>
-            <Bloom
-              luminanceThreshold={0.2}
-              luminanceSmoothing={0.8}
-              intensity={glitchMode ? 2.5 : 0.85}
-              mipmapBlur
-            />
-            {glitchMode && (
-              <ChromaticAberration
-                offset={new THREE.Vector2(0.008, 0.008)}
-                radialModulation={true}
-                modulationOffset={0.5}
-              />
-            )}
-          </EffectComposer>
         </Suspense>
       </Canvas>
     </div>
   );
 };
-
