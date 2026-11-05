@@ -112,19 +112,19 @@ export const AboutSection: React.FC = () => {
 
           {/* Right Column: Glitch Photo Card & Bento Stats (5 Cols) */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            {/* Duotone Glitch Photo Card */}
+            {/* Professional Portrait Card */}
             <Reveal direction="left" delay={0.2}>
               <TiltCard className="p-3 bg-gradient-to-b from-surface-elevated to-surface group cursor-pointer">
-                <div className="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-[#0A0D16] border border-white/10 shadow-2xl">
+                <div className="relative w-full h-[440px] sm:h-[500px] rounded-2xl overflow-hidden bg-[#0A0D16] border border-white/10 shadow-2xl">
                   <Image
                     src="/assets/vaidik_portrait_pro.jpg"
                     alt="Vaidik Gandhi"
                     fill
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     priority
                   />
-                  {/* Subtle Ambient Vignette Bottom Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#05060A] via-transparent to-transparent opacity-80" />
+                  {/* Subtle Ambient Vignette Bottom Overlay for text legibility */}
+                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#05060A] via-[#05060A]/70 to-transparent pointer-events-none" />
 
                   {/* Floating Identity Badge */}
                   <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-[#090C14]/90 border border-white/10 backdrop-blur-md flex items-center justify-between shadow-xl">

@@ -2,7 +2,6 @@
 
 import React, { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 
@@ -145,22 +144,6 @@ export const ArchitectureNodes: React.FC = () => {
               side={THREE.DoubleSide}
             />
           </mesh>
-
-          {/* 3D Space Label Pill */}
-          <Html center distanceFactor={14} pointerEvents="none">
-            <div className="flex flex-col items-center pointer-events-none select-none -translate-y-8">
-              <div className="px-2.5 py-1 rounded-full bg-[#05060A]/90 border border-white/15 backdrop-blur-md text-[10px] font-mono font-bold text-typography-primary whitespace-nowrap shadow-[0_4px_16px_rgba(0,0,0,0.6)] flex items-center gap-1.5">
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: node.color }}
-                />
-                <span>{node.label}</span>
-              </div>
-              <span className="text-[8px] font-mono text-typography-muted whitespace-nowrap mt-0.5 opacity-80">
-                {node.sub}
-              </span>
-            </div>
-          </Html>
         </group>
       ))}
 

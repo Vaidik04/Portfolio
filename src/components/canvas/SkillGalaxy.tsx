@@ -2,7 +2,6 @@
 
 import React, { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 
@@ -149,14 +148,6 @@ export const SkillGalaxy: React.FC = () => {
               side={THREE.DoubleSide}
             />
           </mesh>
-
-          {/* 3D Floating Tech Label */}
-          <Html center distanceFactor={14} pointerEvents="none">
-            <div className="px-2 py-0.5 rounded-full bg-[#05060A]/85 border border-white/10 backdrop-blur-md text-[9px] font-mono font-bold text-typography-primary whitespace-nowrap shadow-lg select-none pointer-events-none -translate-y-6">
-              <span className="w-1.5 h-1.5 rounded-full inline-block mr-1" style={{ backgroundColor: node.color }} />
-              <span>{node.name}</span>
-            </div>
-          </Html>
         </group>
       ))}
     </group>
