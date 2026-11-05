@@ -48,6 +48,16 @@ export default function Home() {
       else setActiveSection("contact");
     });
 
+    // Native scroll fallback listener to ensure 100% sync
+    const handleNativeScroll = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (total > 0) {
+        const p = Math.max(0, Math.min(1, window.scrollY / total));
+        setScrollProgress(p);
+      }
+    };
+    window.addEventListener("scroll", handleNativeScroll, { passive: true });
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -55,6 +65,7 @@ export default function Home() {
     requestAnimationFrame(raf);
 
     return () => {
+      window.removeEventListener("scroll", handleNativeScroll);
       lenis.destroy();
     };
   }, [setScrollProgress, setActiveSection]);

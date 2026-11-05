@@ -1642,5 +1642,221 @@ def extract_and_solve_grid(frame, cnn_model, solver_engine):
     links: {
       github: "https://github.com/Vaidik04"
     }
+  },
+
+  // =========================================================================
+  // 34. Q-OPTIMIZATION SUITE (QUANTUM ALGORITHMS & QAOA RESEARCH)
+  // =========================================================================
+  {
+    id: "q-optimization-suite",
+    name: "Quantum Combinatorial Optimization Suite",
+    tagline: "QAOA, QUBO Hamiltonian Mapping & Adaptive D-QPSO Transit Solver",
+    category: "systems",
+    badge: "Quantum Research",
+    badgeType: "research",
+    platform: "Python 3.12+ · Qiskit / QAOA · QUBO · CVRPLIB Benchmarks · Pytest",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#7C5CFF",
+    problem:
+      "Capacitated Vehicle Routing (CVRP) is NP-hard. Classical exact solvers scale exponentially with fleet size, failing to optimize dynamic urban transit fleets and delivery grids within operational real-time deadlines.",
+    solution:
+      "Architected a comprehensive quantum and quantum-inspired optimization research repository. Formulates vehicle routing into Quadratic Unconstrained Binary Optimization (QUBO) Ising Hamiltonians solved via Quantum Approximate Optimization Algorithm (QAOA) statevectors on simulated quantum backends. Complements quantum routines with an ultra-fast Adaptive Quantum-Behaved Particle Swarm Optimization (Adaptive D-QPSO) engine benchmarking against standard CVRPLIB instances (E-n22-k4) and Bhopal municipal transit grids.",
+    techStack: [
+      "Python 3.12+",
+      "QAOA (Quantum Approximate Optimization)",
+      "QUBO Hamiltonian Mapping",
+      "Adaptive D-QPSO Engine",
+      "CVRPLIB Standard Benchmarks",
+      "GeoJSON Spatial Routes",
+      "Pytest Test Suite"
+    ],
+    keyMetrics: [
+      { label: "Optimization Model", value: "QUBO & QAOA Statevector" },
+      { label: "Benchmark Instance", value: "CVRPLIB E-n22-k4 Verified" },
+      { label: "Synthetic Generator", value: "Bhopal Urban Route Spatial Grid" },
+      { label: "Test Rigor", value: "100% Pytest Unit & Integration" }
+    ],
+    highlights: [
+      "Mathematical QUBO translation transforming vehicle capacity constraints into penalty Hamiltonians",
+      "Adaptive D-QPSO algorithm dynamically modulating contraction-expansion coefficients for rapid convergence",
+      "Automated ablation study experiments plotting convergence curves against classical genetic baselines",
+      "Complete modular architecture with decoupled problem definition, encoding, fitness, and repair layers"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 35. DJANGO JEWELRY E-COMMERCE (FULL-STACK RETAIL COMMERCE)
+  // =========================================================================
+  {
+    id: "django-jewelry-ecommerce",
+    name: "Django Jewelry E-Commerce",
+    tagline: "Full-Stack Precious Jewelry Catalog, Cart Checkout & Admin Stock Management",
+    category: "commercial",
+    badge: "Full-Stack Web",
+    badgeType: "production",
+    platform: "Python 3.12+ · Django 5.0+ · SQLite · Bootstrap 5 & Order Cart",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F59E0B",
+    problem:
+      "Independent jewelry boutiques struggle with high SaaS platform commission fees (Shopify, WooCommerce) and require customizable multi-category jewelry stores with bespoke checkout workflows.",
+    solution:
+      "Constructed a full-featured e-commerce web application utilizing Django and SQLite. Features segregated product category catalogs (Rings, Necklaces, Bracelets, Earrings), a dynamic session-based shopping cart, customer checkout pipeline, and a comprehensive Django Admin portal for product inventory, price adjustments, and customer order processing.",
+    techStack: [
+      "Python 3.12+",
+      "Django 5.0+",
+      "Django ORM & SQLite",
+      "Session-Based Cart State",
+      "Bootstrap 5 Responsive UI",
+      "Role-Based Admin Dashboard"
+    ],
+    keyMetrics: [
+      { label: "Architecture", value: "Django MVT Full-Stack" },
+      { label: "Cart Management", value: "Real-Time Session Tracking" },
+      { label: "Product Taxonomy", value: "Multi-Category Jewelry Catalog" },
+      { label: "Zero Commission", value: "Self-Hosted Sovereign Store" }
+    ],
+    highlights: [
+      "Robust relational database models with foreign key cascades connecting categories, products, and orders",
+      "Custom session cart engine allowing instant item quantity modification and real-time total updates",
+      "Secure user authentication with registration, password hashing, and customer order history views",
+      "Modular Django app architecture separating store frontend, media uploads, and backend models"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 36. FOCUS OS (DESKTOP DISTRACTION BLOCKER & HABIT TRACKER)
+  // =========================================================================
+  {
+    id: "focus-os-tracker",
+    name: "Focus OS Desktop Companion",
+    tagline: "Low-Level Host Redirection Website Blocker & Deep Work Habit System",
+    category: "tools",
+    badge: "Desktop Utility",
+    badgeType: "production",
+    platform: "Python 3.12+ · OS Hosts Socket Blocker · SQLite Analytics · Tkinter",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#22D3EE",
+    problem:
+      "Browser extension ad blockers and site blockers are trivially bypassed by opening alternative browsers or private windows, failing to enforce strict deep work discipline for developers.",
+    solution:
+      "Built a desktop operating system utility in Python that manipulates the low-level operating system `hosts` file with administrator privileges. During active Pomodoro focus blocks, distracting social media and video domains are bound to `127.0.0.1`, terminating socket connections system-wide across all browsers and applications. Features task prioritization, habit streak counters, and weekly productivity analytics stored in SQLite.",
+    techStack: [
+      "Python 3.12+",
+      "System Hosts File Manipulation",
+      "Administrative Privilege Handling",
+      "SQLite Habit Analytics",
+      "Tkinter Desktop Interface",
+      "Pomodoro Timer Engine"
+    ],
+    keyMetrics: [
+      { label: "Block Level", value: "System-Wide OS Hosts Level" },
+      { label: "Bypass Prevention", value: "All Browsers & Apps Blocked" },
+      { label: "Storage", value: "Local SQLite Habit Streaks" },
+      { label: "Timer Model", value: "Configurable Work/Rest Intervals" }
+    ],
+    highlights: [
+      "Low-level DNS redirection binding blacklisted hostnames to loopback IP address during focus sessions",
+      "Automated host file restoration upon timer completion guaranteeing no permanent network disruption",
+      "Visual productivity analytics calculating daily focused minutes, task completions, and streak integrity",
+      "Standalone desktop executable running with zero cloud telemetry or internet access required"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 37. MONKEYTYPE STEALTH BOT (AUTONOMOUS DOM AUTOMATION)
+  // =========================================================================
+  {
+    id: "monkeytype-stealth-bot",
+    name: "MonkeyType Autonomous Typing Engine",
+    tagline: "Selenium WebDriver DOM Scraping & Gaussian Latency Humanized Typing Bot",
+    category: "tools",
+    badge: "Browser Automation",
+    badgeType: "opensource",
+    platform: "Python 3.12+ · Selenium WebDriver · Humanized Keystroke Timing · DOM Parser",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#3DDC84",
+    problem:
+      "Evaluating browser DOM mutation speeds and testing web input stress limits with naive bots triggers bot-detection thresholds due to constant, zero-variance keystroke intervals.",
+    solution:
+      "Engineered an automated browser typing engine using Python and Selenium WebDriver. Scrapes dynamic active text elements from the live DOM in real time, computes mathematical Gaussian normal distribution delays between individual keypresses, and injects realistic micro-hesitations and intentional typo-correction behaviors to mimic authentic human motor cadences at adjustable WPM rates.",
+    techStack: [
+      "Python 3.12+",
+      "Selenium WebDriver",
+      "Real-Time DOM Traversal",
+      "Gaussian Statistical Latency",
+      "Keyboard Hook Failsafes",
+      "Autonomous Browser Automation"
+    ],
+    keyMetrics: [
+      { label: "Typing Cadence", value: "Configurable 60 - 200+ WPM" },
+      { label: "Latency Model", value: "Gaussian Normal Distribution" },
+      { label: "Failsafe", value: "Instant Escape Key Interrupt" },
+      { label: "Browser Support", value: "Chrome / Chromium Headless" }
+    ],
+    highlights: [
+      "Real-time DOM inspection extracting upcoming word tokens directly from active browser viewports",
+      "Gaussian distribution keystroke jitter eliminating mechanical uniform timing signatures",
+      "Emergency keyboard hook monitoring allowing instant failsafe termination by pressing Escape",
+      "Clean modular configuration for testing web application text entry stress limits"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 38. THE HUMANS OF BHOPAL (COMMUNITY MEDIA & STORYTELLING)
+  // =========================================================================
+  {
+    id: "humans-of-bhopal",
+    name: "The Humans of Bhopal",
+    tagline: "Community Documentary Media, Cultural Storytelling & Interview Workstation",
+    category: "commercial",
+    badge: "Digital Media",
+    badgeType: "production",
+    platform: "HTML5 · CSS3 · Modern JavaScript · PHP Contact Backend",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#EC4899",
+    problem:
+      "Grassroots changemakers, local artisans, and entrepreneurs in Tier-2 Indian cities like Bhopal lack dedicated digital storytelling platforms to document their journeys and connect with community supporters.",
+    solution:
+      "Designed and deployed a responsive digital media platform celebrating the human narratives of Bhopal. Features long-form documentary profiles, high-resolution photo essay galleries, an interview appointment booking interface, and custom community connection workflows.",
+    techStack: [
+      "HTML5 & Semantic Markup",
+      "CSS3 Flexbox & Grid",
+      "Vanilla JavaScript",
+      "PHP Form Processing",
+      "Responsive Media Galleries",
+      "Appointment Scheduling Flow"
+    ],
+    keyMetrics: [
+      { label: "Audience Focus", value: "Bhopal Cultural Community" },
+      { label: "Media Format", value: "Photo Essays & Long-Form Profiles" },
+      { label: "Performance", value: "Zero-Framework 99/100 Lighthouse" },
+      { label: "Engagement", value: "Direct Interview Booking Forms" }
+    ],
+    highlights: [
+      "High-contrast editorial typography engineered for effortless reading across mobile viewports",
+      "Lightweight zero-dependency frontend delivering sub-second load times on 3G/4G cellular connections",
+      "Integrated appointment booking system allowing community members to submit story recommendations",
+      "Curated historical and contemporary archives chronicling the unique cultural heritage of Bhopal"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
   }
 ];
