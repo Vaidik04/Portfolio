@@ -9,18 +9,14 @@ export const ArchitectureNodes: React.FC = () => {
   const { scrollProgress } = useWorldStore();
   const groupRef = useRef<THREE.Group>(null);
 
-  // 3D MVVM & Keystore Nodes
-  const nodes = useMemo(() => {
-    return [
-      { id: "ui", label: "Compose M3 UI", pos: new THREE.Vector3(-3.5, 1.2, 0), color: "#3DDC84" },
-      { id: "vm", label: "StateFlow ViewModel", pos: new THREE.Vector3(-1.2, 0.4, 0), color: "#7C5CFF" },
-      { id: "repo", label: "Clean Repository", pos: new THREE.Vector3(1.2, -0.4, 0), color: "#22D3EE" },
-      { id: "room", label: "Room SQLite 2.6+", pos: new THREE.Vector3(3.5, 0.8, 0), color: "#F59E0B" },
-      { id: "keystore", label: "Keystore AES-256", pos: new THREE.Vector3(3.5, -1.4, 0), color: "#EC4899" },
-    ];
-  }, []);
+  const nodes = useMemo(() => [
+    { id: "ui", label: "Compose M3 UI", pos: new THREE.Vector3(-3.5, 1.2, 0), color: "#3DDC84" },
+    { id: "vm", label: "StateFlow ViewModel", pos: new THREE.Vector3(-1.2, 0.4, 0), color: "#7C5CFF" },
+    { id: "repo", label: "Clean Repository", pos: new THREE.Vector3(1.2, -0.4, 0), color: "#22D3EE" },
+    { id: "room", label: "Room SQLite 2.6+", pos: new THREE.Vector3(3.5, 0.8, 0), color: "#F59E0B" },
+    { id: "keystore", label: "Keystore AES-256", pos: new THREE.Vector3(3.5, -1.4, 0), color: "#EC4899" },
+  ], []);
 
-  // Glowing traveling pulses
   const pulseCount = 18;
   const pulseGeom = useMemo(() => new THREE.SphereGeometry(0.08, 12, 12), []);
   const pulseMat = useMemo(() => new THREE.MeshBasicMaterial({ color: "#22D3EE" }), []);
@@ -30,19 +26,15 @@ export const ArchitectureNodes: React.FC = () => {
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
-    // Active during Architecture & Process: scrollProgress ~ 0.70 - 0.90
     const inRange = scrollProgress >= 0.68 && scrollProgress <= 0.92;
     groupRef.current.visible = inRange;
     if (!inRange) return;
 
-    // Subtle breathing float
     groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 1.5) * 0.15;
 
-    // Animate data pulses along connections (UI -> VM -> Repo -> Room / Keystore)
     pulses.current.forEach((mesh, idx) => {
       if (!mesh) return;
       const t = (state.clock.elapsedTime * 0.8 + idx / pulseCount) % 1;
-      // Interpolate along the pipeline
       if (idx < 6) {
         mesh.position.lerpVectors(nodes[0].pos, nodes[1].pos, t);
       } else if (idx < 12) {
@@ -56,7 +48,6 @@ export const ArchitectureNodes: React.FC = () => {
 
   return (
     <group ref={groupRef} position={[0, 0, -2]}>
-      {/* MVVM Component Nodes */}
       {nodes.map((node) => (
         <group key={node.id} position={node.pos.toArray()}>
           <mesh>
@@ -70,7 +61,6 @@ export const ArchitectureNodes: React.FC = () => {
             />
           </mesh>
 
-          {/* Wireframe Orbit */}
           <mesh>
             <sphereGeometry args={[0.75, 16, 16]} />
             <meshBasicMaterial color={node.color} wireframe transparent opacity={0.2} />
@@ -78,7 +68,6 @@ export const ArchitectureNodes: React.FC = () => {
         </group>
       ))}
 
-      {/* Traveling Data Packets */}
       {Array.from({ length: pulseCount }).map((_, i) => (
         <mesh
           key={i}

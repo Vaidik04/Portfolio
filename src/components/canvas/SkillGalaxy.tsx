@@ -10,7 +10,6 @@ export const SkillGalaxy: React.FC = () => {
   const { scrollProgress, setCursorText } = useWorldStore();
   const groupRef = useRef<THREE.Group>(null);
 
-  // Generate constellation nodes for core skills
   const nodes = useMemo(() => {
     const list = [
       { name: "Kotlin 2.0+ (K2)", color: "#7C5CFF", size: 0.46, speed: 0.6 },
@@ -48,12 +47,10 @@ export const SkillGalaxy: React.FC = () => {
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
-    // Active during Tech Stack & Skills: scrollProgress ~ 0.35 - 0.58
     const inRange = scrollProgress >= 0.33 && scrollProgress <= 0.6;
     groupRef.current.visible = inRange;
     if (!inRange) return;
 
-    // Galaxy slow rotation + gravitational pull towards cursor
     const pointer = state.pointer;
     groupRef.current.rotation.y += delta * 0.3;
     groupRef.current.rotation.x = THREE.MathUtils.damp(
@@ -63,7 +60,6 @@ export const SkillGalaxy: React.FC = () => {
       delta
     );
 
-    // Individual node breathing
     nodes.forEach((node, idx) => {
       const mesh = meshRefs.current[idx];
       if (mesh) {
@@ -96,7 +92,6 @@ export const SkillGalaxy: React.FC = () => {
             />
           </mesh>
 
-          {/* Glowing Halo Ring */}
           <mesh position={node.basePos.toArray()}>
             <ringGeometry args={[node.size * 1.25, node.size * 1.35, 32]} />
             <meshBasicMaterial
@@ -109,7 +104,6 @@ export const SkillGalaxy: React.FC = () => {
         </group>
       ))}
 
-      {/* Galaxy Core Pulsing Orb */}
       <mesh>
         <sphereGeometry args={[1.1, 32, 32]} />
         <meshBasicMaterial color="#3DDC84" wireframe transparent opacity={0.25} />
