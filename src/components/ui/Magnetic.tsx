@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { sounds } from "@/lib/sound";
 
 interface MagneticProps {
   children: React.ReactNode;
@@ -22,6 +23,10 @@ export const Magnetic: React.FC<MagneticProps> = ({
   const springConfig = { damping: 15, stiffness: 180 };
   const smoothX = useSpring(x, springConfig);
   const smoothY = useSpring(y, springConfig);
+
+  const handleMouseEnter = () => {
+    sounds.tick();
+  };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
@@ -44,6 +49,7 @@ export const Magnetic: React.FC<MagneticProps> = ({
   return (
     <motion.div
       ref={ref}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ x: smoothX, y: smoothY }}

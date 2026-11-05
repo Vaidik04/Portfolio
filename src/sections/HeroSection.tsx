@@ -6,6 +6,7 @@ import { PhoneMockup3D } from "@/components/canvas/PhoneMockup3D";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowDown, ArrowUpRight, Download, Play, Sparkles } from "lucide-react";
+import { TextScramble } from "@/components/ui/TextScramble";
 
 const ROTATING_WORDS = ["earn", "scale", "ship", "solve"];
 
@@ -50,7 +51,7 @@ export const HeroSection: React.FC = () => {
             {/* Giant Cinema Headline */}
             <Reveal direction="up" delay={0.2}>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold tracking-[-0.035em] text-typography-primary leading-[1.04]">
-                I build apps that{" "}
+                <TextScramble text="I build apps that" speed={24} />{" "}
                 <span className="inline-block relative">
                   <AnimatePresence mode="wait">
                     <motion.span

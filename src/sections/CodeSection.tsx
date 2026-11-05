@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
-import { Copy, Check, Terminal, Code2, Smartphone } from "lucide-react";
+import { Copy, Check, Terminal, Code2, Smartphone, Play, Cpu, CheckCircle } from "lucide-react";
 
 export const CodeSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [activeCodeTab, setActiveCodeTab] = useState<number>(0);
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [simStep, setSimStep] = useState<number>(0);
 
   const SNIPPETS = [
     {
@@ -44,6 +46,13 @@ class ChamberDatabaseFactory @Inject constructor(
         "Cause List: Courtroom 4 · Item #12",
         "eCourts CNR: MPGW010049282024",
       ],
+      logs: [
+        "Initializing Android Keystore provider...",
+        "Hardware StrongBox Enclave verified (Giesecke+Devrient SE)",
+        "AES-256-GCM master key derived in tamper-resistant chip",
+        "SQLCipher native binary loaded with PRAGMA cipher_page_size = 4096",
+        "Database sealed. Zero telemetry, 0 background network threads.",
+      ],
     },
     {
       title: "MoneyMath.kt",
@@ -76,6 +85,13 @@ value class Paise(val amount: Long) : Comparable<Paise> {
         "Copper Pipe 5m: ₹1,650.00",
         "GST 18%: ₹1,170.00",
         "Total Settled: ₹7,670.00 (UPI)",
+      ],
+      logs: [
+        "Parsing monetary transaction: 767000L paise (0 heap allocations)",
+        "Computing 18% GST (9% CGST + 9% SGST) via integer math",
+        "Formatting with Indian lakh/crore numeral separator logic",
+        "Verification: 0.00000 paise drift across 100,000 ledger test items",
+        "Transaction committed to local offline journal successfully.",
       ],
     },
     {
@@ -111,6 +127,13 @@ class HandLandmarkerHelper(
         "Air Stroke: Brush #3DDC84",
         "Voice State: Ready ('Clear', 'Save')",
       ],
+      logs: [
+        "Binding OpenGL ES 3.1 compute shader context...",
+        "MediaPipe GPU delegate model loaded (hand_landmarker.task)",
+        "Live camera preview stream feed connected (1920x1080 @ 60fps)",
+        "21 3D landmarks inferred in 11.2ms with 98.7% confidence score",
+        "Mid-air pinch gesture recognized. Drawing stroke dispatched.",
+      ],
     },
   ];
 
@@ -120,6 +143,23 @@ class HandLandmarkerHelper(
     navigator.clipboard.writeText(current.code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const runSimulation = () => {
+    if (isSimulating) return;
+    setIsSimulating(true);
+    setSimStep(1);
+
+    const interval = setInterval(() => {
+      setSimStep((prev) => {
+        if (prev >= current.logs.length) {
+          clearInterval(interval);
+          setTimeout(() => setIsSimulating(false), 2000);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 450);
   };
 
   return (
@@ -161,22 +201,33 @@ class HandLandmarkerHelper(
                   </span>
                 </div>
 
-                <button
-                  onClick={handleCopy}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface border border-white/10 text-xs font-mono text-typography-secondary hover:text-typography-primary hover:border-white/20 transition-all"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-accent-android" />
-                      <span className="text-accent-android">Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>Copy Code</span>
-                    </>
-                  )}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={runSimulation}
+                    disabled={isSimulating}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-accent-android/20 border border-accent-android/40 text-xs font-mono text-accent-android hover:bg-accent-android hover:text-[#05060A] transition-all disabled:opacity-50"
+                  >
+                    <Play className="w-3 h-3 fill-current" />
+                    <span>{isSimulating ? "Executing..." : "Run Simulation"}</span>
+                  </button>
+
+                  <button
+                    onClick={handleCopy}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surface border border-white/10 text-xs font-mono text-typography-secondary hover:text-typography-primary hover:border-white/20 transition-all"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-accent-android" />
+                        <span className="text-accent-android">Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
 
               {/* IDE File Tabs */}
@@ -184,7 +235,11 @@ class HandLandmarkerHelper(
                 {SNIPPETS.map((snip, i) => (
                   <button
                     key={snip.title}
-                    onClick={() => setActiveCodeTab(i)}
+                    onClick={() => {
+                      setActiveCodeTab(i);
+                      setIsSimulating(false);
+                      setSimStep(0);
+                    }}
                     className={`px-4 py-2.5 text-xs font-mono font-medium flex items-center gap-2 border-r border-white/5 transition-colors whitespace-nowrap ${
                       activeCodeTab === i
                         ? "bg-[#070913] text-accent-android border-t-2 border-t-accent-android"
@@ -203,6 +258,28 @@ class HandLandmarkerHelper(
                   <code>{current.code}</code>
                 </pre>
               </div>
+
+              {/* Execution Simulator Log Drawer (if active) */}
+              {simStep > 0 && (
+                <div className="bg-[#030409] border-t border-white/10 p-4 font-mono text-xs space-y-1 animate-fadeIn">
+                  <div className="text-[11px] text-accent-android uppercase tracking-wider font-bold mb-2 flex items-center gap-1.5">
+                    <Cpu className="w-3.5 h-3.5" />
+                    <span>Runtime Execution Logs</span>
+                  </div>
+                  {current.logs.slice(0, simStep).map((log, index) => (
+                    <div key={index} className="text-typography-secondary flex items-start gap-2">
+                      <span className="text-accent-cyan">[{index * 7}ms]</span>
+                      <span>{log}</span>
+                    </div>
+                  ))}
+                  {simStep === current.logs.length && (
+                    <div className="text-accent-android font-bold pt-1 flex items-center gap-1.5">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      <span>Execution finished with 0 warnings. Memory clean.</span>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Status Bar */}
               <div className="px-5 py-2 bg-surface border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-typography-muted">
@@ -241,7 +318,9 @@ class HandLandmarkerHelper(
                   {current.previewItems.map((item, idx) => (
                     <div
                       key={idx}
-                      className="p-3 rounded-xl bg-surface border border-white/5 text-xs font-mono text-typography-primary flex items-center justify-between"
+                      className={`p-3 rounded-xl bg-surface border border-white/5 text-xs font-mono text-typography-primary flex items-center justify-between transition-all duration-300 ${
+                        isSimulating ? "border-accent-android/40 bg-accent-android/5" : ""
+                      }`}
                     >
                       <span>{item}</span>
                     </div>
@@ -260,4 +339,3 @@ class HandLandmarkerHelper(
     </section>
   );
 };
-

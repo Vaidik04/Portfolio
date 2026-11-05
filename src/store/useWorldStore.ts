@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { sounds } from "@/lib/sound";
 
 export type SectionId = "boot" | "hero" | "about" | "skills" | "projects" | "architecture" | "credentials" | "contact";
 
@@ -57,7 +58,14 @@ export const useWorldStore = create<WorldState>((set) => ({
   setBooted: (isBooted) => set({ isBooted }),
 
   soundEnabled: false,
-  toggleSound: () => set((state) => ({ soundEnabled: !state.soundEnabled })),
+  toggleSound: () =>
+    set((state) => {
+      const next = !state.soundEnabled;
+      sounds.init();
+      sounds.setMuted(!next);
+      if (next) sounds.bootHum();
+      return { soundEnabled: next };
+    }),
 
   hudVisible: true,
   toggleHUD: () => set((state) => ({ hudVisible: !state.hudVisible })),

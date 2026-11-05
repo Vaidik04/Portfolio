@@ -2,18 +2,24 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
+import { useWorldStore } from "@/store/useWorldStore";
 
 export const CustomCursor: React.FC = () => {
   const [mounted, setMounted] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [cursorText, setCursorText] = useState("");
+  const [domHovered, setDomHovered] = useState(false);
+  const [domCursorText, setDomCursorText] = useState("");
+
+  const { cursorText: worldCursorText } = useWorldStore();
 
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  const springConfig = { damping: 28, stiffness: 350 };
+  const springConfig = { damping: 26, stiffness: 380 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
+
+  const activeText = worldCursorText || domCursorText;
+  const isHovered = domHovered || Boolean(worldCursorText);
 
   useEffect(() => {
     setMounted(true);
@@ -29,12 +35,12 @@ export const CustomCursor: React.FC = () => {
 
       const interactive = target.closest("a, button, [data-interactive='true'], [data-cursor]");
       if (interactive) {
-        setHovered(true);
+        setDomHovered(true);
         const text = interactive.getAttribute("data-cursor");
-        setCursorText(text || "");
+        setDomCursorText(text || "");
       } else {
-        setHovered(false);
-        setCursorText("");
+        setDomHovered(false);
+        setDomCursorText("");
       }
     };
 
@@ -51,7 +57,7 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden hidden md:block">
-      {/* Outer trailing ring */}
+      {/* Outer trailing ring / morphing badge */}
       <motion.div
         style={{
           x: smoothX,
@@ -60,21 +66,21 @@ export const CustomCursor: React.FC = () => {
           translateY: "-50%",
         }}
         animate={{
-          scale: hovered ? 2.2 : 1,
-          backgroundColor: hovered ? "rgba(61, 220, 132, 0.12)" : "rgba(61, 220, 132, 0.04)",
-          borderColor: hovered ? "rgba(61, 220, 132, 0.8)" : "rgba(61, 220, 132, 0.4)",
+          scale: activeText ? 2.6 : isHovered ? 1.8 : 1,
+          backgroundColor: isHovered ? "rgba(61, 220, 132, 0.16)" : "rgba(61, 220, 132, 0.04)",
+          borderColor: isHovered ? "rgba(61, 220, 132, 0.9)" : "rgba(61, 220, 132, 0.35)",
         }}
-        transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-        className="w-10 h-10 rounded-full border border-accent-android/40 backdrop-blur-[1px] flex items-center justify-center"
+        transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        className="w-10 h-10 rounded-full border border-accent-android/40 backdrop-blur-[2px] flex items-center justify-center shadow-[0_0_15px_rgba(61,220,132,0.2)]"
       >
-        {cursorText && (
-          <span className="text-[9px] font-mono tracking-widest text-accent-android uppercase font-bold">
-            {cursorText}
+        {activeText && (
+          <span className="text-[8px] font-mono tracking-widest text-accent-android uppercase font-black px-1">
+            {activeText}
           </span>
         )}
       </motion.div>
 
-      {/* Center sharp dot */}
+      {/* Center sharp laser dot */}
       <motion.div
         style={{
           x: mouseX,
@@ -83,12 +89,11 @@ export const CustomCursor: React.FC = () => {
           translateY: "-50%",
         }}
         animate={{
-          scale: hovered ? 0.4 : 1,
-          opacity: hovered ? 0.3 : 1,
+          scale: isHovered ? 0.3 : 1,
+          opacity: isHovered ? 0.25 : 1,
         }}
         className="w-1.5 h-1.5 rounded-full bg-accent-android shadow-[0_0_10px_#3DDC84]"
       />
     </div>
   );
 };
-

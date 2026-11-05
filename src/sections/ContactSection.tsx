@@ -1,17 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import confetti from "canvas-confetti";
 import { Reveal } from "@/components/ui/Reveal";
 import { Magnetic } from "@/components/ui/Magnetic";
-import { Mail, Github, Linkedin, Send, Sparkles, CheckCircle2, Play } from "lucide-react";
+import { Mail, Github, Linkedin, Send, Sparkles, CheckCircle2, Play, Terminal, Sliders, ExternalLink } from "lucide-react";
+
+interface TerminalLine {
+  text: string;
+  type: "input" | "output" | "error" | "success" | "system";
+}
 
 export const ContactSection: React.FC = () => {
+  const [mode, setMode] = useState<"form" | "terminal">("form");
   const [topic, setTopic] = useState<string>("android");
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [submitted, setSubmitted] = useState<boolean>(false);
+
+  // Terminal State
+  const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([
+    { text: "VaidikTech Sovereign Shell v2.4.0 (x86_64-android-linux)", type: "system" },
+    { text: "Type 'help' to view available commands, or 'hire' to start project engagement.", type: "output" },
+  ]);
+  const [cliInput, setCliInput] = useState<string>("");
+  const terminalEndRef = useRef<HTMLDivElement>(null);
 
   const TOPIC_PRESETS = [
     {
@@ -42,26 +56,98 @@ export const ContactSection: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !email) return;
-
-    // Trigger Awwwards-style confetti fireworks
+  const fireSuccessCelebration = (contactName: string, contactTopic: string, note: string) => {
     confetti({
-      particleCount: 100,
-      spread: 70,
+      particleCount: 110,
+      spread: 75,
       origin: { y: 0.6 },
       colors: ["#3DDC84", "#7C5CFF", "#22D3EE", "#FFFFFF"],
     });
 
     setSubmitted(true);
     setTimeout(() => {
-      // Open mailto link as reliable fallback
-      const subject = encodeURIComponent(`Project Inquiry: ${name} (${topic})`);
-      const body = encodeURIComponent(`From: ${name} <${email}>\n\n${message}`);
+      const subject = encodeURIComponent(`Project Inquiry: ${contactName || "Client"} (${contactTopic})`);
+      const body = encodeURIComponent(`From: ${contactName} <${email}>\n\n${note || message}`);
       window.location.href = `mailto:vaidikgandhi@gmail.com?subject=${subject}&body=${body}`;
     }, 1200);
   };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email) return;
+    fireSuccessCelebration(name, topic, message);
+  };
+
+  const handleTerminalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cmd = cliInput.trim();
+    if (!cmd) return;
+
+    const newHistory: TerminalLine[] = [...terminalHistory, { text: `guest@vaidiktech:~$ ${cmd}`, type: "input" }];
+    const lower = cmd.toLowerCase();
+
+    if (lower === "help") {
+      newHistory.push(
+        { text: "Available commands:", type: "system" },
+        { text: "  hire           - Trigger client inquiry transmission protocol", type: "output" },
+        { text: "  projects       - Display flagship published applications", type: "output" },
+        { text: "  skills         - List core architecture stack and IIT credits", type: "output" },
+        { text: "  about          - View founder brief and engineering ethos", type: "output" },
+        { text: "  website        - Visit VaidikTech official site (vaidiktech.app)", type: "output" },
+        { text: "  clear          - Flush console output buffer", type: "output" }
+      );
+    } else if (lower === "hire") {
+      newHistory.push(
+        { text: "Initiating inquiry dispatch protocol to vaidikgandhi@gmail.com...", type: "system" },
+        { text: "Connecting to native mail client...", type: "success" }
+      );
+      fireSuccessCelebration("Terminal Client", "Engineering Engagement", "Initiated directly via interactive CLI terminal.");
+    } else if (lower === "projects") {
+      newHistory.push(
+        { text: "Flagship Production Software:", type: "system" },
+        { text: "  * Girvi (Google Play)       - Offline-first Gold Loan OS with Compound Interest", type: "output" },
+        { text: "  * JewelBill (Google Play)   - Sovereign Jewellery Invoicing with 80mm ESC/POS Thermal", type: "output" },
+        { text: "  * AdvoKosh (Google Play)    - Advocate Chamber OS with eCourts Integration", type: "output" },
+        { text: "  * SwarmOS                   - Nearby P2P edge ML compute federation", type: "output" },
+        { text: "  * SkyCanvas                 - Sub-15ms MediaPipe GPU air gesture studio", type: "output" }
+      );
+    } else if (lower === "skills") {
+      newHistory.push(
+        { text: "Technical Capabilities:", type: "system" },
+        { text: "  - Languages: Kotlin 2.0, Modern Python 3.12, Java 21, C++", type: "output" },
+        { text: "  - UI Engine: Jetpack Compose, Three.js / WebGL, TailwindCSS", type: "output" },
+        { text: "  - Storage: Room, SQLCipher 256-bit AES Hardware Keystore, DataStore", type: "output" },
+        { text: "  - Hardware: Bluetooth ESC/POS Thermal Printing, BLE, USB Serial", type: "output" },
+        { text: "  - Academic: 22 IIT Credits Recommended across 6 Elite NPTEL Domains", type: "output" }
+      );
+    } else if (lower === "about") {
+      newHistory.push(
+        { text: "Vaidik Gandhi - Independent Android Developer & Founder at VaidikTech (https://vaidiktech.app).", type: "output" },
+        { text: "Specialising in sovereign, offline-first mobile applications with zero telemetry and integer paise arithmetic.", type: "output" }
+      );
+    } else if (lower === "website") {
+      window.open("https://vaidiktech.app", "_blank", "noopener,noreferrer");
+      newHistory.push({ text: "Opening https://vaidiktech.app in external viewport...", type: "success" });
+    } else if (lower === "clear") {
+      setTerminalHistory([]);
+      setCliInput("");
+      return;
+    } else {
+      newHistory.push({
+        text: `Command not found: '${cmd}'. Type 'help' for instructions.`,
+        type: "error",
+      });
+    }
+
+    setTerminalHistory(newHistory);
+    setCliInput("");
+  };
+
+  useEffect(() => {
+    if (mode === "terminal") {
+      terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [terminalHistory, mode]);
 
   return (
     <section id="contact" className="relative py-32 overflow-hidden border-t border-white/5">
@@ -179,100 +265,188 @@ export const ContactSection: React.FC = () => {
                     <Linkedin className="w-5 h-5" />
                   </a>
                 </Magnetic>
+                <Magnetic strength={0.3}>
+                  <a
+                    href="https://vaidiktech.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-2 rounded-xl bg-surface border border-surface-border flex items-center gap-2 text-xs font-mono text-accent-android hover:border-accent-android/40 transition-colors"
+                    title="Visit VaidikTech"
+                  >
+                    <span>vaidiktech.app</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </Magnetic>
               </div>
             </Reveal>
           </div>
 
-          {/* Right Column: Interactive Inquiry Form (6 Cols) */}
+          {/* Right Column: Mode-Switchable Container (6 Cols) */}
           <div className="lg:col-span-6">
             <Reveal direction="left" delay={0.2}>
               <div className="p-6 sm:p-8 rounded-3xl bg-surface-elevated/90 border border-white/15 backdrop-blur-xl shadow-2xl">
-                <div className="text-lg font-heading font-bold text-typography-primary mb-1">
-                  Fast Inquiry Generator
-                </div>
-                <p className="text-xs text-typography-muted font-sans mb-6">
-                  Select a topic to generate a calibrated project brief:
-                </p>
-
-                {/* Preset Topic Chips */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {TOPIC_PRESETS.map((p) => (
+                {/* Mode Selector Tabs */}
+                <div className="flex items-center justify-between pb-5 border-b border-white/10 mb-6">
+                  <div className="flex items-center gap-2">
                     <button
-                      key={p.id}
                       type="button"
-                      onClick={() => handleTopicChange(p.id)}
-                      className={`px-3 py-1.5 rounded-full text-xs font-mono font-medium transition-all ${
-                        topic === p.id
-                          ? "bg-accent-android text-[#05060A] font-bold shadow-sm"
-                          : "bg-surface border border-white/10 text-typography-secondary hover:text-typography-primary"
+                      onClick={() => setMode("form")}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-all ${
+                        mode === "form"
+                          ? "bg-accent-android text-[#05060A] font-bold"
+                          : "text-typography-muted hover:text-typography-primary"
                       }`}
                     >
-                      {p.label}
+                      <Sliders className="w-3.5 h-3.5" />
+                      <span>Form View</span>
                     </button>
-                  ))}
+                    <button
+                      type="button"
+                      onClick={() => setMode("terminal")}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-all ${
+                        mode === "terminal"
+                          ? "bg-accent-android text-[#05060A] font-bold"
+                          : "text-typography-muted hover:text-typography-primary"
+                      }`}
+                    >
+                      <Terminal className="w-3.5 h-3.5" />
+                      <span>Terminal CLI</span>
+                    </button>
+                  </div>
+
+                  <span className="text-[11px] font-mono text-typography-muted">
+                    {mode === "form" ? "GUI Mode" : "Interactive Shell"}
+                  </span>
                 </div>
 
-                {submitted ? (
-                  <div className="p-8 rounded-2xl bg-accent-android/10 border border-accent-android/30 text-center flex flex-col items-center gap-3">
-                    <CheckCircle2 className="w-12 h-12 text-accent-android" />
-                    <div className="text-lg font-heading font-bold text-typography-primary">
-                      Inquiry Dispatched!
+                {mode === "terminal" ? (
+                  /* Hacker Terminal Mode */
+                  <div className="flex flex-col h-[400px] bg-[#05070E] rounded-2xl border border-white/10 p-4 font-mono text-xs overflow-hidden">
+                    <div className="flex-1 overflow-y-auto space-y-2 pr-1">
+                      {terminalHistory.map((line, idx) => (
+                        <div
+                          key={idx}
+                          className={`leading-relaxed whitespace-pre-wrap ${
+                            line.type === "input"
+                              ? "text-accent-android font-semibold"
+                              : line.type === "error"
+                              ? "text-red-400"
+                              : line.type === "success"
+                              ? "text-accent-cyan font-semibold"
+                              : line.type === "system"
+                              ? "text-accent-violet font-medium"
+                              : "text-typography-secondary"
+                          }`}
+                        >
+                          {line.text}
+                        </div>
+                      ))}
+                      <div ref={terminalEndRef} />
                     </div>
-                    <p className="text-xs text-typography-secondary max-w-sm">
-                      Opening your email client to complete transmission. You can also directly reach me at vaidikgandhi@gmail.com.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    <div>
-                      <label className="text-[11px] font-mono text-typography-muted uppercase tracking-wider block mb-1.5">
-                        Your Name
-                      </label>
+
+                    <form onSubmit={handleTerminalSubmit} className="mt-3 pt-3 border-t border-white/10 flex items-center gap-2">
+                      <span className="text-accent-android font-bold">guest@vaidiktech:~$</span>
                       <input
                         type="text"
-                        required
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="e.g. Rahul Sharma"
-                        className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 text-xs sm:text-sm text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-accent-android/60 transition-colors font-sans"
+                        value={cliInput}
+                        onChange={(e) => setCliInput(e.target.value)}
+                        placeholder="type 'hire' or 'help'..."
+                        className="flex-1 bg-transparent border-none text-xs text-typography-primary placeholder:text-typography-muted focus:outline-none"
+                        autoFocus
                       />
+                    </form>
+                  </div>
+                ) : (
+                  /* Standard Form Mode */
+                  <div>
+                    <div className="text-lg font-heading font-bold text-typography-primary mb-1">
+                      Fast Inquiry Generator
+                    </div>
+                    <p className="text-xs text-typography-muted font-sans mb-6">
+                      Select a topic to generate a calibrated project brief:
+                    </p>
+
+                    {/* Preset Topic Chips */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {TOPIC_PRESETS.map((p) => (
+                        <button
+                          key={p.id}
+                          type="button"
+                          onClick={() => handleTopicChange(p.id)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-mono font-medium transition-all ${
+                            topic === p.id
+                              ? "bg-accent-android text-[#05060A] font-bold shadow-sm"
+                              : "bg-surface border border-white/10 text-typography-secondary hover:text-typography-primary"
+                          }`}
+                        >
+                          {p.label}
+                        </button>
+                      ))}
                     </div>
 
-                    <div>
-                      <label className="text-[11px] font-mono text-typography-muted uppercase tracking-wider block mb-1.5">
-                        Your Email
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="rahul@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 text-xs sm:text-sm text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-accent-android/60 transition-colors font-sans"
-                      />
-                    </div>
+                    {submitted ? (
+                      <div className="p-8 rounded-2xl bg-accent-android/10 border border-accent-android/30 text-center flex flex-col items-center gap-3">
+                        <CheckCircle2 className="w-12 h-12 text-accent-android" />
+                        <div className="text-lg font-heading font-bold text-typography-primary">
+                          Inquiry Dispatched!
+                        </div>
+                        <p className="text-xs text-typography-secondary max-w-sm">
+                          Opening your email client to complete transmission. You can also directly reach me at vaidikgandhi@gmail.com.
+                        </p>
+                      </div>
+                    ) : (
+                      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                        <div>
+                          <label className="text-[11px] font-mono text-typography-muted uppercase tracking-wider block mb-1.5">
+                            Your Name
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="e.g. Rahul Sharma"
+                            className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 text-xs sm:text-sm text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-accent-android/60 transition-colors font-sans"
+                          />
+                        </div>
 
-                    <div>
-                      <label className="text-[11px] font-mono text-typography-muted uppercase tracking-wider block mb-1.5">
-                        Message & Requirements
-                      </label>
-                      <textarea
-                        rows={5}
-                        required
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 text-xs sm:text-sm text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-accent-android/60 transition-colors font-sans resize-none leading-relaxed"
-                      />
-                    </div>
+                        <div>
+                          <label className="text-[11px] font-mono text-typography-muted uppercase tracking-wider block mb-1.5">
+                            Your Email
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="rahul@company.com"
+                            className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 text-xs sm:text-sm text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-accent-android/60 transition-colors font-sans"
+                          />
+                        </div>
 
-                    <button
-                      type="submit"
-                      className="w-full mt-2 py-3.5 rounded-xl bg-accent-android text-[#05060A] font-sans font-bold text-sm tracking-wide shadow-[0_0_25px_rgba(61,220,132,0.35)] hover:shadow-[0_0_40px_rgba(61,220,132,0.6)] hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
-                    >
-                      <span>Transmit Message</span>
-                      <Send className="w-4 h-4" />
-                    </button>
-                  </form>
+                        <div>
+                          <label className="text-[11px] font-mono text-typography-muted uppercase tracking-wider block mb-1.5">
+                            Message & Requirements
+                          </label>
+                          <textarea
+                            rows={5}
+                            required
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            className="w-full px-4 py-3 rounded-xl bg-surface border border-white/10 text-xs sm:text-sm text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-accent-android/60 transition-colors font-sans resize-none leading-relaxed"
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          className="w-full mt-2 py-3.5 rounded-xl bg-accent-android text-[#05060A] font-sans font-bold text-sm tracking-wide shadow-[0_0_25px_rgba(61,220,132,0.35)] hover:shadow-[0_0_40px_rgba(61,220,132,0.6)] hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+                        >
+                          <span>Transmit Message</span>
+                          <Send className="w-4 h-4" />
+                        </button>
+                      </form>
+                    )}
+                  </div>
                 )}
               </div>
             </Reveal>
@@ -282,4 +456,3 @@ export const ContactSection: React.FC = () => {
     </section>
   );
 };
-

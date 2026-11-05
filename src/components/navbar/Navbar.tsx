@@ -6,7 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Magnetic } from "@/components/ui/Magnetic";
-import { ArrowUpRight, Menu, X, Play } from "lucide-react";
+import { ArrowUpRight, Menu, X, Play, Volume2, VolumeX } from "lucide-react";
+import { useWorldStore } from "@/store/useWorldStore";
 
 interface NavLinkItem {
   name: string;
@@ -27,6 +28,7 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { soundEnabled, toggleSound } = useWorldStore();
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -145,6 +147,22 @@ export const Navbar: React.FC = () => {
                 <Play className="w-2.5 h-2.5 fill-current" />
                 <span>Play Store</span>
               </a>
+            </Magnetic>
+
+            <Magnetic strength={0.35}>
+              <button
+                type="button"
+                onClick={toggleSound}
+                className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                  soundEnabled
+                    ? "bg-accent-android/20 border-accent-android/50 text-accent-android shadow-[0_0_12px_rgba(61,220,132,0.4)]"
+                    : "bg-surface border-white/10 text-typography-muted hover:text-typography-primary hover:border-white/20"
+                }`}
+                title={soundEnabled ? "Audio FX Active (Click to Mute)" : "Enable Web Audio FX"}
+                aria-label="Toggle audio effects"
+              >
+                {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+              </button>
             </Magnetic>
 
             <Magnetic strength={0.35}>

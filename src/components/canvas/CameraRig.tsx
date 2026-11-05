@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
+import { sounds } from "@/lib/sound";
 
 export const CameraRig: React.FC = () => {
   const { scrollProgress } = useWorldStore();
@@ -11,9 +12,19 @@ export const CameraRig: React.FC = () => {
 
   const targetCamPos = useRef(new THREE.Vector3(0, 0, 7.5));
   const targetLookAt = useRef(new THREE.Vector3(0, 0, 0));
+  const prevProgress = useRef(0);
+  const lastWarpTime = useRef(0);
 
   useFrame((state, delta) => {
     const p = scrollProgress;
+    const progressVelocity = Math.abs(p - prevProgress.current) / Math.max(delta, 0.001);
+    prevProgress.current = p;
+
+    const now = state.clock.getElapsedTime();
+    if (progressVelocity > 1.8 && now - lastWarpTime.current > 1.2) {
+      sounds.warp();
+      lastWarpTime.current = now;
+    }
 
     if (p < 0.18) {
       // Hero: Zoomed focus on 3D device & satellites
