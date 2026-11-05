@@ -21,7 +21,7 @@ export const TechStackSection: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="relative py-32 overflow-hidden border-t border-white/5 bg-[#070910]">
+    <section id="skills" className="relative py-32 overflow-hidden border-t border-white/5 bg-[#05060A]/40 backdrop-blur-[2px]">
       {/* Background Volumetric Light */}
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-accent-cyan/10 rounded-full blur-[140px] pointer-events-none" />
 

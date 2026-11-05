@@ -41,7 +41,7 @@ export const ProcessSection: React.FC = () => {
   ];
 
   return (
-    <section id="architecture" className="relative py-32 overflow-hidden border-t border-white/5 bg-[#06080F]">
+    <section id="architecture" className="relative py-32 overflow-hidden border-t border-white/5 bg-[#05060A]/40 backdrop-blur-[2px]">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <Reveal direction="down">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-accent-violet text-xs font-mono uppercase tracking-widest mb-6">
