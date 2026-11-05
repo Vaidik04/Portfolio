@@ -3,6 +3,9 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { CameraRig } from "./CameraRig";
+import { CosmicDust } from "./CosmicDust";
+import { CyberGridFloor } from "./CyberGridFloor";
+import { PointerLight } from "./PointerLight";
 import { AssemblingPhone } from "./AssemblingPhone";
 import { CodePortalTunnel } from "./CodePortalTunnel";
 import { SkillGalaxy } from "./SkillGalaxy";
@@ -32,14 +35,21 @@ export const WorldCanvas: React.FC = () => {
         }}
         dpr={[1, 2]}
       >
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.45} />
         <directionalLight position={[10, 15, 10]} intensity={1.5} color="#FFFFFF" />
-        <pointLight position={[-10, -5, -10]} intensity={1.0} color="#7C5CFF" />
-        <pointLight position={[5, -8, 5]} intensity={0.8} color="#3DDC84" />
+        <pointLight position={[-10, -5, -10]} intensity={1.2} color="#7C5CFF" />
+        <pointLight position={[5, -8, 5]} intensity={0.9} color="#3DDC84" />
+
+        {/* Dynamic Interactive Pointer Light */}
+        <PointerLight />
 
         <Suspense fallback={null}>
           {/* Continuous Camera Rig */}
           <CameraRig />
+
+          {/* Ambient Cosmic Field & Floor Grid */}
+          <CosmicDust />
+          <CyberGridFloor />
 
           {/* 3D Scene Components */}
           <AssemblingPhone />
