@@ -19,6 +19,7 @@ const NAV_LINKS: NavLinkItem[] = [
   { name: "Tech Stack", href: "/#skills", hash: "skills" },
   { name: "Projects", href: "/projects", hash: "projects" },
   { name: "Architecture", href: "/#architecture", hash: "architecture" },
+  { name: "Credentials", href: "/#credentials", hash: "credentials" },
   { name: "Contact", href: "/#contact", hash: "contact" },
 ];
 

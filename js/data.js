@@ -268,6 +268,112 @@ const PORTFOLIO_DATA = {
     }
   },
   {
+    "id": "qroute",
+    "title": "QRoute",
+    "subtitle": "Quantum-Inspired Urban Routing & Multi-Modal Transit Optimization",
+    "category": "systems",
+    "featured": true,
+    "badge": "Core Transit Engine",
+    "badgeType": "research",
+    "platform": "Python · Simulated Annealing, Kalman Filtering & GTFS",
+    "icon": "assets/vaidiktech_symbol.svg",
+    "heroImage": "assets/vaidiktech_symbol.svg",
+    "gallery": [],
+    "summary": "Quantum-Inspired Urban Routing & Multi-Modal Transit Optimization",
+    "problem": "Public transport in high-density metropolitan areas suffers from GPS telemetry noise in urban canyons, unsynchronized inter-modal transfers (bus to metro to walking), and severe bottleneck congestion that standard Dijkstra/A* shortest-path algorithms fail to balance dynamically.",
+    "solution": "Engineered QRoute (formerly Q-Transit Nexus & QRoute-Final), an integrated urban transit optimization framework. Unifies GTFS timetable parsing, real-time vehicle Kalman filtering for dead-reckoning during GPS dropouts, and a quantum-inspired simulated annealing cooling heuristic to calculate multi-modal commuter journeys with 31% less transfer wait latency.",
+    "techStack": [
+      "Python 3.10+",
+      "Quantum-Inspired Simulated Annealing",
+      "Extended Kalman Filtering",
+      "GTFS Specification",
+      "NetworkX & Graph Theory",
+      "GeoPandas & Spatial Stream Processing",
+      "WebSockets"
+    ],
+    "keyMetrics": [
+      {
+        "label": "Algorithm",
+        "value": "Quantum-Inspired Annealing"
+      },
+      {
+        "label": "Wait Time Cut",
+        "value": "31% Lower Transfer Delay"
+      },
+      {
+        "label": "Filter Precision",
+        "value": "94.2% Accurate ETAs"
+      },
+      {
+        "label": "Network Capacity",
+        "value": "10,000+ Node Transit Graph"
+      }
+    ],
+    "highlights": [
+      "Quantum-inspired simulated annealing heuristic exploring combinatorially vast multi-modal transit graphs without getting trapped in local congestion minima",
+      "Extended Kalman filter pipeline smoothing noisy vehicle GPS feeds and predicting dead-reckoning positions in urban tunnels",
+      "Multi-criteria Pareto optimization weighting travel time, monetary fare, transfer friction, and walking fatigue",
+      "High-throughput WebSocket telemetry stream broadcasting millisecond-level schedule adjustments to client apps",
+      "Unified open architecture replacing fragmented transit scripts into a production-grade routing microservice"
+    ],
+    "links": {
+      "github": "https://github.com/Vaidik04/QRoute-Final"
+    }
+  },
+  {
+    "id": "jarvis-ai",
+    "title": "Jarvis AI Assistant",
+    "subtitle": "Desktop Voice Assistant, Task Automation & SQLite Memory System",
+    "category": "ai-vision",
+    "featured": false,
+    "badge": "Advanced Python Desktop",
+    "badgeType": "production",
+    "platform": "Python · PyQt5, SpeechRecognition & SQLite",
+    "icon": "assets/vaidiktech_symbol.svg",
+    "heroImage": "assets/vaidiktech_symbol.svg",
+    "gallery": [],
+    "summary": "Desktop Voice Assistant, Task Automation & SQLite Memory System",
+    "problem": "Developers and power users waste cumulative hours performing repetitive system tasks: navigating complex directory trees, dispatching recurring emails, querying local notes, managing system settings, and controlling desktop windows manually.",
+    "solution": "Engineered Jarvis, a comprehensive desktop automation and voice recognition assistant built in Python and PyQt5. Features continuous offline hotword detection, speech-to-text NLP intent parsing, system control, an automated email bot, daily alarm scheduling, persistent SQLite associative memory (jarvis_memory.db), and an Android companion client.",
+    "techStack": [
+      "Python 3.10",
+      "PyQt5 GUI",
+      "SpeechRecognition",
+      "SQLite (jarvis_memory.db)",
+      "Automations & OS Subsystems",
+      "Pyttsx3 Text-to-Speech",
+      "Socket Inter-Process Communication"
+    ],
+    "keyMetrics": [
+      {
+        "label": "Architecture",
+        "value": "Modular PyQt5 + Core Daemon"
+      },
+      {
+        "label": "Memory Engine",
+        "value": "SQLite Persistent State"
+      },
+      {
+        "label": "Latency",
+        "value": "Sub-200ms Command Execution"
+      },
+      {
+        "label": "Automations",
+        "value": "Email, OS, Tasks, Alarms"
+      }
+    ],
+    "highlights": [
+      "Custom PyQt5 cyberpunk HUD interface with animated waveform telemetry and status indicators",
+      "Persistent conversation and entity memory stored inside local jarvis_memory.db database",
+      "Hands-free voice recognition with wake-word detection, customizable sensitivity, and fallback text input",
+      "Automated email dispatching, browser task automation, system diagnostics, and volume/display controls",
+      "Cross-platform IPC architecture allowing synchronization with Android companion application"
+    ],
+    "links": {
+      "github": "https://github.com/Vaidik04"
+    }
+  },
+  {
     "id": "swarmos",
     "title": "SwarmOS",
     "subtitle": "Air-Gapped P2P Distributed Device Mesh Operating System",
@@ -424,6 +530,259 @@ const PORTFOLIO_DATA = {
     }
   },
   {
+    "id": "skycanvas",
+    "title": "SkyCanvas – AI Air Painter",
+    "subtitle": "Contactless Computer Vision Canvas via 21-Landmark Hand Tracking",
+    "category": "ai-vision",
+    "featured": false,
+    "badge": "Computer Vision 60 FPS",
+    "badgeType": "research",
+    "platform": "Python & Android · MediaPipe Hands & OpenCV",
+    "icon": "assets/vaidiktech_symbol.svg",
+    "heroImage": "assets/vaidiktech_symbol.svg",
+    "gallery": [],
+    "summary": "Contactless Computer Vision Canvas via 21-Landmark Hand Tracking",
+    "problem": "Traditional digital drawing requires expensive stylus hardware or physical touchscreens, limiting creative interaction and accessibility in collaborative spaces and touchless interactive exhibits.",
+    "solution": "Built a real-time computer vision drawing interface that tracks 21 3D hand landmarks via standard webcam using Google MediaPipe and OpenCV. Enables drawing in mid-air with sub-pixel index finger precision, dual-finger color/tool selection, and exponential moving average stroke smoothing.",
+    "techStack": [
+      "Python",
+      "OpenCV",
+      "Google MediaPipe",
+      "NumPy",
+      "Kinematic Smoothing Filters",
+      "CameraX Integration"
+    ],
+    "keyMetrics": [
+      {
+        "label": "Tracking FPS",
+        "value": "60 FPS Real-time"
+      },
+      {
+        "label": "Hardware Needed",
+        "value": "Standard 720p Webcam"
+      },
+      {
+        "label": "Latency",
+        "value": "<16ms Gesture Response"
+      },
+      {
+        "label": "Hand Landmarks",
+        "value": "21 Keypoints Tracked"
+      }
+    ],
+    "highlights": [
+      "21-point 3D hand landmark estimation tracking index finger tip trajectory with sub-pixel precision",
+      "Gesture state machine: Two fingers up for tool/color selection, single index finger for drawing",
+      "Exponential moving average filter eliminating hand tremor and producing silky canvas strokes",
+      "Color palette selector, dynamic brush stroke sizing, and instant PNG export functionality"
+    ],
+    "links": {
+      "github": "https://github.com/Vaidik04"
+    }
+  },
+  {
+    "id": "ai-disaster-sos",
+    "title": "AI Disaster Response & SOS Mesh",
+    "subtitle": "Emergency P2P Mesh Network with On-Device NLP & YOLOv8",
+    "category": "ai-vision",
+    "featured": false,
+    "badge": "Hackathon Finalist",
+    "badgeType": "research",
+    "platform": "Python, Flask, Flutter & YOLOv8",
+    "icon": "assets/vaidiktech_symbol.svg",
+    "heroImage": "assets/vaidiktech_symbol.svg",
+    "gallery": [],
+    "summary": "Emergency P2P Mesh Network with On-Device NLP & YOLOv8",
+    "problem": "During catastrophic natural disasters, cellular infrastructure collapses, leaving victims trapped without communication channels while rescue teams possess no visibility into casualty clusters.",
+    "solution": "Designed an ad-hoc emergency communication system routing distress packets across multi-hop peer-to-peer Wi-Fi Direct and BLE connections, paired with on-device NLP urgency classification and YOLOv8 human detection in disaster imagery.",
+    "techStack": [
+      "Python + Flask",
+      "YOLOv8 Computer Vision",
+      "NLP Sentiment & Distress Scoring",
+      "BLE & Wi-Fi Direct Nearby Mesh",
+      "WebSockets + Leaflet GPS Heatmaps"
+    ],
+    "keyMetrics": [
+      {
+        "label": "Vision Model",
+        "value": "YOLOv8 Human Detection"
+      },
+      {
+        "label": "NLP Triage",
+        "value": "Distress Keyword Classifier"
+      },
+      {
+        "label": "Infrastructure",
+        "value": "Zero Cellular Needed"
+      },
+      {
+        "label": "Dashboard",
+        "value": "Real-time GPS Heatmap"
+      }
+    ],
+    "highlights": [
+      "Multi-hop store-and-forward mesh propagation carrying SOS beacons across disconnected survivor handsets",
+      "NLP distress classifier detecting high-priority cries for help ('help', 'bacchao', 'fire', 'trapped')",
+      "Embedded YOLOv8 vision pipeline detecting trapped humans in uploaded phone camera photos",
+      "Live GPS heatmap coordination dashboard for first responders and rescue command centers"
+    ],
+    "links": {
+      "github": "https://github.com/Vaidik04"
+    }
+  },
+  {
+    "id": "stock-tracker-pro",
+    "title": "Stock Tracker Pro & Predictive Analytics",
+    "subtitle": "Financial Time-Series Analytics & Technical Indicator Suite",
+    "category": "productivity",
+    "featured": false,
+    "badge": "Financial Engine",
+    "badgeType": "opensource",
+    "platform": "Python · Pandas, TA-Lib, Streamlit & Plotly",
+    "icon": "assets/vaidiktech_symbol.svg",
+    "heroImage": "assets/vaidiktech_symbol.svg",
+    "gallery": [],
+    "summary": "Financial Time-Series Analytics & Technical Indicator Suite",
+    "problem": "Retail traders lack customizable algorithmic indicator suites that run locally without hefty monthly subscription fees charged by proprietary trading platforms.",
+    "solution": "Engineered a quantitative stock tracking engine calculating technical indicators (RSI, MACD, Bollinger Bands, EMA crossovers) over historical equity feeds with automated breakout alert triggers and interactive 60 FPS candlestick visualizations.",
+    "techStack": [
+      "Python",
+      "Pandas & NumPy",
+      "TA-Lib",
+      "Plotly Interactive Charts",
+      "Streamlit Dashboard",
+      "Yahoo Finance API"
+    ],
+    "keyMetrics": [
+      {
+        "label": "Technical Indicators",
+        "value": "15+ Mathematical Models"
+      },
+      {
+        "label": "Backtesting",
+        "value": "Historical Signal Engine"
+      },
+      {
+        "label": "Visualizations",
+        "value": "Interactive 60FPS Plotly"
+      },
+      {
+        "label": "Cost",
+        "value": "100% Free Open Source"
+      }
+    ],
+    "highlights": [
+      "Vectorized calculation of momentum, volatility, and volume indicators across multi-year tick data",
+      "Interactive candlestick charting with dynamic support/resistance level identification",
+      "Automated strategy backtesting engine outputting Sharpe ratio, maximum drawdown, and win rate",
+      "Real-time price threshold notifications and portfolio risk exposure breakdowns"
+    ],
+    "links": {
+      "github": "https://github.com/Vaidik04"
+    }
+  },
+  {
+    "id": "focus-companion",
+    "title": "Focus - Deep Work Companion",
+    "subtitle": "Pomodoro Engine, Desktop Blocker & Productivity Analytics",
+    "category": "productivity",
+    "featured": false,
+    "badge": "Open Source Utility",
+    "badgeType": "opensource",
+    "platform": "Python & Jetpack Compose · Desktop & Android",
+    "icon": "assets/vaidiktech_symbol.svg",
+    "heroImage": "assets/vaidiktech_symbol.svg",
+    "gallery": [],
+    "summary": "Pomodoro Engine, Desktop Blocker & Productivity Analytics",
+    "problem": "Developers and knowledge workers face constant digital fragmentation, social media distraction loops, and multitasking fatigue, preventing sustained deep work sessions.",
+    "solution": "Engineered Focus, a dual desktop-and-mobile deep work workstation. Features customized interval Pomodoro cycles, distraction domain blocking, habit formation streak tracking, offline binaural audio loops, and daily session productivity heatmaps.",
+    "techStack": [
+      "Python (Focus Desktop)",
+      "Kotlin & Jetpack Compose",
+      "Hostfile Network Filter",
+      "Matplotlib Session Analytics",
+      "Foreground Audio Player Service"
+    ],
+    "keyMetrics": [
+      {
+        "label": "Distraction Level",
+        "value": "Zero Ads / Clean UI"
+      },
+      {
+        "label": "Desktop Blocker",
+        "value": "Domain Host Filtering"
+      },
+      {
+        "label": "Analytics",
+        "value": "Daily/Weekly Heatmaps"
+      },
+      {
+        "label": "Soundscapes",
+        "value": "Offline 48kHz Binaural"
+      }
+    ],
+    "highlights": [
+      "Automated website and distraction blocker enforcing strict deep-work discipline during active sessions",
+      "Habit formation engine tracking unbroken daily streaks with mathematical consistency metrics",
+      "Rich analytics graphing peak productivity hours, average focus length, and task completion velocity",
+      "Dual implementations: Python workstation for desktop coding and Jetpack Compose for mobile focus"
+    ],
+    "links": {
+      "github": "https://github.com/Vaidik04"
+    }
+  },
+  {
+    "id": "ecommerce-predictive",
+    "title": "E-Commerce Predictive Analytics",
+    "subtitle": "Machine Learning Demand Forecasting & Customer Lifetime Valuation",
+    "category": "systems",
+    "featured": false,
+    "badge": "ML Analytics Engine",
+    "badgeType": "production",
+    "platform": "Python · Scikit-Learn, Pandas & Flask",
+    "icon": "assets/vaidiktech_symbol.svg",
+    "heroImage": "assets/vaidiktech_symbol.svg",
+    "gallery": [],
+    "summary": "Machine Learning Demand Forecasting & Customer Lifetime Valuation",
+    "problem": "Retailers face unpredictable inventory stockouts and customer churn due to static, retrospective sales reports that fail to predict future purchasing patterns.",
+    "solution": "Built a modular machine learning pipeline analyzing customer transaction histories to forecast seasonal inventory demand, segment buyers using RFM (Recency, Frequency, Monetary) clustering, and predict churn probabilities before customers defect.",
+    "techStack": [
+      "Python",
+      "Scikit-Learn",
+      "K-Means Clustering",
+      "Random Forest Regressor",
+      "Flask Microservice",
+      "Pandas & NumPy"
+    ],
+    "keyMetrics": [
+      {
+        "label": "Forecasting Model",
+        "value": "Ensemble Random Forest"
+      },
+      {
+        "label": "Segmentation",
+        "value": "RFM + K-Means"
+      },
+      {
+        "label": "Churn Prediction",
+        "value": "Logistic ROC-AUC 0.88"
+      },
+      {
+        "label": "Architecture",
+        "value": "Modular ML Microservice"
+      }
+    ],
+    "highlights": [
+      "Automated feature engineering extracting purchase velocity, seasonal decay, and average cart size",
+      "RFM customer segmentation identifying high-value VIP buyers vs. price-sensitive discount seekers",
+      "Early warning churn detection model empowering businesses to dispatch automated retention coupons",
+      "Clean REST API integration endpoints for seamless dashboard embedding"
+    ],
+    "links": {
+      "github": "https://github.com/Vaidik04"
+    }
+  },
+  {
     "id": "solar-analytics",
     "title": "Solar Analytics",
     "subtitle": "Photovoltaic Yield Modeling & Telemetry Engine",
@@ -472,107 +831,6 @@ const PORTFOLIO_DATA = {
     ],
     "links": {
       "github": "https://github.com/Vaidik04/Solar"
-    }
-  },
-  {
-    "id": "qroute-final",
-    "title": "QRoute-Final",
-    "subtitle": "Quantum-Inspired Heuristic Urban Transit Optimization",
-    "category": "systems",
-    "featured": false,
-    "badge": "Private Architecture Core",
-    "badgeType": "research",
-    "platform": "Python · Simulated Annealing & Graph Theory",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "Quantum-Inspired Heuristic Urban Transit Optimization",
-    "problem": "Traditional shortest-path algorithms (Dijkstra, A*) struggle when balancing multi-modal transfers, dynamic bus arrival variance, walking fatigue penalties, and extreme peak-hour passenger congestion across dense urban transit graphs.",
-    "solution": "Engineered an advanced quantum-inspired optimization framework utilizing simulated annealing and probabilistic graph state superposition to solve combinatorial multi-modal route selection in large-scale urban transit networks.",
-    "techStack": [
-      "Python",
-      "Graph Theory",
-      "Simulated Annealing",
-      "Combinatorial Optimization",
-      "Multi-Agent Modeling",
-      "NetworkX"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Algorithm",
-        "value": "Quantum-Inspired Annealing"
-      },
-      {
-        "label": "Latency Reduction",
-        "value": "31% Less Wait Time"
-      },
-      {
-        "label": "Graph Capacity",
-        "value": "10,000+ Node Network"
-      },
-      {
-        "label": "Objective Function",
-        "value": "Pareto Multi-Criteria"
-      }
-    ],
-    "highlights": [
-      "Multi-criteria Pareto optimization balancing travel duration, transfer friction, and transit cost",
-      "Simulated annealing cooling schedule that escapes local minima in dense metropolitan grids",
-      "Dynamic penalty weights adapting to live transit congestion and missed connection probability",
-      "Comprehensive benchmarking against standard Dijkstra and Contraction Hierarchies"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04/QRoute-Final"
-    }
-  },
-  {
-    "id": "qroute",
-    "title": "QRoute",
-    "subtitle": "Multi-Modal Urban Transit Optimization Engine",
-    "category": "systems",
-    "featured": false,
-    "badge": "Public Python Repo",
-    "badgeType": "opensource",
-    "platform": "Python · Heuristics & Transit Analytics",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "Multi-Modal Urban Transit Optimization Engine",
-    "problem": "Commuters in developing metropolitan areas face fragmented public transport systems without unified schedules, resulting in prolonged transfer waiting times between buses, metros, and auto-rickshaws.",
-    "solution": "Developed a Python-based transit routing engine that parses GTFS feeds, constructs unified transit graph matrices, and calculates time-optimized multi-modal journey plans with real-time transfer buffers.",
-    "techStack": [
-      "Python",
-      "GTFS Specification",
-      "Graph Traversal",
-      "Pandas",
-      "GeoPandas"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Standard",
-        "value": "GTFS Compatible"
-      },
-      {
-        "label": "Modality",
-        "value": "Bus + Metro + Walking"
-      },
-      {
-        "label": "Status",
-        "value": "Open Source"
-      },
-      {
-        "label": "Speed",
-        "value": "Sub-50ms Pathfinding"
-      }
-    ],
-    "highlights": [
-      "Unified GTFS schedule parser building directed multi-graph representations of transit lines",
-      "Fast timetable lookups with forward-search time-expanded pathfinding",
-      "Custom transfer buffer logic preventing unrealistically tight connections",
-      "Clean CLI and modular API for seamless integration with mobile navigation frontends"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04/QRoute"
     }
   },
   {
@@ -626,157 +884,6 @@ const PORTFOLIO_DATA = {
     }
   },
   {
-    "id": "q-transit-nexus",
-    "title": "Q-Transit Nexus",
-    "subtitle": "Distributed Public Transport Mesh & Real-Time ETA Pipeline",
-    "category": "systems",
-    "featured": false,
-    "badge": "Public Python Repo",
-    "badgeType": "opensource",
-    "platform": "Python · Distributed Stream Processing",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "Distributed Public Transport Mesh & Real-Time ETA Pipeline",
-    "problem": "Public transit tracking systems frequently suffer from GPS signal drops in urban canyons, leading to jumpy vehicle locations, phantom buses, and inaccurate arrival estimations for waiting passengers.",
-    "solution": "Developed a stream processing telemetry pipeline that applies Kalman filtering and dead-reckoning heuristics to noisy vehicle GPS coordinates, providing smooth map interpolation and accurate stop arrival ETAs.",
-    "techStack": [
-      "Python",
-      "Kalman Filter",
-      "Stream Processing",
-      "WebSockets",
-      "Spatial Indexing"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Noise Filter",
-        "value": "Extended Kalman Filter"
-      },
-      {
-        "label": "ETA Accuracy",
-        "value": "94.2% Within 1 Min"
-      },
-      {
-        "label": "Architecture",
-        "value": "Event-Driven Stream"
-      },
-      {
-        "label": "Repository",
-        "value": "GitHub Public"
-      }
-    ],
-    "highlights": [
-      "Kalman filtering algorithm smoothing erratic GPS coordinates caused by urban multipath interference",
-      "Dead reckoning estimation continuing route tracking during temporary GPS signal loss in tunnels",
-      "Map-matching algorithm snapping raw coordinates to known transit road networks",
-      "Real-time WebSocket event broadcaster pushing sub-second vehicle updates to clients"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04/q-transit-nexus1"
-    }
-  },
-  {
-    "id": "vaidiktech",
-    "title": "VaidikTech Core Platform",
-    "subtitle": "Design System, Micro-Libraries & Native Tooling Infrastructure",
-    "category": "productivity",
-    "featured": false,
-    "badge": "Core Private Repo",
-    "badgeType": "production",
-    "platform": "TypeScript · Node.js & React Ecosystem",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "Design System, Micro-Libraries & Native Tooling Infrastructure",
-    "problem": "Building multiple native Android and web applications independently leads to redundant boilerplate, fragmented design tokens, inconsistent encryption patterns, and duplicated financial math routines.",
-    "solution": "Constructed the unified VaidikTech platform and code infrastructure repository: centralizing design tokens, cryptographic helper contracts, reusable integer math utilities, build automation scripts, and shared documentation across all commercial products.",
-    "techStack": [
-      "TypeScript",
-      "Node.js",
-      "Tailwind CSS",
-      "Design Systems",
-      "Cryptographic Contracts",
-      "CI/CD Tooling"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Ecosystem Role",
-        "value": "Shared Infrastructure"
-      },
-      {
-        "label": "Languages",
-        "value": "TypeScript & Kotlin Interop"
-      },
-      {
-        "label": "Products Powered",
-        "value": "Girvi, JewelBill, AdvoKosh"
-      },
-      {
-        "label": "Status",
-        "value": "Active Development"
-      }
-    ],
-    "highlights": [
-      "Unified design tokens for dark luxury aesthetics across mobile and web interfaces",
-      "Shared mathematical specifications for financial compounding and thermal printing bytecodes",
-      "Standardized security protocols guaranteeing zero-network compliance and keystore binding",
-      "Centralized documentation and release management tooling for Google Play Store deployments"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04/VaidikTech"
-    }
-  },
-  {
-    "id": "agrilink",
-    "title": "AgriLink",
-    "subtitle": "Decentralized Agricultural Commodity Marketplace & Fair Price Discovery",
-    "category": "systems",
-    "featured": false,
-    "badge": "Architecture Spec",
-    "badgeType": "research",
-    "platform": "Android & Microservices",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "Decentralized Agricultural Commodity Marketplace & Fair Price Discovery",
-    "problem": "Smallholder farmers in rural regions are forced to sell produce through multi-tiered intermediaries who withhold mandi price transparency, resulting in up to 40% loss of farmer profit margins.",
-    "solution": "Architected a direct farmer-to-buyer marketplace prototype supporting SMS fallback for feature phones, mandi APMC price aggregation, and localized Hindi/Marathi voice-guided crop listings.",
-    "techStack": [
-      "Kotlin",
-      "Android Jetpack",
-      "APMC Mandi APIs",
-      "SMS Gateway Fallback",
-      "Localized Voice Search"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Intermediary Margin Cut",
-        "value": "~35% Saved"
-      },
-      {
-        "label": "Fallback",
-        "value": "Two-way SMS Channel"
-      },
-      {
-        "label": "Languages",
-        "value": "Hindi, Marathi, English"
-      },
-      {
-        "label": "Mandi Coverage",
-        "value": "All Major APMC Hubs"
-      }
-    ],
-    "highlights": [
-      "Aggregates daily government APMC market rates across district mandis for price transparency",
-      "Voice-guided crop listing enabling low-literacy farmers to register harvest batches easily",
-      "Direct buyer bidding with escrow milestone confirmations preventing default payments",
-      "Offline sync architecture saving draft listings during intermittent rural cellular reception"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04"
-    }
-  },
-  {
     "id": "free-ai-invoice",
     "title": "Free AI Invoice & GST Assistant",
     "subtitle": "Smart Business Billing & Automated GST Calculation Utility",
@@ -827,150 +934,50 @@ const PORTFOLIO_DATA = {
     }
   },
   {
-    "id": "skycanvas",
-    "title": "SkyCanvas – AI Air Painter",
-    "subtitle": "Contactless Computer Vision Canvas via Hand Tracking",
-    "category": "ai-vision",
+    "id": "agrilink",
+    "title": "AgriLink",
+    "subtitle": "Decentralized Agricultural Commodity Marketplace & Fair Price Discovery",
+    "category": "systems",
     "featured": false,
-    "badge": "Computer Vision MVP",
+    "badge": "Architecture Spec",
     "badgeType": "research",
-    "platform": "Python · MediaPipe & OpenCV",
+    "platform": "Android & Microservices",
     "icon": "assets/vaidiktech_symbol.svg",
     "heroImage": "assets/vaidiktech_symbol.svg",
     "gallery": [],
-    "summary": "Contactless Computer Vision Canvas via Hand Tracking",
-    "problem": "Traditional digital drawing requires expensive stylus hardware or physical touchscreens, limiting creative interaction and accessibility in collaborative spaces.",
-    "solution": "Built a real-time computer vision drawing interface that tracks hand landmarks via webcam using Google MediaPipe and OpenCV, enabling users to draw in mid-air using intuitive finger gestures with zero specialized hardware.",
+    "summary": "Decentralized Agricultural Commodity Marketplace & Fair Price Discovery",
+    "problem": "Smallholder farmers in rural regions are forced to sell produce through multi-tiered intermediaries who withhold mandi price transparency, resulting in up to 40% loss of farmer profit margins.",
+    "solution": "Architected a direct farmer-to-buyer marketplace prototype supporting SMS fallback for feature phones, mandi APMC price aggregation, and localized Hindi/Marathi voice-guided crop listings.",
     "techStack": [
-      "Python",
-      "OpenCV",
-      "Google MediaPipe",
-      "NumPy",
-      "Kinematic Smoothing"
+      "Kotlin",
+      "Android Jetpack",
+      "APMC Mandi APIs",
+      "SMS Gateway Fallback",
+      "Localized Voice Search"
     ],
     "keyMetrics": [
       {
-        "label": "Tracking FPS",
-        "value": "60 FPS Real-time"
+        "label": "Intermediary Margin Cut",
+        "value": "~35% Saved"
       },
       {
-        "label": "Hardware Needed",
-        "value": "Standard 720p Webcam"
+        "label": "Fallback",
+        "value": "Two-way SMS Channel"
       },
       {
-        "label": "Latency",
-        "value": "<16ms Gesture Response"
+        "label": "Languages",
+        "value": "Hindi, Marathi, English"
       },
       {
-        "label": "Hand Landmarks",
-        "value": "21 Keypoints Tracked"
+        "label": "Mandi Coverage",
+        "value": "All Major APMC Hubs"
       }
     ],
     "highlights": [
-      "21-point 3D hand landmark estimation tracking index finger tip trajectory with sub-pixel precision",
-      "Gesture state machine: Two fingers up for tool/color selection, single index finger for drawing",
-      "Exponential moving average filter eliminating hand tremor and producing silky canvas strokes",
-      "Color palette selector, dynamic brush stroke sizing, and instant PNG export functionality"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04"
-    }
-  },
-  {
-    "id": "ai-disaster-sos",
-    "title": "AI Disaster Response & SOS Mesh",
-    "subtitle": "Resilient Emergency P2P Mesh Network with NLP Triage",
-    "category": "ai-vision",
-    "featured": false,
-    "badge": "Hackathon Finalist",
-    "badgeType": "research",
-    "platform": "Android · P2P Mesh & On-Device NLP",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "Resilient Emergency P2P Mesh Network with NLP Triage",
-    "problem": "During catastrophic natural disasters, cellular infrastructure collapses, leaving victims trapped without communication channels while rescue teams possess no visibility into casualty clusters.",
-    "solution": "Designed an ad-hoc emergency communication system routing encrypted distress packets across multi-hop peer-to-peer Wi-Fi Direct and BLE connections, paired with on-device NLP triage classifying urgency.",
-    "techStack": [
-      "Android Native",
-      "BLE Mesh Protocols",
-      "Wi-Fi Direct",
-      "TFLite NLP Model",
-      "GPS Ephemeris Caching"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Mesh Hops",
-        "value": "Up to 7 Device Relays"
-      },
-      {
-        "label": "NLP Triage",
-        "value": "On-Device TFLite Model"
-      },
-      {
-        "label": "Infrastructure",
-        "value": "Zero Cellular Needed"
-      },
-      {
-        "label": "Encryption",
-        "value": "End-to-End Curve25519"
-      }
-    ],
-    "highlights": [
-      "Multi-hop store-and-forward mesh propagation carrying SOS beacons across disconnected nodes",
-      "Embedded lightweight TFLite model scoring medical urgency from natural language distress messages",
-      "Low-power BLE beacon mode extending survivor device battery life up to 72 hours",
-      "Command hub dashboard mapping casualty clusters using cached offline topography maps"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04"
-    }
-  },
-  {
-    "id": "stock-tracker-pro",
-    "title": "Stock Tracker Pro & Analytics",
-    "subtitle": "High-Frequency Financial Time-Series Dashboard & Indicators",
-    "category": "productivity",
-    "featured": false,
-    "badge": "Financial Engine",
-    "badgeType": "opensource",
-    "platform": "Python & Streamlit",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "High-Frequency Financial Time-Series Dashboard & Indicators",
-    "problem": "Retail traders lack customizable algorithmic indicator suites that run locally without hefty monthly subscription fees charged by proprietary trading platforms.",
-    "solution": "Engineered a quantitative stock tracking engine calculating technical indicators (RSI, MACD, Bollinger Bands, EMA crossovers) over historical equity feeds with automated breakout alert triggers.",
-    "techStack": [
-      "Python",
-      "Pandas",
-      "TA-Lib",
-      "Plotly Interactive Charts",
-      "Yahoo Finance API"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Technical Indicators",
-        "value": "15+ Mathematical Models"
-      },
-      {
-        "label": "Backtesting",
-        "value": "Historical Signal Engine"
-      },
-      {
-        "label": "Visualizations",
-        "value": "Interactive 60FPS Plotly"
-      },
-      {
-        "label": "Cost",
-        "value": "100% Free Open Source"
-      }
-    ],
-    "highlights": [
-      "Vectorized calculation of momentum, volatility, and volume indicators across multi-year tick data",
-      "Interactive candlestick charting with dynamic support/resistance level identification",
-      "Automated strategy backtesting engine outputting Sharpe ratio, maximum drawdown, and win rate",
-      "Real-time price threshold notifications and portfolio risk exposure breakdowns"
+      "Aggregates daily government APMC market rates across district mandis for price transparency",
+      "Voice-guided crop listing enabling low-literacy farmers to register harvest batches easily",
+      "Direct buyer bidding with escrow milestone confirmations preventing default payments",
+      "Offline sync architecture saving draft listings during intermittent rural cellular reception"
     ],
     "links": {
       "github": "https://github.com/Vaidik04"
@@ -1027,154 +1034,224 @@ const PORTFOLIO_DATA = {
     }
   },
   {
-    "id": "vaidikratnam",
-    "title": "Vaidik Ratnam Digital Platform",
-    "subtitle": "High-End Gems & Jewellery Digital Showcase Architecture",
-    "category": "systems",
+    "id": "vaidiktech",
+    "title": "VaidikTech Core Platform",
+    "subtitle": "Design System, Micro-Libraries & Native Tooling Infrastructure",
+    "category": "productivity",
     "featured": false,
-    "badge": "Client Production",
+    "badge": "Core Platform",
     "badgeType": "production",
-    "platform": "Full-Stack Web & Android Gateway",
+    "platform": "TypeScript · Node.js & React Ecosystem",
     "icon": "assets/vaidiktech_symbol.svg",
     "heroImage": "assets/vaidiktech_symbol.svg",
     "gallery": [],
-    "summary": "High-End Gems & Jewellery Digital Showcase Architecture",
-    "problem": "Luxury gemstone and fine jewelry merchants require high-fidelity digital showcases that capture gemstone optical luster, certify hallmarked purities, and facilitate private client consultations securely.",
-    "solution": "Architected a bespoke digital catalog platform featuring dynamic live bullion rate feeds, high-resolution media zoom, certified gemstone laboratory report verification, and direct VIP concierge inquiry channels.",
+    "summary": "Design System, Micro-Libraries & Native Tooling Infrastructure",
+    "problem": "Building multiple native Android and web applications independently leads to redundant boilerplate, fragmented design tokens, inconsistent encryption patterns, and duplicated financial math routines.",
+    "solution": "Constructed the unified VaidikTech platform and code infrastructure repository: centralizing design tokens, cryptographic helper contracts, reusable integer math utilities, build automation scripts, and shared documentation across all commercial products.",
     "techStack": [
-      "React",
+      "TypeScript",
+      "Node.js",
       "Tailwind CSS",
-      "REST APIs",
-      "Cloudinary CDN",
-      "WhatsApp Business API"
+      "Design Systems",
+      "Cryptographic Contracts",
+      "CI/CD Tooling"
     ],
     "keyMetrics": [
       {
-        "label": "Catalog Purity",
-        "value": "GIA / IGI Certification"
+        "label": "Ecosystem Role",
+        "value": "Shared Infrastructure"
       },
       {
-        "label": "Image Performance",
-        "value": "Sub-Second WebP CDN"
+        "label": "Languages",
+        "value": "TypeScript & Kotlin Interop"
       },
       {
-        "label": "Security",
-        "value": "Private Inquiry Vault"
-      },
-      {
-        "label": "Client Satisfaction",
-        "value": "High Retention"
-      }
-    ],
-    "highlights": [
-      "Dynamic live daily gold and silver market rate ticker reflecting bullion pricing in real time",
-      "Ultra-high-definition interactive product gallery with responsive pinch-to-zoom magnification",
-      "Direct integration with GIA and IGI certificate verification lookup portals",
-      "Seamless VIP client consultation booking via direct WhatsApp Business API gateway"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04"
-    }
-  },
-  {
-    "id": "focus-companion",
-    "title": "Focus - Deep Work Companion",
-    "subtitle": "Minimalist Pomodoro Engine with Ambient Soundscapes",
-    "category": "productivity",
-    "featured": false,
-    "badge": "Open Source Utility",
-    "badgeType": "opensource",
-    "platform": "Native Android · Jetpack Compose",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "Minimalist Pomodoro Engine with Ambient Soundscapes",
-    "problem": "Digital professionals face constant notifications, multitasking fatigue, and cognitive fragmentation, making sustained uninterrupted engineering sessions difficult.",
-    "solution": "Engineered an unobtrusive Android focus companion in Jetpack Compose. Combines a customizable interval Pomodoro timer with offline binaural noise soundscapes, foreground service audio loops, and daily session analytics.",
-    "techStack": [
-      "Kotlin",
-      "Jetpack Compose",
-      "Android ExoPlayer",
-      "Foreground Audio Service",
-      "DataStore Preferences"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Battery Usage",
-        "value": "<1% per Hour"
-      },
-      {
-        "label": "Distraction Level",
-        "value": "Zero Ads / Clean UI"
-      },
-      {
-        "label": "Sound Quality",
-        "value": "Offline 48kHz Audio"
-      },
-      {
-        "label": "Architecture",
-        "value": "100% Jetpack Compose"
-      }
-    ],
-    "highlights": [
-      "Smooth circular animated progress indicator built with Jetpack Compose canvas animations",
-      "Foreground audio player service streaming uninterrupted rain, café, and white noise offline",
-      "Session history analytics mapping peak productivity hours across days and weeks",
-      "Zero telemetry tracking or ads: engineered for maximum cognitive calm and privacy"
-    ],
-    "links": {
-      "github": "https://github.com/Vaidik04"
-    }
-  },
-  {
-    "id": "nptel-study-agent",
-    "title": "NPTEL Study Agent",
-    "subtitle": "Autonomous Academic Companion & Lecture Synthesizer",
-    "category": "productivity",
-    "featured": false,
-    "badge": "AI Academic Tool",
-    "badgeType": "opensource",
-    "platform": "Python & LLM Agent Pipeline",
-    "icon": "assets/vaidiktech_symbol.svg",
-    "heroImage": "assets/vaidiktech_symbol.svg",
-    "gallery": [],
-    "summary": "Autonomous Academic Companion & Lecture Synthesizer",
-    "problem": "Engineering students preparing for NPTEL and university exams spend countless hours manually pausing long video lectures to extract core definitions, theorem proofs, and assignment solutions.",
-    "solution": "Developed an automated study pipeline in Python that ingests course syllabi, processes lecture transcripts, extracts key algorithmic proofs, and synthesizes structured study flashcards and mock quiz questions.",
-    "techStack": [
-      "Python",
-      "LLM Agent Architecture",
-      "Transcript Parsers",
-      "Markdown Synthesis",
-      "Flashcard Generation"
-    ],
-    "keyMetrics": [
-      {
-        "label": "Synthesis Ratio",
-        "value": "60-Min Lecture -> 3-Min Notes"
-      },
-      {
-        "label": "Output Format",
-        "value": "Markdown & LaTeX Equations"
-      },
-      {
-        "label": "Evaluation",
-        "value": "Automated Quiz Generator"
+        "label": "Products Powered",
+        "value": "Girvi, JewelBill, AdvoKosh"
       },
       {
         "label": "Status",
-        "value": "Open Source"
+        "value": "Active Development"
       }
     ],
     "highlights": [
-      "Extracts mathematical formulas and diagrams from lecture transcripts into clean LaTeX notation",
-      "Generates concept flashcards optimized for spaced repetition review schedules",
-      "Creates automated multiple-choice mock exam questions based on historical course assignments",
-      "High-speed batch processing converting entire 12-week course syllabi into unified revision guides"
+      "Unified design tokens for dark luxury aesthetics across mobile and web interfaces",
+      "Shared mathematical specifications for financial compounding and thermal printing bytecodes",
+      "Standardized security protocols guaranteeing zero-network compliance and keystore binding",
+      "Centralized documentation and release management tooling for Google Play Store deployments"
     ],
     "links": {
-      "github": "https://github.com/Vaidik04"
+      "github": "https://github.com/Vaidik04/VaidikTech"
     }
+  }
+],
+
+  certificates: [
+  {
+    "id": "nptel-oops",
+    "title": "Fundamentals of Object Oriented Programming",
+    "issuer": "NPTEL · IIT Kharagpur (Ministry of Education)",
+    "category": "nptel",
+    "date": "Jan - Apr 2026",
+    "score": "75% (Elite)",
+    "badge": "Elite Certificate",
+    "credits": "4 Credits Recommended",
+    "credentialId": "NPTEL26CS87S1252401044",
+    "fileUrl": "/certificates/Fundamentals of Object Oriented Programming.pdf",
+    "fileType": "pdf",
+    "skillsLearned": [
+      "Object-Oriented Design (OOD)",
+      "Polymorphism & Inheritance",
+      "Encapsulation & Abstraction",
+      "C++ & Modern OOP Patterns",
+      "Memory Management & Pointers"
+    ],
+    "description": "12-week comprehensive theoretical and applied curriculum on Object-Oriented paradigms, classes, operator overloading, virtual tables, and modular software architecture certified by IIT Kharagpur."
+  },
+  {
+    "id": "nptel-ml",
+    "title": "Introduction to Machine Learning",
+    "issuer": "NPTEL · IIT Kharagpur",
+    "category": "nptel",
+    "date": "Jul - Oct",
+    "score": "Certified (68%)",
+    "badge": "AI/ML Core",
+    "credits": "4 Credits Recommended",
+    "credentialId": "NPTEL-IIT-ML-CORE",
+    "fileUrl": "/certificates/Introduction To Machine Learning.pdf",
+    "fileType": "pdf",
+    "skillsLearned": [
+      "Supervised & Unsupervised Learning",
+      "Linear & Logistic Regression",
+      "Decision Trees & Random Forests",
+      "Neural Networks & Gradient Descent",
+      "Dimensionality Reduction (PCA)"
+    ],
+    "description": "12-week advanced mathematical foundation in statistical learning theory, optimization loss functions, probabilistic graphical models, and algorithmic regression/classification."
+  },
+  {
+    "id": "nptel-dsa-python",
+    "title": "Programming, Data Structures and Algorithms Using Python",
+    "issuer": "NPTEL · Chennai Mathematical Institute (CMI)",
+    "category": "nptel",
+    "date": "Jan - Mar 2026",
+    "score": "Certified",
+    "badge": "Core DSA",
+    "credits": "3 Credits Recommended",
+    "credentialId": "NPTEL26CS79S352800281",
+    "fileUrl": "/certificates/Programming, Data Structures and Algorithms.pdf",
+    "fileType": "pdf",
+    "skillsLearned": [
+      "Algorithm Complexity (Big-O)",
+      "Sorting & Binary Search Trees",
+      "Graphs, BFS & DFS Traversals",
+      "Dynamic Programming (Memoization)",
+      "Python Data Structures & Hash Tables"
+    ],
+    "description": "8-week algorithmic rigor covering abstract data types, recursive divide-and-conquer strategies, Dijkstra shortest paths, heaps, and Python computational optimization."
+  },
+  {
+    "id": "nptel-dbms",
+    "title": "Database Management System",
+    "issuer": "NPTEL · IIT Kharagpur",
+    "category": "nptel",
+    "date": "Jul - Sep",
+    "score": "Certified",
+    "badge": "Database Architecture",
+    "credits": "3 Credits Recommended",
+    "credentialId": "NPTEL-IIT-DBMS-CORE",
+    "fileUrl": "/certificates/Database Management System.pdf",
+    "fileType": "pdf",
+    "skillsLearned": [
+      "Relational Algebra & Tuple Calculus",
+      "Schema Normalization (1NF to BCNF)",
+      "ACID Transactions & Concurrency Control",
+      "B+ Trees & Storage Indexing",
+      "SQL Query Optimization"
+    ],
+    "description": "8-week intensive database engineering course focusing on relational models, transaction isolation levels, write-ahead logging (WAL), and query plan execution."
+  },
+  {
+    "id": "nptel-discrete-math",
+    "title": "Discrete Mathematics",
+    "issuer": "NPTEL · IIT Ropar",
+    "category": "nptel",
+    "date": "Jul - Oct",
+    "score": "Certified",
+    "badge": "Theoretical Computer Science",
+    "credits": "4 Credits Recommended",
+    "credentialId": "NPTEL-IIT-DM-CORE",
+    "fileUrl": "/certificates/Discrete Mathematics.pdf",
+    "fileType": "pdf",
+    "skillsLearned": [
+      "Propositional & Predicate Logic",
+      "Graph Theory & Planarity",
+      "Combinatorics & Pigeonhole Principle",
+      "Recurrence Relations & Generating Functions",
+      "Set Theory & Boolean Algebra"
+    ],
+    "description": "12-week mathematical foundation for computational proof techniques, inductive reasoning, Eulerian/Hamiltonian graph properties, and discrete structures."
+  },
+  {
+    "id": "nptel-c-programming",
+    "title": "Problem Solving Through Programming In C",
+    "issuer": "NPTEL · IIT Kharagpur",
+    "category": "nptel",
+    "date": "Jan - Apr 2026",
+    "score": "Certified",
+    "badge": "Systems Programming",
+    "credits": "4 Credits Recommended",
+    "credentialId": "NPTEL26CS53S252401378",
+    "fileUrl": "/certificates/Problem Solving Through Programming In C.pdf",
+    "fileType": "pdf",
+    "skillsLearned": [
+      "Pointers & Memory Allocation (malloc/free)",
+      "Bitwise Operations & Structs",
+      "File I/O & Stream Buffers",
+      "Algorithm Step-by-Step Tracing",
+      "Low-Level Debugging"
+    ],
+    "description": "12-week fundamental programming course diving into hardware-level data representations, array memory layouts, pointer arithmetic, and algorithmic logic in C."
+  },
+  {
+    "id": "hackerrank-problem-solving",
+    "title": "Problem Solving (Basic)",
+    "issuer": "HackerRank",
+    "category": "hackerrank",
+    "date": "Feb 24, 2025",
+    "badge": "Verified Skill Assessment",
+    "credentialId": "3D407F729E59",
+    "credentialUrl": "https://www.hackerrank.com/certificates/3d407f729e59",
+    "fileUrl": "/assets/certificates/hackerrank_problem_solving.jpg",
+    "fileType": "image",
+    "skillsLearned": [
+      "Algorithmic Logic",
+      "Data Structures",
+      "Array & String Manipulations",
+      "Edge-case Testing & Optimization"
+    ],
+    "description": "Verified certification passing HackerRank's rigorous timed algorithmic assessment covering core data structures, time complexity analysis, and clean algorithmic problem-solving."
+  },
+  {
+    "id": "udemy-100-days-python",
+    "title": "100 Days of Code: The Complete Python Pro Bootcamp",
+    "issuer": "Udemy · Dr. Angela Yu",
+    "category": "udemy",
+    "date": "Aug 13, 2022",
+    "badge": "64 Total Hours",
+    "credentialId": "UC-c4665a9d-e104-4c61-bdf1-ae47ad0882cb",
+    "credentialUrl": "https://ude.my/UC-c4665a9d-e104-4c61-bdf1-ae47ad0882cb",
+    "fileUrl": "/assets/certificates/udemy_python_100_days.jpg",
+    "fileType": "image",
+    "skillsLearned": [
+      "Python 3 Advanced OOP",
+      "Web Scraping (BeautifulSoup & Selenium)",
+      "APIs & Requests Automation",
+      "Data Analysis (Pandas & NumPy)",
+      "Desktop GUI (Tkinter & PyQt)",
+      "Flask Web Development"
+    ],
+    "description": "Mastery of end-to-end Python engineering across 100 consecutive days of production challenges, building real-world automation scripts, data scrapers, desktop interfaces, and web applications."
   }
 ],
 

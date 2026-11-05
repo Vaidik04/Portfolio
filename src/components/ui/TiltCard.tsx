@@ -8,6 +8,7 @@ interface TiltCardProps {
   className?: string;
   glowColor?: string;
   maxTilt?: number;
+  onClick?: () => void;
 }
 
 export const TiltCard: React.FC<TiltCardProps> = ({
@@ -15,6 +16,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
   className = "",
   glowColor = "rgba(61, 220, 132, 0.15)",
   maxTilt = 10,
+  onClick,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -58,6 +60,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
   return (
     <motion.div
       ref={ref}
+      onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{

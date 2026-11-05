@@ -184,7 +184,7 @@ public class EscPosThermalPrinter {
         os.write(ALIGN_CENTER);
         os.write(DOUBLE_HEIGHT_BOLD);
         os.write((shopName + "\n").getBytes(StandardCharsets.UTF_8));
-        os.write(new byte[]{0x1B, 0x21, 0x00}); // Reset font
+        os.write(new byte[]{0x1B, 0x21, 0x00});
         os.write(("INVOICE: #" + invoiceNo + "\n").getBytes(StandardCharsets.UTF_8));
         os.write(("TOTAL: Rs. " + (totalPaise / 100.0) + "\n\n").getBytes(StandardCharsets.UTF_8));
         os.write(CUT_PAPER);
@@ -266,7 +266,136 @@ object SecurityVault {
   },
 
   // =========================================================================
-  // 4. SWARMOS - AIR-GAPPED P2P DISTRIBUTED MESH
+  // 4. QROUTE (UNIFIED FLAGSHIP) - QUANTUM-INSPIRED TRANSIT OPTIMIZER
+  // =========================================================================
+  {
+    id: "qroute",
+    name: "QRoute",
+    tagline: "Quantum-Inspired Urban Routing & Multi-Modal Transit Optimization",
+    category: "systems",
+    badge: "Core Transit Engine",
+    badgeType: "research",
+    platform: "Python · Simulated Annealing, Kalman Filtering & GTFS",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#38BDF8",
+    problem:
+      "Public transport in high-density metropolitan areas suffers from GPS telemetry noise in urban canyons, unsynchronized inter-modal transfers (bus to metro to walking), and severe bottleneck congestion that standard Dijkstra/A* shortest-path algorithms fail to balance dynamically.",
+    solution:
+      "Engineered QRoute (formerly Q-Transit Nexus & QRoute-Final), an integrated urban transit optimization framework. Unifies GTFS timetable parsing, real-time vehicle Kalman filtering for dead-reckoning during GPS dropouts, and a quantum-inspired simulated annealing cooling heuristic to calculate multi-modal commuter journeys with 31% less transfer wait latency.",
+    techStack: [
+      "Python 3.10+",
+      "Quantum-Inspired Simulated Annealing",
+      "Extended Kalman Filtering",
+      "GTFS Specification",
+      "NetworkX & Graph Theory",
+      "GeoPandas & Spatial Stream Processing",
+      "WebSockets"
+    ],
+    keyMetrics: [
+      { label: "Algorithm", value: "Quantum-Inspired Annealing" },
+      { label: "Wait Time Cut", value: "31% Lower Transfer Delay" },
+      { label: "Filter Precision", value: "94.2% Accurate ETAs" },
+      { label: "Network Capacity", value: "10,000+ Node Transit Graph" }
+    ],
+    highlights: [
+      "Quantum-inspired simulated annealing heuristic exploring combinatorially vast multi-modal transit graphs without getting trapped in local congestion minima",
+      "Extended Kalman filter pipeline smoothing noisy vehicle GPS feeds and predicting dead-reckoning positions in urban tunnels",
+      "Multi-criteria Pareto optimization weighting travel time, monetary fare, transfer friction, and walking fatigue",
+      "High-throughput WebSocket telemetry stream broadcasting millisecond-level schedule adjustments to client apps",
+      "Unified open architecture replacing fragmented transit scripts into a production-grade routing microservice"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04/QRoute-Final"
+    },
+    codeSnippet: {
+      filename: "QuantumAnnealingRouter.py",
+      language: "python",
+      code: `import math, random
+
+class QuantumAnnealingRouter:
+    def __init__(self, transit_graph, initial_temp=100.0, cooling_rate=0.97):
+        self.graph = transit_graph
+        self.temp = initial_temp
+        self.cooling = cooling_rate
+
+    def evaluate_energy(self, path):
+        total_time, transfer_penalty, cost = 0, 0, 0
+        for u, v in zip(path[:-1], path[1:]):
+            edge = self.graph[u][v]
+            total_time += edge['duration'] + edge.get('congestion_delay', 0)
+            if edge.get('is_transfer', False):
+                transfer_penalty += 8.0 # 8 min psychological transfer friction
+        return total_time + transfer_penalty
+
+    def find_optimal_route(self, origin, destination, max_iter=1500):
+        current_path = self.graph.get_initial_heuristic(origin, destination)
+        current_energy = self.evaluate_energy(current_path)
+        best_path, best_energy = current_path, current_energy
+        
+        for _ in range(max_iter):
+            neighbor = self.graph.perturb_path(current_path)
+            neighbor_energy = self.evaluate_energy(neighbor)
+            delta = neighbor_energy - current_energy
+            
+            # Simulated annealing acceptance probability with quantum tunneling heuristic
+            if delta < 0 or random.random() < math.exp(-delta / max(self.temp, 1e-4)):
+                current_path, current_energy = neighbor, neighbor_energy
+                if current_energy < best_energy:
+                    best_path, best_energy = current_path, current_energy
+            self.temp *= self.cooling
+            
+        return best_path, best_energy`
+    }
+  },
+
+  // =========================================================================
+  // 5. JARVIS AI - VOICE ASSISTANT & DESKTOP AUTOMATION (D:\Python\Jarvis)
+  // =========================================================================
+  {
+    id: "jarvis-ai",
+    name: "Jarvis AI Assistant",
+    tagline: "Desktop Voice Assistant, Task Automation & SQLite Memory System",
+    category: "ai",
+    badge: "Advanced Python Desktop",
+    badgeType: "production",
+    platform: "Python · PyQt5, SpeechRecognition & SQLite",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F59E0B",
+    problem:
+      "Developers and power users waste cumulative hours performing repetitive system tasks: navigating complex directory trees, dispatching recurring emails, querying local notes, managing system settings, and controlling desktop windows manually.",
+    solution:
+      "Engineered Jarvis, a comprehensive desktop automation and voice recognition assistant built in Python and PyQt5. Features continuous offline hotword detection, speech-to-text NLP intent parsing, system control, an automated email bot, daily alarm scheduling, persistent SQLite associative memory (jarvis_memory.db), and an Android companion client.",
+    techStack: [
+      "Python 3.10",
+      "PyQt5 GUI",
+      "SpeechRecognition",
+      "SQLite (jarvis_memory.db)",
+      "Automations & OS Subsystems",
+      "Pyttsx3 Text-to-Speech",
+      "Socket Inter-Process Communication"
+    ],
+    keyMetrics: [
+      { label: "Architecture", value: "Modular PyQt5 + Core Daemon" },
+      { label: "Memory Engine", value: "SQLite Persistent State" },
+      { label: "Latency", value: "Sub-200ms Command Execution" },
+      { label: "Automations", value: "Email, OS, Tasks, Alarms" }
+    ],
+    highlights: [
+      "Custom PyQt5 cyberpunk HUD interface with animated waveform telemetry and status indicators",
+      "Persistent conversation and entity memory stored inside local jarvis_memory.db database",
+      "Hands-free voice recognition with wake-word detection, customizable sensitivity, and fallback text input",
+      "Automated email dispatching, browser task automation, system diagnostics, and volume/display controls",
+      "Cross-platform IPC architecture allowing synchronization with Android companion application"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 6. SWARMOS - AIR-GAPPED P2P DISTRIBUTED MESH
   // =========================================================================
   {
     id: "swarmos",
@@ -311,7 +440,7 @@ object SecurityVault {
   },
 
   // =========================================================================
-  // 5. GRIDCARE - DISASTER HOSPITAL TRIAGE
+  // 7. GRIDCARE - DISASTER HOSPITAL TRIAGE
   // =========================================================================
   {
     id: "gridcare",
@@ -355,7 +484,7 @@ object SecurityVault {
   },
 
   // =========================================================================
-  // 6. KAAMKRAM (कामक्रम) - TASK & WORKER MANAGEMENT
+  // 8. KAAMKRAM (कामक्रम) - TASK & WORKER MANAGEMENT
   // =========================================================================
   {
     id: "kaamkram",
@@ -398,7 +527,220 @@ object SecurityVault {
   },
 
   // =========================================================================
-  // 7. SOLAR ANALYTICS - PHOTOVOLTAIC TELEMETRY (GITHUB REPO: SOLAR)
+  // 9. SKYCANVAS - AI AIR PAINTER (D:\Python\SkyCanvas)
+  // =========================================================================
+  {
+    id: "skycanvas",
+    name: "SkyCanvas – AI Air Painter",
+    tagline: "Contactless Computer Vision Canvas via 21-Landmark Hand Tracking",
+    category: "ai",
+    badge: "Computer Vision 60 FPS",
+    badgeType: "research",
+    platform: "Python & Android · MediaPipe Hands & OpenCV",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#06B6D4",
+    problem:
+      "Traditional digital drawing requires expensive stylus hardware or physical touchscreens, limiting creative interaction and accessibility in collaborative spaces and touchless interactive exhibits.",
+    solution:
+      "Built a real-time computer vision drawing interface that tracks 21 3D hand landmarks via standard webcam using Google MediaPipe and OpenCV. Enables drawing in mid-air with sub-pixel index finger precision, dual-finger color/tool selection, and exponential moving average stroke smoothing.",
+    techStack: [
+      "Python",
+      "OpenCV",
+      "Google MediaPipe",
+      "NumPy",
+      "Kinematic Smoothing Filters",
+      "CameraX Integration"
+    ],
+    keyMetrics: [
+      { label: "Tracking FPS", value: "60 FPS Real-time" },
+      { label: "Hardware Needed", value: "Standard 720p Webcam" },
+      { label: "Latency", value: "<16ms Gesture Response" },
+      { label: "Hand Landmarks", value: "21 Keypoints Tracked" }
+    ],
+    highlights: [
+      "21-point 3D hand landmark estimation tracking index finger tip trajectory with sub-pixel precision",
+      "Gesture state machine: Two fingers up for tool/color selection, single index finger for drawing",
+      "Exponential moving average filter eliminating hand tremor and producing silky canvas strokes",
+      "Color palette selector, dynamic brush stroke sizing, and instant PNG export functionality"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 10. AI DISASTER RESPONSE & SOS MESH (D:\Python\Projects\Hackathon)
+  // =========================================================================
+  {
+    id: "ai-disaster-sos",
+    name: "AI Disaster Response & SOS Mesh",
+    tagline: "Emergency P2P Mesh Network with On-Device NLP & YOLOv8",
+    category: "ai",
+    badge: "Hackathon Finalist",
+    badgeType: "research",
+    platform: "Python, Flask, Flutter & YOLOv8",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F43F5E",
+    problem:
+      "During catastrophic natural disasters, cellular infrastructure collapses, leaving victims trapped without communication channels while rescue teams possess no visibility into casualty clusters.",
+    solution:
+      "Designed an ad-hoc emergency communication system routing distress packets across multi-hop peer-to-peer Wi-Fi Direct and BLE connections, paired with on-device NLP urgency classification and YOLOv8 human detection in disaster imagery.",
+    techStack: [
+      "Python + Flask",
+      "YOLOv8 Computer Vision",
+      "NLP Sentiment & Distress Scoring",
+      "BLE & Wi-Fi Direct Nearby Mesh",
+      "WebSockets + Leaflet GPS Heatmaps"
+    ],
+    keyMetrics: [
+      { label: "Vision Model", value: "YOLOv8 Human Detection" },
+      { label: "NLP Triage", value: "Distress Keyword Classifier" },
+      { label: "Infrastructure", value: "Zero Cellular Needed" },
+      { label: "Dashboard", value: "Real-time GPS Heatmap" }
+    ],
+    highlights: [
+      "Multi-hop store-and-forward mesh propagation carrying SOS beacons across disconnected survivor handsets",
+      "NLP distress classifier detecting high-priority cries for help ('help', 'bacchao', 'fire', 'trapped')",
+      "Embedded YOLOv8 vision pipeline detecting trapped humans in uploaded phone camera photos",
+      "Live GPS heatmap coordination dashboard for first responders and rescue command centers"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 11. STOCK TRACKER PRO (D:\Python\stock_tracker_complete.py)
+  // =========================================================================
+  {
+    id: "stock-tracker-pro",
+    name: "Stock Tracker Pro & Predictive Analytics",
+    tagline: "Financial Time-Series Analytics & Technical Indicator Suite",
+    category: "tools",
+    badge: "Financial Engine",
+    badgeType: "opensource",
+    platform: "Python · Pandas, TA-Lib, Streamlit & Plotly",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#10B981",
+    problem:
+      "Retail traders lack customizable algorithmic indicator suites that run locally without hefty monthly subscription fees charged by proprietary trading platforms.",
+    solution:
+      "Engineered a quantitative stock tracking engine calculating technical indicators (RSI, MACD, Bollinger Bands, EMA crossovers) over historical equity feeds with automated breakout alert triggers and interactive 60 FPS candlestick visualizations.",
+    techStack: [
+      "Python",
+      "Pandas & NumPy",
+      "TA-Lib",
+      "Plotly Interactive Charts",
+      "Streamlit Dashboard",
+      "Yahoo Finance API"
+    ],
+    keyMetrics: [
+      { label: "Technical Indicators", value: "15+ Mathematical Models" },
+      { label: "Backtesting", value: "Historical Signal Engine" },
+      { label: "Visualizations", value: "Interactive 60FPS Plotly" },
+      { label: "Cost", value: "100% Free Open Source" }
+    ],
+    highlights: [
+      "Vectorized calculation of momentum, volatility, and volume indicators across multi-year tick data",
+      "Interactive candlestick charting with dynamic support/resistance level identification",
+      "Automated strategy backtesting engine outputting Sharpe ratio, maximum drawdown, and win rate",
+      "Real-time price threshold notifications and portfolio risk exposure breakdowns"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 12. FOCUS - DEEP WORK & HABIT COMPANION (D:\Python\Projects\Focus)
+  // =========================================================================
+  {
+    id: "focus-companion",
+    name: "Focus - Deep Work Companion",
+    tagline: "Pomodoro Engine, Desktop Blocker & Productivity Analytics",
+    category: "tools",
+    badge: "Open Source Utility",
+    badgeType: "opensource",
+    platform: "Python & Jetpack Compose · Desktop & Android",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#6366F1",
+    problem:
+      "Developers and knowledge workers face constant digital fragmentation, social media distraction loops, and multitasking fatigue, preventing sustained deep work sessions.",
+    solution:
+      "Engineered Focus, a dual desktop-and-mobile deep work workstation. Features customized interval Pomodoro cycles, distraction domain blocking, habit formation streak tracking, offline binaural audio loops, and daily session productivity heatmaps.",
+    techStack: [
+      "Python (Focus Desktop)",
+      "Kotlin & Jetpack Compose",
+      "Hostfile Network Filter",
+      "Matplotlib Session Analytics",
+      "Foreground Audio Player Service"
+    ],
+    keyMetrics: [
+      { label: "Distraction Level", value: "Zero Ads / Clean UI" },
+      { label: "Desktop Blocker", value: "Domain Host Filtering" },
+      { label: "Analytics", value: "Daily/Weekly Heatmaps" },
+      { label: "Soundscapes", value: "Offline 48kHz Binaural" }
+    ],
+    highlights: [
+      "Automated website and distraction blocker enforcing strict deep-work discipline during active sessions",
+      "Habit formation engine tracking unbroken daily streaks with mathematical consistency metrics",
+      "Rich analytics graphing peak productivity hours, average focus length, and task completion velocity",
+      "Dual implementations: Python workstation for desktop coding and Jetpack Compose for mobile focus"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 13. E-COMMERCE PREDICTIVE ANALYTICS (D:\Python\Projects\E-Commerce-PredictiveAnalysis)
+  // =========================================================================
+  {
+    id: "ecommerce-predictive",
+    name: "E-Commerce Predictive Analytics",
+    tagline: "Machine Learning Demand Forecasting & Customer Lifetime Valuation",
+    category: "systems",
+    badge: "ML Analytics Engine",
+    badgeType: "production",
+    platform: "Python · Scikit-Learn, Pandas & Flask",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#EC4899",
+    problem:
+      "Retailers face unpredictable inventory stockouts and customer churn due to static, retrospective sales reports that fail to predict future purchasing patterns.",
+    solution:
+      "Built a modular machine learning pipeline analyzing customer transaction histories to forecast seasonal inventory demand, segment buyers using RFM (Recency, Frequency, Monetary) clustering, and predict churn probabilities before customers defect.",
+    techStack: [
+      "Python",
+      "Scikit-Learn",
+      "K-Means Clustering",
+      "Random Forest Regressor",
+      "Flask Microservice",
+      "Pandas & NumPy"
+    ],
+    keyMetrics: [
+      { label: "Forecasting Model", value: "Ensemble Random Forest" },
+      { label: "Segmentation", value: "RFM + K-Means" },
+      { label: "Churn Prediction", value: "Logistic ROC-AUC 0.88" },
+      { label: "Architecture", value: "Modular ML Microservice" }
+    ],
+    highlights: [
+      "Automated feature engineering extracting purchase velocity, seasonal decay, and average cart size",
+      "RFM customer segmentation identifying high-value VIP buyers vs. price-sensitive discount seekers",
+      "Early warning churn detection model empowering businesses to dispatch automated retention coupons",
+      "Clean REST API integration endpoints for seamless dashboard embedding"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 14. SOLAR ANALYTICS (GITHUB REPO: SOLAR)
   // =========================================================================
   {
     id: "solar-analytics",
@@ -441,92 +783,7 @@ object SecurityVault {
   },
 
   // =========================================================================
-  // 8. QROUTE-FINAL - QUANTUM-INSPIRED URBAN ROUTING (GITHUB REPO: QROUTE-FINAL)
-  // =========================================================================
-  {
-    id: "qroute-final",
-    name: "QRoute-Final",
-    tagline: "Quantum-Inspired Heuristic Urban Transit Optimization",
-    category: "systems",
-    badge: "Private Architecture Core",
-    badgeType: "research",
-    platform: "Python · Simulated Annealing & Graph Theory",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#8B5CF6",
-    problem:
-      "Traditional shortest-path algorithms (Dijkstra, A*) struggle when balancing multi-modal transfers, dynamic bus arrival variance, walking fatigue penalties, and extreme peak-hour passenger congestion across dense urban transit graphs.",
-    solution:
-      "Engineered an advanced quantum-inspired optimization framework utilizing simulated annealing and probabilistic graph state superposition to solve combinatorial multi-modal route selection in large-scale urban transit networks.",
-    techStack: [
-      "Python",
-      "Graph Theory",
-      "Simulated Annealing",
-      "Combinatorial Optimization",
-      "Multi-Agent Modeling",
-      "NetworkX"
-    ],
-    keyMetrics: [
-      { label: "Algorithm", value: "Quantum-Inspired Annealing" },
-      { label: "Latency Reduction", value: "31% Less Wait Time" },
-      { label: "Graph Capacity", value: "10,000+ Node Network" },
-      { label: "Objective Function", value: "Pareto Multi-Criteria" }
-    ],
-    highlights: [
-      "Multi-criteria Pareto optimization balancing travel duration, transfer friction, and transit cost",
-      "Simulated annealing cooling schedule that escapes local minima in dense metropolitan grids",
-      "Dynamic penalty weights adapting to live transit congestion and missed connection probability",
-      "Comprehensive benchmarking against standard Dijkstra and Contraction Hierarchies"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04/QRoute-Final"
-    }
-  },
-
-  // =========================================================================
-  // 9. QROUTE - MULTI-MODAL TRANSIT OPTIMIZER (GITHUB REPO: QROUTE)
-  // =========================================================================
-  {
-    id: "qroute",
-    name: "QRoute",
-    tagline: "Multi-Modal Urban Transit Optimization Engine",
-    category: "systems",
-    badge: "Public Python Repo",
-    badgeType: "opensource",
-    platform: "Python · Heuristics & Transit Analytics",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#38BDF8",
-    problem:
-      "Commuters in developing metropolitan areas face fragmented public transport systems without unified schedules, resulting in prolonged transfer waiting times between buses, metros, and auto-rickshaws.",
-    solution:
-      "Developed a Python-based transit routing engine that parses GTFS feeds, constructs unified transit graph matrices, and calculates time-optimized multi-modal journey plans with real-time transfer buffers.",
-    techStack: [
-      "Python",
-      "GTFS Specification",
-      "Graph Traversal",
-      "Pandas",
-      "GeoPandas"
-    ],
-    keyMetrics: [
-      { label: "Standard", value: "GTFS Compatible" },
-      { label: "Modality", value: "Bus + Metro + Walking" },
-      { label: "Status", value: "Open Source" },
-      { label: "Speed", value: "Sub-50ms Pathfinding" }
-    ],
-    highlights: [
-      "Unified GTFS schedule parser building directed multi-graph representations of transit lines",
-      "Fast timetable lookups with forward-search time-expanded pathfinding",
-      "Custom transfer buffer logic preventing unrealistically tight connections",
-      "Clean CLI and modular API for seamless integration with mobile navigation frontends"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04/QRoute"
-    }
-  },
-
-  // =========================================================================
-  // 10. CAREERCONNECT MVP (GITHUB REPO: CAREERCONNECT)
+  // 15. CAREERCONNECT MVP (GITHUB REPO: CAREERCONNECT)
   // =========================================================================
   {
     id: "careerconnect",
@@ -568,134 +825,7 @@ object SecurityVault {
   },
 
   // =========================================================================
-  // 11. Q-TRANSIT NEXUS (GITHUB REPO: Q-TRANSIT-NEXUS1)
-  // =========================================================================
-  {
-    id: "q-transit-nexus",
-    name: "Q-Transit Nexus",
-    tagline: "Distributed Public Transport Mesh & Real-Time ETA Pipeline",
-    category: "systems",
-    badge: "Public Python Repo",
-    badgeType: "opensource",
-    platform: "Python · Distributed Stream Processing",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#06B6D4",
-    problem:
-      "Public transit tracking systems frequently suffer from GPS signal drops in urban canyons, leading to jumpy vehicle locations, phantom buses, and inaccurate arrival estimations for waiting passengers.",
-    solution:
-      "Developed a stream processing telemetry pipeline that applies Kalman filtering and dead-reckoning heuristics to noisy vehicle GPS coordinates, providing smooth map interpolation and accurate stop arrival ETAs.",
-    techStack: [
-      "Python",
-      "Kalman Filter",
-      "Stream Processing",
-      "WebSockets",
-      "Spatial Indexing"
-    ],
-    keyMetrics: [
-      { label: "Noise Filter", value: "Extended Kalman Filter" },
-      { label: "ETA Accuracy", value: "94.2% Within 1 Min" },
-      { label: "Architecture", value: "Event-Driven Stream" },
-      { label: "Repository", value: "GitHub Public" }
-    ],
-    highlights: [
-      "Kalman filtering algorithm smoothing erratic GPS coordinates caused by urban multipath interference",
-      "Dead reckoning estimation continuing route tracking during temporary GPS signal loss in tunnels",
-      "Map-matching algorithm snapping raw coordinates to known transit road networks",
-      "Real-time WebSocket event broadcaster pushing sub-second vehicle updates to clients"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04/q-transit-nexus1"
-    }
-  },
-
-  // =========================================================================
-  // 12. VAIDIKTECH PLATFORM (GITHUB REPO: VAIDIKTECH)
-  // =========================================================================
-  {
-    id: "vaidiktech",
-    name: "VaidikTech Core Platform",
-    tagline: "Design System, Micro-Libraries & Native Tooling Infrastructure",
-    category: "tools",
-    badge: "Core Private Repo",
-    badgeType: "production",
-    platform: "TypeScript · Node.js & React Ecosystem",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#3DDC84",
-    problem:
-      "Building multiple native Android and web applications independently leads to redundant boilerplate, fragmented design tokens, inconsistent encryption patterns, and duplicated financial math routines.",
-    solution:
-      "Constructed the unified VaidikTech platform and code infrastructure repository: centralizing design tokens, cryptographic helper contracts, reusable integer math utilities, build automation scripts, and shared documentation across all commercial products.",
-    techStack: [
-      "TypeScript",
-      "Node.js",
-      "Tailwind CSS",
-      "Design Systems",
-      "Cryptographic Contracts",
-      "CI/CD Tooling"
-    ],
-    keyMetrics: [
-      { label: "Ecosystem Role", value: "Shared Infrastructure" },
-      { label: "Languages", value: "TypeScript & Kotlin Interop" },
-      { label: "Products Powered", value: "Girvi, JewelBill, AdvoKosh" },
-      { label: "Status", value: "Active Development" }
-    ],
-    highlights: [
-      "Unified design tokens for dark luxury aesthetics across mobile and web interfaces",
-      "Shared mathematical specifications for financial compounding and thermal printing bytecodes",
-      "Standardized security protocols guaranteeing zero-network compliance and keystore binding",
-      "Centralized documentation and release management tooling for Google Play Store deployments"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04/VaidikTech"
-    }
-  },
-
-  // =========================================================================
-  // 13. AGRILINK - COMMODITY MARKETPLACE
-  // =========================================================================
-  {
-    id: "agrilink",
-    name: "AgriLink",
-    tagline: "Decentralized Agricultural Commodity Marketplace & Fair Price Discovery",
-    category: "systems",
-    badge: "Architecture Spec",
-    badgeType: "research",
-    platform: "Android & Microservices",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#10B981",
-    problem:
-      "Smallholder farmers in rural regions are forced to sell produce through multi-tiered intermediaries who withhold mandi price transparency, resulting in up to 40% loss of farmer profit margins.",
-    solution:
-      "Architected a direct farmer-to-buyer marketplace prototype supporting SMS fallback for feature phones, mandi APMC price aggregation, and localized Hindi/Marathi voice-guided crop listings.",
-    techStack: [
-      "Kotlin",
-      "Android Jetpack",
-      "APMC Mandi APIs",
-      "SMS Gateway Fallback",
-      "Localized Voice Search"
-    ],
-    keyMetrics: [
-      { label: "Intermediary Margin Cut", value: "~35% Saved" },
-      { label: "Fallback", value: "Two-way SMS Channel" },
-      { label: "Languages", value: "Hindi, Marathi, English" },
-      { label: "Mandi Coverage", value: "All Major APMC Hubs" }
-    ],
-    highlights: [
-      "Aggregates daily government APMC market rates across district mandis for price transparency",
-      "Voice-guided crop listing enabling low-literacy farmers to register harvest batches easily",
-      "Direct buyer bidding with escrow milestone confirmations preventing default payments",
-      "Offline sync architecture saving draft listings during intermittent rural cellular reception"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04"
-    }
-  },
-
-  // =========================================================================
-  // 14. FREE AI INVOICE & GST ASSISTANT
+  // 16. FREE AI INVOICE & GST ASSISTANT (D:\Python\FreeAIInvoice)
   // =========================================================================
   {
     id: "free-ai-invoice",
@@ -737,125 +867,41 @@ object SecurityVault {
   },
 
   // =========================================================================
-  // 15. SKYCANVAS - AI AIR PAINTER
+  // 17. AGRILINK - COMMODITY MARKETPLACE
   // =========================================================================
   {
-    id: "skycanvas",
-    name: "SkyCanvas – AI Air Painter",
-    tagline: "Contactless Computer Vision Canvas via Hand Tracking",
-    category: "ai",
-    badge: "Computer Vision MVP",
+    id: "agrilink",
+    name: "AgriLink",
+    tagline: "Decentralized Agricultural Commodity Marketplace & Fair Price Discovery",
+    category: "systems",
+    badge: "Architecture Spec",
     badgeType: "research",
-    platform: "Python · MediaPipe & OpenCV",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#06B6D4",
-    problem:
-      "Traditional digital drawing requires expensive stylus hardware or physical touchscreens, limiting creative interaction and accessibility in collaborative spaces.",
-    solution:
-      "Built a real-time computer vision drawing interface that tracks hand landmarks via webcam using Google MediaPipe and OpenCV, enabling users to draw in mid-air using intuitive finger gestures with zero specialized hardware.",
-    techStack: [
-      "Python",
-      "OpenCV",
-      "Google MediaPipe",
-      "NumPy",
-      "Kinematic Smoothing"
-    ],
-    keyMetrics: [
-      { label: "Tracking FPS", value: "60 FPS Real-time" },
-      { label: "Hardware Needed", value: "Standard 720p Webcam" },
-      { label: "Latency", value: "<16ms Gesture Response" },
-      { label: "Hand Landmarks", value: "21 Keypoints Tracked" }
-    ],
-    highlights: [
-      "21-point 3D hand landmark estimation tracking index finger tip trajectory with sub-pixel precision",
-      "Gesture state machine: Two fingers up for tool/color selection, single index finger for drawing",
-      "Exponential moving average filter eliminating hand tremor and producing silky canvas strokes",
-      "Color palette selector, dynamic brush stroke sizing, and instant PNG export functionality"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04"
-    }
-  },
-
-  // =========================================================================
-  // 16. AI DISASTER RESPONSE & SOS MESH
-  // =========================================================================
-  {
-    id: "ai-disaster-sos",
-    name: "AI Disaster Response & SOS Mesh",
-    tagline: "Resilient Emergency P2P Mesh Network with NLP Triage",
-    category: "ai",
-    badge: "Hackathon Finalist",
-    badgeType: "research",
-    platform: "Android · P2P Mesh & On-Device NLP",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#F43F5E",
-    problem:
-      "During catastrophic natural disasters, cellular infrastructure collapses, leaving victims trapped without communication channels while rescue teams possess no visibility into casualty clusters.",
-    solution:
-      "Designed an ad-hoc emergency communication system routing encrypted distress packets across multi-hop peer-to-peer Wi-Fi Direct and BLE connections, paired with on-device NLP triage classifying urgency.",
-    techStack: [
-      "Android Native",
-      "BLE Mesh Protocols",
-      "Wi-Fi Direct",
-      "TFLite NLP Model",
-      "GPS Ephemeris Caching"
-    ],
-    keyMetrics: [
-      { label: "Mesh Hops", value: "Up to 7 Device Relays" },
-      { label: "NLP Triage", value: "On-Device TFLite Model" },
-      { label: "Infrastructure", value: "Zero Cellular Needed" },
-      { label: "Encryption", value: "End-to-End Curve25519" }
-    ],
-    highlights: [
-      "Multi-hop store-and-forward mesh propagation carrying SOS beacons across disconnected nodes",
-      "Embedded lightweight TFLite model scoring medical urgency from natural language distress messages",
-      "Low-power BLE beacon mode extending survivor device battery life up to 72 hours",
-      "Command hub dashboard mapping casualty clusters using cached offline topography maps"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04"
-    }
-  },
-
-  // =========================================================================
-  // 17. STOCK TRACKER PRO & PREDICTIVE ANALYTICS
-  // =========================================================================
-  {
-    id: "stock-tracker-pro",
-    name: "Stock Tracker Pro & Analytics",
-    tagline: "High-Frequency Financial Time-Series Dashboard & Indicators",
-    category: "tools",
-    badge: "Financial Engine",
-    badgeType: "opensource",
-    platform: "Python & Streamlit",
+    platform: "Android & Microservices",
     icon: "/assets/vaidiktech_symbol.svg",
     heroImage: "/assets/vaidiktech_symbol.svg",
     accentColor: "#10B981",
     problem:
-      "Retail traders lack customizable algorithmic indicator suites that run locally without hefty monthly subscription fees charged by proprietary trading platforms.",
+      "Smallholder farmers in rural regions are forced to sell produce through multi-tiered intermediaries who withhold mandi price transparency, resulting in up to 40% loss of farmer profit margins.",
     solution:
-      "Engineered a quantitative stock tracking engine calculating technical indicators (RSI, MACD, Bollinger Bands, EMA crossovers) over historical equity feeds with automated breakout alert triggers.",
+      "Architected a direct farmer-to-buyer marketplace prototype supporting SMS fallback for feature phones, mandi APMC price aggregation, and localized Hindi/Marathi voice-guided crop listings.",
     techStack: [
-      "Python",
-      "Pandas",
-      "TA-Lib",
-      "Plotly Interactive Charts",
-      "Yahoo Finance API"
+      "Kotlin",
+      "Android Jetpack",
+      "APMC Mandi APIs",
+      "SMS Gateway Fallback",
+      "Localized Voice Search"
     ],
     keyMetrics: [
-      { label: "Technical Indicators", value: "15+ Mathematical Models" },
-      { label: "Backtesting", value: "Historical Signal Engine" },
-      { label: "Visualizations", value: "Interactive 60FPS Plotly" },
-      { label: "Cost", value: "100% Free Open Source" }
+      { label: "Intermediary Margin Cut", value: "~35% Saved" },
+      { label: "Fallback", value: "Two-way SMS Channel" },
+      { label: "Languages", value: "Hindi, Marathi, English" },
+      { label: "Mandi Coverage", value: "All Major APMC Hubs" }
     ],
     highlights: [
-      "Vectorized calculation of momentum, volatility, and volume indicators across multi-year tick data",
-      "Interactive candlestick charting with dynamic support/resistance level identification",
-      "Automated strategy backtesting engine outputting Sharpe ratio, maximum drawdown, and win rate",
-      "Real-time price threshold notifications and portfolio risk exposure breakdowns"
+      "Aggregates daily government APMC market rates across district mandis for price transparency",
+      "Voice-guided crop listing enabling low-literacy farmers to register harvest batches easily",
+      "Direct buyer bidding with escrow milestone confirmations preventing default payments",
+      "Offline sync architecture saving draft listings during intermittent rural cellular reception"
     ],
     links: {
       github: "https://github.com/Vaidik04"
@@ -905,128 +951,45 @@ object SecurityVault {
   },
 
   // =========================================================================
-  // 19. VAIDIK RATNAM DIGITAL PLATFORM
+  // 19. VAIDIKTECH PLATFORM (GITHUB REPO: VAIDIKTECH)
   // =========================================================================
   {
-    id: "vaidikratnam",
-    name: "Vaidik Ratnam Digital Platform",
-    tagline: "High-End Gems & Jewellery Digital Showcase Architecture",
-    category: "systems",
-    badge: "Client Production",
+    id: "vaidiktech",
+    name: "VaidikTech Core Platform",
+    tagline: "Design System, Micro-Libraries & Native Tooling Infrastructure",
+    category: "tools",
+    badge: "Core Platform",
     badgeType: "production",
-    platform: "Full-Stack Web & Android Gateway",
+    platform: "TypeScript · Node.js & React Ecosystem",
     icon: "/assets/vaidiktech_symbol.svg",
     heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#F59E0B",
+    accentColor: "#3DDC84",
     problem:
-      "Luxury gemstone and fine jewelry merchants require high-fidelity digital showcases that capture gemstone optical luster, certify hallmarked purities, and facilitate private client consultations securely.",
+      "Building multiple native Android and web applications independently leads to redundant boilerplate, fragmented design tokens, inconsistent encryption patterns, and duplicated financial math routines.",
     solution:
-      "Architected a bespoke digital catalog platform featuring dynamic live bullion rate feeds, high-resolution media zoom, certified gemstone laboratory report verification, and direct VIP concierge inquiry channels.",
+      "Constructed the unified VaidikTech platform and code infrastructure repository: centralizing design tokens, cryptographic helper contracts, reusable integer math utilities, build automation scripts, and shared documentation across all commercial products.",
     techStack: [
-      "React",
+      "TypeScript",
+      "Node.js",
       "Tailwind CSS",
-      "REST APIs",
-      "Cloudinary CDN",
-      "WhatsApp Business API"
+      "Design Systems",
+      "Cryptographic Contracts",
+      "CI/CD Tooling"
     ],
     keyMetrics: [
-      { label: "Catalog Purity", value: "GIA / IGI Certification" },
-      { label: "Image Performance", value: "Sub-Second WebP CDN" },
-      { label: "Security", value: "Private Inquiry Vault" },
-      { label: "Client Satisfaction", value: "High Retention" }
+      { label: "Ecosystem Role", value: "Shared Infrastructure" },
+      { label: "Languages", value: "TypeScript & Kotlin Interop" },
+      { label: "Products Powered", value: "Girvi, JewelBill, AdvoKosh" },
+      { label: "Status", value: "Active Development" }
     ],
     highlights: [
-      "Dynamic live daily gold and silver market rate ticker reflecting bullion pricing in real time",
-      "Ultra-high-definition interactive product gallery with responsive pinch-to-zoom magnification",
-      "Direct integration with GIA and IGI certificate verification lookup portals",
-      "Seamless VIP client consultation booking via direct WhatsApp Business API gateway"
+      "Unified design tokens for dark luxury aesthetics across mobile and web interfaces",
+      "Shared mathematical specifications for financial compounding and thermal printing bytecodes",
+      "Standardized security protocols guaranteeing zero-network compliance and keystore binding",
+      "Centralized documentation and release management tooling for Google Play Store deployments"
     ],
     links: {
-      github: "https://github.com/Vaidik04"
-    }
-  },
-
-  // =========================================================================
-  // 20. FOCUS - DEEP WORK COMPANION
-  // =========================================================================
-  {
-    id: "focus-companion",
-    name: "Focus - Deep Work Companion",
-    tagline: "Minimalist Pomodoro Engine with Ambient Soundscapes",
-    category: "tools",
-    badge: "Open Source Utility",
-    badgeType: "opensource",
-    platform: "Native Android · Jetpack Compose",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#6366F1",
-    problem:
-      "Digital professionals face constant notifications, multitasking fatigue, and cognitive fragmentation, making sustained uninterrupted engineering sessions difficult.",
-    solution:
-      "Engineered an unobtrusive Android focus companion in Jetpack Compose. Combines a customizable interval Pomodoro timer with offline binaural noise soundscapes, foreground service audio loops, and daily session analytics.",
-    techStack: [
-      "Kotlin",
-      "Jetpack Compose",
-      "Android ExoPlayer",
-      "Foreground Audio Service",
-      "DataStore Preferences"
-    ],
-    keyMetrics: [
-      { label: "Battery Usage", value: "<1% per Hour" },
-      { label: "Distraction Level", value: "Zero Ads / Clean UI" },
-      { label: "Sound Quality", value: "Offline 48kHz Audio" },
-      { label: "Architecture", value: "100% Jetpack Compose" }
-    ],
-    highlights: [
-      "Smooth circular animated progress indicator built with Jetpack Compose canvas animations",
-      "Foreground audio player service streaming uninterrupted rain, café, and white noise offline",
-      "Session history analytics mapping peak productivity hours across days and weeks",
-      "Zero telemetry tracking or ads: engineered for maximum cognitive calm and privacy"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04"
-    }
-  },
-
-  // =========================================================================
-  // 21. NPTEL STUDY AGENT & LECTURE SYNTHESIZER
-  // =========================================================================
-  {
-    id: "nptel-study-agent",
-    name: "NPTEL Study Agent",
-    tagline: "Autonomous Academic Companion & Lecture Synthesizer",
-    category: "tools",
-    badge: "AI Academic Tool",
-    badgeType: "opensource",
-    platform: "Python & LLM Agent Pipeline",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#8B5CF6",
-    problem:
-      "Engineering students preparing for NPTEL and university exams spend countless hours manually pausing long video lectures to extract core definitions, theorem proofs, and assignment solutions.",
-    solution:
-      "Developed an automated study pipeline in Python that ingests course syllabi, processes lecture transcripts, extracts key algorithmic proofs, and synthesizes structured study flashcards and mock quiz questions.",
-    techStack: [
-      "Python",
-      "LLM Agent Architecture",
-      "Transcript Parsers",
-      "Markdown Synthesis",
-      "Flashcard Generation"
-    ],
-    keyMetrics: [
-      { label: "Synthesis Ratio", value: "60-Min Lecture -> 3-Min Notes" },
-      { label: "Output Format", value: "Markdown & LaTeX Equations" },
-      { label: "Evaluation", value: "Automated Quiz Generator" },
-      { label: "Status", value: "Open Source" }
-    ],
-    highlights: [
-      "Extracts mathematical formulas and diagrams from lecture transcripts into clean LaTeX notation",
-      "Generates concept flashcards optimized for spaced repetition review schedules",
-      "Creates automated multiple-choice mock exam questions based on historical course assignments",
-      "High-speed batch processing converting entire 12-week course syllabi into unified revision guides"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04"
+      github: "https://github.com/Vaidik04/VaidikTech"
     }
   }
 ];

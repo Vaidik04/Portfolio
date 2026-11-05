@@ -11,6 +11,7 @@ import { ProjectsSection } from "@/sections/ProjectsSection";
 import { ProcessSection } from "@/sections/ProcessSection";
 import { CodeSection } from "@/sections/CodeSection";
 import { ExperienceSection } from "@/sections/ExperienceSection";
+import { CertificationsSection } from "@/sections/CertificationsSection";
 import { ContactSection } from "@/sections/ContactSection";
 import { FooterSection } from "@/sections/FooterSection";
 
@@ -69,7 +70,10 @@ export default function Home() {
         {/* 9. Experience & Milestones Timeline */}
         <ExperienceSection />
 
-        {/* 10. Direct Connection & Contact Generator */}
+        {/* 10. Verified Credentials & Certifications (NPTEL, IITs, HackerRank, Udemy) */}
+        <CertificationsSection />
+
+        {/* 11. Direct Connection & Contact Generator */}
         <ContactSection />
 
         {/* 11. Cinematic Outlined Typography Footer with Live Time */}

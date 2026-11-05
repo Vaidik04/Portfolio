@@ -488,6 +488,39 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===========================================================================
+  // 9.5 VERIFIED CERTIFICATES RENDERING
+  // ===========================================================================
+  const certsGrid = document.getElementById("certificates-grid");
+  if (certsGrid && data.certificates) {
+    certsGrid.innerHTML = data.certificates.map(c => `
+      <div class="certificate-card ${c.badge && c.badge.includes('Elite') ? 'cert-elite' : ''}">
+        <div>
+          <div class="cert-header">
+            <span class="cert-badge"><i data-lucide="award"></i> ${c.badge || 'Verified'}</span>
+            <span class="cert-date">${c.date}</span>
+          </div>
+          <h3 class="cert-title">${c.title}</h3>
+          <p class="cert-issuer">${c.issuer}</p>
+          <p class="cert-desc">${c.description}</p>
+          <div class="cert-skills">
+            ${c.skillsLearned.slice(0, 3).map(s => `<span class="tech-tag">${s}</span>`).join('')}
+          </div>
+        </div>
+        <div class="cert-footer">
+          <div class="cert-meta">
+            ${c.score ? `<span class="cert-score">${c.score}</span>` : ''}
+            ${c.credits ? `<span class="cert-credits">${c.credits}</span>` : ''}
+          </div>
+          <a href="${c.fileUrl}" target="_blank" rel="noopener noreferrer" class="cert-view-btn">
+            <span>View Verified ${c.fileType.toUpperCase()}</span>
+            <i data-lucide="external-link"></i>
+          </a>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // ===========================================================================
   // 10. PRESET MESSAGE INQUIRY HUB
   // ===========================================================================
   const presetTabs = document.querySelectorAll(".preset-tab");
