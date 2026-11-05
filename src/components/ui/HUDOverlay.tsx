@@ -152,7 +152,7 @@ export const HUDOverlay: React.FC = () => {
         </div>
         <span className="text-white/20">|</span>
         <div className="text-typography-muted">
-          ENGINE: <span className="text-accent-android">R3F + WEBDGL2</span>
+          ENGINE: <span className="text-accent-android">R3F + WEBGL2</span>
         </div>
       </div>
 

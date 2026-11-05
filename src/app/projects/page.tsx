@@ -84,7 +84,7 @@ export default function ProjectsPage() {
               All Applications & Systems
             </h1>
             <p className="text-typography-secondary text-base sm:text-lg max-w-2xl mt-3 font-sans">
-              21 production applications, air-gapped security frameworks, computer vision engines, and mathematical financial models engineered by Vaidik Gandhi.
+              {PROJECTS.length} verified production applications, air-gapped security frameworks, computer vision engines, and mathematical financial models engineered by Vaidik Gandhi.
             </p>
           </div>
 

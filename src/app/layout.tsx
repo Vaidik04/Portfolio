@@ -22,6 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vaidiktech.app"),
   title: "Vaidik Gandhi — Senior Android Engineer & Founder @ VaidikTech",
   description:
     "Award-winning independent Android developer building revenue-generating, offline-first mobile products (Girvi, AdvoKosh, JewelBill, SwarmOS). Native Kotlin, Jetpack Compose, Room SQLite, SQLCipher & On-Device AI.",
@@ -40,12 +41,24 @@ export const metadata: Metadata = {
     "SQLCipher",
   ],
   authors: [{ name: "Vaidik Gandhi" }],
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: "Vaidik Gandhi — Independent Android Developer & Founder @ VaidikTech",
     description:
       "Building practical, offline-first mobile products and intelligent systems that solve real-world Indian business workflows.",
-    url: "https://vaidik04.github.io",
+    url: "https://vaidiktech.app",
     siteName: "Vaidik Gandhi Portfolio",
+    images: [
+      {
+        url: "/assets/vaidik_3d_avatar_square.jpg",
+        width: 1024,
+        height: 1024,
+        alt: "Vaidik Gandhi",
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
@@ -53,6 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vaidik Gandhi — Android Developer · Founder @ VaidikTech",
     description: "Building revenue-generating, offline-first native Android apps.",
+    images: ["/assets/vaidik_3d_avatar_square.jpg"],
   },
 };
 

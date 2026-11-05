@@ -7,6 +7,7 @@ import { Navbar } from "@/components/navbar/Navbar";
 import { FooterSection } from "@/sections/FooterSection";
 import { AboutSection } from "@/sections/AboutSection";
 import { ExperienceSection } from "@/sections/ExperienceSection";
+import { PROJECTS } from "@/data/projects";
 import {
   ArrowLeft,
   Sparkles,
@@ -113,12 +114,12 @@ export default function AboutPage() {
 
           <div className="lg:col-span-5 flex flex-col gap-6">
             <div className="rounded-3xl overflow-hidden border border-white/10 bg-surface-elevated p-2 shadow-2xl relative group">
-              <div className="relative w-full h-80 rounded-2xl overflow-hidden">
+              <div className="relative w-full h-80 rounded-2xl overflow-hidden bg-[#0A0D16]">
                 <Image
-                  src="/assets/b.jpg"
-                  alt="Vaidik Gandhi"
+                  src="/assets/vaidik_3d_avatar_portrait.jpg"
+                  alt="Vaidik Gandhi 3D Avatar"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-4">
@@ -139,7 +140,7 @@ export default function AboutPage() {
                 <p className="text-xs text-typography-muted mt-1">Google Play Releases</p>
               </div>
               <div className="p-4 rounded-2xl bg-surface border border-white/5">
-                <span className="text-2xl font-mono font-bold text-accent-violet">21 Projects</span>
+                <span className="text-2xl font-mono font-bold text-accent-violet">{PROJECTS.length}+ Projects</span>
                 <p className="text-xs text-typography-muted mt-1">Engineered & Maintained</p>
               </div>
               <div className="p-4 rounded-2xl bg-surface border border-white/5">

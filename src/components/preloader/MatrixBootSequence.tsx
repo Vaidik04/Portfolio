@@ -27,6 +27,17 @@ export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComple
     sounds.init();
     sounds.bootHum();
 
+    const skipBoot = () => {
+      sounds.shockwave();
+      setComplete(true);
+      setTimeout(onComplete, 250);
+    };
+
+    const handleKeyDown = () => {
+      skipBoot();
+    };
+    window.addEventListener("keydown", handleKeyDown, { once: true });
+
     // Progress counter 0 - 100%
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
@@ -52,12 +63,11 @@ export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComple
 
     // Shockwave pulse & completion after 2.2s
     const timeout = setTimeout(() => {
-      sounds.shockwave();
-      setComplete(true);
-      setTimeout(onComplete, 600);
+      skipBoot();
     }, 2400);
 
     return () => {
+      window.removeEventListener("keydown", handleKeyDown);
       clearInterval(progressInterval);
       clearInterval(logInterval);
       clearTimeout(timeout);
@@ -71,7 +81,12 @@ export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComple
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-50 flex flex-col justify-between p-6 sm:p-12 bg-[#05060A] text-typography-primary font-mono select-none"
+          onClick={() => {
+            sounds.shockwave();
+            setComplete(true);
+            setTimeout(onComplete, 250);
+          }}
+          className="fixed inset-0 z-50 flex flex-col justify-between p-6 sm:p-12 bg-[#05060A] text-typography-primary font-mono select-none cursor-pointer"
         >
           {/* Top Bar */}
           <div className="flex items-center justify-between text-xs text-typography-muted">
