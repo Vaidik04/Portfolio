@@ -384,30 +384,6 @@ const PORTFOLIO_DATA = {
       }
     },
     {
-      id: "careerconnect",
-      title: "CareerConnect MVP",
-      subtitle: "AI-Powered Student Career Opportunity Platform & Matching Engine",
-      category: "systems",
-      featured: false,
-      badge: "Deterministic AI Matching",
-      badgeType: "opensource",
-      platform: "Python / FastAPI",
-      summary: "An explainable opportunity platform for students evaluating deterministic eligibility criteria, calculating weighted match scores, and managing recruitment pipelines.",
-      problem: "Students frequently waste dozens of hours applying to listings where they fail hard academic cut-offs (degree, CGPA, graduation batch), while recruiters receive hundreds of unqualified resumes.",
-      solution: "Engineered a dual-tier matching engine: a strictly deterministic eligibility gatekeeper coupled with a weighted multi-factor match score (Skills 35%, Eligibility 25%, Interests 15%, Work Mode 10%, Profile 10%, Location 5%) with transparent natural language explanations.",
-      techStack: ["Python", "FastAPI", "Explainable AI Matchmaking", "Resume Storage Abstraction", "Kanban Pipeline Tracker", "REST APIs"],
-      highlights: [
-        "Deterministic eligibility engine with visual pass/fail checklists",
-        "Multi-factor weighted match score formula with transparent factor breakdown",
-        "Interactive recruitment stage tracker (Saved → Applied → Assessment → Interview → Offer)",
-        "Standardized skills catalog with proficiency ratings and secure resume ingestion",
-        "Built-in fallback when external language model API keys are omitted"
-      ],
-      links: {
-        github: "https://github.com/Vaidik04/CareerConnect"
-      }
-    },
-    {
       id: "digitalkhata",
       title: "Vyapar Khata (DigitalKhata)",
       subtitle: "Offline-First Digital Udhaar Ledger for Indian Small Businesses",

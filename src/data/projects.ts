@@ -799,49 +799,6 @@ class QuantumAnnealingRouter:
   },
 
   // =========================================================================
-  // 15. CAREERCONNECT MVP (GITHUB REPO: CAREERCONNECT)
-  // =========================================================================
-  {
-    id: "careerconnect",
-    name: "CareerConnect MVP",
-    tagline: "AI-Driven Talent Matching & Skill Gap Analysis Platform",
-    timeline: "Nov 2025 - Dec 2025",
-    category: "systems",
-    badge: "Public Python Repo",
-    badgeType: "opensource",
-    platform: "Python & NLP Architecture",
-    icon: "/assets/vaidiktech_symbol.svg",
-    heroImage: "/assets/vaidiktech_symbol.svg",
-    accentColor: "#EC4899",
-    problem:
-      "Graduating engineering students face immense friction finding internships that match their actual technical competencies, while recruiters are overwhelmed by generic resumes that fail to highlight verified skills.",
-    solution:
-      "Engineered an NLP-driven platform that parses candidate resumes, extracts verified technical proficiencies, maps them against industry job descriptions using vector similarity, and highlights concrete skill gaps with actionable learning roadmaps.",
-    techStack: [
-      "Python",
-      "NLP Information Extraction",
-      "Cosine Similarity",
-      "Scikit-Learn",
-      "Flask API"
-    ],
-    keyMetrics: [
-      { label: "Matching Metric", value: "Vector Cosine Similarity" },
-      { label: "Extraction", value: "Skills, Experience, Degrees" },
-      { label: "Status", value: "GitHub Public" },
-      { label: "Response Time", value: "<150ms / Profile" }
-    ],
-    highlights: [
-      "Automated PDF and DOCX resume parsing with regex and NER tokenization for technical terms",
-      "Quantitative skill match scoring ranking applicants objectively against job requirements",
-      "Identifies missing competencies and recommends targeted certifications and tutorials",
-      "REST API architecture designed for lightweight integration into university placement portals"
-    ],
-    links: {
-      github: "https://github.com/Vaidik04/CareerConnect"
-    }
-  },
-
-  // =========================================================================
   // 16. FREE AI INVOICE & GST ASSISTANT (D:\Python\FreeAIInvoice)
   // =========================================================================
   {
