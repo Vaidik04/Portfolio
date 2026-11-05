@@ -39,8 +39,6 @@ All project information in this portfolio has been extracted and fact-checked di
   Predictive multimodal digital twin for urban transportation. Employs Discrete Quantum-inspired Particle Swarm Optimization (Adaptive D-QPSO) to dynamically re-route fleets during traffic incidents, broadcasting GeoJSON updates over real-time WebSockets.
 * **[Stock Tracker Pro](https://github.com/Vaidik04/StockTracker-Portfolio-Prediction)** *(Python Desktop · Tkinter, Random Forest Regression, Matplotlib)*  
   Quantitative analysis and market tracking workstation featuring machine-learning price predictions, RSI/MACD technical indicators, 30-second automated price alerts, and Excel exports.
-* **[CareerConnect MVP](https://github.com/Vaidik04/CareerConnect)** *(Python, FastAPI, Explainable Multi-Factor Matching)*  
-  Opportunity portal for students featuring a deterministic eligibility gatekeeper, explainable weighted match scoring (Skills 35%, Eligibility 25%, Interests 15%), and an interactive Kanban application tracker.
 * **[Vaidik Ratnam Platform](https://vaidikratnam.com)** *(Next.js App Router, TypeScript, Tailwind CSS, Supabase)*  
   Full-stack digital showcase, custom goldsmithing studio, and Vedic consultation hub engineered for a family-owned Indian jewellery brand.
 * **[Focus Companion](file:///D:/Python/Projects/Focus)** *(Python, SQLite, Pomodoro Engine)*  
