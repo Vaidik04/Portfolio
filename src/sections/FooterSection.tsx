@@ -51,8 +51,14 @@ export const FooterSection: React.FC = () => {
         {/* Footer Info Row */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 pt-8 border-t border-white/5">
           {/* Brand Info */}
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-surface-elevated border border-surface-border flex items-center justify-center p-2">
+          <a
+            href="https://vaidiktech.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 group"
+            title="Visit VaidikTech (vaidiktech.app)"
+          >
+            <div className="w-9 h-9 rounded-full bg-surface-elevated border border-surface-border flex items-center justify-center p-2 group-hover:border-accent-android/40 transition-colors">
               <Image
                 src="/assets/vaidiktech_symbol.svg"
                 alt="VaidikTech"
@@ -62,14 +68,15 @@ export const FooterSection: React.FC = () => {
               />
             </div>
             <div>
-              <div className="text-sm font-heading font-bold text-typography-primary">
-                VaidikTech
+              <div className="text-sm font-heading font-bold text-typography-primary group-hover:text-accent-android transition-colors flex items-center gap-1.5">
+                <span>VaidikTech</span>
+                <span className="text-[10px] font-mono text-accent-android">vaidiktech.app</span>
               </div>
               <div className="text-[10px] font-mono text-typography-muted">
                 Building useful technology, one product at a time.
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Live Local Time Widget */}
           <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-surface-border text-xs font-mono text-typography-secondary">
@@ -93,7 +100,7 @@ export const FooterSection: React.FC = () => {
 
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono text-typography-muted border-t border-white/5 pt-6">
-          <div>&copy; 2026 Vaidik Gandhi · Founder @ VaidikTech. All rights reserved.</div>
+          <div>&copy; 2026 Vaidik Gandhi · Founder @ <a href="https://vaidiktech.app" target="_blank" rel="noopener noreferrer" className="text-accent-android hover:underline">VaidikTech</a>. All rights reserved.</div>
           <div className="flex items-center gap-1">
             <span>Crafted with</span>
             <Heart className="w-3 h-3 text-red-500 fill-red-500" />

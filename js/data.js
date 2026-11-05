@@ -21,6 +21,7 @@ const PORTFOLIO_DATA = {
     links: {
       github: "https://github.com/Vaidik04",
       playStore: "https://play.google.com/store/apps/details?id=com.girvi.app",
+      website: "https://vaidiktech.app",
       email: "vaidikgandhi@gmail.com",
       linkedin: "https://www.linkedin.com/in/vaidik-gandhi/"
     },
@@ -1081,7 +1082,8 @@ const PORTFOLIO_DATA = {
       "Centralized documentation and release management tooling for Google Play Store deployments"
     ],
     "links": {
-      "github": "https://github.com/Vaidik04/VaidikTech"
+      "github": "https://github.com/Vaidik04/VaidikTech",
+      "demo": "https://vaidiktech.app"
     }
   },
   {

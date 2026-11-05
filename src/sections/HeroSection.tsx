@@ -35,9 +35,15 @@ export const HeroSection: React.FC = () => {
             <Reveal direction="down" delay={0.1}>
               <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md w-fit">
                 <span className="w-2 h-2 rounded-full bg-accent-android shadow-[0_0_8px_#3DDC84] animate-pulse" />
-                <span className="text-xs font-mono text-typography-primary font-medium tracking-wide">
+                <a
+                  href="https://vaidiktech.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-mono text-typography-primary font-medium tracking-wide hover:text-accent-android transition-colors"
+                  title="Visit VaidikTech (vaidiktech.app)"
+                >
                   Independent Android Developer · Founder @ VaidikTech
-                </span>
+                </a>
               </div>
             </Reveal>
 

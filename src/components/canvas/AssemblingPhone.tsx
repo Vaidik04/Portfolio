@@ -96,34 +96,7 @@ export const AssemblingPhone: React.FC = () => {
 
   return (
     <group ref={groupRef} position={[2.2, 0, 0]}>
-      {/* Phone Parts Assembly */}
-      {parts.map((p, idx) => (
-        <mesh
-          key={p.id}
-          ref={(el) => {
-            if (el) partRefs.current[idx] = el;
-          }}
-          position={p.targetPos.toArray()}
-        >
-          <boxGeometry args={p.size as [number, number, number]} />
-          <meshStandardMaterial
-            color={p.color}
-            roughness={0.2}
-            metalness={0.8}
-            emissive={p.emissive}
-            emissiveIntensity={p.emissiveIntensity}
-            wireframe={false}
-          />
-        </mesh>
-      ))}
-
-      {/* Glowing Wireframe Outline */}
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[2.38, 4.58, 0.22]} />
-        <meshBasicMaterial color="#3DDC84" wireframe transparent opacity={0.25} />
-      </mesh>
-
-      {/* Orbiting Satellite Data Chips */}
+      {/* Ambient Orbiting Satellite Tech Chips (Kotlin, Compose, Room, SQLCipher) */}
       {satellites.map((sat, i) => (
         <group
           key={sat.label}
@@ -132,16 +105,22 @@ export const AssemblingPhone: React.FC = () => {
           }}
         >
           <mesh>
-            <octahedronGeometry args={[0.2, 0]} />
-            <meshStandardMaterial color={sat.color} emissive={sat.color} emissiveIntensity={0.9} />
+            <octahedronGeometry args={[0.22, 0]} />
+            <meshStandardMaterial color={sat.color} emissive={sat.color} emissiveIntensity={1.2} />
           </mesh>
-          {/* Subtle Orbit Ring */}
+          {/* Glowing Orbit Halo */}
           <mesh rotation={[Math.PI / 2, 0, 0]}>
-            <ringGeometry args={[0.28, 0.32, 24]} />
-            <meshBasicMaterial color={sat.color} transparent opacity={0.35} side={THREE.DoubleSide} />
+            <ringGeometry args={[0.3, 0.36, 32]} />
+            <meshBasicMaterial color={sat.color} transparent opacity={0.45} side={THREE.DoubleSide} />
           </mesh>
         </group>
       ))}
+
+      {/* Subtle Ambient Depth Ring */}
+      <mesh rotation={[Math.PI / 2.5, 0, 0]} position={[0, 0, -0.5]}>
+        <ringGeometry args={[2.6, 2.65, 64]} />
+        <meshBasicMaterial color="#3DDC84" transparent opacity={0.15} side={THREE.DoubleSide} />
+      </mesh>
     </group>
   );
 };

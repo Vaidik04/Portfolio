@@ -10,6 +10,7 @@ export const ExperienceSection: React.FC = () => {
       period: "2023 — Present",
       role: "Founder & Independent Android Developer",
       org: "VaidikTech · Mobile Software Lab",
+      url: "https://vaidiktech.app",
       desc: "Founded VaidikTech to build high-utility, revenue-generating mobile products for Indian businesses. Architected and published Girvi on Google Play; engineered AdvoKosh (solo advocate chamber OS), JewelBill (thermal jewellery POS), and KaamKram.",
       icon: <Rocket className="w-4 h-4 text-accent-android" />,
       badge: "Commercial Brand",
@@ -84,7 +85,21 @@ export const ExperienceSection: React.FC = () => {
                     {m.role}
                   </h3>
                   <div className="text-sm font-sans font-medium text-typography-secondary mb-3">
-                    {m.org}
+                    {m.url ? (
+                      <a
+                        href={m.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent-android hover:underline inline-flex items-center gap-1.5 transition-colors"
+                      >
+                        <span>{m.org}</span>
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-android/10 border border-accent-android/30">
+                          vaidiktech.app
+                        </span>
+                      </a>
+                    ) : (
+                      m.org
+                    )}
                   </div>
                   <p className="text-xs sm:text-sm font-sans text-typography-muted leading-relaxed">
                     {m.desc}

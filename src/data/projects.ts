@@ -1010,7 +1010,8 @@ class QuantumAnnealingRouter:
       "Centralized documentation and release management tooling for Google Play Store deployments"
     ],
     links: {
-      github: "https://github.com/Vaidik04/VaidikTech"
+      github: "https://github.com/Vaidik04/VaidikTech",
+      demo: "https://vaidiktech.app"
     }
   },
 

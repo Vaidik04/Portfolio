@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { TiltCard } from "@/components/ui/TiltCard";
-import { Shield, Smartphone, Terminal, Award, Sparkles, MapPin, GraduationCap } from "lucide-react";
+import { Shield, Smartphone, Terminal, Award, Sparkles, MapPin, GraduationCap, ExternalLink } from "lucide-react";
 
 export const AboutSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,7 +51,14 @@ export const AboutSection: React.FC = () => {
             <div className="flex flex-col gap-6 font-sans text-base sm:text-lg leading-relaxed">
               <motion.p style={{ opacity: highlight1 }} className="transition-opacity duration-300">
                 I am an independent Android developer and the founder of{" "}
-                <strong className="text-typography-primary font-semibold">VaidikTech</strong>. My
+                <a
+                  href="https://vaidiktech.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-typography-primary font-semibold hover:text-accent-android transition-colors underline decoration-accent-android/40 underline-offset-4"
+                >
+                  VaidikTech
+                </a>. My
                 journey began with deep curiosity about how software interacts with hardware and how it
                 can eliminate friction in overlooked everyday businesses.
               </motion.p>
@@ -108,32 +115,42 @@ export const AboutSection: React.FC = () => {
             {/* Duotone Glitch Photo Card */}
             <Reveal direction="left" delay={0.2}>
               <TiltCard className="p-3 bg-gradient-to-b from-surface-elevated to-surface group cursor-pointer">
-                <div className="relative w-full h-72 sm:h-80 rounded-xl overflow-hidden bg-[#0A0D16]">
+                <div className="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-[#0A0D16] border border-white/10 shadow-2xl">
                   <Image
                     src="/assets/vaidik_portrait_pro.jpg"
                     alt="Vaidik Gandhi"
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105 filter grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100"
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    priority
                   />
-                  {/* Duotone Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#05060A] via-transparent to-accent-android/10 opacity-70 group-hover:opacity-30 transition-opacity duration-300" />
-
-                  {/* Scanline Glitch Effect */}
-                  <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px] pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity duration-300" />
+                  {/* Subtle Ambient Vignette Bottom Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#05060A] via-transparent to-transparent opacity-80" />
 
                   {/* Floating Identity Badge */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-[#090C14]/90 border border-white/10 backdrop-blur-md flex items-center justify-between">
+                  <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-[#090C14]/90 border border-white/10 backdrop-blur-md flex items-center justify-between shadow-xl">
                     <div>
                       <div className="text-sm font-heading font-bold text-typography-primary">
                         Vaidik Gandhi
                       </div>
-                      <div className="text-[10px] font-mono text-accent-android">
-                        Founder @ VaidikTech
-                      </div>
+                      <a
+                        href="https://vaidiktech.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[11px] font-mono text-accent-android hover:underline flex items-center gap-1.5 transition-colors"
+                      >
+                        <span>Founder @ VaidikTech</span>
+                        <ExternalLink className="w-2.5 h-2.5" />
+                      </a>
                     </div>
-                    <div className="w-8 h-8 rounded-lg bg-accent-android/20 border border-accent-android/40 flex items-center justify-center text-accent-android">
+                    <a
+                      href="https://vaidiktech.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-lg bg-accent-android/20 border border-accent-android/40 flex items-center justify-center text-accent-android hover:bg-accent-android hover:text-[#05060A] transition-all"
+                      title="Open VaidikTech (vaidiktech.app)"
+                    >
                       <Terminal className="w-4 h-4" />
-                    </div>
+                    </a>
                   </div>
                 </div>
               </TiltCard>
