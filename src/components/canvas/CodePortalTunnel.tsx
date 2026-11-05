@@ -40,6 +40,8 @@ export const CodePortalTunnel: React.FC = () => {
 
   const ringRefs = useRef<THREE.Mesh[]>([]);
   const pointsRef = useRef<THREE.Points>(null);
+  const prevProgressRef = useRef(scrollProgress);
+  const velocityRef = useRef(0);
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
@@ -49,8 +51,13 @@ export const CodePortalTunnel: React.FC = () => {
     groupRef.current.visible = inRange;
     if (!inRange) return;
 
-    // Speed proportional to scroll progress
-    const speed = 10.0 + scrollProgress * 22.0;
+    // Track scroll velocity for portal jump burst
+    const deltaProgress = Math.abs(scrollProgress - prevProgressRef.current);
+    prevProgressRef.current = scrollProgress;
+    const instantVelocity = delta > 0 ? deltaProgress / delta : 0;
+    velocityRef.current = THREE.MathUtils.damp(velocityRef.current, instantVelocity, 6, delta);
+
+    const speed = 12.0 + scrollProgress * 25.0 + velocityRef.current * 45.0;
 
     // Stream points along Z
     if (pointsRef.current) {
@@ -67,11 +74,11 @@ export const CodePortalTunnel: React.FC = () => {
     // Animate glowing hexagonal portal warp rings
     ringRefs.current.forEach((ring, idx) => {
       if (!ring) return;
-      ring.position.z += delta * (speed * 0.9);
+      ring.position.z += delta * (speed * 0.95);
       if (ring.position.z > 6) {
         ring.position.z = -42 + (idx * 3.2);
       }
-      ring.rotation.z += delta * (0.35 + (idx % 2 === 0 ? 0.2 : -0.2));
+      ring.rotation.z += delta * (0.35 + (idx % 2 === 0 ? 0.25 : -0.25));
     });
 
     // Whole tunnel spiral rotation

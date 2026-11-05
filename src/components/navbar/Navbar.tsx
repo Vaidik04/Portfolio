@@ -89,9 +89,16 @@ export const Navbar: React.FC = () => {
                 <span className="text-xs font-heading font-bold text-typography-primary leading-tight group-hover:text-accent-android transition-colors">
                   Vaidik Gandhi
                 </span>
-                <span className="text-[9px] font-mono tracking-wider text-accent-android uppercase">
+                <a
+                  href="https://vaidiktech.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[9px] font-mono tracking-wider text-accent-android uppercase hover:underline"
+                  title="Visit VaidikTech (vaidiktech.app)"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   Founder · VaidikTech
-                </span>
+                </a>
               </div>
             </Link>
           </Magnetic>

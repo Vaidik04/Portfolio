@@ -55,17 +55,18 @@ export const ArchitectureNodes: React.FC = () => {
   );
 
   const pulses = useRef<THREE.Mesh[]>([]);
+  const isHovered = useRef(false);
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
-    // Active when user is in the Architecture / Process section (0.50 - 0.85)
-    const inRange = scrollProgress >= 0.50 && scrollProgress <= 0.85;
+    // Active when user is in the Architecture / Process section (0.65 - 0.88)
+    const inRange = scrollProgress >= 0.65 && scrollProgress <= 0.88;
     groupRef.current.visible = inRange;
     if (!inRange) return;
 
     // Smooth entrance / exit scale
-    const centerT = (scrollProgress - 0.50) / 0.35;
+    const centerT = (scrollProgress - 0.65) / 0.23;
     const fade = Math.sin(centerT * Math.PI);
     const targetScale = THREE.MathUtils.clamp(fade * 1.05, 0.01, 1.0);
     groupRef.current.scale.set(targetScale, targetScale, targetScale);
@@ -73,21 +74,28 @@ export const ArchitectureNodes: React.FC = () => {
     // Subtle breathing floating motion
     groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 1.2) * 0.12;
 
+    // Accelerate data transmission on hover
+    const baseSpeed = isHovered.current ? 1.35 : 0.62;
+
     // Animate data pulses along the 4 pipelines
     pulses.current.forEach((mesh, idx) => {
       if (!mesh) return;
       const pipeIndex = idx % pipelines.length;
       const pipe = pipelines[pipeIndex];
-      const speed = 0.55;
       const offset = Math.floor(idx / pipelines.length) * 0.25;
-      const t = (state.clock.elapsedTime * speed + offset) % 1;
+      const t = (state.clock.elapsedTime * baseSpeed + offset) % 1;
       const point = pipe.curve.getPoint(t);
       mesh.position.copy(point);
     });
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -1.5]}>
+    <group
+      ref={groupRef}
+      position={[0, 0, -1.5]}
+      onPointerOver={() => (isHovered.current = true)}
+      onPointerOut={() => (isHovered.current = false)}
+    >
       {/* 3D Pipeline Connection Tubes */}
       {pipelines.map((pipe, i) => (
         <mesh key={i}>

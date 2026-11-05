@@ -39,3 +39,4 @@ export const CyberGridFloor: React.FC = () => {
     </group>
   );
 };
+

@@ -81,6 +81,13 @@ export const CertificationsSection: React.FC = () => {
                   <span className="text-xs font-mono font-bold text-typography-primary">IIT Kharagpur (75% Elite Silver)</span>
                 </div>
               </div>
+              <div className="px-4 py-2 rounded-2xl bg-surface-elevated border border-white/10 flex items-center gap-3">
+                <GraduationCap className="w-5 h-5 text-accent-violet" />
+                <div>
+                  <span className="text-[10px] font-mono uppercase text-typography-muted block">Academic Endorsement</span>
+                  <span className="text-xs font-mono font-bold text-typography-primary">22 IIT Credits Recommended</span>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>

@@ -38,19 +38,30 @@ export const CosmicDust: React.FC = () => {
     return { positions: pos, colors: col, speeds: spd };
   }, [count]);
 
+  const prevProgressRef = useRef(scrollProgress);
+  const velocityRef = useRef(0);
+
   useFrame((state, delta) => {
     if (!pointsRef.current) return;
 
+    // Track scroll velocity for warp acceleration
+    const deltaProgress = Math.abs(scrollProgress - prevProgressRef.current);
+    prevProgressRef.current = scrollProgress;
+    const instantVelocity = delta > 0 ? deltaProgress / delta : 0;
+    velocityRef.current = THREE.MathUtils.damp(velocityRef.current, instantVelocity, 6, delta);
+
+    const warpBoost = THREE.MathUtils.clamp(velocityRef.current * 55.0, 0, 40.0);
+    const scrollVelocity = (1.5 + scrollProgress * 8.0 + warpBoost) * 4.5;
+
     const positionsArr = pointsRef.current.geometry.attributes.position.array as Float32Array;
-    const scrollVelocity = 1.0 + scrollProgress * 12.0;
 
     for (let i = 0; i < count; i++) {
-      // Flow forward along Z axis
-      positionsArr[i * 3 + 2] += speeds[i] * delta * scrollVelocity * 4.0;
+      // Flow forward along Z axis with warp acceleration
+      positionsArr[i * 3 + 2] += speeds[i] * delta * scrollVelocity;
 
       // Wrap around when past camera
       if (positionsArr[i * 3 + 2] > 10) {
-        positionsArr[i * 3 + 2] = -40;
+        positionsArr[i * 3 + 2] = -42;
       }
 
       // Gentle orbital sway
@@ -92,3 +103,4 @@ export const CosmicDust: React.FC = () => {
     </points>
   );
 };
+
