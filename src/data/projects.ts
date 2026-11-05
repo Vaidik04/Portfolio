@@ -1201,5 +1201,446 @@ def extract_and_solve_grid(frame, cnn_model, solver_engine):
     links: {
       github: "https://github.com/Vaidik04"
     }
+  },
+
+  // =========================================================================
+  // 24. DHOBALITE (COMMERCIAL ANDROID LAUNDRY WORKFLOW)
+  // =========================================================================
+  {
+    id: "dhobalite",
+    name: "DhobaLite",
+    tagline: "On-Demand Laundry & Garment Operations Platform for Indian Dhobis",
+    category: "commercial",
+    badge: "Clean Architecture",
+    badgeType: "production",
+    platform: "Native Android · Kotlin 2.0+ · Jetpack Compose · Dagger Hilt & Firebase",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#22D3EE",
+    problem:
+      "Traditional Indian neighborhood laundry and dry-cleaning services (dhobis) manage hundreds of garment bundles daily using loose paper slips and chalk markings on fabric. This leads to misplaced clothes, customer disputes over missing items, untracked payment dues, and no way to update customers on order progress.",
+    solution:
+      "Engineered an enterprise-grade Clean Architecture Android application designed specifically for Indian laundry businesses. Built with Dagger Hilt dependency injection, Room Database for offline queueing, and Cloud Firestore for multi-device sync. Features distinct role-based UX for shopkeepers (intake, barcode/QR tagging, price lists, dues ledgers, daily settlement reports) and customers (order tracking, pickup scheduling, digital billing, WhatsApp status notifications).",
+    techStack: [
+      "Kotlin 2.0+ (K2)",
+      "Jetpack Compose M3",
+      "Dagger Hilt DI",
+      "Room SQLite 2.6+",
+      "Cloud Firestore & FCM",
+      "QR / Barcode Scanner",
+      "Clean Architecture & MVI",
+      "WhatsApp Cloud Intents"
+    ],
+    keyMetrics: [
+      { label: "Architecture", value: "Clean Architecture + Hilt" },
+      { label: "Offline Capability", value: "Room DB Local Sync" },
+      { label: "Notification Channels", value: "FCM & Direct WhatsApp" },
+      { label: "Garment Tracking", value: "QR Tagging Pipeline" }
+    ],
+    highlights: [
+      "Separated domain use-cases for auth, order processing, shop operations, and customer notifications",
+      "Automated QR code garment tagging linking individual clothing pieces to customer accounts",
+      "Instant WhatsApp bill dispatch with itemized garment counts, delivery deadlines, and payment links",
+      "Shopkeeper daily reconciliation dashboard tracking pending laundry batches and outstanding khata dues"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 25. CHRONO 2.0 (NATIVE ANDROID PERFORMANCE & COGNITIVE OS)
+  // =========================================================================
+  {
+    id: "chrono-os",
+    name: "CHRONO 2.0",
+    tagline: "Cognitive Performance Operating System & Circadian Deep Work Advisor",
+    category: "tools",
+    badge: "Deep Work Engine",
+    badgeType: "production",
+    platform: "Native Android · Kotlin 2.0+ · Jetpack Compose M3 · Claude API & StateFlow",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#7C5CFF",
+    problem:
+      "Modern knowledge workers and developers battle chronic cognitive fragmentation. Existing habit trackers and Pomodoro timers operate on static intervals that ignore biological circadian energy rhythms and provide zero intelligent feedback on deep work debt.",
+    solution:
+      "Constructed a native Android cognitive performance operating system in Kotlin and Jetpack Compose Material 3. Implements the TEMPO circadian algorithm that dynamically charts biological energy curves, calculates daily focus decay, and matches task complexity to peak cognitive windows. Integrates ARIA—an on-device and streaming Claude API AI career mentor for mock interview simulation and weekly cognitive analysis—alongside arcade cognitive sprints (DSA Blitz, Focus Sprint) and offline DataStore persistence.",
+    techStack: [
+      "Kotlin 2.0+ (K2)",
+      "Jetpack Compose Material 3",
+      "StateFlow & ViewModel",
+      "Anthropic Claude API",
+      "DataStore Preferences",
+      "Navigation Compose",
+      "Circadian TEMPO Math",
+      "OkHttp Streaming"
+    ],
+    keyMetrics: [
+      { label: "Adaptive Algorithm", value: "Circadian TEMPO Model" },
+      { label: "AI Advisor", value: "ARIA Claude Streaming" },
+      { label: "Gamified Sprints", value: "DSA Blitz & Focus Arcade" },
+      { label: "Offline Fallback", value: "100% Local Persistence" }
+    ],
+    highlights: [
+      "Dynamic TEMPO biological energy curve visualizer mapping focus tasks into optimal circadian windows",
+      "ARIA AI mentor chat providing weekly productivity synthesis and timed technical mock interviews",
+      "CHRONO Arcade suite featuring cognitive warm-ups: Fate Wheel, DSA Blitz, and Focus Sprint",
+      "Living visual timeline and 30-day focus deficit heatmaps rendered in smooth Compose canvas graphics"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 26. VAIDIKRATNAM (VEDIC GEMOLOGY & LUXURY FINE JEWELRY)
+  // =========================================================================
+  {
+    id: "vaidikratnam",
+    name: "VaidikRatnam",
+    tagline: "Vedic Gemology Provenance Platform & Custom Fine Jewelry Workstation",
+    category: "commercial",
+    badge: "Luxury Commerce",
+    badgeType: "production",
+    platform: "Next.js 14.2+ · TypeScript · Supabase · Jyotish Planetary Engine",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F59E0B",
+    problem:
+      "The Indian gemstone and bespoke jewelry market is rife with synthetic counterfeits, undisclosed chemical treatments, and opaque astrological claims without astronomical grounding or certificate authentication.",
+    solution:
+      "Architected a modern e-commerce and verification platform in Next.js 14 (App Router), TypeScript, and Supabase. Features an interactive Vedic Jyotish recommendation algorithm computing gemstone suitability from birth charts and planetary degrees, an instant GIA/IGI laboratory certificate authenticity verification pipeline, and live bullion rate integration updating 24K/22K gold rates dynamically across bespoke jewelry configurations.",
+    techStack: [
+      "Next.js 14.2+ (App Router)",
+      "TypeScript",
+      "Supabase PostgreSQL",
+      "Tailwind CSS",
+      "Jyotish Planetary Engine",
+      "Live Bullion Price API",
+      "GIA/IGI Certificate Auth"
+    ],
+    keyMetrics: [
+      { label: "Framework", value: "Next.js 14 + Server Components" },
+      { label: "Database", value: "Supabase Relational Auth" },
+      { label: "Verification", value: "Cryptographic Certificate Lookup" },
+      { label: "Price Precision", value: "Real-Time Gold Bullion Feed" }
+    ],
+    highlights: [
+      "Computational Jyotish algorithm translating birth coordinates into planetary lagna and gemstone affinities",
+      "GIA, IGI, and government-recognized laboratory certificate verification viewer with tamper prevention",
+      "Bespoke 3D jewelry customization consultation pipeline with real-time metal weight price calculations",
+      "Mobile-optimized luxury dark aesthetic with server-rendered SEO catalog and instant edge caching"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 27. ALIGNN CAREERS (AI TALENT RADAR & ELIGIBILITY MATCHING)
+  // =========================================================================
+  {
+    id: "alignn-careers",
+    name: "Alignn Career Intelligence",
+    tagline: "AI Resume Qualification Radar & Semantic Opportunity Matching Engine",
+    category: "ai",
+    badge: "AI Systems",
+    badgeType: "production",
+    platform: "Python 3.12+ · FastAPI 0.115+ · Next.js 14.2+ · PostgreSQL 16+ & SQLAlchemy",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#3DDC84",
+    problem:
+      "Engineering graduates and job applicants face extreme noise on standard job portals, submitting hundreds of applications blindly without understanding objective eligibility criteria or skill alignment.",
+    solution:
+      "Created a full-stack career intelligence system powered by a high-throughput Python FastAPI backend and a Next.js 14 frontend. Implements mathematical qualification scoring across educational criteria, tech stack proficiency vectors, and requirement weights. Features an automated career radar seed crawler, dynamic profile-to-job matching, and real-time eligibility status alerts.",
+    techStack: [
+      "Python 3.12+",
+      "FastAPI 0.115+",
+      "Next.js 14.2+",
+      "PostgreSQL 16+ & Alembic",
+      "SQLAlchemy 2.0+",
+      "Pydantic V2",
+      "JWT Security & Bcrypt",
+      "Tailwind CSS"
+    ],
+    keyMetrics: [
+      { label: "Backend Latency", value: "<18ms P95 Response" },
+      { label: "Validation", value: "Pydantic V2 Strict Schemas" },
+      { label: "Database Migration", value: "Alembic Automated Versioning" },
+      { label: "Matching Algorithm", value: "Multi-Factor Eligibility Scoring" }
+    ],
+    highlights: [
+      "Decoupled microservice architecture separating qualification matching, notifications, and seeding",
+      "Rigorous Pydantic V2 data validation and asynchronous SQLAlchemy ORM database querying",
+      "Clean Next.js 14 applicant portal with interactive career radar maps and personalized action items",
+      "Comprehensive test suite covering edge-case eligibility scenarios and JWT authorization tokens"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 28. HINDU PANCHANG ENGINE (ASTRONOMICAL EPHEMERIS ENGINE)
+  // =========================================================================
+  {
+    id: "hindu-panchang-engine",
+    name: "Vedic Panchang Ephemeris Engine",
+    tagline: "Astronomical Topocentric Planetary Tracker & Precise Vedic Calendar Math",
+    category: "systems",
+    badge: "Astronomical Math",
+    badgeType: "research",
+    platform: "Python 3.12+ · PyEphem · Spherical Trigonometry · Tkinter",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F59E0B",
+    problem:
+      "Calculating authentic Hindu Panchang (Tithi, Nakshatra, Yoga, Karana, Rahu Kalam, Yamaganda) cannot be performed using Gregorian date math. It requires real-time spherical trigonometry tracking the exact topocentric angular separation between the Moon and Sun.",
+    solution:
+      "Engineered an astronomical computation engine in Python utilizing the PyEphem library. Takes geographic latitude, longitude, and elevation of Indian cities to compute exact solar/lunar ecliptic coordinates, resolving the 12-degree moon-sun elongation angles that define Tithi transitions. Calculates precise local sunrise, solar noon, and sunset, generating accurate Rahu Kalam and Choghadiya time intervals with an interactive GUI.",
+    techStack: [
+      "Python 3.12+",
+      "PyEphem Astronomical Library",
+      "Spherical Trigonometry",
+      "Pytz Timezone Engine",
+      "Tkinter Desktop UI",
+      "Ephemeris Data Modeling"
+    ],
+    keyMetrics: [
+      { label: "Coordinate Accuracy", value: "Topocentric Arcsecond Precision" },
+      { label: "Tithi Calculation", value: "12° Elongation Angular Solver" },
+      { label: "City Database", value: "All Major Indian Coordinates" },
+      { label: "Solar Timing", value: "Elevation & Refraction Compensated" }
+    ],
+    highlights: [
+      "Mathematical tracking of Sun and Moon ecliptic longitudes to calculate exact Tithi start and end epochs",
+      "Atmospheric refraction compensation for exact mathematical sunrise and sunset timings",
+      "Automatic calculation of the 27 Nakshatras (13°20' lunar spans) and 27 astrological Yogas",
+      "Modular Python library easily integrable into backend microservices and mobile applications"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 29. NEURAL JARVIS CORE (DEEP LEARNING NLU & VOICE ENGINE)
+  // =========================================================================
+  {
+    id: "neural-jarvis-core",
+    name: "Neural Jarvis NLU Voice Engine",
+    tagline: "PyTorch Feedforward Neural Intent Classifier & Speech Automation Pipeline",
+    category: "ai",
+    badge: "Deep Learning Core",
+    badgeType: "research",
+    platform: "Python 3.12+ · PyTorch 2.4+ · NLTK · SpeechRecognition & PyAudio",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#22D3EE",
+    problem:
+      "Early voice assistant scripts relied on brittle if-else string matching or rigid regex expressions, failing when users phrased identical commands with colloquial variations, synonyms, or altered grammar.",
+    solution:
+      "Constructed a deep learning natural language understanding (NLU) core from scratch in PyTorch. Implements a multi-layer Feedforward Neural Network (`NeuralNetwork(nn.Module)`) with linear layers and ReLU activations trained on custom intent corpora. Integrates NLTK word tokenization and Porter stemming to generate normalized bag-of-words vectors, achieving robust intent classification (>97% confidence) before dispatching actions to text-to-speech and operating system automation handlers.",
+    techStack: [
+      "Python 3.12+",
+      "PyTorch 2.4+ (nn.Module)",
+      "NLTK Tokenization & Stemming",
+      "Bag-of-Words Vectorizer",
+      "SpeechRecognition",
+      "PyAudio & pyttsx3",
+      "Multithreaded Voice Loop"
+    ],
+    keyMetrics: [
+      { label: "Neural Architecture", value: "Custom Feedforward PyTorch NN" },
+      { label: "Inference Time", value: "<6ms Vector Classification" },
+      { label: "Training Loss", value: "CrossEntropyLoss <0.001" },
+      { label: "Voice Pipeline", value: "Continuous Hands-Free Loop" }
+    ],
+    highlights: [
+      "Clean PyTorch model architecture serializing learned synaptic weights into portable `.pth` model checkpoints",
+      "Custom NLP pre-processing pipeline featuring whitespace filtering, tokenization, and Porter stemming",
+      "Zero-cloud inference running locally on consumer hardware without sending audio to third-party APIs",
+      "Asynchronous audio capture avoiding UI thread blocking during continuous ambient listening"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 30. TUITION SAAS (COACHING MANAGEMENT & FEE LEDGER)
+  // =========================================================================
+  {
+    id: "tuition-saas",
+    name: "Tuition Coaching SaaS",
+    tagline: "Mobile-First Batch Attendance & Pending Fee Ledger for Indian Tutors",
+    category: "commercial",
+    badge: "SaaS Platform",
+    badgeType: "production",
+    platform: "Python 3.12+ · Flask · SQLite · Razorpay Integration",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#10B981",
+    problem:
+      "Private coaching institutes and freelance home tutors across India manage student batches, daily attendance records, and monthly fee collections in physical paper notebooks, making it tedious to track payment arrears and communicate with parents.",
+    solution:
+      "Built a mobile-friendly web SaaS tailored for coaching tutors managing 10 to 200 students. Organizes classes by subject and grade, offers one-tap daily attendance recording, tracks monthly fee statuses (Paid, Pending, Overdue), generates automated attendance and revenue analytics, and integrates Razorpay for PRO plan subscription monetization.",
+    techStack: [
+      "Python 3.12+",
+      "Flask Microframework",
+      "SQLite & SQLAlchemy",
+      "Razorpay Payment Gateway",
+      "Responsive Mobile-First CSS",
+      "Role-Based Authentication",
+      "CSV & PDF Report Export"
+    ],
+    keyMetrics: [
+      { label: "Target Segment", value: "10-200 Student Coaching Centers" },
+      { label: "Attendance Speed", value: "Single-Tap Batch Marking" },
+      { label: "Payments", value: "Razorpay Webhooks" },
+      { label: "Deployment", value: "Lightweight Production Container" }
+    ],
+    highlights: [
+      "Instant attendance logging with automatic monthly attendance percentage calculation per student",
+      "Clear monthly financial ledger showing collected revenue versus pending fees across batches",
+      "Subscription gateway integration supporting automated tiered account upgrades with Razorpay",
+      "One-click report generation exporting class attendance rosters and fee summaries to CSV"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 31. FLASK CHESS ENGINE (ALGORITHMIC CHESS & MINIMAX AI)
+  // =========================================================================
+  {
+    id: "flask-chess-engine",
+    name: "FlaskChess Engine",
+    tagline: "Minimax Alpha-Beta Pruning Chess Engine & Web Canvas Game",
+    category: "systems",
+    badge: "Algorithmic Game Engine",
+    badgeType: "opensource",
+    platform: "Python 3.12+ · Flask · Minimax with Alpha-Beta Pruning · HTML5 Canvas",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#A855F7",
+    problem:
+      "Building an algorithmic board game engine requires solving combinatorial move explosion while maintaining responsive browser gameplay without relying on heavy external third-party chess APIs.",
+    solution:
+      "Engineered a chess game and engine from scratch in Python. Features full legal move generation (including castling, en passant, and pawn promotion), piece-square heuristic evaluation tables, and a recursive minimax tree search enhanced with alpha-beta pruning to cut unnecessary branch evaluations. Exposes the engine via a Flask REST API connected to an HTML5 canvas interactive board.",
+    techStack: [
+      "Python 3.12+",
+      "Flask REST API",
+      "Minimax Algorithm",
+      "Alpha-Beta Pruning",
+      "Piece-Square Heuristic Tables",
+      "HTML5 Canvas & JavaScript",
+      "Game Theory & Tree Search"
+    ],
+    keyMetrics: [
+      { label: "Algorithm", value: "Minimax + Alpha-Beta Pruning" },
+      { label: "Search Optimization", value: "Piece-Square Positional Tables" },
+      { label: "Rules Supported", value: "Castling, En Passant & Promotion" },
+      { label: "Interface", value: "Zero-Dependency HTML5 Board" }
+    ],
+    highlights: [
+      "Alpha-beta pruning reducing search space exponent by more than 50% without missing optimal moves",
+      "Positional heuristics encouraging piece center control, king safety, and early pawn structure development",
+      "Lightweight stateless REST API allowing instant engine move calculations over HTTP requests",
+      "Interactive responsive chessboard with visual move indicators, captured piece tracking, and checkmate detection"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 32. GEMINI CHAT STREAM (GENERATIVE AI STREAMING WORKSPACE)
+  // =========================================================================
+  {
+    id: "gemini-chat-stream",
+    name: "Gemini Chat Stream",
+    tagline: "Real-Time Server-Sent Events AI Chat Studio with Markdown Highlighting",
+    category: "ai",
+    badge: "Generative AI",
+    badgeType: "production",
+    platform: "Python 3.12+ · Google Gemini API · Tailwind CSS · Server-Sent Events",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#3DDC84",
+    problem:
+      "Standard LLM API integrations that buffer entire responses before rendering create perceptible delays and poor UX for developers seeking rapid answers and formatted code snippets.",
+    solution:
+      "Created a generative AI chat client utilizing the Google Generative AI (Gemini) SDK. Implements token delta streaming via Server-Sent Events (SSE), dynamically rendering markdown paragraphs, lists, and syntax-highlighted code blocks with copy-to-clipboard functionality as tokens arrive. Designed with a dark luxury aesthetic powered by Tailwind CSS.",
+    techStack: [
+      "Python 3.12+",
+      "Google Gemini Generative AI SDK",
+      "Server-Sent Events (SSE)",
+      "Tailwind CSS",
+      "Markdown & Prism.js Highlighting",
+      "Session Context Management"
+    ],
+    keyMetrics: [
+      { label: "Streaming Latency", value: "<120ms First Token (TTFT)" },
+      { label: "LLM Engine", value: "Google Gemini 1.5 Pro" },
+      { label: "Rendering", value: "Real-Time Markdown Token Stream" },
+      { label: "Design", value: "Tailwind Dark Luxury Aesthetic" }
+    ],
+    highlights: [
+      "Server-Sent Events streaming yielding immediate visual feedback and zero perceived wait times",
+      "Real-time incremental markdown parser rendering code fences with language detection and copy buttons",
+      "Persistent conversation context window maintaining multi-turn dialogue history",
+      "Clean responsive interface styled with custom glowing accents and developer keyboard shortcuts"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
+  },
+
+  // =========================================================================
+  // 33. ESP32 IOT CAM & MESH (EMBEDDED HARDWARE SURVEILLANCE & RELAY)
+  // =========================================================================
+  {
+    id: "esp32-iot-cam-mesh",
+    name: "ESP32-CAM IoT Surveillance & Relay Mesh",
+    tagline: "Zero-Cloud Microcontroller MJPEG Video Streamer & Appliance Relay Hub",
+    category: "systems",
+    badge: "Hardware & IoT",
+    badgeType: "opensource",
+    platform: "Embedded C++ · ESP32 / Arduino · Wi-Fi HTTP Stream · Relay Hardware",
+    icon: "/assets/vaidiktech_symbol.svg",
+    heroImage: "/assets/vaidiktech_symbol.svg",
+    accentColor: "#F43F5E",
+    problem:
+      "Consumer smart home cameras and IoT switches depend on closed cloud ecosystems that leak private video streams, charge monthly fees, and become unusable during WAN internet disruptions.",
+    solution:
+      "Programmed embedded C++ firmware for the ESP32 and ESP32-CAM microcontrollers using the Arduino framework. Directs the OV2640 camera sensor to stream raw MJPEG video over local Wi-Fi via an embedded HTTP server running on the chip's internal flash and PSRAM. Pairs with a multi-relay switching circuit controllable through local HTTP endpoints and classic Bluetooth serial commands, guaranteeing 100% private LAN surveillance and appliance automation.",
+    techStack: [
+      "Embedded C++",
+      "ESP32 & ESP32-CAM",
+      "Arduino Framework",
+      "OV2640 Camera Sensor",
+      "Local HTTP MJPEG Streamer",
+      "Bluetooth Serial (SPP)",
+      "4-Channel Relay Hardware"
+    ],
+    keyMetrics: [
+      { label: "Video Latency", value: "<40ms Local LAN Stream" },
+      { label: "Resolution", value: "SVGA / VGA Stream @ 25 FPS" },
+      { label: "Cloud Dependency", value: "0% (Air-Gapped Private LAN)" },
+      { label: "Hardware Control", value: "4-Channel 230V AC Relays" }
+    ],
+    highlights: [
+      "Embedded HTTP server on ESP32 streaming live video without requiring an external proxy or server",
+      "Configurable camera sensor registers (brightness, contrast, resolution, frame rate) via URL queries",
+      "Direct hardware GPIO pin control switching high-voltage relays for domestic appliance automation",
+      "Dual-mode communication supporting both Wi-Fi web dashboards and offline Bluetooth terminal commands"
+    ],
+    links: {
+      github: "https://github.com/Vaidik04"
+    }
   }
 ];
