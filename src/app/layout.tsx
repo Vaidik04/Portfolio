@@ -7,7 +7,7 @@ const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-serif",
   display: "swap",
-  style: ["normal", "italic"],
+  adjustFontFallback: false,
 });
 
 const inter = Inter({

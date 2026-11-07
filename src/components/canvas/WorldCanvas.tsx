@@ -1,70 +1,96 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
-import { PhoneExplodedLayers } from "./PhoneExplodedLayers";
+import { useWorldStore } from "@/store/useWorldStore";
+import { qualityGovernor } from "@/lib/qualityGovernor";
+import { CameraRig } from "./CameraRig";
+import { BootGlyphRain } from "./BootGlyphRain";
+import { AssemblingPhoneHero } from "./AssemblingPhoneHero";
+import { ExplodedPhoneStack } from "./ExplodedPhoneStack";
+import { FlightDeckRail } from "./FlightDeckRail";
+import { LabConstellation } from "./LabConstellation";
+import { WorldBeaconArtifact } from "./WorldBeaconArtifact";
 
 export const WorldCanvas: React.FC = () => {
+  const { glitchMode, qualityTier } = useWorldStore();
+  const [hasWebGLError, setHasWebGLError] = useState(false);
+
+  // If 2D fallback is forced or WebGL crashed, render clean 2D ambient gradient
+  if (hasWebGLError || qualityTier === "fallback2d") {
+    return (
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#05060A]"
+      >
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-accent-android/10 blur-[140px]" />
+        <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-accent-violet/10 blur-[140px]" />
+      </div>
+    );
+  }
+
+  const profile = qualityGovernor.getProfile();
+
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-auto z-0 overflow-hidden bg-[#0E0F11]"
+      className={`fixed inset-0 pointer-events-auto z-0 overflow-hidden bg-[#05060A] transition-all duration-500 ${
+        glitchMode
+          ? "filter invert-[0.1] contrast-125 saturate-150 [text-shadow:_0_0_8px_#3DDC84]"
+          : ""
+      }`}
     >
       <Canvas
-        camera={{ position: [0, 0, 8.2], fov: 42 }}
+        camera={{ position: [0, 0, 7.5], fov: 42 }}
+        dpr={profile.dpr}
         gl={{
-          antialias: true,
+          antialias: profile.tier !== "low",
           powerPreference: "high-performance",
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.1,
+          toneMappingExposure: 1.15,
         }}
-        dpr={[1, 1.75]}
+        onCreated={({ gl }) => {
+          gl.setClearColor("#05060A", 1);
+        }}
+        onError={() => setHasWebGLError(true)}
       >
         {/* Ambient Warm Studio Lighting */}
-        <ambientLight intensity={0.65} color="#ECE8DF" />
+        <ambientLight intensity={0.55} color="#ECE8DF" />
 
-        {/* Primary Studio Key Light */}
-        <directionalLight
-          position={[6, 12, 8]}
-          intensity={2.0}
-          color="#FAF8F5"
-        />
+        {/* Primary Key Light */}
+        <directionalLight position={[8, 14, 8]} intensity={1.8} color="#FFFFFF" />
 
         {/* Soft Neutral Fill Light */}
-        <directionalLight
-          position={[-8, -2, 6]}
-          intensity={0.65}
-          color="#9A9A9F"
-        />
+        <directionalLight position={[-8, -4, 6]} intensity={0.7} color="#7C5CFF" />
 
-        {/* Signature Brass Rim Kicker Light (#D4A24C) */}
-        <directionalLight
-          position={[0, -8, -6]}
-          intensity={2.6}
-          color="#D4A24C"
-        />
+        {/* Android Green Rim Kicker Light */}
+        <directionalLight position={[0, -8, -6]} intensity={2.2} color="#3DDC84" />
 
-        {/* Subtle Brass Overhead Specular Glint */}
-        <pointLight
-          position={[3, 5, 3]}
-          intensity={0.9}
-          color="#D4A24C"
-        />
-
-        {/* Soft Contact Shadow underneath phone */}
-        <ContactShadows
-          position={[2.15, -2.6, 0]}
-          opacity={0.6}
-          scale={10}
-          blur={2.4}
-          far={4.5}
-          color="#000000"
-        />
+        {/* Specular Cyan Glint */}
+        <pointLight position={[3, 5, 4]} intensity={1.1} color="#22D3EE" />
 
         <Suspense fallback={null}>
-          <PhoneExplodedLayers />
+          {/* Master Timeline Camera Rig */}
+          <CameraRig />
+
+          {/* Scene 0: GPGPU Glyph Rain */}
+          <BootGlyphRain />
+
+          {/* Scene 1: Hero Phone Chassis Assembly */}
+          <AssemblingPhoneHero />
+
+          {/* Scene 2: The Exploded 5-Layer Stack */}
+          <ExplodedPhoneStack />
+
+          {/* Scene 3: Flagship Work Flight Deck */}
+          <FlightDeckRail />
+
+          {/* Scene 4: The Lab Constellation */}
+          <LabConstellation />
+
+          {/* Scene 8: Sovereign World Beacon */}
+          <WorldBeaconArtifact />
         </Suspense>
       </Canvas>
     </div>

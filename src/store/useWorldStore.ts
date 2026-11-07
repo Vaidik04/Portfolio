@@ -1,16 +1,35 @@
 import { create } from "zustand";
-import { sounds } from "@/lib/sound";
+import { proceduralAudio } from "@/lib/proceduralAudio";
+import { qualityGovernor, QualityTier } from "@/lib/qualityGovernor";
 
-export type SectionId = "boot" | "hero" | "about" | "skills" | "projects" | "architecture" | "credentials" | "contact";
+export type SectionId =
+  | "boot"
+  | "hero"
+  | "architecture"
+  | "flightdeck"
+  | "flight-deck"
+  | "lab"
+  | "proof"
+  | "about"
+  | "credentials"
+  | "contact";
 
-interface WorldState {
+export interface WorldState {
   // Global scroll progress (0.0 to 1.0)
   scrollProgress: number;
   setScrollProgress: (progress: number) => void;
 
+  // Real-time scroll velocity
+  scrollVelocity: number;
+  setScrollVelocity: (velocity: number) => void;
+
   // Active section
   activeSection: SectionId;
   setActiveSection: (section: SectionId) => void;
+
+  // Quality Tier & Hardware capabilities
+  qualityTier: QualityTier;
+  setQualityTier: (tier: QualityTier) => void;
 
   // Boot sequence state
   isBooted: boolean;
@@ -24,34 +43,40 @@ interface WorldState {
   hudVisible: boolean;
   toggleHUD: () => void;
 
-  // Developer terminal open toggle
+  // Offline Sentinel (navigator.onLine)
+  isOffline: boolean;
+  setIsOffline: (offline: boolean) => void;
+
+  // Developer terminal open toggle (`)
   terminalOpen: boolean;
   setTerminalOpen: (open: boolean) => void;
   toggleTerminal: () => void;
+  openTerminal: () => void;
 
   // Command palette toggle (Ctrl+K)
   paletteOpen: boolean;
   setPaletteOpen: (open: boolean) => void;
   togglePalette: () => void;
 
-  // Active hover label for custom cursor (e.g. "VIEW", "DRAG", "PORTAL", "EXPAND")
+  // Debug Inspector (?debug=true)
+  debugOpen: boolean;
+  setDebugOpen: (open: boolean) => void;
+  toggleDebug: () => void;
+
+  // Active hover label for custom cursor (e.g. "VIEW", "DRAG", "PORTAL", "INSPECT")
   cursorText: string;
   setCursorText: (text: string) => void;
-
-  // Active project ID in 3D Flight Deck & Phone screen
-  active3DProjectId: string;
-  setActive3DProjectId: (id: string) => void;
 
   // Active App on 3D phone screen ("girvi" | "jewelbill" | "advokosh")
   activeAppId: "girvi" | "jewelbill" | "advokosh";
   setActiveAppId: (appId: "girvi" | "jewelbill" | "advokosh") => void;
 
-  // Manual 3D layer explosion toggle
+  // 3D Architecture Layer Explosion & Inspection
   manualExploded: boolean;
   setManualExploded: (exploded: boolean) => void;
   toggleManualExploded: () => void;
 
-  // Focused 3D layer (1 to 5)
+  // Focused 3D layer for isolation / orbit (1 to 5)
   focusedLayer: number | null;
   setFocusedLayer: (layer: number | null) => void;
 
@@ -64,60 +89,70 @@ export const useWorldStore = create<WorldState>((set) => ({
   scrollProgress: 0,
   setScrollProgress: (scrollProgress) => set({ scrollProgress }),
 
+  scrollVelocity: 0,
+  setScrollVelocity: (scrollVelocity) => set({ scrollVelocity }),
+
   activeSection: "hero",
   setActiveSection: (activeSection) => set({ activeSection }),
 
-  isBooted: true,
+  qualityTier: qualityGovernor.getProfile().tier,
+  setQualityTier: (qualityTier) => set({ qualityTier }),
+
+  isBooted: false,
   setBooted: (isBooted) => set({ isBooted }),
 
-  soundEnabled: false,
+  soundEnabled: !proceduralAudio.isAudioMuted(),
   toggleSound: () =>
     set((state) => {
       const next = !state.soundEnabled;
-      sounds.init();
-      sounds.setMuted(!next);
-      if (next) sounds.bootHum();
+      proceduralAudio.init();
+      proceduralAudio.setMuted(!next);
+      if (next) proceduralAudio.bootHum();
       return { soundEnabled: next };
     }),
 
   hudVisible: true,
   toggleHUD: () => set((state) => ({ hudVisible: !state.hudVisible })),
 
+  isOffline: typeof navigator !== "undefined" ? !navigator.onLine : false,
+  setIsOffline: (isOffline) => set({ isOffline }),
+
   terminalOpen: false,
   setTerminalOpen: (terminalOpen) => set({ terminalOpen }),
   toggleTerminal: () => set((state) => ({ terminalOpen: !state.terminalOpen })),
+  openTerminal: () => set({ terminalOpen: true }),
 
   paletteOpen: false,
   setPaletteOpen: (paletteOpen) => set({ paletteOpen }),
   togglePalette: () => set((state) => ({ paletteOpen: !state.paletteOpen })),
 
+  debugOpen: false,
+  setDebugOpen: (debugOpen) => set({ debugOpen }),
+  toggleDebug: () => set((state) => ({ debugOpen: !state.debugOpen })),
+
   cursorText: "",
   setCursorText: (cursorText) => set({ cursorText }),
 
-  active3DProjectId: "girvi",
-  setActive3DProjectId: (active3DProjectId) => set({ active3DProjectId }),
-
   activeAppId: "girvi",
   setActiveAppId: (activeAppId) => {
-    sounds.tick();
-    set({ activeAppId, active3DProjectId: activeAppId });
+    proceduralAudio.tick();
+    set({ activeAppId });
   },
 
   manualExploded: false,
   setManualExploded: (manualExploded) => set({ manualExploded }),
   toggleManualExploded: () =>
     set((state) => {
-      sounds.shockwave();
+      proceduralAudio.shockwave();
       return { manualExploded: !state.manualExploded };
     }),
 
   focusedLayer: null,
   setFocusedLayer: (focusedLayer) => {
-    sounds.tick();
+    proceduralAudio.tick();
     set({ focusedLayer });
   },
 
   glitchMode: false,
   setGlitchMode: (glitchMode) => set({ glitchMode }),
 }));
-

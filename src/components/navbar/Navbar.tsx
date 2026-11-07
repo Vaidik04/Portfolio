@@ -4,8 +4,9 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { Volume2, VolumeX, ArrowUpRight, Menu, X } from "lucide-react";
+import { Volume2, VolumeX, ArrowUpRight, Menu, X, Terminal } from "lucide-react";
 import { useWorldStore } from "@/store/useWorldStore";
+import { proceduralAudio } from "@/lib/proceduralAudio";
 
 interface NavItem {
   name: string;
@@ -14,10 +15,12 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { name: "Work", href: "/#work", hash: "work" },
+  { name: "Work", href: "/#flight-deck", hash: "flight-deck" },
   { name: "Architecture", href: "/#architecture", hash: "architecture" },
-  { name: "Engineering", href: "/#engineering", hash: "engineering" },
-  { name: "About", href: "/#about", hash: "about" },
+  { name: "Lab", href: "/#lab", hash: "lab" },
+  { name: "Proof", href: "/#proof", hash: "proof" },
+  { name: "Ethos", href: "/#about", hash: "about" },
+  { name: "Credentials", href: "/#credentials", hash: "credentials" },
   { name: "Contact", href: "/#contact", hash: "contact" },
 ];
 
@@ -27,7 +30,7 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
   const pathname = usePathname();
-  const { soundEnabled, toggleSound } = useWorldStore();
+  const { soundEnabled, toggleSound, openTerminal } = useWorldStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,6 +51,7 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
+    proceduralAudio.tick();
     if (pathname === "/" && item.hash) {
       const el = document.getElementById(item.hash);
       if (el) {
@@ -63,7 +67,7 @@ export const Navbar: React.FC = () => {
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pointer-events-none ${
           visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        } ${scrolled ? "py-3" : "py-6"}`}
+        } ${scrolled ? "py-3" : "py-5"}`}
       >
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
           {/* Refined Brand Wordmark */}
@@ -71,7 +75,7 @@ export const Navbar: React.FC = () => {
             href="/"
             className="pointer-events-auto group flex items-center gap-3 py-1.5 focus:outline-none"
           >
-            <span className="inline-flex w-8 h-8 rounded-full bg-surface-elevated border border-surface-border items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:border-brand/50">
+            <span className="inline-flex w-8 h-8 rounded-full bg-surface-elevated border border-surface-border items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:border-accent-android/50">
               <Image
                 src="/assets/vaidiktech_symbol.svg"
                 alt="VaidikTech Symbol"
@@ -84,14 +88,14 @@ export const Navbar: React.FC = () => {
               <span className="font-heading font-bold text-sm tracking-tight text-typography-primary group-hover:text-white transition-colors">
                 Vaidik Gandhi
               </span>
-              <span className="text-[10px] font-mono text-typography-muted group-hover:text-brand transition-colors">
+              <span className="text-[10px] font-mono text-typography-muted group-hover:text-accent-android transition-colors">
                 Founder · VaidikTech
               </span>
             </span>
           </Link>
 
           {/* Desktop Nav Items */}
-          <nav className="pointer-events-auto hidden md:flex items-center gap-1 px-4 py-1.5 rounded-full bg-[#121419]/80 border border-surface-border backdrop-blur-xl shadow-lg">
+          <nav className="pointer-events-auto hidden md:flex items-center gap-1 px-4 py-1.5 rounded-full bg-[#121419]/80 border border-white/10 backdrop-blur-xl shadow-lg">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.name}
@@ -104,16 +108,30 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Actions: Sound Toggle + Primary CTA */}
-          <div className="pointer-events-auto flex items-center gap-3">
+          {/* Actions: Sound Toggle + CLI Toggle + Primary CTA */}
+          <div className="pointer-events-auto flex items-center gap-2.5">
+            {/* Terminal Toggle Button */}
+            <button
+              type="button"
+              onClick={() => {
+                proceduralAudio.tick();
+                openTerminal();
+              }}
+              className="w-9 h-9 rounded-full border border-white/10 bg-surface-elevated text-typography-muted hover:text-white flex items-center justify-center transition-all"
+              title="Open Developer Terminal (`)"
+              aria-label="Open CLI Terminal"
+            >
+              <Terminal className="w-3.5 h-3.5 text-accent-cyan" />
+            </button>
+
             {/* Audio Mute Button */}
             <button
               type="button"
               onClick={toggleSound}
               className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${
                 soundEnabled
-                  ? "bg-brand/15 border-brand/40 text-brand"
-                  : "bg-surface-elevated border-surface-border text-typography-muted hover:text-typography-primary"
+                  ? "bg-accent-android/15 border-accent-android/40 text-accent-android shadow-[0_0_12px_rgba(61,220,132,0.3)]"
+                  : "bg-surface-elevated border-white/10 text-typography-muted hover:text-typography-primary"
               }`}
               title={soundEnabled ? "Audio On (Click to Mute)" : "Muted (Click to Enable Audio)"}
               aria-label="Toggle ambient sound"
@@ -130,7 +148,7 @@ export const Navbar: React.FC = () => {
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent hover:bg-accent-hover text-accent-on text-xs font-sans font-semibold tracking-wide transition-all shadow-[0_2px_14px_rgba(212,162,76,0.25)] hover:scale-[1.02]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent-android hover:bg-accent-android/90 text-[#05060A] text-xs font-mono font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(61,220,132,0.3)] hover:scale-[1.02]"
             >
               <span>Get in touch</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -152,7 +170,7 @@ export const Navbar: React.FC = () => {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-[#0B0C0E]/95 backdrop-blur-2xl flex flex-col justify-between p-8 md:hidden animate-in fade-in duration-200">
-          <div className="flex items-center justify-between border-b border-surface-border pb-4 mt-16">
+          <div className="flex items-center justify-between border-b border-white/10 pb-4 mt-16">
             <span className="text-xs font-mono text-typography-muted uppercase tracking-wider">Navigation</span>
             <button
               type="button"
@@ -169,18 +187,21 @@ export const Navbar: React.FC = () => {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item)}
-                className="text-2xl font-heading font-bold text-typography-primary hover:text-brand transition-colors"
+                className="text-2xl font-heading font-bold text-typography-primary hover:text-accent-android transition-colors"
               >
                 {item.name}
               </Link>
             ))}
           </div>
 
-          <div className="pt-6 border-t border-surface-border flex flex-col gap-3">
+          <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
             <Link
               href="/#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-3.5 rounded-full bg-brand text-white font-sans font-semibold text-sm shadow-lg"
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="w-full text-center py-3.5 rounded-full bg-accent-android text-[#05060A] font-mono font-bold text-sm shadow-lg"
             >
               Get in touch
             </Link>
