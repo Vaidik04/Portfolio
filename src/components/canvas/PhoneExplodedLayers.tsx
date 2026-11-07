@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
@@ -19,178 +19,229 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   const groupRef = useRef<THREE.Group>(null);
   const { viewport } = useThree();
 
+  const [screenTexture, setScreenTexture] = useState<THREE.CanvasTexture | null>(null);
   const [hoveredLayer, setHoveredLayer] = useState<number | null>(null);
 
   // References for each layer group to animate their local Z positions
-  const layer1Ref = useRef<THREE.Group>(null); // Compose UI
+  const layer1Ref = useRef<THREE.Group>(null); // Compose UI + Screen
   const layer2Ref = useRef<THREE.Group>(null); // ViewModel & StateFlow
   const layer3Ref = useRef<THREE.Group>(null); // Room SQLite
   const layer4Ref = useRef<THREE.Group>(null); // SQLCipher AES-256
   const layer5Ref = useRef<THREE.Group>(null); // Keystore Hardware Enclave
 
   // Dimensions
-  const phoneWidth = 2.7;
-  const phoneHeight = 5.5;
-  const slabDepth = 0.08;
-  const cornerRadius = 0.28;
+  const phoneWidth = 2.35;
+  const phoneHeight = 4.85;
+  const slabDepth = 0.07;
+  const cornerRadius = 0.26;
 
-  // Generate crisp procedural phone screen texture with fictional data
-  const screenTexture = useMemo(() => {
-    if (typeof document === "undefined") return null;
+  // Generate crisp procedural phone screen texture client-side
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const canvas = document.createElement("canvas");
     canvas.width = 1080;
-    canvas.height = 2200;
+    canvas.height = 2240;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return null;
+    if (!ctx) return;
 
-    // Background: Deep dark slate
-    ctx.fillStyle = "#0D0F14";
-    ctx.fillRect(0, 0, 1080, 2200);
+    // 1. Deep Midnight Charcoal Background
+    ctx.fillStyle = "#0C0E14";
+    ctx.fillRect(0, 0, 1080, 2240);
 
-    // Subtle dark gradient
-    const grad = ctx.createLinearGradient(0, 0, 0, 2200);
-    grad.addColorStop(0, "#141722");
-    grad.addColorStop(1, "#0A0C10");
+    // Subtle dark radial gradient
+    const grad = ctx.createLinearGradient(0, 0, 0, 2240);
+    grad.addColorStop(0, "#131722");
+    grad.addColorStop(0.5, "#0A0C11");
+    grad.addColorStop(1, "#07080D");
     ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 1080, 2200);
+    ctx.fillRect(0, 0, 1080, 2240);
 
-    // Status Bar
-    ctx.fillStyle = "#9DA4B5";
-    ctx.font = "bold 36px sans-serif";
-    ctx.fillText("09:41", 80, 90);
-    ctx.font = "28px monospace";
-    ctx.fillText("5G · 100%", 880, 90);
+    // 2. Status Bar
+    ctx.fillStyle = "#EDEFF5";
+    ctx.font = "bold 38px -apple-system, BlinkMacSystemFont, sans-serif";
+    ctx.fillText("09:41", 80, 95);
 
-    // App Header: Girvi Gold Loan OS
+    // Status bar icons (5G, WiFi, Battery)
+    ctx.font = "bold 30px monospace";
+    ctx.fillStyle = "#9DA4B8";
+    ctx.fillText("5G  100%", 830, 95);
+
+    // 3. App Bar Header: Girvi Pawn Ledger
     ctx.fillStyle = "#2B5BFF";
-    ctx.fillRect(80, 150, 8, 56);
+    ctx.beginPath();
+    ctx.roundRect(80, 140, 60, 60, 16);
+    ctx.fill();
+
+    // App Symbol inside badge
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 36px sans-serif";
+    ctx.fillText("₹", 98, 184);
 
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 52px sans-serif";
-    ctx.fillText("Girvi Pawn Ledger", 106, 196);
+    ctx.font = "bold 44px sans-serif";
+    ctx.fillText("Girvi Pawn Ledger", 160, 184);
 
-    ctx.fillStyle = "#7D8498";
-    ctx.font = "32px sans-serif";
-    ctx.fillText("Fictional Sample Record · Sovereign Offline Storage", 80, 260);
+    // Mode Pill
+    ctx.fillStyle = "rgba(43, 91, 255, 0.15)";
+    ctx.strokeStyle = "rgba(43, 91, 255, 0.4)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(80, 225, 410, 48, 24);
+    ctx.fill();
+    ctx.stroke();
 
-    // Card 1: Sample Gold Pledge
-    ctx.fillStyle = "#181C26";
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+    ctx.fillStyle = "#4D7EFF";
+    ctx.font = "bold 24px monospace";
+    ctx.fillText("● OFFLINE SOVEREIGN CORE", 104, 258);
+
+    // 4. Hero Card: Active Gold Pledge (Fictional Sample Data)
+    ctx.fillStyle = "#141724";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.roundRect(80, 320, 920, 480, 32);
+    ctx.roundRect(80, 305, 920, 500, 36);
     ctx.fill();
     ctx.stroke();
 
-    ctx.fillStyle = "#2B5BFF";
-    ctx.font = "bold 32px monospace";
-    ctx.fillText("TOKEN #GV-1048", 120, 385);
+    // Token ID
+    ctx.fillStyle = "#8F9BB3";
+    ctx.font = "bold 28px monospace";
+    ctx.fillText("TOKEN #GV-1048", 120, 370);
 
-    ctx.fillStyle = "#5E667C";
-    ctx.font = "28px sans-serif";
-    ctx.fillText("Customer: Ramesh Kumar (Sample Record)", 120, 440);
+    // Verified badge
+    ctx.fillStyle = "rgba(34, 197, 94, 0.15)";
+    ctx.strokeStyle = "rgba(34, 197, 94, 0.4)";
+    ctx.beginPath();
+    ctx.roundRect(740, 335, 220, 46, 23);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "#4ADE80";
+    ctx.font = "bold 22px monospace";
+    ctx.fillText("VERIFIED PLEDGE", 758, 366);
 
+    // Customer Name
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 76px sans-serif";
-    ctx.fillText("₹1,45,000", 120, 550);
-
-    ctx.fillStyle = "#D95C36";
-    ctx.font = "bold 32px monospace";
-    ctx.fillText("Long Integer Paise: 14,500,000L", 120, 615);
+    ctx.font = "bold 46px sans-serif";
+    ctx.fillText("Ramesh Kumar", 120, 440);
 
     ctx.fillStyle = "#7D8498";
-    ctx.font = "28px monospace";
-    ctx.fillText("Pledge: Gold 22K (42.50g) · Net Wt: 36.80g", 120, 690);
-    ctx.fillText("Interest: 1.50% / Mo · Compound Rule", 120, 740);
+    ctx.font = "26px sans-serif";
+    ctx.fillText("Fictional Customer Record · Tokenized Vault #04", 120, 485);
 
-    // Card 2: Security & Encryption Seal
-    ctx.fillStyle = "#13161F";
-    ctx.strokeStyle = "rgba(43, 91, 255, 0.35)";
+    // Big Rupee Amount
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 82px sans-serif";
+    ctx.fillText("₹1,45,000", 120, 595);
+
+    // Integer Paise Verification Pill
+    ctx.fillStyle = "rgba(217, 92, 54, 0.15)";
+    ctx.strokeStyle = "rgba(217, 92, 54, 0.4)";
     ctx.beginPath();
-    ctx.roundRect(80, 840, 920, 380, 32);
+    ctx.roundRect(120, 630, 480, 44, 22);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "#FF7A50";
+    ctx.font = "bold 24px monospace";
+    ctx.fillText("14,500,000 Long-Paise (0-Drift)", 140, 660);
+
+    // Gold Specs Row
+    ctx.fillStyle = "#9DA4B8";
+    ctx.font = "28px monospace";
+    ctx.fillText("Item: 22K Gold Bangles · Net: 36.80g (Gross: 42.50g)", 120, 725);
+    ctx.fillText("Rate: 1.50% Compound / Mo · Limitations Safe", 120, 768);
+
+    // 5. Card 2: Cryptographic Boundary
+    ctx.fillStyle = "#11141E";
+    ctx.strokeStyle = "rgba(43, 91, 255, 0.35)";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.roundRect(80, 840, 920, 390, 36);
     ctx.fill();
     ctx.stroke();
 
-    ctx.fillStyle = "#2B5BFF";
+    ctx.fillStyle = "#4D7EFF";
     ctx.font = "bold 34px sans-serif";
-    ctx.fillText("Cryptographic Boundary", 120, 910);
+    ctx.fillText("Cryptographic Boundary", 120, 915);
 
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "30px sans-serif";
-    ctx.fillText("SQLCipher 256-bit AES Database", 120, 980);
-    ctx.fillText("Android Keystore AES-256-GCM MasterKey", 120, 1030);
+    ctx.fillText("SQLCipher 256-bit AES Local Database", 120, 985);
 
-    ctx.fillStyle = "#7D8498";
+    ctx.fillStyle = "#8F9BB3";
     ctx.font = "26px monospace";
-    ctx.fillText("PRAGMA cipher_page_size = 4096; Zero network sockets.", 120, 1120);
+    ctx.fillText("Key: Android Keystore Hardware AES-256-GCM MasterKey", 120, 1045);
+    ctx.fillText("PRAGMA cipher_page_size = 4096; Zero Cloud Telemetry", 120, 1095);
+    ctx.fillText("Strict Offline Storage · Biometric Master Release", 120, 1145);
 
-    // Card 3: Recent Transactions
-    ctx.fillStyle = "#181C26";
+    // 6. Card 3: Recent Activity Ledger
+    ctx.fillStyle = "#141724";
     ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
     ctx.beginPath();
-    ctx.roundRect(80, 1260, 920, 480, 32);
+    ctx.roundRect(80, 1265, 920, 520, 36);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "bold 36px sans-serif";
-    ctx.fillText("Ledger Activity", 120, 1330);
+    ctx.fillText("Physical Verification Audit", 120, 1340);
 
-    ctx.fillStyle = "#9DA4B5";
+    ctx.fillStyle = "#8F9BB3";
     ctx.font = "28px monospace";
-    ctx.fillText("1. Principal Disbursed: ₹1,45,000 (Cash)", 120, 1420);
-    ctx.fillText("2. Physical Evidence: CameraX Gold Photo ID #482", 120, 1500);
-    ctx.fillText("3. Thermal Receipt: 80mm ESC/POS Generated", 120, 1580);
-    ctx.fillText("4. Backup: AES-GCM Encrypted JSON to SD Card", 120, 1660);
+    ctx.fillText("1. Principal Disbursed: ₹1,45,000 (Cash Recorded)", 120, 1425);
+    ctx.fillText("2. Physical Evidence: CameraX Gold Photo ID #482", 120, 1505);
+    ctx.fillText("3. Thermal Receipt: 80mm ESC/POS Generated", 120, 1585);
+    ctx.fillText("4. Backup: AES-GCM Encrypted JSON to SD Card", 120, 1665);
+    ctx.fillText("5. Court Limitation Date: 36 Months Calculated", 120, 1745);
 
-    // Bottom Navigation Bar
-    ctx.fillStyle = "#2B5BFF";
+    // 7. Bottom Navigation Bar
+    ctx.fillStyle = "#1A1E2C";
     ctx.beginPath();
-    ctx.roundRect(80, 1820, 920, 120, 30);
+    ctx.roundRect(80, 1830, 920, 130, 36);
     ctx.fill();
 
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 36px sans-serif";
+    ctx.fillStyle = "#2B5BFF";
+    ctx.font = "bold 32px sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("100% Sovereign Offline Database Active", 540, 1895);
+    ctx.fillText("Sovereign Trade Ledger Active", 540, 1910);
     ctx.textAlign = "left";
 
-    // Home indicator pill
+    // 8. Dynamic Island / Home Indicator
     ctx.fillStyle = "#FFFFFF";
     ctx.beginPath();
-    ctx.roundRect(380, 2140, 320, 12, 6);
+    ctx.roundRect(390, 2170, 300, 10, 5);
     ctx.fill();
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.minFilter = THREE.LinearFilter;
     texture.magFilter = THREE.LinearFilter;
     texture.generateMipmaps = false;
-    return texture;
+    texture.needsUpdate = true;
+    setScreenTexture(texture);
   }, []);
 
-  // Shared physically-based materials
-  const chassisMaterial = useMemo(() => {
+  // Physically-based materials
+  const chassisMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#181B22",
-      metalness: 0.85,
-      roughness: 0.22,
+      color: "#1A1D24",
+      metalness: 0.9,
+      roughness: 0.25,
     });
   }, []);
 
-  const glassMaterial = useMemo(() => {
+  const glassMaterial = React.useMemo(() => {
     return new THREE.MeshPhysicalMaterial({
       color: "#FFFFFF",
-      metalness: 0.1,
+      metalness: 0.05,
       roughness: 0.05,
-      transmission: 0.9,
-      thickness: 0.4,
-      ior: 1.5,
+      transmission: 0.92,
+      thickness: 0.2,
       transparent: true,
-      opacity: 0.92,
+      opacity: 0.95,
     });
   }, []);
 
-  const stateLayerMaterial = useMemo(() => {
+  const stateLayerMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: "#151924",
       metalness: 0.65,
@@ -198,7 +249,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     });
   }, []);
 
-  const roomDbMaterial = useMemo(() => {
+  const roomDbMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: "#10131A",
       metalness: 0.5,
@@ -206,19 +257,19 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     });
   }, []);
 
-  const cipherMaterial = useMemo(() => {
+  const cipherMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#8C3A20", // Brushed Copper / Security Ochre
+      color: "#9A4020", // Brushed Copper / Security Ochre
       metalness: 0.85,
       roughness: 0.28,
     });
   }, []);
 
-  const keystoreMaterial = useMemo(() => {
+  const keystoreMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: "#0B0D12",
-      metalness: 0.9,
-      roughness: 0.2,
+      metalness: 0.95,
+      roughness: 0.15,
     });
   }, []);
 
@@ -228,13 +279,13 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     const p = scrollProgress;
 
     // Calculate separation factor (0 = assembled, 1 = fully exploded)
-    // Separation occurs between p = 0.16 and p = 0.48
     let separation = 0;
     if (p >= 0.16 && p <= 0.48) {
-      separation = THREE.MathUtils.smoothstep(p, 0.16, 0.34) * (1 - THREE.MathUtils.smoothstep(p, 0.40, 0.48));
+      separation =
+        THREE.MathUtils.smoothstep(p, 0.16, 0.32) *
+        (1 - THREE.MathUtils.smoothstep(p, 0.38, 0.48));
     }
 
-    // Responsive position: On desktop offset left/right, on mobile center
     const isMobile = viewport.width < 7.5;
     let targetX = 0;
     let targetY = 0;
@@ -242,74 +293,137 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     let targetRotX = 0;
     let targetRotY = 0;
     let targetRotZ = 0;
-    let targetScale = isMobile ? 0.72 : 1.0;
+    let targetScale = isMobile ? 0.62 : 0.82;
 
     if (p < 0.18) {
       // Phase 1: Hero — Assembled phone floating with subtle perspective
-      targetX = isMobile ? 0 : 1.35;
-      targetY = 0;
+      targetX = isMobile ? 0 : 2.15;
+      targetY = isMobile ? -1.8 : 0.05;
       targetZ = 0;
-      targetRotX = 0.12;
-      targetRotY = -0.28;
+      targetRotX = 0.08;
+      targetRotY = -0.32;
       targetRotZ = 0.04;
     } else if (p < 0.50) {
       // Phase 2: Architecture — Axonometric exploded layers view
-      targetX = isMobile ? 0 : -1.2;
+      targetX = isMobile ? 0 : -1.35;
       targetY = 0.2;
-      targetZ = 0.5;
+      targetZ = 0.4;
       targetRotX = 0.38;
       targetRotY = -0.72;
       targetRotZ = 0.22;
-      targetScale = isMobile ? 0.65 : 0.95;
+      targetScale = isMobile ? 0.58 : 0.8;
     } else if (p < 0.75) {
       // Phase 3: Work Showcase — Reassembled phone presenting flagship apps
-      targetX = isMobile ? 0 : 1.4;
+      targetX = isMobile ? 0 : 1.95;
       targetY = -0.1;
       targetZ = 0.2;
       targetRotX = 0.05;
-      targetRotY = -0.15;
+      targetRotY = -0.18;
       targetRotZ = 0;
-      targetScale = isMobile ? 0.75 : 1.05;
+      targetScale = isMobile ? 0.65 : 0.88;
     } else {
       // Phase 4: Rest of page — Gently dock in background
       targetX = 0;
       targetY = 0.5;
-      targetZ = -2.5;
+      targetZ = -3.0;
       targetRotX = 0.2;
       targetRotY = 0.1;
       targetRotZ = 0;
-      targetScale = 0.6;
+      targetScale = 0.55;
     }
 
-    // Pointer mouse tilt
+    // Pointer mouse tilt + gentle idle breathing float
     const pointer = state.pointer;
-    const parallaxX = pointer.x * 0.25;
-    const parallaxY = pointer.y * 0.18;
+    const parallaxX = pointer.x * 0.18;
+    const parallaxY = pointer.y * 0.12;
+    const idleFloat = Math.sin(state.clock.elapsedTime * 1.5) * 0.035;
 
     // Smooth dampening towards target transforms
-    groupRef.current.position.x = THREE.MathUtils.damp(groupRef.current.position.x, targetX + parallaxX, 4, delta);
-    groupRef.current.position.y = THREE.MathUtils.damp(groupRef.current.position.y, targetY + parallaxY, 4, delta);
-    groupRef.current.position.z = THREE.MathUtils.damp(groupRef.current.position.z, targetZ, 4, delta);
+    groupRef.current.position.x = THREE.MathUtils.damp(
+      groupRef.current.position.x,
+      targetX + parallaxX,
+      4,
+      delta
+    );
+    groupRef.current.position.y = THREE.MathUtils.damp(
+      groupRef.current.position.y,
+      targetY + parallaxY + idleFloat,
+      4,
+      delta
+    );
+    groupRef.current.position.z = THREE.MathUtils.damp(
+      groupRef.current.position.z,
+      targetZ,
+      4,
+      delta
+    );
 
-    groupRef.current.rotation.x = THREE.MathUtils.damp(groupRef.current.rotation.x, targetRotX - parallaxY * 0.15, 4, delta);
-    groupRef.current.rotation.y = THREE.MathUtils.damp(groupRef.current.rotation.y, targetRotY + parallaxX * 0.25, 4, delta);
-    groupRef.current.rotation.z = THREE.MathUtils.damp(groupRef.current.rotation.z, targetRotZ, 4, delta);
+    groupRef.current.rotation.x = THREE.MathUtils.damp(
+      groupRef.current.rotation.x,
+      targetRotX - parallaxY * 0.12,
+      4,
+      delta
+    );
+    groupRef.current.rotation.y = THREE.MathUtils.damp(
+      groupRef.current.rotation.y,
+      targetRotY + parallaxX * 0.2,
+      4,
+      delta
+    );
+    groupRef.current.rotation.z = THREE.MathUtils.damp(
+      groupRef.current.rotation.z,
+      targetRotZ,
+      4,
+      delta
+    );
 
-    groupRef.current.scale.setScalar(THREE.MathUtils.damp(groupRef.current.scale.x, targetScale, 4, delta));
+    groupRef.current.scale.setScalar(
+      THREE.MathUtils.damp(groupRef.current.scale.x, targetScale, 4, delta)
+    );
 
     // Animate the 5 layer separations along Z
-    const maxSpread = 1.65;
+    const maxSpread = 1.45;
     const z1 = separation * maxSpread * 1.0;
     const z2 = separation * maxSpread * 0.5;
     const z3 = 0;
     const z4 = -separation * maxSpread * 0.5;
     const z5 = -separation * maxSpread * 1.0;
 
-    if (layer1Ref.current) layer1Ref.current.position.z = THREE.MathUtils.damp(layer1Ref.current.position.z, z1, 6, delta);
-    if (layer2Ref.current) layer2Ref.current.position.z = THREE.MathUtils.damp(layer2Ref.current.position.z, z2, 6, delta);
-    if (layer3Ref.current) layer3Ref.current.position.z = THREE.MathUtils.damp(layer3Ref.current.position.z, z3, 6, delta);
-    if (layer4Ref.current) layer4Ref.current.position.z = THREE.MathUtils.damp(layer4Ref.current.position.z, z4, 6, delta);
-    if (layer5Ref.current) layer5Ref.current.position.z = THREE.MathUtils.damp(layer5Ref.current.position.z, z5, 6, delta);
+    if (layer1Ref.current)
+      layer1Ref.current.position.z = THREE.MathUtils.damp(
+        layer1Ref.current.position.z,
+        z1,
+        6,
+        delta
+      );
+    if (layer2Ref.current)
+      layer2Ref.current.position.z = THREE.MathUtils.damp(
+        layer2Ref.current.position.z,
+        z2,
+        6,
+        delta
+      );
+    if (layer3Ref.current)
+      layer3Ref.current.position.z = THREE.MathUtils.damp(
+        layer3Ref.current.position.z,
+        z3,
+        6,
+        delta
+      );
+    if (layer4Ref.current)
+      layer4Ref.current.position.z = THREE.MathUtils.damp(
+        layer4Ref.current.position.z,
+        z4,
+        6,
+        delta
+      );
+    if (layer5Ref.current)
+      layer5Ref.current.position.z = THREE.MathUtils.damp(
+        layer5Ref.current.position.z,
+        z5,
+        6,
+        delta
+      );
   });
 
   const handlePointerEnter = (id: number) => {
@@ -327,31 +441,58 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   };
 
   return (
-    <group ref={groupRef} position={[1.35, 0, 0]}>
-      {/* Phone Outer Chassis Metal Rim (Frame) */}
-      <mesh material={chassisMaterial} position={[0, 0, 0]}>
-        <boxGeometry args={[phoneWidth + 0.08, phoneHeight + 0.08, 0.32]} />
+    <group ref={groupRef} position={[2.15, 0.05, 0]}>
+      {/* Phone Outer Chassis Metal Rim (Frame) behind display */}
+      <mesh material={chassisMaterial} position={[0, 0, -0.06]}>
+        <boxGeometry args={[phoneWidth + 0.06, phoneHeight + 0.06, 0.16]} />
       </mesh>
 
-      {/* Layer 1: Jetpack Compose Presentation Slab */}
+      {/* Camera bump on back of phone */}
+      <mesh material={chassisMaterial} position={[-0.6, 1.6, -0.16]}>
+        <boxGeometry args={[0.8, 1.0, 0.06]} />
+      </mesh>
+      <mesh position={[-0.6, 1.75, -0.2]}>
+        <cylinderGeometry args={[0.12, 0.12, 0.05, 24]} />
+        <meshStandardMaterial color="#0A0C10" metalness={0.9} roughness={0.1} />
+      </mesh>
+      <mesh position={[-0.6, 1.45, -0.2]}>
+        <cylinderGeometry args={[0.12, 0.12, 0.05, 24]} />
+        <meshStandardMaterial color="#0A0C10" metalness={0.9} roughness={0.1} />
+      </mesh>
+
+      {/* Layer 1: Jetpack Compose Presentation Slab & Display Face */}
       <group
         ref={layer1Ref}
         onPointerOver={() => handlePointerEnter(1)}
         onPointerOut={handlePointerLeave}
       >
+        {/* Front Glass Slab */}
         <RoundedBox
           args={[phoneWidth, phoneHeight, slabDepth]}
           radius={cornerRadius}
           smoothness={6}
           material={isLayerActive(1) ? chassisMaterial : glassMaterial}
+          position={[0, 0, 0.04]}
         />
+
         {/* Screen Display Face */}
-        {screenTexture && (
-          <mesh position={[0, 0, slabDepth / 2 + 0.005]}>
-            <planeGeometry args={[phoneWidth - 0.16, phoneHeight - 0.2]} />
+        {screenTexture ? (
+          <mesh position={[0, 0, 0.076]}>
+            <planeGeometry args={[phoneWidth - 0.12, phoneHeight - 0.16]} />
             <meshBasicMaterial map={screenTexture} toneMapped={false} />
           </mesh>
+        ) : (
+          <mesh position={[0, 0, 0.076]}>
+            <planeGeometry args={[phoneWidth - 0.12, phoneHeight - 0.16]} />
+            <meshBasicMaterial color="#11141C" />
+          </mesh>
         )}
+
+        {/* Punch Hole Camera at Top */}
+        <mesh position={[0, phoneHeight / 2 - 0.22, 0.078]}>
+          <circleGeometry args={[0.045, 24]} />
+          <meshBasicMaterial color="#000000" />
+        </mesh>
       </group>
 
       {/* Layer 2: Domain & StateFlow Slab */}
@@ -365,11 +506,14 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           radius={cornerRadius * 0.8}
           smoothness={6}
           material={stateLayerMaterial}
+          position={[0, 0, 0]}
         />
-        {/* Etched Conductive Logic Lines */}
         <mesh position={[0, 0, slabDepth / 2 + 0.002]}>
           <planeGeometry args={[phoneWidth * 0.85, phoneHeight * 0.85]} />
-          <meshBasicMaterial color={isLayerActive(2) ? "#2B5BFF" : "#1F2942"} wireframe />
+          <meshBasicMaterial
+            color={isLayerActive(2) ? "#2B5BFF" : "#1F2942"}
+            wireframe
+          />
         </mesh>
       </group>
 
@@ -384,11 +528,14 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           radius={cornerRadius * 0.8}
           smoothness={6}
           material={roomDbMaterial}
+          position={[0, 0, -0.04]}
         />
-        {/* Database Schema Grid */}
-        <mesh position={[0, 0, slabDepth / 2 + 0.002]}>
+        <mesh position={[0, 0, -0.04 + slabDepth / 2 + 0.002]}>
           <planeGeometry args={[phoneWidth * 0.85, phoneHeight * 0.85]} />
-          <meshBasicMaterial color={isLayerActive(3) ? "#2B5BFF" : "#1B212D"} wireframe />
+          <meshBasicMaterial
+            color={isLayerActive(3) ? "#2B5BFF" : "#1B212D"}
+            wireframe
+          />
         </mesh>
       </group>
 
@@ -403,10 +550,10 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           radius={cornerRadius * 0.8}
           smoothness={6}
           material={cipherMaterial}
+          position={[0, 0, -0.08]}
         />
-        {/* Cipher Lock Indicator */}
-        <mesh position={[0, 0, slabDepth / 2 + 0.004]}>
-          <ringGeometry args={[0.25, 0.35, 32]} />
+        <mesh position={[0, 0, -0.08 + slabDepth / 2 + 0.004]}>
+          <ringGeometry args={[0.22, 0.32, 32]} />
           <meshBasicMaterial color={isLayerActive(4) ? "#FF8A65" : "#D95C36"} />
         </mesh>
       </group>
@@ -422,14 +569,27 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           radius={cornerRadius * 0.7}
           smoothness={6}
           material={keystoreMaterial}
+          position={[0, 0, -0.14]}
         />
-        {/* Silicon Die Core */}
-        <mesh position={[0, 0, (slabDepth * 1.5) / 2 + 0.005]}>
-          <boxGeometry args={[1.1, 1.1, 0.02]} />
-          <meshStandardMaterial color="#0A0B0F" metalness={0.95} roughness={0.1} />
+        <mesh position={[0, 0, -0.14 + (slabDepth * 1.5) / 2 + 0.005]}>
+          <boxGeometry args={[1.0, 1.0, 0.02]} />
+          <meshStandardMaterial
+            color="#0A0B0F"
+            metalness={0.95}
+            roughness={0.1}
+          />
         </mesh>
       </group>
+
+      {/* Subtle floor contact shadow underneath the phone */}
+      <mesh position={[0, -phoneHeight / 2 - 0.25, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[phoneWidth * 1.3, 1.4]} />
+        <meshBasicMaterial
+          color="#000000"
+          transparent
+          opacity={0.35}
+        />
+      </mesh>
     </group>
   );
 };
-
