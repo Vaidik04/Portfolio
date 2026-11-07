@@ -34,9 +34,8 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   const [screenTexture, setScreenTexture] = useState<THREE.CanvasTexture | null>(null);
   const [hoveredLayer, setHoveredLayer] = useState<number | null>(null);
 
-  // Auto-carousel state (cycles every 5 seconds unless user interacted recently)
+  // Auto-carousel state (cycles every 5.5 seconds unless user interacted recently)
   const lastUserInteraction = useRef<number>(Date.now());
-  const autoCycleTimer = useRef<NodeJS.Timeout | null>(null);
 
   // Drag rotation state for interactive 360 inspection
   const isDragging = useRef(false);
@@ -60,7 +59,6 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   useEffect(() => {
     const interval = setInterval(() => {
       const timeSinceUser = Date.now() - lastUserInteraction.current;
-      // If no interaction in last 7 seconds, auto-cycle
       if (timeSinceUser > 7000 && !manualExploded) {
         const currentIndex = APP_ORDER.indexOf(activeAppId);
         const nextIndex = (currentIndex + 1) % APP_ORDER.length;
@@ -102,7 +100,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       const x = startX + i * (segmentWidth + gap);
       const isCurrent = app === appId;
 
-      ctx.fillStyle = isCurrent ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.18)";
+      ctx.fillStyle = isCurrent ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.2)";
       ctx.beginPath();
       ctx.roundRect(x, 40, segmentWidth, 8, 4);
       ctx.fill();
@@ -164,7 +162,6 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.font = "bold 28px monospace";
       ctx.fillText("TAX INVOICE #JB-2026-89", 120, 375);
 
-      // Verified pill
       ctx.fillStyle = "rgba(245, 158, 11, 0.15)";
       ctx.strokeStyle = "rgba(245, 158, 11, 0.4)";
       ctx.beginPath();
@@ -285,7 +282,6 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.font = "bold 28px monospace";
       ctx.fillText("COURT 4 · ITEM #12", 120, 375);
 
-      // Alert badge
       ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
       ctx.strokeStyle = "rgba(239, 68, 68, 0.4)";
       ctx.beginPath();
@@ -517,12 +513,39 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     renderScreen(activeAppId);
   }, [activeAppId, renderScreen]);
 
-  // Physically-based materials
+  // Physically-based Titanium and Ceramic materials
   const chassisMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#181B22",
-      metalness: 0.9,
-      roughness: 0.22,
+      color: "#161920",
+      metalness: 0.92,
+      roughness: 0.2,
+    });
+  }, []);
+
+  const buttonMaterial = React.useMemo(() => {
+    return new THREE.MeshStandardMaterial({
+      color: "#2B303C",
+      metalness: 0.95,
+      roughness: 0.15,
+    });
+  }, []);
+
+  const antennaMaterial = React.useMemo(() => {
+    return new THREE.MeshBasicMaterial({
+      color: "#0B0D12",
+    });
+  }, []);
+
+  const lensGlassMaterial = React.useMemo(() => {
+    return new THREE.MeshPhysicalMaterial({
+      color: "#080A10",
+      metalness: 0.2,
+      roughness: 0.05,
+      transmission: 0.8,
+      thickness: 0.5,
+      ior: 1.7,
+      transparent: true,
+      opacity: 0.9,
     });
   }, []);
 
@@ -541,32 +564,32 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   const stateLayerMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: "#151924",
-      metalness: 0.65,
-      roughness: 0.35,
+      metalness: 0.7,
+      roughness: 0.3,
     });
   }, []);
 
   const roomDbMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#10131A",
-      metalness: 0.5,
-      roughness: 0.45,
+      color: "#0E1118",
+      metalness: 0.55,
+      roughness: 0.4,
     });
   }, []);
 
   const cipherMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: "#9A4020", // Brushed Copper / Security Ochre
-      metalness: 0.85,
-      roughness: 0.28,
+      metalness: 0.88,
+      roughness: 0.25,
     });
   }, []);
 
   const keystoreMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#0B0D12",
-      metalness: 0.95,
-      roughness: 0.15,
+      color: "#0A0C10",
+      metalness: 0.96,
+      roughness: 0.12,
     });
   }, []);
 
@@ -594,8 +617,17 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     let targetRotZ = 0;
     let targetScale = isMobile ? 0.62 : 0.82;
 
-    if (manualExploded) {
-      targetX = isMobile ? 0 : 0.4;
+    if (focusedLayer !== null && (manualExploded || (p >= 0.16 && p <= 0.48))) {
+      // Focused layer camera framing
+      targetX = isMobile ? 0 : -0.2;
+      targetY = 0.1;
+      targetZ = 0.9;
+      targetRotX = 0.28;
+      targetRotY = -0.45;
+      targetRotZ = 0.1;
+      targetScale = isMobile ? 0.65 : 0.92;
+    } else if (manualExploded) {
+      targetX = isMobile ? 0 : 0.35;
       targetY = 0.1;
       targetZ = 0.5;
       targetRotX = 0.35;
@@ -789,17 +821,78 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           <boxGeometry args={[phoneWidth + 0.06, phoneHeight + 0.06, 0.16]} />
         </mesh>
 
+        {/* Physical Side Buttons */}
+        {/* Power Button (Right) */}
+        <mesh material={buttonMaterial} position={[phoneWidth / 2 + 0.035, 0.8, -0.06]}>
+          <boxGeometry args={[0.02, 0.5, 0.04]} />
+        </mesh>
+        {/* Action Button (Left Top) */}
+        <mesh material={buttonMaterial} position={[-phoneWidth / 2 - 0.035, 1.2, -0.06]}>
+          <boxGeometry args={[0.02, 0.25, 0.04]} />
+        </mesh>
+        {/* Volume Up / Down (Left) */}
+        <mesh material={buttonMaterial} position={[-phoneWidth / 2 - 0.035, 0.7, -0.06]}>
+          <boxGeometry args={[0.02, 0.45, 0.04]} />
+        </mesh>
+        <mesh material={buttonMaterial} position={[-phoneWidth / 2 - 0.035, 0.1, -0.06]}>
+          <boxGeometry args={[0.02, 0.45, 0.04]} />
+        </mesh>
+
+        {/* Antenna Bands on titanium rim */}
+        <mesh material={antennaMaterial} position={[phoneWidth / 2 + 0.031, 1.6, -0.06]}>
+          <boxGeometry args={[0.005, 0.04, 0.162]} />
+        </mesh>
+        <mesh material={antennaMaterial} position={[-phoneWidth / 2 - 0.031, 1.6, -0.06]}>
+          <boxGeometry args={[0.005, 0.04, 0.162]} />
+        </mesh>
+        <mesh material={antennaMaterial} position={[phoneWidth / 2 + 0.031, -1.6, -0.06]}>
+          <boxGeometry args={[0.005, 0.04, 0.162]} />
+        </mesh>
+        <mesh material={antennaMaterial} position={[-phoneWidth / 2 - 0.031, -1.6, -0.06]}>
+          <boxGeometry args={[0.005, 0.04, 0.162]} />
+        </mesh>
+
         {/* Camera bump on back of phone */}
         <mesh material={chassisMaterial} position={[-0.6, 1.6, -0.16]}>
-          <boxGeometry args={[0.8, 1.0, 0.06]} />
+          <boxGeometry args={[0.82, 1.05, 0.06]} />
         </mesh>
-        <mesh position={[-0.6, 1.75, -0.2]}>
-          <cylinderGeometry args={[0.12, 0.12, 0.05, 24]} />
-          <meshStandardMaterial color="#0A0C10" metalness={0.9} roughness={0.1} />
+
+        {/* Triple Camera Lenses with Sapphire Glass & Iridescent Rings */}
+        <mesh position={[-0.6, 1.82, -0.2]}>
+          <cylinderGeometry args={[0.13, 0.13, 0.04, 32]} />
+          <meshStandardMaterial color="#0A0C10" metalness={0.95} roughness={0.08} />
         </mesh>
-        <mesh position={[-0.6, 1.45, -0.2]}>
-          <cylinderGeometry args={[0.12, 0.12, 0.05, 24]} />
-          <meshStandardMaterial color="#0A0C10" metalness={0.9} roughness={0.1} />
+        <mesh position={[-0.6, 1.82, -0.22]} material={lensGlassMaterial}>
+          <cylinderGeometry args={[0.11, 0.11, 0.01, 32]} />
+        </mesh>
+
+        <mesh position={[-0.6, 1.4, -0.2]}>
+          <cylinderGeometry args={[0.13, 0.13, 0.04, 32]} />
+          <meshStandardMaterial color="#0A0C10" metalness={0.95} roughness={0.08} />
+        </mesh>
+        <mesh position={[-0.6, 1.4, -0.22]} material={lensGlassMaterial}>
+          <cylinderGeometry args={[0.11, 0.11, 0.01, 32]} />
+        </mesh>
+
+        {/* Ultra-Wide Third Lens */}
+        <mesh position={[-0.32, 1.61, -0.2]}>
+          <cylinderGeometry args={[0.11, 0.11, 0.04, 32]} />
+          <meshStandardMaterial color="#0A0C10" metalness={0.95} roughness={0.08} />
+        </mesh>
+        <mesh position={[-0.32, 1.61, -0.22]} material={lensGlassMaterial}>
+          <cylinderGeometry args={[0.09, 0.09, 0.01, 32]} />
+        </mesh>
+
+        {/* Dual LED True-Tone Flash */}
+        <mesh position={[-0.85, 1.82, -0.19]}>
+          <circleGeometry args={[0.045, 16]} />
+          <meshBasicMaterial color="#FFEDB3" />
+        </mesh>
+
+        {/* LiDAR Scanner */}
+        <mesh position={[-0.85, 1.4, -0.19]}>
+          <circleGeometry args={[0.04, 16]} />
+          <meshBasicMaterial color="#050608" />
         </mesh>
 
         {/* Layer 1: Jetpack Compose Presentation Slab & Display Face */}
@@ -820,7 +913,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
             position={[0, 0, 0.04]}
           />
 
-          {/* Screen Display Face */}
+          {/* Screen Display Face with Subtle Ambient Emissive Glow */}
           {screenTexture ? (
             <mesh position={[0, 0, 0.076]}>
               <planeGeometry args={[phoneWidth - 0.12, phoneHeight - 0.16]} />
@@ -846,7 +939,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
                 onClick={() => setFocusedLayer(1)}
                 className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(1)
-                    ? "bg-brand text-white border-brand scale-105"
+                    ? "bg-brand text-white border-brand scale-105 shadow-[0_0_20px_rgba(43,91,255,0.4)]"
                     : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-brand/50"
                 }`}
               >
@@ -891,7 +984,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
                 onClick={() => setFocusedLayer(2)}
                 className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(2)
-                    ? "bg-brand text-white border-brand scale-105"
+                    ? "bg-brand text-white border-brand scale-105 shadow-[0_0_20px_rgba(43,91,255,0.4)]"
                     : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-brand/50"
                 }`}
               >
@@ -936,7 +1029,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
                 onClick={() => setFocusedLayer(3)}
                 className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(3)
-                    ? "bg-brand text-white border-brand scale-105"
+                    ? "bg-brand text-white border-brand scale-105 shadow-[0_0_20px_rgba(43,91,255,0.4)]"
                     : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-brand/50"
                 }`}
               >
@@ -978,7 +1071,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
                 onClick={() => setFocusedLayer(4)}
                 className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(4)
-                    ? "bg-[#D95C36] text-white border-[#D95C36] scale-105"
+                    ? "bg-[#D95C36] text-white border-[#D95C36] scale-105 shadow-[0_0_20px_rgba(217,92,54,0.4)]"
                     : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-[#D95C36]/60"
                 }`}
               >
@@ -1024,7 +1117,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
                 onClick={() => setFocusedLayer(5)}
                 className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(5)
-                    ? "bg-purple-600 text-white border-purple-500 scale-105"
+                    ? "bg-purple-600 text-white border-purple-500 scale-105 shadow-[0_0_20px_rgba(168,85,247,0.4)]"
                     : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-purple-500/60"
                 }`}
               >
@@ -1037,12 +1130,6 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
             </Html>
           )}
         </group>
-
-        {/* Subtle floor contact shadow underneath the phone */}
-        <mesh position={[0, -phoneHeight / 2 - 0.25, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[phoneWidth * 1.3, 1.4]} />
-          <meshBasicMaterial color="#000000" transparent opacity={0.35} />
-        </mesh>
       </group>
     </group>
   );

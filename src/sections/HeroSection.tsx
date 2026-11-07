@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Play, Layers, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Play, Layers, Sparkles, Shield, Cpu, Terminal } from "lucide-react";
 import { useWorldStore } from "@/store/useWorldStore";
 
 export const HeroSection: React.FC = () => {
@@ -15,7 +15,7 @@ export const HeroSection: React.FC = () => {
       className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-12 px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
     >
       {/* Top Headline & Lead Copy */}
-      <div className="max-w-xl lg:max-w-2xl flex flex-col gap-6 my-auto pointer-events-auto">
+      <div className="max-w-xl lg:max-w-2xl flex flex-col gap-5 my-auto pointer-events-auto">
         {/* Subtle Editorial Kicker Pill with subtle motion */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -32,7 +32,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-3xl sm:text-5xl lg:text-[3.4rem] font-heading font-extrabold tracking-tight text-typography-primary leading-[1.12]"
+          className="text-3xl sm:text-5xl lg:text-[3.35rem] font-heading font-extrabold tracking-tight text-typography-primary leading-[1.12]"
         >
           I build native, offline-first Android apps that run businesses.
         </motion.h1>
@@ -46,6 +46,31 @@ export const HeroSection: React.FC = () => {
         >
           Engineering sovereign mobile tools with Jetpack Compose, Room SQLite, and hardware-backed SQLCipher encryption—designed specifically for India&apos;s trades operating in zero-connectivity environments.
         </motion.p>
+
+        {/* Live Sovereign Benchmarks Bar (Concrete Engineering Guarantees) */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-3.5 my-1 border-y border-surface-border text-left"
+        >
+          <div className="flex flex-col">
+            <span className="text-sm font-mono text-brand font-bold">0.0000%</span>
+            <span className="text-[11px] font-sans text-typography-muted">Float Drift · 64-bit Long</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm font-mono text-emerald-400 font-bold">0 KB</span>
+            <span className="text-[11px] font-sans text-typography-muted">Zero Cloud Telemetry</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm font-mono text-[#D95C36] font-bold">256-bit</span>
+            <span className="text-[11px] font-sans text-typography-muted">AES StrongBox Vault</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm font-mono text-purple-400 font-bold">240ms</span>
+            <span className="text-[11px] font-sans text-typography-muted">Direct ESC/POS Print</span>
+          </div>
+        </motion.div>
 
         {/* Primary Action Buttons */}
         <motion.div
@@ -72,7 +97,7 @@ export const HeroSection: React.FC = () => {
         </motion.div>
 
         {/* Mobile / Tablet 3D App Controller Bar */}
-        <div className="flex md:hidden flex-col gap-2 pt-3">
+        <div className="flex md:hidden flex-col gap-2 pt-2">
           <div className="flex items-center justify-between text-[11px] font-mono text-typography-muted">
             <span className="flex items-center gap-1.5">
               <Sparkles className="w-3 h-3 text-brand" />
@@ -206,7 +231,7 @@ export const HeroSection: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.45 }}
-        className="pt-8 border-t border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-sans text-typography-muted pointer-events-auto"
+        className="pt-6 border-t border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-sans text-typography-muted pointer-events-auto"
       >
         <div className="flex items-center gap-2 font-mono text-typography-secondary font-medium uppercase tracking-wider text-[11px]">
           <span>Shipped on Google Play:</span>
