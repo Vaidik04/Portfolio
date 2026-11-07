@@ -54,7 +54,7 @@ export const useWorldStore = create<WorldState>((set) => ({
   activeSection: "hero",
   setActiveSection: (activeSection) => set({ activeSection }),
 
-  isBooted: false,
+  isBooted: true,
   setBooted: (isBooted) => set({ isBooted }),
 
   soundEnabled: false,

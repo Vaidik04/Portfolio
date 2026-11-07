@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import Lenis from "lenis";
-import { StudioPreloader } from "@/components/preloader/StudioPreloader";
 import { WorldCanvas } from "@/components/canvas/WorldCanvas";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { Navbar } from "@/components/navbar/Navbar";
@@ -65,16 +64,7 @@ export default function Home() {
 
   return (
     <>
-      {/* 1. Fast, Quiet Typographic Preloader */}
-      {!isBooted && (
-        <StudioPreloader
-          onComplete={() => {
-            setBooted(true);
-          }}
-        />
-      )}
-
-      {/* 2. Single Continuous 3D WebGL World Canvas (Exploded Phone & Architecture) */}
+      {/* 1. Single Continuous 3D WebGL World Canvas (Exploded Phone & Architecture) */}
       <WorldCanvas />
 
       {/* 3. Purposeful Command Palette (Press Ctrl+K / Cmd+K) */}
