@@ -8,36 +8,6 @@ import { useWorldStore } from "@/store/useWorldStore";
 
 const APP_ORDER: ("girvi" | "jewelbill" | "advokosh")[] = ["girvi", "jewelbill", "advokosh"];
 
-// Bulletproof Universal Rounded Rectangle polyfill for HTML5 Canvas2D
-const drawRoundedRect = (
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  r: number
-) => {
-  if (typeof (ctx as any).roundRect === "function") {
-    try {
-      (ctx as any).roundRect(x, y, w, h, r);
-      return;
-    } catch {
-      // Fall through to manual bezier path
-    }
-  }
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.lineTo(x + w - r, y);
-  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-  ctx.lineTo(x + w, y + h - r);
-  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-  ctx.lineTo(x + r, y + h);
-  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-  ctx.lineTo(x, y + r);
-  ctx.quadraticCurveTo(x, y, x + r, y);
-  ctx.closePath();
-};
-
 interface PhoneExplodedLayersProps {
   onLayerHover?: (layerId: number | null) => void;
   activeLayerOverride?: number | null;
@@ -131,7 +101,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
 
       ctx.fillStyle = isCurrent ? "#D4A24C" : "rgba(154, 154, 159, 0.25)";
       ctx.beginPath();
-      drawRoundedRect(ctx, x, 40, segmentWidth, 8, 4);
+      ctx.roundRect(x, 40, segmentWidth, 8, 4);
       ctx.fill();
 
       // App Name under segment indicator
@@ -154,7 +124,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       // JEWELBILL APP UI (JEWELLERY POS & INVOICING)
       ctx.fillStyle = "#D4A24C";
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 160, 60, 60, 16);
+      ctx.roundRect(80, 160, 60, 60, 16);
       ctx.fill();
 
       ctx.fillStyle = "#14110A";
@@ -170,7 +140,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 235, 430, 48, 24);
+      ctx.roundRect(80, 235, 430, 48, 24);
       ctx.fill();
       ctx.stroke();
 
@@ -183,7 +153,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 310, 920, 495, 36);
+      ctx.roundRect(80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -194,7 +164,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillStyle = "rgba(212, 162, 76, 0.12)";
       ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.beginPath();
-      drawRoundedRect(ctx, 740, 340, 220, 44, 22);
+      ctx.roundRect(740, 340, 220, 44, 22);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = "#D4A24C";
@@ -216,7 +186,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillStyle = "rgba(212, 162, 76, 0.15)";
       ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.beginPath();
-      drawRoundedRect(ctx, 120, 630, 480, 44, 22);
+      ctx.roundRect(120, 630, 480, 44, 22);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = "#E4B766";
@@ -233,7 +203,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 835, 920, 385, 36);
+      ctx.roundRect(80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -249,13 +219,13 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.font = "26px monospace";
       ctx.fillText("Driver: Raw binary bitmap stream; zero print spoolers", 120, 1035);
       ctx.fillText("Storage: Encrypted Room SQLite with daily hash-tree export", 120, 1085);
-      ctx.fillText("Sovereignty: 0 KB External Cloud Telemetry in low-signal bazaars", 120, 1135);
+      ctx.fillText("Offline Uptime: 100% Counter Uptime in low-signal bazaars", 120, 1135);
 
       // Card 3: Line Items
       ctx.fillStyle = "#16171A";
       ctx.strokeStyle = "#2A2C31";
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 1250, 920, 520, 36);
+      ctx.roundRect(80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -274,7 +244,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       // ADVOKOSH APP UI (ADVOCATE CASE DIARY)
       ctx.fillStyle = "#D4A24C";
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 160, 60, 60, 16);
+      ctx.roundRect(80, 160, 60, 60, 16);
       ctx.fill();
 
       ctx.fillStyle = "#14110A";
@@ -290,7 +260,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 235, 420, 48, 24);
+      ctx.roundRect(80, 235, 420, 48, 24);
       ctx.fill();
       ctx.stroke();
 
@@ -303,7 +273,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 310, 920, 495, 36);
+      ctx.roundRect(80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -314,7 +284,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillStyle = "rgba(217, 92, 92, 0.15)";
       ctx.strokeStyle = "rgba(217, 92, 92, 0.4)";
       ctx.beginPath();
-      drawRoundedRect(ctx, 720, 340, 240, 44, 22);
+      ctx.roundRect(720, 340, 240, 44, 22);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = "#D95C5C";
@@ -336,7 +306,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillStyle = "rgba(212, 162, 76, 0.15)";
       ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.beginPath();
-      drawRoundedRect(ctx, 120, 630, 480, 44, 22);
+      ctx.roundRect(120, 630, 480, 44, 22);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = "#E4B766";
@@ -353,7 +323,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 835, 920, 385, 36);
+      ctx.roundRect(80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -375,7 +345,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillStyle = "#16171A";
       ctx.strokeStyle = "#2A2C31";
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 1250, 920, 520, 36);
+      ctx.roundRect(80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -394,7 +364,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       // GIRVI APP UI (GOLD LOAN & PAWN LEDGER)
       ctx.fillStyle = "#D4A24C";
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 160, 60, 60, 16);
+      ctx.roundRect(80, 160, 60, 60, 16);
       ctx.fill();
 
       ctx.fillStyle = "#14110A";
@@ -410,7 +380,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 235, 410, 48, 24);
+      ctx.roundRect(80, 235, 410, 48, 24);
       ctx.fill();
       ctx.stroke();
 
@@ -423,7 +393,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 310, 920, 495, 36);
+      ctx.roundRect(80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -434,7 +404,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillStyle = "rgba(78, 154, 104, 0.15)";
       ctx.strokeStyle = "rgba(78, 154, 104, 0.4)";
       ctx.beginPath();
-      drawRoundedRect(ctx, 740, 340, 220, 44, 22);
+      ctx.roundRect(740, 340, 220, 44, 22);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = "#4E9A68";
@@ -456,7 +426,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillStyle = "rgba(212, 162, 76, 0.15)";
       ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.beginPath();
-      drawRoundedRect(ctx, 120, 630, 480, 44, 22);
+      ctx.roundRect(120, 630, 480, 44, 22);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = "#E4B766";
@@ -473,7 +443,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 835, 920, 385, 36);
+      ctx.roundRect(80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -495,7 +465,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillStyle = "#16171A";
       ctx.strokeStyle = "#2A2C31";
       ctx.beginPath();
-      drawRoundedRect(ctx, 80, 1250, 920, 520, 36);
+      ctx.roundRect(80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
@@ -515,7 +485,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     // Bottom Navigation Bar
     ctx.fillStyle = "#16171A";
     ctx.beginPath();
-    drawRoundedRect(ctx, 80, 1830, 920, 130, 36);
+    ctx.roundRect(80, 1830, 920, 130, 36);
     ctx.fill();
 
     ctx.fillStyle = "#D4A24C";
@@ -527,7 +497,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     // Dynamic Island / Home Indicator
     ctx.fillStyle = "#ECE8DF";
     ctx.beginPath();
-    drawRoundedRect(ctx, 390, 2170, 300, 10, 5);
+    ctx.roundRect(390, 2170, 300, 10, 5);
     ctx.fill();
 
     const texture = new THREE.CanvasTexture(canvas);
@@ -566,21 +536,27 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   }, []);
 
   const lensGlassMaterial = React.useMemo(() => {
-    return new THREE.MeshStandardMaterial({
-      color: "#050608",
-      metalness: 0.95,
-      roughness: 0.08,
+    return new THREE.MeshPhysicalMaterial({
+      color: "#0A0C10",
+      metalness: 0.2,
+      roughness: 0.05,
+      transmission: 0.8,
+      thickness: 0.5,
+      ior: 1.7,
+      transparent: true,
+      opacity: 0.9,
     });
   }, []);
 
   const glassMaterial = React.useMemo(() => {
-    return new THREE.MeshStandardMaterial({
-      color: "#ECE8DF",
-      metalness: 0.1,
+    return new THREE.MeshPhysicalMaterial({
+      color: "#FFFFFF",
+      metalness: 0.05,
       roughness: 0.05,
+      transmission: 0.92,
+      thickness: 0.2,
       transparent: true,
-      opacity: 0.18,
-      depthWrite: false,
+      opacity: 0.95,
     });
   }, []);
 
@@ -935,19 +911,19 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
 
           {/* Screen Display Face */}
           {screenTexture ? (
-            <mesh position={[0, 0, 0.082]} renderOrder={20}>
+            <mesh position={[0, 0, 0.076]}>
               <planeGeometry args={[phoneWidth - 0.12, phoneHeight - 0.16]} />
               <meshBasicMaterial map={screenTexture} toneMapped={false} />
             </mesh>
           ) : (
-            <mesh position={[0, 0, 0.082]} renderOrder={20}>
+            <mesh position={[0, 0, 0.076]}>
               <planeGeometry args={[phoneWidth - 0.12, phoneHeight - 0.16]} />
               <meshBasicMaterial color="#11141C" />
             </mesh>
           )}
 
           {/* Punch Hole Camera at Top */}
-          <mesh position={[0, phoneHeight / 2 - 0.22, 0.084]} renderOrder={22}>
+          <mesh position={[0, phoneHeight / 2 - 0.22, 0.078]}>
             <circleGeometry args={[0.045, 24]} />
             <meshBasicMaterial color="#000000" />
           </mesh>
