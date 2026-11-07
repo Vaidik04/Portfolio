@@ -148,23 +148,23 @@ export const EngineeringStandardsSection: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col gap-4 mb-16">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-brand" />
-          <span className="text-xs font-mono tracking-wider uppercase text-typography-muted">
-            02 · Engineering Discipline & Standards
+          <span className="w-2 h-2 rounded-full bg-accent" />
+          <span className="text-xs font-mono tracking-wider uppercase text-text-muted">
+            Engineering Discipline & Standards
           </span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-text leading-tight">
           How I build.
         </h2>
-        <p className="text-base sm:text-lg text-typography-secondary font-sans leading-relaxed max-w-2xl">
+        <p className="text-base sm:text-lg text-text-muted font-sans leading-relaxed max-w-2xl">
           Sovereign software requires uncompromising engineering standards: zero-drift monetary math, hardware-backed cryptographic key isolation, and deterministic schema migrations.
         </p>
       </div>
 
       {/* Code Inspector Shell */}
-      <div className="rounded-2xl border border-surface-border bg-surface overflow-hidden shadow-2xl">
+      <div className="rounded-2xl border border-border bg-surface-1 overflow-hidden shadow-2xl">
         {/* Code Tabs Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-surface-border bg-surface-elevated/80 px-4 py-2 gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border bg-surface-2/80 px-4 py-2 gap-3">
           <div className="flex items-center gap-2 overflow-x-auto">
             {STANDARDS_SNIPPETS.map((snip, index) => (
               <button
@@ -176,8 +176,8 @@ export const EngineeringStandardsSection: React.FC = () => {
                 }}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors flex items-center gap-2 whitespace-nowrap ${
                   activeTab === index
-                    ? "bg-surface text-brand font-semibold border border-surface-border"
-                    : "text-typography-muted hover:text-typography-primary"
+                    ? "bg-surface-1 text-accent font-semibold border border-border"
+                    : "text-text-muted hover:text-text"
                 }`}
               >
                 <Terminal className="w-3.5 h-3.5" />
@@ -186,28 +186,28 @@ export const EngineeringStandardsSection: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex items-center justify-between sm:justify-end gap-3 text-xs font-mono text-typography-muted">
-            <span className="text-[11px] text-typography-muted hidden md:inline">
+          <div className="flex items-center justify-between sm:justify-end gap-3 text-xs font-mono text-text-muted">
+            <span className="text-[11px] text-text-muted hidden md:inline">
               {current.app}
             </span>
             <button
               onClick={handleCopy}
-              className="p-1.5 rounded hover:bg-surface border border-surface-border text-typography-secondary hover:text-typography-primary transition-colors flex items-center gap-1.5"
+              className="p-1.5 rounded hover:bg-surface-2 border border-border text-text-muted hover:text-text transition-colors flex items-center gap-1.5"
               title="Copy snippet"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-brand" /> : <Copy className="w-3.5 h-3.5" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-accent" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="text-[10px]">{copied ? "Copied" : "Copy"}</span>
             </button>
           </div>
         </div>
 
         {/* Code Explanation Bar */}
-        <div className="p-4 sm:p-6 bg-surface border-b border-surface-border text-xs sm:text-sm font-sans text-typography-secondary leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-4 sm:p-6 bg-surface-1 border-b border-border text-xs sm:text-sm font-sans text-text-muted leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex-1">{current.description}</div>
           <button
             onClick={runSimulation}
             disabled={testing}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand/15 hover:bg-brand/25 border border-brand/40 text-brand text-xs font-mono font-semibold transition-all whitespace-nowrap shadow-sm hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent text-accent-on text-xs font-mono font-semibold transition-all whitespace-nowrap shadow-sm hover:scale-[1.02] active:scale-[0.98]"
           >
             {testing ? (
               <>

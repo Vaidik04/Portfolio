@@ -134,14 +134,14 @@ export const ArchitectureExplodedSection: React.FC = () => {
                     onClick={() => setFocusedLayer(layer.id)}
                     className={`p-4 rounded-xl text-left border transition-all flex items-center justify-between group ${
                       isSelected
-                        ? "bg-surface-elevated border-brand text-white shadow-[0_0_20px_rgba(43,91,255,0.2)]"
+                        ? "bg-surface-elevated border-accent text-text shadow-[0_0_20px_rgba(212,162,76,0.25)]"
                         : "bg-surface/50 border-surface-border text-typography-secondary hover:border-surface-border-hover hover:text-typography-primary"
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <span
                         className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
-                          isSelected ? "bg-brand text-white" : "bg-white/5 text-typography-muted"
+                          isSelected ? "bg-accent text-accent-on" : "bg-white/5 text-typography-muted"
                         }`}
                       >
                         {layer.label}

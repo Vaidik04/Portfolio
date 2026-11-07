@@ -42,36 +42,36 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B0C0E] text-typography-primary flex flex-col selection:bg-brand selection:text-white">
+    <div className="min-h-screen bg-bg text-text flex flex-col selection:bg-accent selection:text-accent-on">
       <Navbar />
 
       <main className="flex-1 max-w-6xl mx-auto px-6 pt-32 sm:pt-40 pb-24 w-full">
         {/* Breadcrumb */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-mono text-typography-secondary hover:text-brand transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent transition-colors mb-8"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Home</span>
         </Link>
 
         {/* Hero Header */}
-        <div className="pb-12 border-b border-surface-border">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/30 text-brand text-xs font-mono uppercase tracking-widest mb-4">
+        <div className="pb-12 border-b border-border">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-mono uppercase tracking-widest mb-4">
             <span>Independent Android Developer & Founder</span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-heading font-extrabold tracking-tight text-typography-primary leading-tight">
+          <h1 className="text-4xl sm:text-6xl font-heading font-extrabold tracking-tight text-text leading-tight">
             Vaidik Gandhi
           </h1>
-          <p className="text-typography-secondary text-lg sm:text-xl max-w-3xl mt-4 font-sans leading-relaxed">
+          <p className="text-text-muted text-lg sm:text-xl max-w-3xl mt-4 font-sans leading-relaxed">
             I am an independent Android developer and the founder of <strong>VaidikTech</strong>. I build native Android applications that solve practical problems, simplify everyday workflows, and make technology dependable for people and businesses.
           </p>
         </div>
 
         {/* Narrative & Photo Section */}
-        <section className="py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-surface-border">
-          <div className="lg:col-span-7 space-y-6 text-sm sm:text-base text-typography-secondary leading-relaxed font-sans">
-            <h2 className="text-2xl font-heading font-bold text-typography-primary">
+        <section className="py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-border">
+          <div className="lg:col-span-7 space-y-6 text-sm sm:text-base text-text-muted leading-relaxed font-sans">
+            <h2 className="text-2xl font-heading font-bold text-text">
               Engineering Beyond Code
             </h2>
             <p>
@@ -90,14 +90,14 @@ export default function AboutPage() {
             <div className="pt-4 flex flex-wrap gap-3">
               <Link
                 href="/#work"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand hover:bg-brand-light text-white text-xs font-sans font-semibold shadow-md transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent hover:bg-accent-hover text-accent-on text-xs font-sans font-semibold shadow-brass transition-all hover:scale-105"
               >
                 <span>View Flagship Apps</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
               <Link
                 href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-surface-border hover:border-surface-border-hover text-xs font-mono text-typography-secondary hover:text-white transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border hover:border-border-hover text-xs font-mono text-text-muted hover:text-text transition-all"
               >
                 <span>Get in Touch</span>
               </Link>
@@ -105,8 +105,8 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5 flex flex-col gap-6">
-            <div className="rounded-3xl overflow-hidden border border-surface-border bg-surface p-3 shadow-xl relative group">
-              <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#0A0D16]">
+            <div className="rounded-3xl overflow-hidden border border-border bg-surface-1 p-3 shadow-xl relative group">
+              <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-surface-2">
                 <Image
                   src="/assets/vaidik_3d_avatar_portrait.jpg"
                   alt="Vaidik Gandhi 3D Avatar"
@@ -117,31 +117,31 @@ export default function AboutPage() {
               <div className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-base font-heading font-bold text-typography-primary">Vaidik Gandhi</h3>
-                    <p className="text-xs font-mono text-brand">Founder @ VaidikTech</p>
+                    <h3 className="text-base font-heading font-bold text-text">Vaidik Gandhi</h3>
+                    <p className="text-xs font-mono text-accent">Founder @ VaidikTech</p>
                   </div>
-                  <span className="text-xs font-mono text-typography-muted">Bhopal, India</span>
+                  <span className="text-xs font-mono text-text-muted">Bhopal, India</span>
                 </div>
               </div>
             </div>
 
-            {/* Verified Bio Cards */}
+            {/* Verified Bio Cards (Zero Vanity Metrics) */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="p-4 rounded-2xl bg-surface border border-surface-border">
-                <span className="text-2xl font-mono font-bold text-brand">3 Apps</span>
-                <p className="text-xs text-typography-muted mt-1">Google Play Releases</p>
+              <div className="p-4 rounded-2xl bg-surface-1 border border-border">
+                <span className="text-2xl font-mono font-bold text-accent">3 Apps</span>
+                <p className="text-xs text-text-muted mt-1">Google Play Releases</p>
               </div>
-              <div className="p-4 rounded-2xl bg-surface border border-surface-border">
-                <span className="text-2xl font-mono font-bold text-white">{PROJECTS.length}+ Projects</span>
-                <p className="text-xs text-typography-muted mt-1">Engineered & Maintained</p>
+              <div className="p-4 rounded-2xl bg-surface-1 border border-border">
+                <span className="text-2xl font-mono font-bold text-text">256-bit</span>
+                <p className="text-xs text-text-muted mt-1">AES StrongBox Vault</p>
               </div>
-              <div className="p-4 rounded-2xl bg-surface border border-surface-border">
-                <span className="text-2xl font-mono font-bold text-brand">Offline</span>
-                <p className="text-xs text-typography-muted mt-1">Girvi Sovereign Storage</p>
+              <div className="p-4 rounded-2xl bg-surface-1 border border-border">
+                <span className="text-2xl font-mono font-bold text-accent">Offline</span>
+                <p className="text-xs text-text-muted mt-1">Girvi Sovereign Storage</p>
               </div>
-              <div className="p-4 rounded-2xl bg-surface border border-surface-border">
-                <span className="text-2xl font-mono font-bold text-white">LNCT</span>
-                <p className="text-xs text-typography-muted mt-1">B.Tech CSE (AI & ML)</p>
+              <div className="p-4 rounded-2xl bg-surface-1 border border-border">
+                <span className="text-2xl font-mono font-bold text-text">LNCT</span>
+                <p className="text-xs text-text-muted mt-1">B.Tech CSE (AI & ML) &apos;26</p>
               </div>
             </div>
           </div>

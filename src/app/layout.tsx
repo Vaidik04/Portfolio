@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Newsreader, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const newsreader = Newsreader({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-serif",
   display: "swap",
+  style: ["normal", "italic"],
 });
 
 const inter = Inter({
@@ -21,11 +22,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const notoSansDevanagari = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  variable: "--font-devanagari",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://vaidiktech.app"),
-  title: "Vaidik Gandhi - Independent Android Developer & Founder @ VaidikTech",
+  title: "Vaidik Gandhi — Independent Android Developer & Founder @ VaidikTech",
   description:
-    "Independent Android developer building offline-first, encrypted mobile applications for India's professional trades: Girvi (gold loan ledger), JewelBill (jewellery POS), and AdvoKosh (advocate case diary). Native Kotlin, Jetpack Compose, Room SQLite, SQLCipher.",
+    "Engineering native, offline-first, encrypted Android software for India's professional trades: Girvi (गिरवी), JewelBill (ज्वेलबिल), and AdvoKosh (एडवोकोश). Kotlin, Jetpack Compose, Room SQLite, SQLCipher.",
   keywords: [
     "Vaidik Gandhi",
     "Android Developer",
@@ -34,10 +42,9 @@ export const metadata: Metadata = {
     "Girvi",
     "AdvoKosh",
     "JewelBill",
-    "SwarmOS",
     "VaidikTech",
     "Offline-First",
-    "Room Database",
+    "Room SQLite",
     "SQLCipher",
     "India",
   ],
@@ -47,28 +54,19 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   openGraph: {
-    title: "Vaidik Gandhi - Independent Android Developer & Founder @ VaidikTech",
+    title: "Vaidik Gandhi — Independent Android Developer & Founder @ VaidikTech",
     description:
       "Engineering native, offline-first mobile products with Kotlin, Jetpack Compose, Room, and hardware-backed SQLCipher encryption.",
     url: "https://vaidiktech.app",
     siteName: "Vaidik Gandhi Portfolio",
-    images: [
-      {
-        url: "/assets/vaidik_3d_avatar_square.jpg",
-        width: 1024,
-        height: 1024,
-        alt: "Vaidik Gandhi · Founder of VaidikTech",
-      },
-    ],
-    locale: "en_US",
+    locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vaidik Gandhi - Android Developer · Founder @ VaidikTech",
+    title: "Vaidik Gandhi — Independent Android Developer · Founder @ VaidikTech",
     description:
       "Engineering native, offline-first mobile products with Kotlin, Jetpack Compose, Room, and hardware-backed SQLCipher encryption.",
-    images: ["/assets/vaidik_3d_avatar_square.jpg"],
   },
 };
 
@@ -80,13 +78,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth dark`}
+      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansDevanagari.variable} scroll-smooth dark`}
     >
-      <body className="bg-background text-typography-primary font-sans antialiased min-h-screen relative selection:bg-brand selection:text-white">
-        {/* Subtle Architectural Film Grain */}
+      <body className="bg-bg text-text font-sans antialiased min-h-screen relative selection:bg-accent selection:text-accent-on">
+        {/* Fine Architectural Film Grain Texture */}
         <div className="noise-overlay" />
-        {/* Interactive Subtle Desktop Cursor */}
+
+        {/* Subtle Desktop Interactive Cursor */}
         <CustomCursor />
+
         {children}
       </body>
     </html>

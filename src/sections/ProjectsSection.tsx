@@ -48,15 +48,15 @@ export const ProjectsSection: React.FC = () => {
       {/* Section Header */}
       <div className="flex flex-col gap-4 mb-20">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-brand" />
-          <span className="text-xs font-mono tracking-wider uppercase text-typography-muted">
-            01 · Curated Flagship Work
+          <span className="w-2 h-2 rounded-full bg-accent" />
+          <span className="text-xs font-mono tracking-wider uppercase text-text-muted">
+            Curated Flagship Work
           </span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-text leading-tight">
           Production applications.
         </h2>
-        <p className="text-base sm:text-lg text-typography-secondary font-sans leading-relaxed max-w-2xl">
+        <p className="text-base sm:text-lg text-text-muted font-sans leading-relaxed max-w-2xl">
           Three flagship commercial applications actively published on the Google Play Store, engineered from direct field observation of India&apos;s traditional trades.
         </p>
       </div>
@@ -66,56 +66,56 @@ export const ProjectsSection: React.FC = () => {
         {flagships.map((project, index) => (
           <article
             key={project.id}
-            className="p-8 sm:p-12 rounded-3xl bg-surface border border-surface-border flex flex-col lg:flex-row gap-12 items-start justify-between shadow-xl relative overflow-hidden group hover:border-surface-border-hover transition-colors"
+            className="p-8 sm:p-12 rounded-3xl bg-surface-1 border border-border flex flex-col lg:flex-row gap-12 items-start justify-between shadow-xl relative overflow-hidden group hover:border-border-hover transition-colors"
           >
             {/* Left Column: Project Narrative */}
             <div className="flex-1 flex flex-col gap-6">
               <div className="flex items-center gap-3 flex-wrap">
-                <span className="text-xs font-mono px-3 py-1 rounded-full bg-brand/10 border border-brand/30 text-brand font-semibold">
+                <span className="text-xs font-mono px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent font-semibold">
                   FLAGSHIP 0{index + 1}
                 </span>
-                <span className="text-xs font-mono text-typography-muted">
+                <span className="text-xs font-mono text-text-muted">
                   {project.timeline}
                 </span>
-                <span className="text-xs font-mono text-typography-muted border-l border-surface-border pl-3">
+                <span className="text-xs font-mono text-text-muted border-l border-border pl-3">
                   Google Play Release
                 </span>
               </div>
 
               <div>
-                <h3 className="text-2xl sm:text-4xl font-heading font-extrabold text-typography-primary tracking-tight">
+                <h3 className="text-2xl sm:text-4xl font-heading font-extrabold text-text tracking-tight">
                   {project.name}
                 </h3>
-                <p className="text-sm sm:text-base text-typography-secondary font-sans mt-2 leading-relaxed">
+                <p className="text-sm sm:text-base text-text-muted font-sans mt-2 leading-relaxed">
                   {project.tagline}
                 </p>
               </div>
 
               {/* Problem & Hard Constraint */}
-              <div className="flex flex-col gap-4 py-4 border-y border-surface-border text-sm font-sans leading-relaxed">
+              <div className="flex flex-col gap-4 py-4 border-y border-border text-sm font-sans leading-relaxed">
                 <div>
-                  <span className="text-xs font-mono text-typography-muted uppercase tracking-wider block mb-1">
+                  <span className="text-xs font-mono text-text-muted uppercase tracking-wider block mb-1">
                     The Problem
                   </span>
-                  <p className="text-typography-primary font-medium">{project.problem}</p>
+                  <p className="text-text font-medium">{project.problem}</p>
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-typography-muted uppercase tracking-wider block mb-1">
+                  <span className="text-xs font-mono text-text-muted uppercase tracking-wider block mb-1">
                     The Architecture Solution
                   </span>
-                  <p className="text-typography-secondary">{project.solution}</p>
+                  <p className="text-text-muted">{project.solution}</p>
                 </div>
               </div>
 
               {/* Key Architecture Decisions */}
               <div className="flex flex-col gap-2.5">
-                <span className="text-xs font-mono text-typography-muted uppercase tracking-wider">
+                <span className="text-xs font-mono text-text-muted uppercase tracking-wider">
                   Key Architecture Decisions
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-typography-secondary">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-text-muted">
                   {project.highlights.slice(0, 4).map((h, i) => (
                     <div key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-brand flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </div>
                   ))}
@@ -123,12 +123,12 @@ export const ProjectsSection: React.FC = () => {
               </div>
 
               {/* Stack & CTAs */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-surface-border">
+              <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-border">
                 <div className="flex flex-wrap gap-1.5">
                   {project.techStack.slice(0, 4).map((tech, i) => (
                     <span
                       key={i}
-                      className="text-[11px] font-mono px-2.5 py-1 rounded bg-surface-elevated border border-surface-border text-typography-muted"
+                      className="text-[11px] font-mono px-2.5 py-1 rounded bg-surface-2 border border-border text-text-muted"
                     >
                       {tech}
                     </span>
@@ -141,7 +141,7 @@ export const ProjectsSection: React.FC = () => {
                       href={project.links.playStore}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand hover:bg-brand-light text-white text-xs font-sans font-semibold transition-all shadow-md"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent hover:bg-accent-hover text-accent-on text-xs font-sans font-semibold transition-all shadow-[0_2px_14px_rgba(212,162,76,0.25)]"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" />
                       <span>View on Google Play</span>
@@ -150,7 +150,7 @@ export const ProjectsSection: React.FC = () => {
 
                   <Link
                     href={`/projects/${project.id}`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-surface-border hover:border-surface-border-hover text-typography-secondary hover:text-typography-primary text-xs font-sans transition-colors"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border hover:border-border-hover text-text-muted hover:text-text text-xs font-sans transition-colors"
                   >
                     <span>Read Case Study</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -160,20 +160,20 @@ export const ProjectsSection: React.FC = () => {
             </div>
 
             {/* Right Column: Hero Visual Mockup Preview */}
-            <div className="w-full lg:w-[320px] flex-shrink-0 rounded-2xl overflow-hidden border border-surface-border bg-surface-elevated p-4 flex flex-col justify-between shadow-2xl">
-              <div className="flex items-center justify-between border-b border-surface-border pb-3 mb-4">
+            <div className="w-full lg:w-[320px] flex-shrink-0 rounded-2xl overflow-hidden border border-border bg-surface-2 p-4 flex flex-col justify-between shadow-2xl">
+              <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-brand" />
-                  <span className="text-xs font-mono font-bold text-typography-primary">
+                  <div className="w-2.5 h-2.5 rounded-full bg-accent" />
+                  <span className="text-xs font-mono font-bold text-text">
                     {project.name}
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-typography-muted uppercase">
+                <span className="text-[10px] font-mono text-text-muted uppercase">
                   Verified APK
                 </span>
               </div>
 
-              <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-[#0A0C10] flex items-center justify-center p-3 group/preview">
+              <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-bg flex items-center justify-center p-3 group/preview">
                 {project.id === "advokosh" ? (
                   <Image
                     src="/assets/advokosh_screen1.png"
@@ -197,26 +197,26 @@ export const ProjectsSection: React.FC = () => {
                       height={130}
                       className="object-contain rounded-3xl shadow-2xl transition-transform duration-500 group-hover/preview:scale-105"
                     />
-                    <span className="text-[11px] font-mono text-typography-muted">
+                    <span className="text-[11px] font-mono text-text-muted">
                       Girvi Core · Token #GV-1048
                     </span>
                   </div>
                 )}
               </div>
 
-              <div className="pt-4 mt-4 border-t border-surface-border text-[11px] font-mono text-typography-muted flex items-center justify-between">
+              <div className="pt-4 mt-4 border-t border-border text-[11px] font-mono text-text-muted flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => {
                     setActiveAppId(project.id as "girvi" | "jewelbill" | "advokosh");
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className="inline-flex items-center gap-1.5 text-brand hover:underline font-semibold"
+                  className="inline-flex items-center gap-1.5 text-accent hover:underline font-semibold"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Inspect in 3D Phone ↑</span>
                 </button>
-                <span className="text-typography-muted">Google Play</span>
+                <span className="text-text-muted">Google Play</span>
               </div>
             </div>
           </article>
@@ -224,19 +224,19 @@ export const ProjectsSection: React.FC = () => {
       </div>
 
       {/* Secondary Section: Selected Engineering Archive Table */}
-      <div className="mt-32 pt-20 border-t border-surface-border">
+      <div className="mt-32 pt-20 border-t border-border">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Layers className="w-4 h-4 text-brand" />
-              <span className="text-xs font-mono tracking-wider uppercase text-typography-muted">
-                02 · Complete Engineering Catalog
+              <Layers className="w-4 h-4 text-accent" />
+              <span className="text-xs font-mono tracking-wider uppercase text-text-muted">
+                Complete Engineering Catalog
               </span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-typography-primary">
+            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-text">
               Selected Engineering Archive
             </h3>
-            <p className="text-sm text-typography-secondary font-sans mt-1">
+            <p className="text-sm text-text-muted font-sans mt-1">
               Systems, distributed P2P experiments, AI research, and developer tools.
             </p>
           </div>

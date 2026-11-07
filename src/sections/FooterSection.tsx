@@ -11,11 +11,11 @@ export const FooterSection: React.FC = () => {
   };
 
   return (
-    <footer className="relative py-16 px-6 max-w-6xl mx-auto w-full border-t border-surface-border text-xs font-sans text-typography-muted z-10">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8 pb-12 border-b border-surface-border">
+    <footer className="relative py-16 px-6 max-w-6xl mx-auto w-full border-t border-border text-xs font-sans text-text-muted z-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8 pb-12 border-b border-border">
         {/* Brand Identification */}
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-surface-elevated border border-surface-border flex items-center justify-center p-2">
+          <div className="w-9 h-9 rounded-full bg-surface-1 border border-border flex items-center justify-center p-2">
             <Image
               src="/assets/vaidiktech_symbol.svg"
               alt="VaidikTech"
@@ -25,30 +25,30 @@ export const FooterSection: React.FC = () => {
             />
           </div>
           <div>
-            <div className="font-heading font-bold text-sm text-typography-primary">
+            <div className="font-heading font-bold text-sm text-text">
               Vaidik Gandhi
             </div>
-            <div className="text-[11px] font-mono text-typography-muted">
+            <div className="text-[11px] font-mono text-text-muted">
               Founder · VaidikTech Mobile Lab
             </div>
           </div>
         </div>
 
         {/* Footer Navigation */}
-        <div className="flex flex-wrap items-center gap-6 text-typography-secondary">
-          <a href="#work" className="hover:text-typography-primary transition-colors">
+        <div className="flex flex-wrap items-center gap-6 text-text-muted">
+          <a href="#work" className="hover:text-text transition-colors">
             Work
           </a>
-          <a href="#architecture" className="hover:text-typography-primary transition-colors">
+          <a href="#architecture" className="hover:text-text transition-colors">
             Architecture
           </a>
-          <a href="#engineering" className="hover:text-typography-primary transition-colors">
+          <a href="#engineering" className="hover:text-text transition-colors">
             Engineering
           </a>
-          <a href="#about" className="hover:text-typography-primary transition-colors">
+          <a href="#about" className="hover:text-text transition-colors">
             About
           </a>
-          <a href="#contact" className="hover:text-typography-primary transition-colors">
+          <a href="#contact" className="hover:text-text transition-colors">
             Contact
           </a>
         </div>
@@ -56,7 +56,7 @@ export const FooterSection: React.FC = () => {
         {/* Back to top button */}
         <button
           onClick={scrollToTop}
-          className="self-start sm:self-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-surface-border hover:border-surface-border-hover text-typography-secondary hover:text-typography-primary transition-colors"
+          className="self-start sm:self-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border hover:border-border-hover text-text-muted hover:text-text transition-colors"
         >
           <span>Back to top</span>
           <ArrowUp className="w-3.5 h-3.5" />
@@ -64,7 +64,7 @@ export const FooterSection: React.FC = () => {
       </div>
 
       {/* Copyright & Technical Colophon */}
-      <div className="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[11px] font-mono text-typography-muted">
+      <div className="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-[11px] font-mono text-text-faint">
         <div>
           © {new Date().getFullYear()} Vaidik Gandhi. All rights reserved.
         </div>

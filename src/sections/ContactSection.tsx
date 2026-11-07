@@ -149,7 +149,7 @@ export const ContactSection: React.FC = () => {
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-brand hover:bg-brand-light text-white font-sans font-semibold text-sm transition-all shadow-[0_2px_12px_rgba(43,91,255,0.3)] flex items-center justify-center gap-2 mt-2"
+              className="w-full py-3.5 rounded-full bg-accent hover:bg-accent-hover text-accent-on font-sans font-semibold text-sm transition-all shadow-[0_2px_16px_rgba(212,162,76,0.28)] hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 mt-2"
             >
               <span>{formSent ? "Opening email client..." : "Send inquiry"}</span>
               <Send className="w-4 h-4" />

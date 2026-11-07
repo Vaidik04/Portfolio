@@ -11,48 +11,55 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0B0C0E",
+        bg: "var(--bg)",
         surface: {
-          DEFAULT: "#121418",
-          hover: "#181B21",
-          elevated: "#1D212A",
-          border: "rgba(240, 240, 246, 0.08)",
-          "border-hover": "rgba(240, 240, 246, 0.22)",
+          DEFAULT: "var(--surface-1)",
+          1: "var(--surface-1)",
+          2: "var(--surface-2)",
+          border: "var(--border)",
+          "border-hover": "var(--border-hover)",
         },
-        brand: {
-          DEFAULT: "#2B5BFF", // Precision Architectural Cobalt
-          light: "#4D76FF",
-          dark: "#1A44D9",
-          subtle: "rgba(43, 91, 255, 0.12)",
-          border: "rgba(43, 91, 255, 0.35)",
+        border: "var(--border)",
+        text: {
+          DEFAULT: "var(--text)",
+          muted: "var(--text-muted)",
+          faint: "var(--text-faint)",
         },
         accent: {
-          ochre: "#D95C36", // Precision Architectural Copper / Security Ochre
-          ochreSubtle: "rgba(217, 92, 54, 0.12)",
-          cobalt: "#2B5BFF",
-          android: "#2B5BFF", // Remapped to brand cobalt
-          cyan: "#2B5BFF",
-          violet: "#2B5BFF",
+          DEFAULT: "var(--accent)",
+          hover: "var(--accent-hover)",
+          press: "var(--accent-press)",
+          on: "var(--accent-on)",
+        },
+        brand: {
+          DEFAULT: "var(--accent)",
+          light: "var(--accent-hover)",
+          dark: "var(--accent-press)",
+          on: "var(--accent-on)",
         },
         typography: {
-          primary: "#F4F4F6",
-          secondary: "#9398A7",
-          muted: "#5C6170",
+          primary: "var(--text)",
+          secondary: "var(--text-muted)",
+          muted: "var(--text-faint)",
         },
+        danger: "var(--danger)",
+        success: "var(--success)",
+        warning: "var(--warning)",
       },
       fontFamily: {
-        heading: ["var(--font-heading)", "Space Grotesk", "sans-serif"],
-        sans: ["var(--font-sans)", "Inter", "sans-serif"],
+        serif: ["var(--font-serif)", "Newsreader", "Georgia", "serif"],
+        heading: ["var(--font-serif)", "Newsreader", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "Inter", "-apple-system", "sans-serif"],
         mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
+        devanagari: ["var(--font-devanagari)", "Noto Sans Devanagari", "sans-serif"],
       },
-      keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
+      boxShadow: {
+        brass: "0 2px 20px -2px rgba(212, 162, 76, 0.25)",
+        floating: "0 20px 40px -15px rgba(0, 0, 0, 0.7)",
       },
-      animation: {
-        marquee: "marquee 45s linear infinite",
+      transitionTimingFunction: {
+        editorial: "cubic-bezier(0.16, 1, 0.3, 1)",
+        smooth: "cubic-bezier(0.65, 0, 0.35, 1)",
       },
     },
   },

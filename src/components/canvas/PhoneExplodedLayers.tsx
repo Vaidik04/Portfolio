@@ -5,9 +5,38 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { RoundedBox, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
-import { sounds } from "@/lib/sound";
 
 const APP_ORDER: ("girvi" | "jewelbill" | "advokosh")[] = ["girvi", "jewelbill", "advokosh"];
+
+// Bulletproof Universal Rounded Rectangle polyfill for HTML5 Canvas2D
+const drawRoundedRect = (
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number
+) => {
+  if (typeof (ctx as any).roundRect === "function") {
+    try {
+      (ctx as any).roundRect(x, y, w, h, r);
+      return;
+    } catch {
+      // Fall through to manual bezier path
+    }
+  }
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+};
 
 interface PhoneExplodedLayersProps {
   onLayerHover?: (layerId: number | null) => void;
@@ -46,7 +75,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   const layer1Ref = useRef<THREE.Group>(null); // Compose UI + Screen
   const layer2Ref = useRef<THREE.Group>(null); // ViewModel & StateFlow
   const layer3Ref = useRef<THREE.Group>(null); // Room SQLite
-  const layer4Ref = useRef<THREE.Group>(null); // SQLCipher AES-256
+  const layer4Ref = useRef<THREE.Group>(null); // SQLCipher AES-256 (BRASS ACCENT)
   const layer5Ref = useRef<THREE.Group>(null); // Keystore Hardware Enclave
 
   // Dimensions
@@ -69,7 +98,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     return () => clearInterval(interval);
   }, [activeAppId, manualExploded, setActiveAppId]);
 
-  // Render texture based on activeAppId
+  // Render texture based on activeAppId using "Ink & Brass" design tokens
   const renderScreen = useCallback((appId: string) => {
     if (typeof window === "undefined") return;
 
@@ -79,14 +108,14 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // 1. Deep Midnight Charcoal Background
-    ctx.fillStyle = "#0C0E14";
+    // 1. Base: Deep Warm Charcoal (#0E0F11)
+    ctx.fillStyle = "#0E0F11";
     ctx.fillRect(0, 0, 1080, 2240);
 
     const grad = ctx.createLinearGradient(0, 0, 0, 2240);
-    grad.addColorStop(0, "#131722");
-    grad.addColorStop(0.5, "#0A0C11");
-    grad.addColorStop(1, "#07080D");
+    grad.addColorStop(0, "#16171A");
+    grad.addColorStop(0.5, "#0E0F11");
+    grad.addColorStop(1, "#090A0C");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 1080, 2240);
 
@@ -100,141 +129,141 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       const x = startX + i * (segmentWidth + gap);
       const isCurrent = app === appId;
 
-      ctx.fillStyle = isCurrent ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.2)";
+      ctx.fillStyle = isCurrent ? "#D4A24C" : "rgba(154, 154, 159, 0.25)";
       ctx.beginPath();
-      ctx.roundRect(x, 40, segmentWidth, 8, 4);
+      drawRoundedRect(ctx, x, 40, segmentWidth, 8, 4);
       ctx.fill();
 
       // App Name under segment indicator
-      ctx.fillStyle = isCurrent ? "#EDEFF5" : "#5E667C";
+      ctx.fillStyle = isCurrent ? "#ECE8DF" : "#6B6C72";
       ctx.font = isCurrent ? "bold 20px monospace" : "18px monospace";
-      const label = app === "girvi" ? "1. GIRVI OS" : app === "jewelbill" ? "2. JEWELBILL" : "3. ADVOKOSH";
+      const label = app === "girvi" ? "1. GIRVI (गिरवी)" : app === "jewelbill" ? "2. JEWELBILL" : "3. ADVOKOSH";
       ctx.fillText(label, x + 10, 68);
     });
 
     // 3. Status Bar
-    ctx.fillStyle = "#EDEFF5";
+    ctx.fillStyle = "#ECE8DF";
     ctx.font = "bold 36px -apple-system, BlinkMacSystemFont, sans-serif";
     ctx.fillText("09:41", 80, 125);
 
     ctx.font = "bold 28px monospace";
-    ctx.fillStyle = "#9DA4B8";
+    ctx.fillStyle = "#9A9A9F";
     ctx.fillText("5G · 100%", 850, 125);
 
     if (appId === "jewelbill") {
       // JEWELBILL APP UI (JEWELLERY POS & INVOICING)
-      ctx.fillStyle = "#D97706";
+      ctx.fillStyle = "#D4A24C";
       ctx.beginPath();
-      ctx.roundRect(80, 160, 60, 60, 16);
+      drawRoundedRect(ctx, 80, 160, 60, 60, 16);
       ctx.fill();
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#14110A";
       ctx.font = "bold 36px sans-serif";
       ctx.fillText("J", 98, 204);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 44px sans-serif";
-      ctx.fillText("JewelBill POS", 160, 204);
+      ctx.fillText("JewelBill (ज्वेलबिल)", 160, 204);
 
       // Mode Pill
-      ctx.fillStyle = "rgba(217, 119, 6, 0.15)";
-      ctx.strokeStyle = "rgba(217, 119, 6, 0.4)";
+      ctx.fillStyle = "rgba(212, 162, 76, 0.12)";
+      ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(80, 235, 430, 48, 24);
+      drawRoundedRect(ctx, 80, 235, 430, 48, 24);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#F59E0B";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 24px monospace";
       ctx.fillText("● OFFLINE COUNTER POS", 104, 268);
 
       // Card 1: Active Jewellery Invoice
-      ctx.fillStyle = "#161922";
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+      ctx.fillStyle = "#16171A";
+      ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 310, 920, 495, 36);
+      drawRoundedRect(ctx, 80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#F59E0B";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 28px monospace";
       ctx.fillText("TAX INVOICE #JB-2026-89", 120, 375);
 
-      ctx.fillStyle = "rgba(245, 158, 11, 0.15)";
-      ctx.strokeStyle = "rgba(245, 158, 11, 0.4)";
+      ctx.fillStyle = "rgba(212, 162, 76, 0.12)";
+      ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.beginPath();
-      ctx.roundRect(740, 340, 220, 44, 22);
+      drawRoundedRect(ctx, 740, 340, 220, 44, 22);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = "#FBBF24";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 22px monospace";
       ctx.fillText("COUNTER READY", 760, 370);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 46px sans-serif";
       ctx.fillText("Sunita Verma", 120, 445);
 
-      ctx.fillStyle = "#7D8498";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "26px sans-serif";
-      ctx.fillText("Customer Tax ID: Verified · Counter #02", 120, 490);
+      ctx.fillText("Fictional Customer Record · Counter Station #02", 120, 490);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 82px sans-serif";
       ctx.fillText("₹2,84,500", 120, 595);
 
-      ctx.fillStyle = "rgba(245, 158, 11, 0.15)";
-      ctx.strokeStyle = "rgba(245, 158, 11, 0.4)";
+      ctx.fillStyle = "rgba(212, 162, 76, 0.15)";
+      ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.beginPath();
-      ctx.roundRect(120, 630, 480, 44, 22);
+      drawRoundedRect(ctx, 120, 630, 480, 44, 22);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = "#FBBF24";
+      ctx.fillStyle = "#E4B766";
       ctx.font = "bold 24px monospace";
       ctx.fillText("28,450,000 Long-Paise (0-Drift)", 140, 660);
 
-      ctx.fillStyle = "#9DA4B8";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "28px monospace";
       ctx.fillText("Item: 22K Bridal Necklace (48.20g Net)", 120, 725);
       ctx.fillText("Tax: CGST (1.5%) + SGST (1.5%) Exact Match", 120, 768);
 
       // Card 2: Thermal Printing & SQLCipher
-      ctx.fillStyle = "#11141E";
-      ctx.strokeStyle = "rgba(217, 119, 6, 0.35)";
+      ctx.fillStyle = "#1D1F23";
+      ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 835, 920, 385, 36);
+      drawRoundedRect(ctx, 80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#F59E0B";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 34px sans-serif";
       ctx.fillText("Direct Hardware Bridge", 120, 910);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "30px sans-serif";
       ctx.fillText("80mm ESC/POS Bluetooth Thermal Printing", 120, 975);
 
-      ctx.fillStyle = "#8F9BB3";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "26px monospace";
       ctx.fillText("Driver: Raw binary bitmap stream; zero print spoolers", 120, 1035);
       ctx.fillText("Storage: Encrypted Room SQLite with daily hash-tree export", 120, 1085);
-      ctx.fillText("Offline Uptime: 100% Counter Uptime in low-signal bazaars", 120, 1135);
+      ctx.fillText("Sovereignty: 0 KB External Cloud Telemetry in low-signal bazaars", 120, 1135);
 
       // Card 3: Line Items
-      ctx.fillStyle = "#141724";
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.fillStyle = "#16171A";
+      ctx.strokeStyle = "#2A2C31";
       ctx.beginPath();
-      ctx.roundRect(80, 1250, 920, 520, 36);
+      drawRoundedRect(ctx, 80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 36px sans-serif";
       ctx.fillText("Counter Line Items", 120, 1325);
 
-      ctx.fillStyle = "#8F9BB3";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "28px monospace";
       ctx.fillText("1. 22K Gold Base: ₹2,64,200 (Rate: ₹5,480/g)", 120, 1405);
       ctx.fillText("2. Making Charges (₹250/g): ₹12,050", 120, 1480);
@@ -243,118 +272,118 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillText("5. ESC/POS Receipt: Printed in 240ms", 120, 1705);
     } else if (appId === "advokosh") {
       // ADVOKOSH APP UI (ADVOCATE CASE DIARY)
-      ctx.fillStyle = "#6366F1";
+      ctx.fillStyle = "#D4A24C";
       ctx.beginPath();
-      ctx.roundRect(80, 160, 60, 60, 16);
+      drawRoundedRect(ctx, 80, 160, 60, 60, 16);
       ctx.fill();
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#14110A";
       ctx.font = "bold 36px sans-serif";
       ctx.fillText("§", 98, 204);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 44px sans-serif";
-      ctx.fillText("AdvoKosh Case Diary", 160, 204);
+      ctx.fillText("AdvoKosh (एडवोकोश)", 160, 204);
 
       // Mode Pill
-      ctx.fillStyle = "rgba(99, 102, 241, 0.15)";
-      ctx.strokeStyle = "rgba(99, 102, 241, 0.4)";
+      ctx.fillStyle = "rgba(212, 162, 76, 0.12)";
+      ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(80, 235, 420, 48, 24);
+      drawRoundedRect(ctx, 80, 235, 420, 48, 24);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#818CF8";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 24px monospace";
       ctx.fillText("● ENCRYPTED LEGAL VAULT", 104, 268);
 
       // Card 1: Active Case Hearing
-      ctx.fillStyle = "#151827";
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+      ctx.fillStyle = "#16171A";
+      ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 310, 920, 495, 36);
+      drawRoundedRect(ctx, 80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#818CF8";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 28px monospace";
       ctx.fillText("COURT 4 · ITEM #12", 120, 375);
 
-      ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
-      ctx.strokeStyle = "rgba(239, 68, 68, 0.4)";
+      ctx.fillStyle = "rgba(217, 92, 92, 0.15)";
+      ctx.strokeStyle = "rgba(217, 92, 92, 0.4)";
       ctx.beginPath();
-      ctx.roundRect(720, 340, 240, 44, 22);
+      drawRoundedRect(ctx, 720, 340, 240, 44, 22);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = "#F87171";
+      ctx.fillStyle = "#D95C5C";
       ctx.font = "bold 22px monospace";
       ctx.fillText("HEARING 10:30 AM", 740, 370);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 46px sans-serif";
       ctx.fillText("State vs. Sharma & Ors.", 120, 445);
 
-      ctx.fillStyle = "#7D8498";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "26px sans-serif";
       ctx.fillText("Writ Petition #4821/2025 · Hon'ble High Court", 120, 490);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 72px sans-serif";
       ctx.fillText("Final Arguments", 120, 585);
 
-      ctx.fillStyle = "rgba(99, 102, 241, 0.15)";
-      ctx.strokeStyle = "rgba(99, 102, 241, 0.4)";
+      ctx.fillStyle = "rgba(212, 162, 76, 0.15)";
+      ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.beginPath();
-      ctx.roundRect(120, 630, 480, 44, 22);
+      drawRoundedRect(ctx, 120, 630, 480, 44, 22);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = "#A5B4FC";
+      ctx.fillStyle = "#E4B766";
       ctx.font = "bold 24px monospace";
       ctx.fillText("Limitation: 14 Days Remaining", 140, 660);
 
-      ctx.fillStyle = "#9DA4B8";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "28px monospace";
       ctx.fillText("Section: 482 Cr.P.C · Quashing Petition", 120, 725);
       ctx.fillText("Witness: 3 Examined · Cross Scheduled", 120, 768);
 
       // Card 2: Security & Client Privilege
-      ctx.fillStyle = "#11141E";
-      ctx.strokeStyle = "rgba(99, 102, 241, 0.35)";
+      ctx.fillStyle = "#1D1F23";
+      ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 835, 920, 385, 36);
+      drawRoundedRect(ctx, 80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#818CF8";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 34px sans-serif";
       ctx.fillText("Client-Advocate Privilege", 120, 910);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "30px sans-serif";
       ctx.fillText("AES-256 GCM Hardware-Backed Encryption", 120, 975);
 
-      ctx.fillStyle = "#8F9BB3";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "26px monospace";
       ctx.fillText("Confidential briefs and evidence encrypted locally", 120, 1035);
       ctx.fillText("Zero cloud scraping; no external AI telemetry", 120, 1085);
       ctx.fillText("Instant biometric release upon court entrance", 120, 1135);
 
       // Card 3: Cause List
-      ctx.fillStyle = "#141724";
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.fillStyle = "#16171A";
+      ctx.strokeStyle = "#2A2C31";
       ctx.beginPath();
-      ctx.roundRect(80, 1250, 920, 520, 36);
+      drawRoundedRect(ctx, 80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 36px sans-serif";
       ctx.fillText("Today's Cause List", 120, 1325);
 
-      ctx.fillStyle = "#8F9BB3";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "28px monospace";
       ctx.fillText("1. Court 4 - State vs Sharma (10:30 AM)", 120, 1405);
       ctx.fillText("2. Court 2 - Verma vs Verma (11:45 AM)", 120, 1480);
@@ -363,118 +392,118 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.fillText("5. All Records Synced to Offline Encrypted Ledger", 120, 1705);
     } else {
       // GIRVI APP UI (GOLD LOAN & PAWN LEDGER)
-      ctx.fillStyle = "#2B5BFF";
+      ctx.fillStyle = "#D4A24C";
       ctx.beginPath();
-      ctx.roundRect(80, 160, 60, 60, 16);
+      drawRoundedRect(ctx, 80, 160, 60, 60, 16);
       ctx.fill();
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#14110A";
       ctx.font = "bold 36px sans-serif";
       ctx.fillText("₹", 98, 204);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 44px sans-serif";
-      ctx.fillText("Girvi Pawn Ledger", 160, 204);
+      ctx.fillText("Girvi (गिरवी)", 160, 204);
 
       // Mode Pill
-      ctx.fillStyle = "rgba(43, 91, 255, 0.15)";
-      ctx.strokeStyle = "rgba(43, 91, 255, 0.4)";
+      ctx.fillStyle = "rgba(212, 162, 76, 0.12)";
+      ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(80, 235, 410, 48, 24);
+      drawRoundedRect(ctx, 80, 235, 410, 48, 24);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#4D7EFF";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 24px monospace";
       ctx.fillText("● OFFLINE SOVEREIGN CORE", 104, 268);
 
       // Card 1: Active Gold Pledge (Fictional Sample Data)
-      ctx.fillStyle = "#141724";
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+      ctx.fillStyle = "#16171A";
+      ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 310, 920, 495, 36);
+      drawRoundedRect(ctx, 80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#8F9BB3";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 28px monospace";
       ctx.fillText("TOKEN #GV-1048", 120, 375);
 
-      ctx.fillStyle = "rgba(34, 197, 94, 0.15)";
-      ctx.strokeStyle = "rgba(34, 197, 94, 0.4)";
+      ctx.fillStyle = "rgba(78, 154, 104, 0.15)";
+      ctx.strokeStyle = "rgba(78, 154, 104, 0.4)";
       ctx.beginPath();
-      ctx.roundRect(740, 340, 220, 44, 22);
+      drawRoundedRect(ctx, 740, 340, 220, 44, 22);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = "#4ADE80";
+      ctx.fillStyle = "#4E9A68";
       ctx.font = "bold 22px monospace";
       ctx.fillText("VERIFIED PLEDGE", 758, 370);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 46px sans-serif";
       ctx.fillText("Ramesh Kumar", 120, 445);
 
-      ctx.fillStyle = "#7D8498";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "26px sans-serif";
       ctx.fillText("Fictional Customer Record · Tokenized Vault #04", 120, 490);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 82px sans-serif";
       ctx.fillText("₹1,45,000", 120, 595);
 
-      ctx.fillStyle = "rgba(217, 92, 54, 0.15)";
-      ctx.strokeStyle = "rgba(217, 92, 54, 0.4)";
+      ctx.fillStyle = "rgba(212, 162, 76, 0.15)";
+      ctx.strokeStyle = "rgba(212, 162, 76, 0.4)";
       ctx.beginPath();
-      ctx.roundRect(120, 630, 480, 44, 22);
+      drawRoundedRect(ctx, 120, 630, 480, 44, 22);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = "#FF7A50";
+      ctx.fillStyle = "#E4B766";
       ctx.font = "bold 24px monospace";
       ctx.fillText("14,500,000 Long-Paise (0-Drift)", 140, 660);
 
-      ctx.fillStyle = "#9DA4B8";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "28px monospace";
       ctx.fillText("Item: 22K Gold Bangles · Net: 36.80g (Gross: 42.50g)", 120, 725);
       ctx.fillText("Rate: 1.50% Compound / Mo · Limitations Safe", 120, 768);
 
       // Card 2: Cryptographic Boundary
-      ctx.fillStyle = "#11141E";
-      ctx.strokeStyle = "rgba(43, 91, 255, 0.35)";
+      ctx.fillStyle = "#1D1F23";
+      ctx.strokeStyle = "#2A2C31";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 835, 920, 385, 36);
+      drawRoundedRect(ctx, 80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#4D7EFF";
+      ctx.fillStyle = "#D4A24C";
       ctx.font = "bold 34px sans-serif";
       ctx.fillText("Cryptographic Boundary", 120, 910);
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "30px sans-serif";
       ctx.fillText("SQLCipher 256-bit AES Local Database", 120, 975);
 
-      ctx.fillStyle = "#8F9BB3";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "26px monospace";
       ctx.fillText("Key: Android Keystore Hardware AES-256-GCM MasterKey", 120, 1035);
       ctx.fillText("PRAGMA cipher_page_size = 4096; Zero Cloud Telemetry", 120, 1085);
       ctx.fillText("Strict Offline Storage · Biometric Master Release", 120, 1135);
 
       // Card 3: Recent Activity Ledger
-      ctx.fillStyle = "#141724";
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.fillStyle = "#16171A";
+      ctx.strokeStyle = "#2A2C31";
       ctx.beginPath();
-      ctx.roundRect(80, 1250, 920, 520, 36);
+      drawRoundedRect(ctx, 80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = "#FFFFFF";
+      ctx.fillStyle = "#ECE8DF";
       ctx.font = "bold 36px sans-serif";
       ctx.fillText("Physical Verification Audit", 120, 1325);
 
-      ctx.fillStyle = "#8F9BB3";
+      ctx.fillStyle = "#9A9A9F";
       ctx.font = "28px monospace";
       ctx.fillText("1. Principal Disbursed: ₹1,45,000 (Cash Recorded)", 120, 1405);
       ctx.fillText("2. Physical Evidence: CameraX Gold Photo ID #482", 120, 1480);
@@ -484,21 +513,21 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     }
 
     // Bottom Navigation Bar
-    ctx.fillStyle = "#1A1E2C";
+    ctx.fillStyle = "#16171A";
     ctx.beginPath();
-    ctx.roundRect(80, 1830, 920, 130, 36);
+    drawRoundedRect(ctx, 80, 1830, 920, 130, 36);
     ctx.fill();
 
-    ctx.fillStyle = appId === "jewelbill" ? "#F59E0B" : appId === "advokosh" ? "#818CF8" : "#2B5BFF";
+    ctx.fillStyle = "#D4A24C";
     ctx.font = "bold 32px sans-serif";
     ctx.textAlign = "center";
     ctx.fillText("Sovereign Trade Ledger Active", 540, 1910);
     ctx.textAlign = "left";
 
     // Dynamic Island / Home Indicator
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = "#ECE8DF";
     ctx.beginPath();
-    ctx.roundRect(390, 2170, 300, 10, 5);
+    drawRoundedRect(ctx, 390, 2170, 300, 10, 5);
     ctx.fill();
 
     const texture = new THREE.CanvasTexture(canvas);
@@ -513,18 +542,18 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     renderScreen(activeAppId);
   }, [activeAppId, renderScreen]);
 
-  // Physically-based Titanium and Ceramic materials
+  // Physically-based Titanium and Brass materials
   const chassisMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#161920",
+      color: "#16171A",
       metalness: 0.92,
-      roughness: 0.2,
+      roughness: 0.22,
     });
   }, []);
 
   const buttonMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#2B303C",
+      color: "#2A2C31",
       metalness: 0.95,
       roughness: 0.15,
     });
@@ -532,38 +561,32 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
 
   const antennaMaterial = React.useMemo(() => {
     return new THREE.MeshBasicMaterial({
-      color: "#0B0D12",
+      color: "#0E0F11",
     });
   }, []);
 
   const lensGlassMaterial = React.useMemo(() => {
-    return new THREE.MeshPhysicalMaterial({
-      color: "#080A10",
-      metalness: 0.2,
-      roughness: 0.05,
-      transmission: 0.8,
-      thickness: 0.5,
-      ior: 1.7,
-      transparent: true,
-      opacity: 0.9,
+    return new THREE.MeshStandardMaterial({
+      color: "#050608",
+      metalness: 0.95,
+      roughness: 0.08,
     });
   }, []);
 
   const glassMaterial = React.useMemo(() => {
-    return new THREE.MeshPhysicalMaterial({
-      color: "#FFFFFF",
-      metalness: 0.05,
+    return new THREE.MeshStandardMaterial({
+      color: "#ECE8DF",
+      metalness: 0.1,
       roughness: 0.05,
-      transmission: 0.92,
-      thickness: 0.2,
       transparent: true,
-      opacity: 0.95,
+      opacity: 0.18,
+      depthWrite: false,
     });
   }, []);
 
   const stateLayerMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#151924",
+      color: "#16171A",
       metalness: 0.7,
       roughness: 0.3,
     });
@@ -571,23 +594,24 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
 
   const roomDbMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#0E1118",
-      metalness: 0.55,
-      roughness: 0.4,
+      color: "#121418",
+      metalness: 0.6,
+      roughness: 0.38,
     });
   }, []);
 
-  const cipherMaterial = React.useMemo(() => {
+  // SIGNATURE BRASS PBR MATERIAL (--accent: #D4A24C)
+  const brassCipherMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#9A4020", // Brushed Copper / Security Ochre
+      color: "#D4A24C",
       metalness: 0.88,
-      roughness: 0.25,
+      roughness: 0.22,
     });
   }, []);
 
   const keystoreMaterial = React.useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: "#0A0C10",
+      color: "#0B0D10",
       metalness: 0.96,
       roughness: 0.12,
     });
@@ -822,15 +846,12 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
         </mesh>
 
         {/* Physical Side Buttons */}
-        {/* Power Button (Right) */}
         <mesh material={buttonMaterial} position={[phoneWidth / 2 + 0.035, 0.8, -0.06]}>
           <boxGeometry args={[0.02, 0.5, 0.04]} />
         </mesh>
-        {/* Action Button (Left Top) */}
         <mesh material={buttonMaterial} position={[-phoneWidth / 2 - 0.035, 1.2, -0.06]}>
           <boxGeometry args={[0.02, 0.25, 0.04]} />
         </mesh>
-        {/* Volume Up / Down (Left) */}
         <mesh material={buttonMaterial} position={[-phoneWidth / 2 - 0.035, 0.7, -0.06]}>
           <boxGeometry args={[0.02, 0.45, 0.04]} />
         </mesh>
@@ -874,7 +895,6 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           <cylinderGeometry args={[0.11, 0.11, 0.01, 32]} />
         </mesh>
 
-        {/* Ultra-Wide Third Lens */}
         <mesh position={[-0.32, 1.61, -0.2]}>
           <cylinderGeometry args={[0.11, 0.11, 0.04, 32]} />
           <meshStandardMaterial color="#0A0C10" metalness={0.95} roughness={0.08} />
@@ -913,21 +933,21 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
             position={[0, 0, 0.04]}
           />
 
-          {/* Screen Display Face with Subtle Ambient Emissive Glow */}
+          {/* Screen Display Face */}
           {screenTexture ? (
-            <mesh position={[0, 0, 0.076]}>
+            <mesh position={[0, 0, 0.082]} renderOrder={20}>
               <planeGeometry args={[phoneWidth - 0.12, phoneHeight - 0.16]} />
               <meshBasicMaterial map={screenTexture} toneMapped={false} />
             </mesh>
           ) : (
-            <mesh position={[0, 0, 0.076]}>
+            <mesh position={[0, 0, 0.082]} renderOrder={20}>
               <planeGeometry args={[phoneWidth - 0.12, phoneHeight - 0.16]} />
               <meshBasicMaterial color="#11141C" />
             </mesh>
           )}
 
           {/* Punch Hole Camera at Top */}
-          <mesh position={[0, phoneHeight / 2 - 0.22, 0.078]}>
+          <mesh position={[0, phoneHeight / 2 - 0.22, 0.084]} renderOrder={22}>
             <circleGeometry args={[0.045, 24]} />
             <meshBasicMaterial color="#000000" />
           </mesh>
@@ -937,17 +957,17 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
             <Html position={[phoneWidth / 2 + 0.35, 1.2, 0.1]} center distanceFactor={10}>
               <div
                 onClick={() => setFocusedLayer(1)}
-                className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
+                className={`px-3.5 py-2 rounded-xl border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(1)
-                    ? "bg-brand text-white border-brand scale-105 shadow-[0_0_20px_rgba(43,91,255,0.4)]"
-                    : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-brand/50"
+                    ? "bg-accent text-accent-on border-accent scale-105 shadow-[0_0_20px_rgba(212,162,76,0.4)]"
+                    : "bg-[#16171A]/95 text-text border-border hover:border-accent/50"
                 }`}
               >
-                <div className="font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand" />
+                <div className="font-bold flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   <span>01 · Jetpack Compose</span>
                 </div>
-                <div className="text-[10px] text-typography-muted">Presentation & UI</div>
+                <div className="text-[10px] text-text-muted">Presentation & Declarative UI</div>
               </div>
             </Html>
           )}
@@ -973,7 +993,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           <mesh position={[0, 0, slabDepth / 2 + 0.002]}>
             <planeGeometry args={[phoneWidth * 0.85, phoneHeight * 0.85]} />
             <meshBasicMaterial
-              color={isLayerActive(2) ? "#2B5BFF" : "#1F2942"}
+              color={isLayerActive(2) ? "#D4A24C" : "#2A2C31"}
               wireframe
             />
           </mesh>
@@ -982,17 +1002,17 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
             <Html position={[phoneWidth / 2 + 0.35, 0.5, 0]} center distanceFactor={10}>
               <div
                 onClick={() => setFocusedLayer(2)}
-                className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
+                className={`px-3.5 py-2 rounded-xl border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(2)
-                    ? "bg-brand text-white border-brand scale-105 shadow-[0_0_20px_rgba(43,91,255,0.4)]"
-                    : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-brand/50"
+                    ? "bg-accent text-accent-on border-accent scale-105 shadow-[0_0_20px_rgba(212,162,76,0.4)]"
+                    : "bg-[#16171A]/95 text-text border-border hover:border-accent/50"
                 }`}
               >
-                <div className="font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                <div className="font-bold flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   <span>02 · StateFlow & Domain</span>
                 </div>
-                <div className="text-[10px] text-typography-muted">Unidirectional Flow</div>
+                <div className="text-[10px] text-text-muted">Unidirectional Flow (UDF)</div>
               </div>
             </Html>
           )}
@@ -1018,7 +1038,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           <mesh position={[0, 0, -0.04 + slabDepth / 2 + 0.002]}>
             <planeGeometry args={[phoneWidth * 0.85, phoneHeight * 0.85]} />
             <meshBasicMaterial
-              color={isLayerActive(3) ? "#2B5BFF" : "#1B212D"}
+              color={isLayerActive(3) ? "#D4A24C" : "#2A2C31"}
               wireframe
             />
           </mesh>
@@ -1027,23 +1047,23 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
             <Html position={[phoneWidth / 2 + 0.35, -0.2, -0.04]} center distanceFactor={10}>
               <div
                 onClick={() => setFocusedLayer(3)}
-                className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
+                className={`px-3.5 py-2 rounded-xl border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(3)
-                    ? "bg-brand text-white border-brand scale-105 shadow-[0_0_20px_rgba(43,91,255,0.4)]"
-                    : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-brand/50"
+                    ? "bg-accent text-accent-on border-accent scale-105 shadow-[0_0_20px_rgba(212,162,76,0.4)]"
+                    : "bg-[#16171A]/95 text-text border-border hover:border-accent/50"
                 }`}
               >
-                <div className="font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                <div className="font-bold flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   <span>03 · Room SQLite</span>
                 </div>
-                <div className="text-[10px] text-typography-muted">Sovereign Persistence</div>
+                <div className="text-[10px] text-text-muted">100% Sovereign Storage</div>
               </div>
             </Html>
           )}
         </group>
 
-        {/* Layer 4: SQLCipher AES-256 Cryptographic Barrier */}
+        {/* Layer 4: SQLCipher AES-256 Cryptographic Barrier (BRASS MATERIAL) */}
         <group
           ref={layer4Ref}
           onPointerOver={() => handlePointerEnter(4)}
@@ -1057,29 +1077,29 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
             args={[phoneWidth * 0.96, phoneHeight * 0.96, slabDepth]}
             radius={cornerRadius * 0.8}
             smoothness={6}
-            material={cipherMaterial}
+            material={brassCipherMaterial}
             position={[0, 0, -0.08]}
           />
           <mesh position={[0, 0, -0.08 + slabDepth / 2 + 0.004]}>
             <ringGeometry args={[0.22, 0.32, 32]} />
-            <meshBasicMaterial color={isLayerActive(4) ? "#FF8A65" : "#D95C36"} />
+            <meshBasicMaterial color="#14110A" />
           </mesh>
 
           {isExplodedNow && (
             <Html position={[phoneWidth / 2 + 0.35, -0.9, -0.08]} center distanceFactor={10}>
               <div
                 onClick={() => setFocusedLayer(4)}
-                className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
+                className={`px-3.5 py-2 rounded-xl border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(4)
-                    ? "bg-[#D95C36] text-white border-[#D95C36] scale-105 shadow-[0_0_20px_rgba(217,92,54,0.4)]"
-                    : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-[#D95C36]/60"
+                    ? "bg-accent text-accent-on border-accent scale-105 shadow-[0_0_20px_rgba(212,162,76,0.4)]"
+                    : "bg-[#16171A]/95 text-text border-border hover:border-accent/50"
                 }`}
               >
-                <div className="font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                <div className="font-bold flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   <span>04 · SQLCipher 256-AES</span>
                 </div>
-                <div className="text-[10px] text-typography-muted">Hardened Cryptography</div>
+                <div className="text-[10px] text-text-muted">Brass Cryptographic Barrier</div>
               </div>
             </Html>
           )}
@@ -1105,9 +1125,9 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
           <mesh position={[0, 0, -0.14 + (slabDepth * 1.5) / 2 + 0.005]}>
             <boxGeometry args={[1.0, 1.0, 0.02]} />
             <meshStandardMaterial
-              color="#0A0B0F"
-              metalness={0.95}
-              roughness={0.1}
+              color="#D4A24C"
+              metalness={0.92}
+              roughness={0.2}
             />
           </mesh>
 
@@ -1115,17 +1135,17 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
             <Html position={[phoneWidth / 2 + 0.35, -1.6, -0.14]} center distanceFactor={10}>
               <div
                 onClick={() => setFocusedLayer(5)}
-                className={`px-3 py-1.5 rounded-lg border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
+                className={`px-3.5 py-2 rounded-xl border backdrop-blur-md text-xs font-mono transition-all cursor-pointer whitespace-nowrap shadow-xl ${
                   isLayerActive(5)
-                    ? "bg-purple-600 text-white border-purple-500 scale-105 shadow-[0_0_20px_rgba(168,85,247,0.4)]"
-                    : "bg-[#121418]/90 text-typography-primary border-white/10 hover:border-purple-500/60"
+                    ? "bg-accent text-accent-on border-accent scale-105 shadow-[0_0_20px_rgba(212,162,76,0.4)]"
+                    : "bg-[#16171A]/95 text-text border-border hover:border-accent/50"
                 }`}
               >
-                <div className="font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                <div className="font-bold flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   <span>05 · Keystore Enclave</span>
                 </div>
-                <div className="text-[10px] text-typography-muted">Hardware Key Vault</div>
+                <div className="text-[10px] text-text-muted">StrongBox Hardware Vault</div>
               </div>
             </Html>
           )}

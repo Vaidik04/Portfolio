@@ -130,7 +130,7 @@ export const Navbar: React.FC = () => {
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brand hover:bg-brand-light text-white text-xs font-sans font-semibold tracking-wide transition-all shadow-[0_2px_12px_rgba(43,91,255,0.3)] hover:scale-[1.02]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent hover:bg-accent-hover text-accent-on text-xs font-sans font-semibold tracking-wide transition-all shadow-[0_2px_14px_rgba(212,162,76,0.25)] hover:scale-[1.02]"
             >
               <span>Get in touch</span>
               <ArrowUpRight className="w-3.5 h-3.5" />

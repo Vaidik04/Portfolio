@@ -49,54 +49,54 @@ export default function ProjectsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0B0C0E] text-typography-primary flex flex-col selection:bg-brand selection:text-white">
+    <div className="min-h-screen bg-bg text-text flex flex-col selection:bg-accent selection:text-accent-on">
       <Navbar />
 
       <main className="flex-1 max-w-6xl mx-auto px-6 pt-32 sm:pt-40 pb-24 w-full">
         {/* Navigation Breadcrumb */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-mono text-typography-secondary hover:text-brand transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent transition-colors mb-8"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Home</span>
         </Link>
 
         {/* Hero Banner */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-surface-border">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-border">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/30 text-brand text-xs font-mono uppercase tracking-widest mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs font-mono uppercase tracking-widest mb-4">
               <span>Full Engineering Catalog</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl font-heading font-extrabold tracking-tight text-typography-primary">
+            <h1 className="text-4xl sm:text-6xl font-heading font-extrabold tracking-tight text-text">
               All Applications & Systems
             </h1>
-            <p className="text-typography-secondary text-base sm:text-lg max-w-2xl mt-3 font-sans">
-              {PROJECTS.length} verified production applications, air-gapped security frameworks, computer vision engines, and mathematical financial models engineered by Vaidik Gandhi.
+            <p className="text-text-muted text-base sm:text-lg max-w-2xl mt-3 font-sans">
+              Verified production applications, air-gapped security frameworks, computer vision engines, and mathematical financial models engineered by Vaidik Gandhi.
             </p>
           </div>
 
           {/* Controls: Search & View Toggle */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 text-typography-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-text-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-full bg-surface-elevated border border-surface-border text-xs text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-brand transition-colors font-sans"
+                className="w-full pl-10 pr-4 py-2 rounded-full bg-surface-2 border border-border text-xs text-text placeholder:text-text-muted focus:outline-none focus:border-accent transition-colors font-sans"
               />
             </div>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center p-1 rounded-full bg-surface-elevated border border-surface-border self-start sm:self-auto">
+            <div className="flex items-center p-1 rounded-full bg-surface-2 border border-border self-start sm:self-auto">
               <button
                 onClick={() => setViewMode("grid")}
                 className={`p-1.5 rounded-full transition-colors ${
                   viewMode === "grid"
-                    ? "bg-brand text-white"
-                    : "text-typography-muted hover:text-white"
+                    ? "bg-accent text-accent-on"
+                    : "text-text-muted hover:text-text"
                 }`}
                 title="Grid view"
               >
@@ -106,8 +106,8 @@ export default function ProjectsPage() {
                 onClick={() => setViewMode("list")}
                 className={`p-1.5 rounded-full transition-colors ${
                   viewMode === "list"
-                    ? "bg-brand text-white"
-                    : "text-typography-muted hover:text-white"
+                    ? "bg-accent text-accent-on"
+                    : "text-text-muted hover:text-text"
                 }`}
                 title="List view"
               >
@@ -125,8 +125,8 @@ export default function ProjectsPage() {
               onClick={() => setSelectedCategory(cat.id)}
               className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all whitespace-nowrap ${
                 selectedCategory === cat.id
-                  ? "bg-brand text-white shadow-sm"
-                  : "bg-surface border border-surface-border text-typography-secondary hover:text-typography-primary"
+                  ? "bg-accent text-accent-on shadow-sm font-semibold"
+                  : "bg-surface-1 border border-border text-text-muted hover:text-text"
               }`}
             >
               {cat.label}
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Results Count */}
-        <div className="text-xs font-mono text-typography-muted mb-6">
+        <div className="text-xs font-mono text-text-muted mb-6">
           Showing {filtered.length} of {PROJECTS.length} verified projects
         </div>
 

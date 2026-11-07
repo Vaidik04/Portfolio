@@ -63,22 +63,22 @@ export const CommandPalette: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-24 px-4 bg-black/80 backdrop-blur-xl animate-fade-in font-sans">
-      <div className="relative w-full max-w-xl bg-surface border border-surface-border rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[520px]">
+    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-24 px-4 bg-bg/80 backdrop-blur-xl animate-fade-in font-sans">
+      <div className="relative w-full max-w-xl bg-surface-1 border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[520px]">
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-surface-border gap-3 bg-surface-elevated">
-          <Search className="w-4 h-4 text-brand flex-shrink-0" />
+        <div className="flex items-center px-4 py-3.5 border-b border-border gap-3 bg-surface-2">
+          <Search className="w-4 h-4 text-accent flex-shrink-0" />
           <input
             autoFocus
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search projects, architecture, or credentials..."
-            className="flex-1 bg-transparent text-sm text-typography-primary focus:outline-none placeholder:text-typography-muted font-sans"
+            className="flex-1 bg-transparent text-sm text-text focus:outline-none placeholder:text-text-muted font-sans"
           />
           <button
             onClick={() => setPaletteOpen(false)}
-            className="text-typography-muted hover:text-white p-1"
+            className="text-text-muted hover:text-text p-1"
           >
             <X className="w-4 h-4" />
           </button>
@@ -88,37 +88,37 @@ export const CommandPalette: React.FC = () => {
         <div className="overflow-y-auto p-3 space-y-4 text-xs">
           {/* Quick Navigation Commands */}
           <div>
-            <span className="text-[10px] font-mono text-typography-muted uppercase px-2 tracking-wider">
+            <span className="text-[10px] font-mono text-text-muted uppercase px-2 tracking-wider">
               Sections
             </span>
             <div className="grid grid-cols-2 gap-1.5 mt-1.5">
               <button
                 onClick={() => navigateTo("hero")}
-                className="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-elevated text-left text-typography-secondary hover:text-typography-primary transition-colors"
+                className="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-2 text-left text-text-muted hover:text-text transition-colors"
               >
-                <Sparkles className="w-3.5 h-3.5 text-brand" />
-                <span>01 // Overview</span>
+                <Sparkles className="w-3.5 h-3.5 text-accent" />
+                <span>Hero Overview</span>
               </button>
               <button
                 onClick={() => navigateTo("architecture")}
-                className="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-elevated text-left text-typography-secondary hover:text-typography-primary transition-colors"
+                className="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-2 text-left text-text-muted hover:text-text transition-colors"
               >
-                <Shield className="w-3.5 h-3.5 text-brand" />
-                <span>02 // Architecture Story</span>
+                <Shield className="w-3.5 h-3.5 text-accent" />
+                <span>Architecture Story</span>
               </button>
               <button
                 onClick={() => navigateTo("work")}
-                className="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-elevated text-left text-typography-secondary hover:text-typography-primary transition-colors"
+                className="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-2 text-left text-text-muted hover:text-text transition-colors"
               >
-                <Layers className="w-3.5 h-3.5 text-brand" />
-                <span>03 // Production Work</span>
+                <Layers className="w-3.5 h-3.5 text-accent" />
+                <span>Flagship Work</span>
               </button>
               <button
                 onClick={() => navigateTo("engineering")}
-                className="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-elevated text-left text-typography-secondary hover:text-typography-primary transition-colors"
+                className="flex items-center gap-2 p-2 rounded-xl hover:bg-surface-2 text-left text-text-muted hover:text-text transition-colors"
               >
-                <FileCode className="w-3.5 h-3.5 text-brand" />
-                <span>04 // Engineering Standards</span>
+                <FileCode className="w-3.5 h-3.5 text-accent" />
+                <span>Engineering Standards</span>
               </button>
             </div>
           </div>
@@ -134,22 +134,22 @@ export const CommandPalette: React.FC = () => {
                   <button
                     key={p.id}
                     onClick={() => navigateTo("work")}
-                    className="w-full flex items-center justify-between p-2 rounded-xl hover:bg-surface-elevated text-left group transition-colors"
+                    className="w-full flex items-center justify-between p-2 rounded-xl hover:bg-surface-2 text-left group transition-colors"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
                       {p.links.playStore ? (
-                        <Play className="w-3.5 h-3.5 text-brand fill-brand flex-shrink-0" />
+                        <Play className="w-3.5 h-3.5 text-accent fill-accent flex-shrink-0" />
                       ) : (
-                        <Layers className="w-3.5 h-3.5 text-typography-muted flex-shrink-0" />
+                        <Layers className="w-3.5 h-3.5 text-text-muted flex-shrink-0" />
                       )}
-                      <span className="text-typography-primary font-bold truncate group-hover:text-brand">
+                      <span className="text-text font-bold truncate group-hover:text-accent">
                         {p.name}
                       </span>
-                      <span className="text-typography-muted truncate text-[11px] hidden sm:inline">
+                      <span className="text-text-muted truncate text-[11px] hidden sm:inline">
                         — {p.tagline}
                       </span>
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-elevated text-typography-muted">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-2 text-text-muted">
                       {p.badge}
                     </span>
                   </button>
@@ -161,7 +161,7 @@ export const CommandPalette: React.FC = () => {
           {/* Filtered Certs */}
           {filteredCerts.length > 0 && (
             <div>
-              <span className="text-[10px] font-mono text-typography-muted uppercase px-2 tracking-wider">
+              <span className="text-[10px] font-mono text-text-muted uppercase px-2 tracking-wider">
                 Certifications ({filteredCerts.length})
               </span>
               <div className="space-y-1 mt-1.5">
@@ -169,15 +169,15 @@ export const CommandPalette: React.FC = () => {
                   <button
                     key={c.id}
                     onClick={() => navigateTo("credentials")}
-                    className="w-full flex items-center justify-between p-2 rounded-xl hover:bg-surface-elevated text-left group transition-colors"
+                    className="w-full flex items-center justify-between p-2 rounded-xl hover:bg-surface-2 text-left group transition-colors"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <Award className="w-3.5 h-3.5 text-brand flex-shrink-0" />
-                      <span className="text-typography-primary font-bold truncate group-hover:text-brand">
+                      <Award className="w-3.5 h-3.5 text-accent flex-shrink-0" />
+                      <span className="text-text font-bold truncate group-hover:text-accent">
                         {c.title}
                       </span>
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-elevated text-typography-muted">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-2 text-text-muted">
                       {c.badge || "Verified"}
                     </span>
                   </button>
