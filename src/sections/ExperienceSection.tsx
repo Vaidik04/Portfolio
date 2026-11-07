@@ -1,116 +1,102 @@
 "use client";
 
 import React from "react";
-import { Reveal } from "@/components/ui/Reveal";
-import { GraduationCap, Rocket, Trophy, Terminal, Calendar } from "lucide-react";
+import { GraduationCap, Rocket, Trophy, Terminal, Calendar, ArrowUpRight } from "lucide-react";
 
 export const ExperienceSection: React.FC = () => {
   const MILESTONES = [
     {
-      period: "2023 — Present",
+      period: "2023 - Present",
       role: "Founder & Independent Android Developer",
-      org: "VaidikTech · Mobile Software Lab",
+      org: "VaidikTech Mobile Software Lab",
       url: "https://vaidiktech.app",
       desc: "Founded VaidikTech to build high-utility, revenue-generating mobile products for Indian businesses. Architected and published Girvi on Google Play; engineered AdvoKosh (solo advocate chamber OS), JewelBill (thermal jewellery POS), and KaamKram.",
-      icon: <Rocket className="w-4 h-4 text-accent-android" />,
+      icon: <Rocket className="w-4 h-4 text-brand" />,
       badge: "Commercial Brand",
     },
     {
-      period: "2022 — Present",
+      period: "2022 - Present",
       role: "B.Tech in Computer Science & Engineering (AI & ML)",
       org: "Lakshmi Narain College of Technology (LNCT), Bhopal",
       desc: "Specialising in Artificial Intelligence and Machine Learning. Completed 6 formal NPTEL certifications from Premier IITs (including Elite Honors in OOPs, Machine Learning, Data Structures, and DBMS), HackerRank Problem Solving certification, and comprehensive Python engineering bootcamps.",
-      icon: <GraduationCap className="w-4 h-4 text-accent-cyan" />,
+      icon: <GraduationCap className="w-4 h-4 text-brand" />,
       badge: "Academic Honors",
     },
     {
-      period: "2024 — 2026",
-      role: "Distributed AI & Systems Engineering",
-      org: "Open Source & Competitive Hackathons",
+      period: "2024 - 2026",
+      role: "Distributed Systems & Machine Learning Research",
+      org: "Open Source & Competitive Systems",
       desc: "Engineered high-impact systems including SwarmOS (Google Nearby Connections P2P_CLUSTER for air-gapped phone ML), AI Disaster Response SOS mesh network (YOLOv8 + Bluetooth packet hopping), and QRoute (simulated annealing quantum-inspired transit optimization).",
-      icon: <Trophy className="w-4 h-4 text-accent-violet" />,
+      icon: <Trophy className="w-4 h-4 text-brand" />,
       badge: "Research & Systems",
     },
     {
       period: "The Foundation",
-      role: "Curiosity & Problem-Oriented Engineering",
-      org: "Personal Lab",
+      role: "Problem-Oriented Software Foundations",
+      org: "Personal Engineering Lab",
       desc: "Started building automation scripts, stock predictors, and desktop utilities with Python. Committed early to never settling for demo code, focusing on shipping real products that solve everyday operational headaches.",
-      icon: <Terminal className="w-4 h-4 text-accent-android" />,
+      icon: <Terminal className="w-4 h-4 text-brand" />,
       badge: "Genesis",
     },
   ];
 
   return (
-    <section id="journey" className="relative py-32 overflow-hidden border-t border-white/5 bg-[#05060A]/40 backdrop-blur-[2px]">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <Reveal direction="down">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-accent-android text-xs font-mono uppercase tracking-widest mb-6">
-            <Calendar className="w-3.5 h-3.5" />
-            <span>06 · Experience & Milestones</span>
-          </div>
-        </Reveal>
+    <section className="relative py-16 overflow-hidden">
+      <div className="flex flex-col gap-3 mb-12">
+        <span className="text-xs font-mono text-brand font-semibold uppercase tracking-wider">
+          Milestones & Trajectory
+        </span>
+        <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-typography-primary">
+          Education & Studio Timeline
+        </h3>
+      </div>
 
-        <Reveal direction="up" delay={0.1}>
-          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary leading-tight mb-4">
-            Education, Milestones & Products
-          </h2>
-          <p className="text-typography-secondary text-base sm:text-lg max-w-2xl font-sans mb-16">
-            From initial curiosity to establishing VaidikTech and publishing production apps on the Google Play Store.
-          </p>
-        </Reveal>
+      <div className="relative pl-6 sm:pl-8 border-l border-surface-border space-y-10">
+        {MILESTONES.map((m) => (
+          <div key={m.period} className="relative">
+            {/* Timeline Node Dot */}
+            <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-7 h-7 rounded-full bg-surface-elevated border border-surface-border flex items-center justify-center shadow-md">
+              {m.icon}
+            </div>
 
-        {/* Timeline Stack */}
-        <div className="relative pl-6 sm:pl-10 border-l border-white/10 space-y-12">
-          {MILESTONES.map((m, idx) => (
-            <Reveal key={m.period} direction="up" delay={idx * 0.1}>
-              <div className="relative">
-                {/* Timeline Node Icon */}
-                <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-8 h-8 rounded-full bg-surface-elevated border border-white/20 flex items-center justify-center shadow-lg">
-                  {m.icon}
-                </div>
-
-                {/* Milestone Card */}
-                <div className="p-6 sm:p-8 rounded-2xl bg-surface border border-surface-border transition-all duration-300 hover:border-accent-android/40 hover:bg-surface-hover">
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                    <span className="text-xs font-mono font-bold text-accent-android">
-                      {m.period}
-                    </span>
-                    <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-typography-muted font-semibold uppercase">
-                      {m.badge}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-heading font-bold text-typography-primary mb-1">
-                    {m.role}
-                  </h3>
-                  <div className="text-sm font-sans font-medium text-typography-secondary mb-3">
-                    {m.url ? (
-                      <a
-                        href={m.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent-android hover:underline inline-flex items-center gap-1.5 transition-colors"
-                      >
-                        <span>{m.org}</span>
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-android/10 border border-accent-android/30">
-                          vaidiktech.app
-                        </span>
-                      </a>
-                    ) : (
-                      m.org
-                    )}
-                  </div>
-                  <p className="text-xs sm:text-sm font-sans text-typography-muted leading-relaxed">
-                    {m.desc}
-                  </p>
-                </div>
+            {/* Milestone Card */}
+            <div className="p-6 rounded-2xl bg-surface border border-surface-border hover:border-surface-border-hover transition-colors">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <span className="text-xs font-mono font-bold text-brand">
+                  {m.period}
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-surface-elevated text-typography-muted border border-surface-border uppercase font-semibold">
+                  {m.badge}
+                </span>
               </div>
-            </Reveal>
-          ))}
-        </div>
+
+              <h4 className="text-lg font-heading font-bold text-typography-primary">
+                {m.role}
+              </h4>
+
+              <div className="text-xs font-sans text-typography-secondary mt-0.5 mb-3">
+                {m.url ? (
+                  <a
+                    href={m.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>{m.org}</span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
+                ) : (
+                  m.org
+                )}
+              </div>
+
+              <p className="text-xs sm:text-sm font-sans text-typography-muted leading-relaxed">
+                {m.desc}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 };
-

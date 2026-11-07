@@ -1,21 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Lenis from "lenis";
-import { MatrixBootSequence } from "@/components/preloader/MatrixBootSequence";
+import { StudioPreloader } from "@/components/preloader/StudioPreloader";
 import { WorldCanvas } from "@/components/canvas/WorldCanvas";
-import { HUDOverlay } from "@/components/ui/HUDOverlay";
-import { DeveloperTerminal } from "@/components/ui/DeveloperTerminal";
 import { CommandPalette } from "@/components/ui/CommandPalette";
-import { EasterEggs } from "@/components/ui/EasterEggs";
 import { Navbar } from "@/components/navbar/Navbar";
 import { HeroSection } from "@/sections/HeroSection";
-import { AboutSection } from "@/sections/AboutSection";
-import { TechStackSection } from "@/sections/TechStackSection";
+import { ArchitectureExplodedSection } from "@/sections/ArchitectureExplodedSection";
 import { ProjectsSection } from "@/sections/ProjectsSection";
-import { ProcessSection } from "@/sections/ProcessSection";
-import { CodeSection } from "@/sections/CodeSection";
-import { ExperienceSection } from "@/sections/ExperienceSection";
+import { EngineeringStandardsSection } from "@/sections/EngineeringStandardsSection";
+import { AboutSection } from "@/sections/AboutSection";
 import { CertificationsSection } from "@/sections/CertificationsSection";
 import { ContactSection } from "@/sections/ContactSection";
 import { FooterSection } from "@/sections/FooterSection";
@@ -27,7 +22,7 @@ export default function Home() {
   useEffect(() => {
     // Lenis smooth inertial scrolling
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
@@ -38,13 +33,11 @@ export default function Home() {
       const p = e.progress;
       setScrollProgress(p);
 
-      // Map progress to active section for HUD
+      // Map progress to active section
       if (p < 0.18) setActiveSection("hero");
-      else if (p < 0.35) setActiveSection("about");
-      else if (p < 0.52) setActiveSection("skills");
-      else if (p < 0.72) setActiveSection("projects");
-      else if (p < 0.84) setActiveSection("architecture");
-      else if (p < 0.93) setActiveSection("credentials");
+      else if (p < 0.45) setActiveSection("architecture");
+      else if (p < 0.70) setActiveSection("projects");
+      else if (p < 0.85) setActiveSection("about");
       else setActiveSection("contact");
     });
 
@@ -72,42 +65,31 @@ export default function Home() {
 
   return (
     <>
-      {/* 1. Matrix Singularity Boot Sequence */}
+      {/* 1. Fast, Quiet Typographic Preloader */}
       {!isBooted && (
-        <MatrixBootSequence
+        <StudioPreloader
           onComplete={() => {
             setBooted(true);
           }}
         />
       )}
 
-      {/* 2. Single Fixed Continuous 3D WebGL World Canvas */}
+      {/* 2. Single Continuous 3D WebGL World Canvas (Exploded Phone & Architecture) */}
       <WorldCanvas />
 
-      {/* 3. Sci-Fi Developer HUD Overlay */}
-      <HUDOverlay />
-
-      {/* 4. In-Site CLI Terminal (Press `) */}
-      <DeveloperTerminal />
-
-      {/* 5. Command Palette (Press Ctrl+K) */}
+      {/* 3. Purposeful Command Palette (Press Ctrl+K / Cmd+K) */}
       <CommandPalette />
 
-      {/* 6. Easter Eggs (Konami Code & Console Art) */}
-      <EasterEggs />
-
-      {/* 7. Floating Glass Navbar */}
+      {/* 4. Minimal Architectural Navbar */}
       <Navbar />
 
-      {/* 8. Continuous Scroll Sections Overlay */}
+      {/* 5. Continuous Editorial Scroll Sections */}
       <main className="relative z-10 flex flex-col min-h-screen pointer-events-auto">
         <HeroSection />
-        <AboutSection />
-        <TechStackSection />
+        <ArchitectureExplodedSection />
         <ProjectsSection />
-        <ProcessSection />
-        <CodeSection />
-        <ExperienceSection />
+        <EngineeringStandardsSection />
+        <AboutSection />
         <CertificationsSection />
         <ContactSection />
         <FooterSection />

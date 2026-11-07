@@ -2,58 +2,58 @@
 
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { CameraRig } from "./CameraRig";
-import { CosmicDust } from "./CosmicDust";
-import { PointerLight } from "./PointerLight";
-import { AssemblingPhone } from "./AssemblingPhone";
-import { CodePortalTunnel } from "./CodePortalTunnel";
-import { SkillGalaxy } from "./SkillGalaxy";
-import { ArchitectureNodes } from "./ArchitectureNodes";
-import { PlanetPullback } from "./PlanetPullback";
 import * as THREE from "three";
+import { PhoneExplodedLayers } from "./PhoneExplodedLayers";
 import { useWorldStore } from "@/store/useWorldStore";
 
 export const WorldCanvas: React.FC = () => {
-  const { glitchMode } = useWorldStore();
-
   return (
     <div
-      className={`fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#05060A] transition-all duration-300 ${
-        glitchMode
-          ? "filter invert-[0.1] contrast-125 saturate-150 [text-shadow:_0_0_8px_#3DDC84]"
-          : ""
-      }`}
+      aria-hidden="true"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#0B0C0E]"
     >
       <Canvas
-        camera={{ position: [0, 0, 7.5], fov: 45 }}
+        camera={{ position: [0, 0, 8.2], fov: 42 }}
         gl={{
           antialias: true,
           powerPreference: "high-performance",
           toneMapping: THREE.ACESFilmicToneMapping,
         }}
-        dpr={[1, 2]}
+        dpr={[1, 1.75]}
       >
-        <ambientLight intensity={0.45} />
-        <directionalLight position={[10, 15, 10]} intensity={1.5} color="#FFFFFF" />
-        <pointLight position={[-10, -5, -10]} intensity={1.2} color="#7C5CFF" />
-        <pointLight position={[5, -8, 5]} intensity={0.9} color="#3DDC84" />
+        {/* Architectural Studio Three-Point Lighting */}
+        <ambientLight intensity={0.65} color="#EDEFF5" />
+        
+        {/* Primary Studio Key Light */}
+        <directionalLight
+          position={[7, 12, 8]}
+          intensity={1.9}
+          color="#FFFFFF"
+        />
 
-        {/* Dynamic Interactive Pointer Light */}
-        <PointerLight />
+        {/* Soft Cool Fill Light */}
+        <directionalLight
+          position={[-8, -3, 6]}
+          intensity={0.75}
+          color="#B0C2E8"
+        />
+
+        {/* Cobalt Rim / Kicker Light highlighting slab beveled edges */}
+        <directionalLight
+          position={[0, -8, -6]}
+          intensity={2.4}
+          color="#2B5BFF"
+        />
+
+        {/* Subtle Ochre Cryptographic Backlight */}
+        <pointLight
+          position={[5, -5, -3]}
+          intensity={0.8}
+          color="#D95C36"
+        />
 
         <Suspense fallback={null}>
-          {/* Continuous Camera Rig */}
-          <CameraRig />
-
-          {/* Ambient Cosmic Stardust Field */}
-          <CosmicDust />
-
-          {/* 3D Scene Components */}
-          <AssemblingPhone />
-          <CodePortalTunnel />
-          <SkillGalaxy />
-          <ArchitectureNodes />
-          <PlanetPullback />
+          <PhoneExplodedLayers />
         </Suspense>
       </Canvas>
     </div>

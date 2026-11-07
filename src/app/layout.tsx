@@ -23,9 +23,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vaidiktech.app"),
-  title: "Vaidik Gandhi — Senior Android Engineer & Founder @ VaidikTech",
+  title: "Vaidik Gandhi - Independent Android Developer & Founder @ VaidikTech",
   description:
-    "Award-winning independent Android developer building revenue-generating, offline-first mobile products (Girvi, AdvoKosh, JewelBill, SwarmOS). Native Kotlin, Jetpack Compose, Room SQLite, SQLCipher & On-Device AI.",
+    "Independent Android developer building offline-first, encrypted mobile applications for India's professional trades: Girvi (gold loan ledger), JewelBill (jewellery POS), and AdvoKosh (advocate case diary). Native Kotlin, Jetpack Compose, Room SQLite, SQLCipher.",
   keywords: [
     "Vaidik Gandhi",
     "Android Developer",
@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     "Offline-First",
     "Room Database",
     "SQLCipher",
+    "India",
   ],
   authors: [{ name: "Vaidik Gandhi" }],
   icons: {
@@ -46,9 +47,9 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   openGraph: {
-    title: "Vaidik Gandhi — Independent Android Developer & Founder @ VaidikTech",
+    title: "Vaidik Gandhi - Independent Android Developer & Founder @ VaidikTech",
     description:
-      "Building practical, offline-first mobile products and intelligent systems that solve real-world Indian business workflows.",
+      "Engineering native, offline-first mobile products with Kotlin, Jetpack Compose, Room, and hardware-backed SQLCipher encryption.",
     url: "https://vaidiktech.app",
     siteName: "Vaidik Gandhi Portfolio",
     images: [
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
         url: "/assets/vaidik_3d_avatar_square.jpg",
         width: 1024,
         height: 1024,
-        alt: "Vaidik Gandhi",
+        alt: "Vaidik Gandhi · Founder of VaidikTech",
       },
     ],
     locale: "en_US",
@@ -64,8 +65,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vaidik Gandhi — Android Developer · Founder @ VaidikTech",
-    description: "Building revenue-generating, offline-first native Android apps.",
+    title: "Vaidik Gandhi - Android Developer · Founder @ VaidikTech",
+    description:
+      "Engineering native, offline-first mobile products with Kotlin, Jetpack Compose, Room, and hardware-backed SQLCipher encryption.",
     images: ["/assets/vaidik_3d_avatar_square.jpg"],
   },
 };
@@ -80,16 +82,13 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth dark`}
     >
-      <body className="bg-background text-typography-primary font-sans antialiased min-h-screen relative selection:bg-accent-android selection:text-background">
-        {/* Subtle Grain / Noise Overlay */}
+      <body className="bg-background text-typography-primary font-sans antialiased min-h-screen relative selection:bg-brand selection:text-white">
+        {/* Subtle Architectural Film Grain */}
         <div className="noise-overlay" />
-        {/* Subtle Ambient Grid */}
-        <div className="ambient-grid" />
-        {/* Interactive Custom Cursor */}
+        {/* Interactive Subtle Desktop Cursor */}
         <CustomCursor />
         {children}
       </body>
     </html>
   );
 }
-

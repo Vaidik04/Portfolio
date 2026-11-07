@@ -1,222 +1,194 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
-import Image from "next/image";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Magnetic } from "@/components/ui/Magnetic";
-import { ArrowUpRight, Menu, X, Play, Volume2, VolumeX } from "lucide-react";
+import Image from "next/image";
+import { Volume2, VolumeX, ArrowUpRight, Menu, X } from "lucide-react";
 import { useWorldStore } from "@/store/useWorldStore";
 
-interface NavLinkItem {
+interface NavItem {
   name: string;
   href: string;
   hash: string;
 }
 
-const NAV_LINKS: NavLinkItem[] = [
-  { name: "About", href: "/#about", hash: "about" },
-  { name: "Tech Stack", href: "/#skills", hash: "skills" },
-  { name: "Projects", href: "/projects", hash: "projects" },
+const NAV_ITEMS: NavItem[] = [
+  { name: "Work", href: "/#work", hash: "work" },
   { name: "Architecture", href: "/#architecture", hash: "architecture" },
-  { name: "Credentials", href: "/#credentials", hash: "credentials" },
+  { name: "Engineering", href: "/#engineering", hash: "engineering" },
+  { name: "About", href: "/#about", hash: "about" },
   { name: "Contact", href: "/#contact", hash: "contact" },
 ];
 
 export const Navbar: React.FC = () => {
+  const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const lastScrollY = useRef(0);
   const pathname = usePathname();
   const { soundEnabled, toggleSound } = useWorldStore();
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 30);
+
+      // Hide on scroll down, show on scroll up
+      if (currentScrollY > 150 && currentScrollY > lastScrollY.current + 6) {
+        setVisible(false);
+      } else if (currentScrollY < lastScrollY.current - 6 || currentScrollY <= 150) {
+        setVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, link: NavLinkItem) => {
-    if (pathname === "/" && link.hash && link.href.startsWith("/#")) {
-      const el = document.getElementById(link.hash);
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
+    if (pathname === "/" && item.hash) {
+      const el = document.getElementById(item.hash);
       if (el) {
         e.preventDefault();
         el.scrollIntoView({ behavior: "smooth" });
-        setMobileOpen(false);
+        setMobileMenuOpen(false);
       }
     }
   };
 
   return (
     <>
-      <header className="fixed top-6 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
-        <motion.div
-          initial={{ y: -30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          className={`pointer-events-auto relative flex items-center justify-between gap-4 md:gap-8 px-4 py-2.5 rounded-full border transition-all duration-300 ${
-            scrolled
-              ? "bg-[#090C14]/90 border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.7)] backdrop-blur-xl"
-              : "bg-[#090C14]/70 border-white/10 backdrop-blur-md"
-          }`}
-        >
-          {/* Scroll Progress Micro-Line at bottom of pill */}
-          <motion.div
-            style={{ scaleX }}
-            className="absolute -bottom-px left-6 right-6 h-[1.5px] bg-gradient-to-r from-accent-violet via-accent-cyan to-accent-android origin-left rounded-full"
-          />
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pointer-events-none ${
+          visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        } ${scrolled ? "py-3" : "py-6"}`}
+      >
+        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+          {/* Refined Brand Wordmark */}
+          <Link
+            href="/"
+            className="pointer-events-auto group flex items-center gap-3 py-1.5 focus:outline-none"
+          >
+            <span className="inline-flex w-8 h-8 rounded-full bg-surface-elevated border border-surface-border items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:border-brand/50">
+              <Image
+                src="/assets/vaidiktech_symbol.svg"
+                alt="VaidikTech Symbol"
+                width={20}
+                height={20}
+                className="w-full h-full object-contain"
+              />
+            </span>
+            <span className="flex flex-col">
+              <span className="font-heading font-bold text-sm tracking-tight text-typography-primary group-hover:text-white transition-colors">
+                Vaidik Gandhi
+              </span>
+              <span className="text-[10px] font-mono text-typography-muted group-hover:text-brand transition-colors">
+                Founder · VaidikTech
+              </span>
+            </span>
+          </Link>
 
-          {/* Brand Logo & VaidikTech Link */}
-          <Magnetic strength={0.25}>
-            <div className="flex items-center gap-2.5 pl-1">
-              <Link href="/" className="w-8 h-8 rounded-full bg-surface-elevated border border-surface-border flex items-center justify-center p-1.5 transition-transform duration-300 hover:scale-105 hover:border-accent-android/40">
-                <Image
-                  src="/assets/vaidiktech_symbol.svg"
-                  alt="VaidikTech"
-                  width={20}
-                  height={20}
-                  className="w-full h-full object-contain"
-                />
+          {/* Desktop Nav Items */}
+          <nav className="pointer-events-auto hidden md:flex items-center gap-1 px-4 py-1.5 rounded-full bg-[#121419]/80 border border-surface-border backdrop-blur-xl shadow-lg">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item)}
+                className="px-3.5 py-1.5 text-xs font-sans font-medium text-typography-secondary hover:text-typography-primary hover:bg-white/[0.04] rounded-full transition-colors"
+              >
+                {item.name}
               </Link>
-              <div className="flex flex-col">
-                <Link
-                  href="/"
-                  className="text-xs font-heading font-bold text-typography-primary leading-tight hover:text-accent-android transition-colors"
-                >
-                  Vaidik Gandhi
-                </Link>
-                <a
-                  href="https://vaidiktech.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[9px] font-mono tracking-wider text-accent-android uppercase hover:underline"
-                  title="Visit VaidikTech (vaidiktech.app)"
-                >
-                  Founder · VaidikTech
-                </a>
-              </div>
-            </div>
-          </Magnetic>
-
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map((link) => {
-              const isActive =
-                link.href === "/projects"
-                  ? pathname === "/projects" || pathname.startsWith("/projects/")
-                  : pathname === link.href;
-
-              return (
-                <Magnetic key={link.name} strength={0.3}>
-                  <Link
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link)}
-                    className={`px-3.5 py-1.5 text-xs font-sans font-medium transition-colors duration-200 relative group ${
-                      isActive ? "text-accent-android font-semibold" : "text-typography-secondary hover:text-typography-primary"
-                    }`}
-                  >
-                    <span>{link.name}</span>
-                    <span
-                      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-accent-android rounded-full transition-all duration-300 ${
-                        isActive ? "w-1/2" : "w-0 group-hover:w-1/2"
-                      }`}
-                    />
-                  </Link>
-                </Magnetic>
-              );
-            })}
+            ))}
           </nav>
 
-          {/* CTA & PlayStore Pill */}
-          <div className="flex items-center gap-2">
-            <Magnetic strength={0.35}>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.girvi.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono rounded-full bg-accent-android/10 hover:bg-accent-android/20 border border-accent-android/30 text-accent-android transition-all"
-                title="Google Play Store"
-              >
-                <Play className="w-2.5 h-2.5 fill-current" />
-                <span>Play Store</span>
-              </a>
-            </Magnetic>
-
-            <Magnetic strength={0.35}>
-              <button
-                type="button"
-                onClick={toggleSound}
-                className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                  soundEnabled
-                    ? "bg-accent-android/20 border-accent-android/50 text-accent-android shadow-[0_0_12px_rgba(61,220,132,0.4)]"
-                    : "bg-surface border-white/10 text-typography-muted hover:text-typography-primary hover:border-white/20"
-                }`}
-                title={soundEnabled ? "Audio FX Active (Click to Mute)" : "Enable Web Audio FX"}
-                aria-label="Toggle audio effects"
-              >
-                {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
-              </button>
-            </Magnetic>
-
-            <Magnetic strength={0.35}>
-              <Link
-                href="/contact"
-                className="relative inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-sans font-semibold rounded-full bg-accent-android text-[#05060A] shadow-[0_0_20px_rgba(61,220,132,0.35)] hover:shadow-[0_0_30px_rgba(61,220,132,0.6)] transition-all duration-300 hover:scale-[1.03]"
-              >
-                <span>Hire me</span>
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-            </Magnetic>
-
-            {/* Mobile Toggle */}
+          {/* Actions: Sound Toggle + Primary CTA */}
+          <div className="pointer-events-auto flex items-center gap-3">
+            {/* Audio Mute Button */}
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-1.5 text-typography-secondary hover:text-typography-primary"
-              aria-label="Toggle menu"
+              type="button"
+              onClick={toggleSound}
+              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${
+                soundEnabled
+                  ? "bg-brand/15 border-brand/40 text-brand"
+                  : "bg-surface-elevated border-surface-border text-typography-muted hover:text-typography-primary"
+              }`}
+              title={soundEnabled ? "Audio On (Click to Mute)" : "Muted (Click to Enable Audio)"}
+              aria-label="Toggle ambient sound"
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+            </button>
+
+            {/* Primary Action Button */}
+            <Link
+              href="/#contact"
+              onClick={(e) => {
+                if (pathname === "/") {
+                  e.preventDefault();
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brand hover:bg-brand-light text-white text-xs font-sans font-semibold tracking-wide transition-all shadow-[0_2px_12px_rgba(43,91,255,0.3)] hover:scale-[1.02]"
+            >
+              <span>Get in touch</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-typography-secondary hover:text-white"
+              aria-label="Toggle mobile menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
-        </motion.div>
+        </div>
       </header>
 
       {/* Mobile Drawer */}
-      {mobileOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="fixed inset-x-4 top-20 z-40 p-6 rounded-3xl bg-[#090C14]/95 border border-white/10 shadow-2xl backdrop-blur-2xl flex flex-col gap-4 md:hidden"
-        >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link)}
-              className="text-sm font-sans font-medium text-typography-secondary hover:text-accent-android transition-colors py-2 border-b border-white/5"
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-[#0B0C0E]/95 backdrop-blur-2xl flex flex-col justify-between p-8 md:hidden animate-in fade-in duration-200">
+          <div className="flex items-center justify-between border-b border-surface-border pb-4 mt-16">
+            <span className="text-xs font-mono text-typography-muted uppercase tracking-wider">Navigation</span>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-1 text-typography-muted hover:text-white"
             >
-              {link.name}
-            </Link>
-          ))}
-          <div className="flex flex-col gap-2 pt-2">
-            <Link
-              href="/contact"
-              onClick={() => setMobileOpen(false)}
-              className="w-full text-center py-2.5 rounded-full bg-accent-android text-[#05060A] text-xs font-sans font-bold shadow-[0_0_20px_rgba(61,220,132,0.35)]"
-            >
-              Get in Touch
-            </Link>
+              <X className="w-5 h-5" />
+            </button>
           </div>
-        </motion.div>
+
+          <div className="flex flex-col gap-5 my-auto">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item)}
+                className="text-2xl font-heading font-bold text-typography-primary hover:text-brand transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          <div className="pt-6 border-t border-surface-border flex flex-col gap-3">
+            <Link
+              href="/#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-3.5 rounded-full bg-brand text-white font-sans font-semibold text-sm shadow-lg"
+            >
+              Get in touch
+            </Link>
+            <div className="text-center text-xs font-mono text-typography-muted">
+              vaidikgandhi@gmail.com
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

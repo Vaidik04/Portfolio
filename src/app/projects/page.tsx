@@ -5,17 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar/Navbar";
 import { FooterSection } from "@/sections/FooterSection";
-import { TiltCard } from "@/components/ui/TiltCard";
 import { PROJECTS, Project } from "@/data/projects";
 import {
   Search,
   Play,
   Github,
   ArrowUpRight,
-  ShieldCheck,
-  Layers,
-  ChevronRight,
-  Sparkles,
   ArrowLeft,
   LayoutGrid,
   List,
@@ -23,23 +18,17 @@ import {
 } from "lucide-react";
 
 export default function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-  const playstoreCount = PROJECTS.filter((p) => Boolean(p.links.playStore)).length;
-  const commercialCount = PROJECTS.filter((p) => p.category === "commercial").length;
-  const systemsCount = PROJECTS.filter((p) => p.category === "systems").length;
-  const aiCount = PROJECTS.filter((p) => p.category === "ai").length;
-  const toolsCount = PROJECTS.filter((p) => p.category === "tools").length;
-
   const categories = [
-    { id: "all", label: `All Projects (${PROJECTS.length})` },
-    { id: "playstore", label: `Google Play Store (${playstoreCount})`, isSpecial: true },
-    { id: "commercial", label: `Commercial Android (${commercialCount})` },
-    { id: "systems", label: `P2P & Distributed (${systemsCount})` },
-    { id: "ai", label: `AI & Vision (${aiCount})` },
-    { id: "tools", label: `Tools & Python (${toolsCount})` },
+    { id: "all", label: `All (${PROJECTS.length})` },
+    { id: "playstore", label: `Google Play`, isSpecial: true },
+    { id: "commercial", label: `Commercial` },
+    { id: "systems", label: `P2P & Systems` },
+    { id: "ai", label: `AI & Vision` },
+    { id: "tools", label: `Tools` },
   ];
 
   const filtered = PROJECTS.filter((p) => {
@@ -60,27 +49,26 @@ export default function ProjectsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#05060A] text-typography-primary flex flex-col selection:bg-accent-android selection:text-[#05060A]">
+    <div className="min-h-screen bg-[#0B0C0E] text-typography-primary flex flex-col selection:bg-brand selection:text-white">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl mx-auto px-6 pt-32 sm:pt-40 pb-24 w-full">
-        {/* Back Link */}
+      <main className="flex-1 max-w-6xl mx-auto px-6 pt-32 sm:pt-40 pb-24 w-full">
+        {/* Navigation Breadcrumb */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-mono text-typography-secondary hover:text-accent-android transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-xs font-mono text-typography-secondary hover:text-brand transition-colors mb-8"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Home</span>
         </Link>
 
         {/* Hero Banner */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-white/5">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-surface-border">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-android/10 border border-accent-android/30 text-accent-android text-xs font-mono uppercase tracking-widest mb-4">
-              <Layers className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/30 text-brand text-xs font-mono uppercase tracking-widest mb-4">
               <span>Full Engineering Catalog</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl font-heading font-black tracking-tight text-typography-primary">
+            <h1 className="text-4xl sm:text-6xl font-heading font-extrabold tracking-tight text-typography-primary">
               All Applications & Systems
             </h1>
             <p className="text-typography-secondary text-base sm:text-lg max-w-2xl mt-3 font-sans">
@@ -94,197 +82,129 @@ export default function ProjectsPage() {
               <Search className="w-4 h-4 text-typography-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search by keyword, tech, problem..."
+                placeholder="Search projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-full bg-surface-elevated border border-white/10 text-xs text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-accent-android/60 transition-colors font-mono"
+                className="w-full pl-10 pr-4 py-2 rounded-full bg-surface-elevated border border-surface-border text-xs text-typography-primary placeholder:text-typography-muted focus:outline-none focus:border-brand transition-colors font-sans"
               />
             </div>
 
-            {/* View Mode Switcher */}
-            <div className="flex items-center p-1 rounded-full bg-surface-elevated border border-white/10 self-start sm:self-auto">
+            {/* View Mode Toggle */}
+            <div className="flex items-center p-1 rounded-full bg-surface-elevated border border-surface-border self-start sm:self-auto">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`p-2 rounded-full transition-colors ${
+                className={`p-1.5 rounded-full transition-colors ${
                   viewMode === "grid"
-                    ? "bg-accent-android text-[#05060A]"
+                    ? "bg-brand text-white"
                     : "text-typography-muted hover:text-white"
                 }`}
-                title="Grid View"
+                title="Grid view"
               >
-                <LayoutGrid className="w-4 h-4" />
+                <LayoutGrid className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`p-2 rounded-full transition-colors ${
+                className={`p-1.5 rounded-full transition-colors ${
                   viewMode === "list"
-                    ? "bg-accent-android text-[#05060A]"
+                    ? "bg-brand text-white"
                     : "text-typography-muted hover:text-white"
                 }`}
-                title="List View"
+                title="List view"
               >
-                <List className="w-4 h-4" />
+                <List className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Category Pills */}
-        <div className="flex flex-wrap items-center gap-2 my-8">
-          {categories.map((cat) => {
-            const isSelected = selectedCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-xs font-sans font-semibold transition-all duration-300 flex items-center gap-1.5 ${
-                  isSelected
-                    ? cat.isSpecial
-                      ? "bg-accent-android text-[#05060A] shadow-[0_0_24px_rgba(61,220,132,0.45)] ring-2 ring-accent-android"
-                      : "bg-white text-[#05060A] shadow-[0_0_20px_rgba(255,255,255,0.25)]"
-                    : cat.isSpecial
-                    ? "bg-accent-android/10 border border-accent-android/30 text-accent-android hover:bg-accent-android/20"
-                    : "bg-surface border border-surface-border text-typography-secondary hover:text-typography-primary hover:border-white/20"
-                }`}
-              >
-                {cat.isSpecial && <Play className="w-2.5 h-2.5 fill-current" />}
-                <span>{cat.label}</span>
-              </button>
-            );
-          })}
+        <div className="flex items-center gap-2 overflow-x-auto py-6 no-scrollbar">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all whitespace-nowrap ${
+                selectedCategory === cat.id
+                  ? "bg-brand text-white shadow-sm"
+                  : "bg-surface border border-surface-border text-typography-secondary hover:text-typography-primary"
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
-        {/* View: Grid */}
+        {/* Results Count */}
+        <div className="text-xs font-mono text-typography-muted mb-6">
+          Showing {filtered.length} of {PROJECTS.length} verified projects
+        </div>
+
+        {/* Grid View */}
         {viewMode === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((project) => {
               const hasPlayStore = Boolean(project.links.playStore);
-
               return (
-                <TiltCard
+                <div
                   key={project.id}
-                  className={`p-6 flex flex-col justify-between group relative overflow-hidden transition-all duration-500 ${
-                    hasPlayStore ? "ring-1 ring-accent-android/30 bg-gradient-to-b from-surface-elevated/90 to-surface/90" : ""
+                  className={`p-6 rounded-2xl bg-surface border transition-colors flex flex-col justify-between group ${
+                    hasPlayStore ? "border-brand/30 hover:border-brand" : "border-surface-border hover:border-surface-border-hover"
                   }`}
-                  glowColor={
-                    hasPlayStore ? "rgba(61, 220, 132, 0.22)" : "rgba(124, 92, 255, 0.16)"
-                  }
                 >
-                  {hasPlayStore && (
-                    <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-accent-android to-transparent opacity-80" />
-                  )}
-
                   <div className="flex flex-col gap-4">
-                    {/* Badge & Timeline */}
-                    <div className="flex items-center justify-between gap-2">
-                      <span
-                        className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold uppercase flex items-center gap-1.5 ${
-                          project.badgeType === "playstore"
-                            ? "bg-accent-android/15 text-accent-android border border-accent-android/40 shadow-[0_0_12px_rgba(61,220,132,0.25)]"
-                            : project.badgeType === "production"
-                            ? "bg-accent-violet/15 text-accent-violet border border-accent-violet/30"
-                            : "bg-accent-cyan/15 text-accent-cyan border border-accent-cyan/30"
-                        }`}
-                      >
-                        {project.badgeType === "playstore" ? (
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-android opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-android"></span>
-                          </span>
-                        ) : (
-                          <ShieldCheck className="w-2.5 h-2.5" />
-                        )}
-                        <span>{project.badge}</span>
-                      </span>
-
-                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-typography-muted bg-white/[0.04] border border-white/5 px-2 py-0.5 rounded-md flex-shrink-0">
-                        <Calendar className="w-2.5 h-2.5 text-accent-android/70" />
-                        <span>{project.timeline}</span>
-                      </div>
-                    </div>
-
-                    {/* App Identity */}
-                    <div className="flex items-center gap-3 pt-1">
-                      <div className="w-12 h-12 rounded-2xl bg-surface-elevated border border-white/10 p-1 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-inner group-hover:scale-105 transition-transform duration-300">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-surface-elevated border border-surface-border p-2 flex items-center justify-center overflow-hidden">
                         <Image
                           src={project.icon}
                           alt={project.name}
-                          width={44}
-                          height={44}
-                          className="w-full h-full object-cover rounded-xl"
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-contain"
                         />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <Link
-                          href={`/projects/${project.id}`}
-                          className="text-lg font-heading font-bold text-typography-primary truncate block hover:text-accent-android transition-colors"
-                        >
-                          {project.name}
-                        </Link>
-                        <p className="text-xs text-typography-muted truncate font-sans">
-                          {project.tagline}
-                        </p>
-                      </div>
+                      <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-surface-elevated text-typography-muted border border-surface-border">
+                        {project.badge}
+                      </span>
                     </div>
 
-                    {/* Problem */}
-                    <p className="text-xs text-typography-secondary leading-relaxed line-clamp-3 font-sans">
-                      {project.problem}
-                    </p>
-
-                    {/* Metrics */}
-                    <div className="grid grid-cols-2 gap-2 p-2.5 rounded-xl bg-surface-elevated/50 border border-white/5">
-                      {project.keyMetrics.slice(0, 2).map((metric, i) => (
-                        <div key={i} className="flex flex-col">
-                          <span className="text-[9px] font-mono text-typography-muted uppercase tracking-wider">
-                            {metric.label}
-                          </span>
-                          <span className="text-xs font-mono font-semibold text-typography-primary truncate">
-                            {metric.value}
-                          </span>
-                        </div>
-                      ))}
+                    <div>
+                      <Link
+                        href={`/projects/${project.id}`}
+                        className="text-lg font-heading font-bold text-typography-primary hover:text-brand transition-colors block"
+                      >
+                        {project.name}
+                      </Link>
+                      <p className="text-xs text-typography-secondary mt-1 line-clamp-2 leading-relaxed">
+                        {project.tagline}
+                      </p>
                     </div>
 
-                    {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {project.techStack.slice(0, 4).map((tech, i) => (
+                    <div className="flex flex-wrap gap-1 pt-2">
+                      {project.techStack.slice(0, 3).map((t, i) => (
                         <span
                           key={i}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/[0.04] text-typography-secondary border border-white/5"
+                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-elevated text-typography-muted border border-surface-border"
                         >
-                          {tech}
+                          {t}
                         </span>
                       ))}
-                      {project.techStack.length > 4 && (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/[0.04] text-typography-muted">
-                          +{project.techStack.length - 4}
-                        </span>
-                      )}
                     </div>
                   </div>
 
-                  {/* Footer Actions */}
-                  <div className="flex items-center justify-between pt-5 mt-4 border-t border-white/5 gap-2">
-                    <Link
-                      href={`/projects/${project.id}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-typography-primary hover:text-accent-android transition-colors py-1 group/btn"
-                    >
-                      <span>Explore Case Study</span>
-                      <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
-                    </Link>
-
-                    <div className="flex items-center gap-1.5">
+                  <div className="pt-6 mt-6 border-t border-surface-border flex items-center justify-between">
+                    <span className="text-[11px] font-mono text-typography-muted">
+                      {project.timeline}
+                    </span>
+                    <div className="flex items-center gap-2">
                       {project.links.playStore && (
                         <a
                           href={project.links.playStore}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-2.5 py-1 rounded-full bg-accent-android/15 hover:bg-accent-android/30 border border-accent-android/40 text-accent-android text-[11px] font-mono flex items-center gap-1 transition-all duration-200 shadow-[0_0_10px_rgba(61,220,132,0.2)]"
-                          title="Open Google Play Store"
+                          className="p-1.5 text-brand hover:text-brand-light transition-colors"
+                          title="View on Google Play"
                         >
-                          <Play className="w-2.5 h-2.5 fill-current" />
-                          <span>Play</span>
+                          <Play className="w-3.5 h-3.5 fill-current" />
                         </a>
                       )}
                       {project.links.github && (
@@ -292,119 +212,69 @@ export default function ProjectsPage() {
                           href={project.links.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-7 h-7 rounded-full bg-white/[0.05] hover:bg-white/10 flex items-center justify-center text-typography-secondary hover:text-white transition-colors"
-                          title="GitHub Repository"
+                          className="p-1.5 text-typography-muted hover:text-white transition-colors"
+                          title="Source Code"
                         >
                           <Github className="w-3.5 h-3.5" />
                         </a>
                       )}
                       <Link
                         href={`/projects/${project.id}`}
-                        className="w-7 h-7 rounded-full bg-white/[0.05] hover:bg-accent-android hover:text-[#05060A] flex items-center justify-center text-typography-secondary transition-colors"
-                        title="Dedicated Case Study Page"
+                        className="p-1.5 text-typography-muted hover:text-brand transition-colors"
+                        title="Case Study"
                       >
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>
-                </TiltCard>
+                </div>
               );
             })}
           </div>
         ) : (
-          /* View: Compact List */
-          <div className="space-y-3">
-            {filtered.map((project) => {
-              const hasPlayStore = Boolean(project.links.playStore);
-              return (
-                <div
-                  key={project.id}
-                  className={`p-4 rounded-2xl bg-surface border border-white/5 hover:border-white/15 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-300 ${
-                    hasPlayStore ? "border-accent-android/30 bg-surface-elevated/70" : ""
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-surface-elevated border border-white/10 p-1 flex-shrink-0 flex items-center justify-center overflow-hidden">
-                      <Image
-                        src={project.icon}
-                        alt={project.name}
-                        width={40}
-                        height={40}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <Link
-                          href={`/projects/${project.id}`}
-                          className="text-base font-heading font-bold text-typography-primary hover:text-accent-android transition-colors"
-                        >
-                          {project.name}
-                        </Link>
-                        <span
-                          className={`text-[9px] font-mono px-2 py-0.5 rounded-full font-bold uppercase ${
-                            project.badgeType === "playstore"
-                              ? "bg-accent-android/15 text-accent-android border border-accent-android/40"
-                              : "bg-white/[0.04] text-typography-muted border border-white/5"
-                          }`}
-                        >
-                          {project.badge}
-                        </span>
-                        <span className="text-[10px] font-mono text-typography-muted bg-white/[0.03] border border-white/5 px-2 py-0.5 rounded-md flex items-center gap-1">
-                          <Calendar className="w-2.5 h-2.5 text-accent-android/70" />
-                          <span>{project.timeline}</span>
-                        </span>
-                      </div>
-                      <p className="text-xs text-typography-secondary line-clamp-1">
-                        {project.tagline}
-                      </p>
-                    </div>
+          /* List View */
+          <div className="flex flex-col divide-y divide-surface-border rounded-2xl border border-surface-border bg-surface overflow-hidden">
+            {filtered.map((project) => (
+              <div
+                key={project.id}
+                className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-surface-elevated/40 transition-colors"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-surface-elevated border border-surface-border p-1.5 flex-shrink-0 flex items-center justify-center">
+                    <Image
+                      src={project.icon}
+                      alt={project.name}
+                      width={32}
+                      height={32}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
-
-                  <div className="flex items-center gap-3 self-end md:self-center">
-                    <div className="hidden lg:flex items-center gap-1.5">
-                      {project.techStack.slice(0, 3).map((t, i) => (
-                        <span
-                          key={i}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/[0.04] text-typography-muted"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-
-                    {project.links.playStore && (
-                      <a
-                        href={project.links.playStore}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-full bg-accent-android/15 hover:bg-accent-android/30 border border-accent-android/40 text-accent-android text-xs font-mono flex items-center gap-1.5 transition-all"
-                      >
-                        <Play className="w-3 h-3 fill-current" />
-                        <span>Play Store</span>
-                      </a>
-                    )}
-                    {project.links.github && (
-                      <a
-                        href={project.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full bg-white/[0.05] hover:bg-white/10 text-typography-secondary hover:text-white transition-colors"
-                      >
-                        <Github className="w-4 h-4" />
-                      </a>
-                    )}
+                  <div>
                     <Link
                       href={`/projects/${project.id}`}
-                      className="px-3 py-1.5 rounded-full bg-white/[0.06] hover:bg-accent-android hover:text-[#05060A] text-xs font-mono text-typography-primary transition-all flex items-center gap-1"
+                      className="font-heading font-bold text-sm text-typography-primary hover:text-brand transition-colors block"
                     >
-                      <span>Case Study</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
+                      {project.name}
                     </Link>
+                    <p className="text-xs text-typography-secondary line-clamp-1">
+                      {project.tagline}
+                    </p>
                   </div>
                 </div>
-              );
-            })}
+
+                <div className="flex items-center gap-4 self-end sm:self-center">
+                  <span className="text-xs font-mono text-typography-muted">
+                    {project.timeline}
+                  </span>
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className="p-1.5 rounded-lg border border-surface-border hover:border-brand text-typography-secondary hover:text-brand transition-colors"
+                  >
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </main>
@@ -413,4 +283,3 @@ export default function ProjectsPage() {
     </div>
   );
 }
-

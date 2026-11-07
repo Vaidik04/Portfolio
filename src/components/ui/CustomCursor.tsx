@@ -14,7 +14,7 @@ export const CustomCursor: React.FC = () => {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  const springConfig = { damping: 26, stiffness: 380 };
+  const springConfig = { damping: 28, stiffness: 350 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
@@ -33,7 +33,7 @@ export const CustomCursor: React.FC = () => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      const interactive = target.closest("a, button, [data-interactive='true'], [data-cursor]");
+      const interactive = target.closest("a, button, [role='button'], [data-interactive='true'], [data-cursor]");
       if (interactive) {
         setDomHovered(true);
         const text = interactive.getAttribute("data-cursor");
@@ -57,7 +57,7 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden hidden md:block">
-      {/* Outer trailing ring / morphing badge */}
+      {/* Outer trailing subtle ring */}
       <motion.div
         style={{
           x: smoothX,
@@ -66,21 +66,21 @@ export const CustomCursor: React.FC = () => {
           translateY: "-50%",
         }}
         animate={{
-          scale: activeText ? 2.6 : isHovered ? 1.8 : 1,
-          backgroundColor: isHovered ? "rgba(61, 220, 132, 0.16)" : "rgba(61, 220, 132, 0.04)",
-          borderColor: isHovered ? "rgba(61, 220, 132, 0.9)" : "rgba(61, 220, 132, 0.35)",
+          scale: activeText ? 2.2 : isHovered ? 1.6 : 1,
+          backgroundColor: isHovered ? "rgba(43, 91, 255, 0.12)" : "transparent",
+          borderColor: isHovered ? "rgba(43, 91, 255, 0.8)" : "rgba(240, 240, 246, 0.25)",
         }}
-        transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className="w-10 h-10 rounded-full border border-accent-android/40 backdrop-blur-[2px] flex items-center justify-center shadow-[0_0_15px_rgba(61,220,132,0.2)]"
+        transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        className="w-8 h-8 rounded-full border flex items-center justify-center shadow-sm"
       >
         {activeText && (
-          <span className="text-[8px] font-mono tracking-widest text-accent-android uppercase font-black px-1">
+          <span className="text-[7px] font-mono tracking-wider text-brand uppercase font-bold px-1">
             {activeText}
           </span>
         )}
       </motion.div>
 
-      {/* Center sharp laser dot */}
+      {/* Center dot */}
       <motion.div
         style={{
           x: mouseX,
@@ -89,10 +89,10 @@ export const CustomCursor: React.FC = () => {
           translateY: "-50%",
         }}
         animate={{
-          scale: isHovered ? 0.3 : 1,
-          opacity: isHovered ? 0.25 : 1,
+          scale: isHovered ? 0.4 : 1,
+          opacity: isHovered ? 0.3 : 1,
         }}
-        className="w-1.5 h-1.5 rounded-full bg-accent-android shadow-[0_0_10px_#3DDC84]"
+        className="w-1.5 h-1.5 rounded-full bg-brand"
       />
     </div>
   );

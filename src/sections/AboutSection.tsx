@@ -1,214 +1,108 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
 import Image from "next/image";
-import { Reveal } from "@/components/ui/Reveal";
-import { TiltCard } from "@/components/ui/TiltCard";
-import { Shield, Smartphone, Terminal, Award, Sparkles, MapPin, GraduationCap, ExternalLink } from "lucide-react";
+import { ArrowUpRight, MapPin, GraduationCap, Building2 } from "lucide-react";
 
 export const AboutSection: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const highlight1 = useTransform(scrollYProgress, [0.15, 0.3], [0.35, 1]);
-  const highlight2 = useTransform(scrollYProgress, [0.3, 0.45], [0.35, 1]);
-  const highlight3 = useTransform(scrollYProgress, [0.45, 0.6], [0.35, 1]);
-  const highlight4 = useTransform(scrollYProgress, [0.6, 0.75], [0.35, 1]);
-
   return (
-    <section id="about" ref={containerRef} className="relative py-32 overflow-hidden border-t border-white/5">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-accent-violet/10 rounded-full blur-[140px] pointer-events-none" />
+    <section
+      id="about"
+      className="relative py-32 px-6 max-w-6xl mx-auto w-full border-t border-surface-border z-10"
+    >
+      <div className="flex flex-col gap-4 mb-16">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-brand" />
+          <span className="text-xs font-mono tracking-wider uppercase text-typography-muted">
+            03 · Founder Ethos & Background
+          </span>
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary leading-tight">
+          Why I build for India&apos;s trades.
+        </h2>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Section Pill */}
-        <Reveal direction="down">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-accent-android text-xs font-mono uppercase tracking-widest mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>01 · The Engineer & Philosophy</span>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* Left Column: Human Narrative */}
+        <div className="lg:col-span-7 flex flex-col gap-6 text-base sm:text-lg font-sans text-typography-secondary leading-relaxed">
+          <p>
+            I am an independent Android developer based in Bhopal, India, and the founder of{" "}
+            <a
+              href="https://vaidiktech.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-typography-primary font-semibold hover:text-brand underline decoration-brand/40 underline-offset-4 transition-colors"
+            >
+              VaidikTech
+            </a>
+            . I engineer native mobile software for people whose daily livelihood depends on accuracy: advocates managing strict court limitation diaries, jewellers calculating gold purity on busy counters, and pawnbrokers safeguarding gold loan pledges.
+          </p>
+
+          <p>
+            Traditional trade in India does not happen in quiet offices with gigabit fiber. It happens in crowded basements with erratic power, blinding sunlight, and zero cellular reception. When a jeweller prints a tax invoice or an advocate checks a court cause list, a cloud timeout isn&apos;t an inconvenience—it halts business.
+          </p>
+
+          <p>
+            That is why my architecture strictly mandates <strong className="text-typography-primary font-semibold">100% offline data sovereignty</strong>, zero-drift integer-paise math, and hardware-backed SQLCipher encryption. I handle the entire product lifecycle: from field workflow observation, to Jetpack Compose architecture, to releasing and supporting verified signed builds on the Google Play Store.
+          </p>
+
+          {/* Quick Verified Bio Metadata */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-surface-border text-xs font-sans">
+            <div className="flex items-start gap-2.5">
+              <Building2 className="w-4 h-4 text-brand flex-shrink-0 mt-0.5" />
+              <div>
+                <span className="font-heading font-bold text-typography-primary block">Studio</span>
+                <span className="text-typography-muted">Founder @ VaidikTech</span>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-2.5">
+              <GraduationCap className="w-4 h-4 text-brand flex-shrink-0 mt-0.5" />
+              <div>
+                <span className="font-heading font-bold text-typography-primary block">Education</span>
+                <span className="text-typography-muted">B.Tech CSE (AI & ML) · LNCT Bhopal</span>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-2.5">
+              <MapPin className="w-4 h-4 text-brand flex-shrink-0 mt-0.5" />
+              <div>
+                <span className="font-heading font-bold text-typography-primary block">Base</span>
+                <span className="text-typography-muted">Bhopal, India (IST)</span>
+              </div>
+            </div>
           </div>
-        </Reveal>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Story-Style Kinetic Bio (7 Cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-8">
-            <Reveal direction="up" delay={0.1}>
-              <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary leading-[1.12]">
-                Building sovereign software for people who work in the{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-android via-accent-cyan to-accent-violet">
-                  real world
-                </span>
-                .
-              </h2>
-            </Reveal>
+        {/* Right Column: Clean Architectural Portrait Card */}
+        <div className="lg:col-span-5 flex flex-col gap-4">
+          <div className="rounded-3xl overflow-hidden border border-surface-border bg-surface p-3 shadow-xl relative group">
+            <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#0A0D14]">
+              <Image
+                src="/assets/vaidik_portrait_pro.jpg"
+                alt="Vaidik Gandhi · Founder of VaidikTech"
+                fill
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                priority
+              />
+            </div>
 
-            {/* Scroll-Triggered Illuminating Paragraphs */}
-            <div className="flex flex-col gap-6 font-sans text-base sm:text-lg leading-relaxed">
-              <motion.p style={{ opacity: highlight1 }} className="transition-opacity duration-300">
-                I am an independent Android developer and the founder of{" "}
+            <div className="p-4 flex items-center justify-between">
+              <div>
+                <div className="font-heading font-bold text-sm text-typography-primary">
+                  Vaidik Gandhi
+                </div>
                 <a
                   href="https://vaidiktech.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-typography-primary font-semibold hover:text-accent-android transition-colors underline decoration-accent-android/40 underline-offset-4"
+                  className="text-xs font-mono text-brand hover:underline flex items-center gap-1"
                 >
-                  VaidikTech
-                </a>. My
-                journey began with deep curiosity about how software interacts with hardware and how it
-                can eliminate friction in overlooked everyday businesses.
-              </motion.p>
-
-              <motion.p style={{ opacity: highlight2 }} className="transition-opacity duration-300">
-                Over time, curiosity matured into an uncompromising engineering ethos:{" "}
-                <strong className="text-accent-android font-medium">
-                  never build superficial demos or theoretical coursework prototypes
-                </strong>
-                . I build complete, hardened applications that real pawnbrokers, advocates, jewellers, and solo
-                tradespeople depend upon every single day.
-              </motion.p>
-
-              <motion.p style={{ opacity: highlight3 }} className="transition-opacity duration-300">
-                Operating in India means designing for hostile constraints: sporadic 2G/3G connectivity,
-                dense basements with zero cellular reception, blinding outdoor sunlight, and zero tolerance
-                for fractional currency drift. That is why my apps strictly mandate{" "}
-                <span className="text-accent-cyan font-mono text-sm px-2 py-0.5 rounded bg-accent-cyan/10 border border-accent-cyan/20">
-                  Zero INTERNET Permissions
-                </span>
-                ,{" "}
-                <span className="text-accent-violet font-mono text-sm px-2 py-0.5 rounded bg-accent-violet/10 border border-accent-violet/20">
-                  256-bit SQLCipher AES
-                </span>
-                , and integer paise monetary mathematics.
-              </motion.p>
-
-              <motion.p style={{ opacity: highlight4 }} className="transition-opacity duration-300">
-                I am currently pursuing my B.Tech in Computer Science and Engineering, specialising in{" "}
-                <strong className="text-typography-primary font-semibold">
-                  Artificial Intelligence and Machine Learning
-                </strong>{" "}
-                at Lakshmi Narain College of Technology (LNCT), Bhopal.
-              </motion.p>
-            </div>
-
-            {/* Academic & Location Pill */}
-            <Reveal direction="up" delay={0.3}>
-              <div className="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono text-typography-secondary">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface border border-surface-border">
-                  <GraduationCap className="w-3.5 h-3.5 text-accent-android" />
-                  <span>LNCT Bhopal · B.Tech CSE (AI & ML)</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface border border-surface-border">
-                  <MapPin className="w-3.5 h-3.5 text-accent-cyan" />
-                  <span>Bhopal, India (UTC+5:30)</span>
-                </div>
+                  <span>vaidiktech.app</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
               </div>
-            </Reveal>
-          </div>
-
-          {/* Right Column: Glitch Photo Card & Bento Stats (5 Cols) */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            {/* Professional Portrait Card */}
-            <Reveal direction="left" delay={0.2}>
-              <TiltCard className="p-3 bg-gradient-to-b from-surface-elevated to-surface group cursor-pointer">
-                <div className="relative w-full h-[440px] sm:h-[500px] rounded-2xl overflow-hidden bg-[#0A0D16] border border-white/10 shadow-2xl">
-                  <Image
-                    src="/assets/vaidik_portrait_pro.jpg"
-                    alt="Vaidik Gandhi"
-                    fill
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    priority
-                  />
-                  {/* Subtle Ambient Vignette Bottom Overlay for text legibility */}
-                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#05060A] via-[#05060A]/70 to-transparent pointer-events-none" />
-
-                  {/* Floating Identity Badge */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-[#090C14]/90 border border-white/10 backdrop-blur-md flex items-center justify-between shadow-xl">
-                    <div>
-                      <div className="text-sm font-heading font-bold text-typography-primary">
-                        Vaidik Gandhi
-                      </div>
-                      <a
-                        href="https://vaidiktech.app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] font-mono text-accent-android hover:underline flex items-center gap-1.5 transition-colors"
-                      >
-                        <span>Founder @ VaidikTech</span>
-                        <ExternalLink className="w-2.5 h-2.5" />
-                      </a>
-                    </div>
-                    <a
-                      href="https://vaidiktech.app"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-lg bg-accent-android/20 border border-accent-android/40 flex items-center justify-center text-accent-android hover:bg-accent-android hover:text-[#05060A] transition-all"
-                      title="Open VaidikTech (vaidiktech.app)"
-                    >
-                      <Terminal className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
-              </TiltCard>
-            </Reveal>
-
-            {/* 4 Bento Stat Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <Reveal direction="up" delay={0.25}>
-                <div className="p-4 rounded-2xl bg-surface border border-surface-border flex flex-col gap-1 transition-all duration-300 hover:border-accent-android/40 hover:bg-surface-hover">
-                  <Smartphone className="w-4 h-4 text-accent-android mb-1" />
-                  <div className="text-2xl sm:text-3xl font-heading font-extrabold text-typography-primary">
-                    3
-                  </div>
-                  <div className="text-xs font-mono font-medium text-typography-secondary">
-                    Play Store Apps
-                  </div>
-                  <div className="text-[10px] text-typography-muted">Girvi, JewelBill, AdvoKosh</div>
-                </div>
-              </Reveal>
-
-              <Reveal direction="up" delay={0.3}>
-                <div className="p-4 rounded-2xl bg-surface border border-surface-border flex flex-col gap-1 transition-all duration-300 hover:border-accent-violet/40 hover:bg-surface-hover">
-                  <Shield className="w-4 h-4 text-accent-violet mb-1" />
-                  <div className="text-2xl sm:text-3xl font-heading font-extrabold text-accent-violet">
-                    100%
-                  </div>
-                  <div className="text-xs font-mono font-medium text-typography-secondary">
-                    Offline Sovereignty
-                  </div>
-                  <div className="text-[10px] text-typography-muted">Zero Cloud Sockets</div>
-                </div>
-              </Reveal>
-
-              <Reveal direction="up" delay={0.35}>
-                <div className="p-4 rounded-2xl bg-surface border border-surface-border flex flex-col gap-1 transition-all duration-300 hover:border-accent-cyan/40 hover:bg-surface-hover">
-                  <Terminal className="w-4 h-4 text-accent-cyan mb-1" />
-                  <div className="text-2xl sm:text-3xl font-heading font-extrabold text-typography-primary">
-                    120+
-                  </div>
-                  <div className="text-xs font-mono font-medium text-typography-secondary">
-                    GitHub Repos
-                  </div>
-                  <div className="text-[10px] text-typography-muted">Open Source & Research</div>
-                </div>
-              </Reveal>
-
-              <Reveal direction="up" delay={0.4}>
-                <div className="p-4 rounded-2xl bg-surface border border-surface-border flex flex-col gap-1 transition-all duration-300 hover:border-accent-android/40 hover:bg-surface-hover">
-                  <Award className="w-4 h-4 text-accent-android mb-1" />
-                  <div className="text-2xl sm:text-3xl font-heading font-extrabold text-accent-android">
-                    Long
-                  </div>
-                  <div className="text-xs font-mono font-medium text-typography-secondary">
-                    Integer Paise Math
-                  </div>
-                  <div className="text-[10px] text-typography-muted">Zero Floating Drift</div>
-                </div>
-              </Reveal>
+              <span className="text-xs font-mono text-typography-muted">Bhopal, IN</span>
             </div>
           </div>
         </div>
@@ -216,4 +110,3 @@ export const AboutSection: React.FC = () => {
     </section>
   );
 };
-
