@@ -10,7 +10,7 @@ export const WorldCanvas: React.FC = () => {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#0B0C0E]"
+      className="fixed inset-0 pointer-events-auto z-0 overflow-hidden bg-[#0B0C0E]"
     >
       <Canvas
         camera={{ position: [0, 0, 8.2], fov: 42 }}

@@ -74,7 +74,7 @@ export default function Home() {
       <Navbar />
 
       {/* 5. Continuous Editorial Scroll Sections */}
-      <main className="relative z-10 flex flex-col min-h-screen pointer-events-auto">
+      <main className="relative z-10 flex flex-col min-h-screen pointer-events-none">
         <HeroSection />
         <ArchitectureExplodedSection />
         <ProjectsSection />

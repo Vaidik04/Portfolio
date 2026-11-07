@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Shield, Layers, Cpu, Database, Smartphone, Lock, Check } from "lucide-react";
+import { useWorldStore } from "@/store/useWorldStore";
 
 interface LayerInfo {
   id: number;
@@ -87,8 +88,11 @@ const ARCHITECTURE_LAYERS: LayerInfo[] = [
 ];
 
 export const ArchitectureExplodedSection: React.FC = () => {
-  const [activeLayer, setActiveLayer] = useState<number>(1);
-  const current = ARCHITECTURE_LAYERS.find((l) => l.id === activeLayer) || ARCHITECTURE_LAYERS[0];
+  const { focusedLayer, setFocusedLayer } = useWorldStore();
+  const selectedLayerId = focusedLayer || 1;
+  const current =
+    ARCHITECTURE_LAYERS.find((l) => l.id === selectedLayerId) ||
+    ARCHITECTURE_LAYERS[0];
 
   return (
     <section
@@ -123,11 +127,11 @@ export const ArchitectureExplodedSection: React.FC = () => {
             {/* Visual Layer Selector Tabs */}
             <div className="flex flex-col gap-2.5">
               {ARCHITECTURE_LAYERS.map((layer) => {
-                const isSelected = activeLayer === layer.id;
+                const isSelected = selectedLayerId === layer.id;
                 return (
                   <button
                     key={layer.id}
-                    onClick={() => setActiveLayer(layer.id)}
+                    onClick={() => setFocusedLayer(layer.id)}
                     className={`p-4 rounded-xl text-left border transition-all flex items-center justify-between group ${
                       isSelected
                         ? "bg-surface-elevated border-brand text-white shadow-[0_0_20px_rgba(43,91,255,0.2)]"

@@ -38,9 +38,22 @@ interface WorldState {
   cursorText: string;
   setCursorText: (text: string) => void;
 
-  // Active project ID in 3D Flight Deck
+  // Active project ID in 3D Flight Deck & Phone screen
   active3DProjectId: string;
   setActive3DProjectId: (id: string) => void;
+
+  // Active App on 3D phone screen ("girvi" | "jewelbill" | "advokosh")
+  activeAppId: "girvi" | "jewelbill" | "advokosh";
+  setActiveAppId: (appId: "girvi" | "jewelbill" | "advokosh") => void;
+
+  // Manual 3D layer explosion toggle
+  manualExploded: boolean;
+  setManualExploded: (exploded: boolean) => void;
+  toggleManualExploded: () => void;
+
+  // Focused 3D layer (1 to 5)
+  focusedLayer: number | null;
+  setFocusedLayer: (layer: number | null) => void;
 
   // Glitch mode triggered by Konami code
   glitchMode: boolean;
@@ -83,6 +96,26 @@ export const useWorldStore = create<WorldState>((set) => ({
 
   active3DProjectId: "girvi",
   setActive3DProjectId: (active3DProjectId) => set({ active3DProjectId }),
+
+  activeAppId: "girvi",
+  setActiveAppId: (activeAppId) => {
+    sounds.tick();
+    set({ activeAppId, active3DProjectId: activeAppId });
+  },
+
+  manualExploded: false,
+  setManualExploded: (manualExploded) => set({ manualExploded }),
+  toggleManualExploded: () =>
+    set((state) => {
+      sounds.shockwave();
+      return { manualExploded: !state.manualExploded };
+    }),
+
+  focusedLayer: null,
+  setFocusedLayer: (focusedLayer) => {
+    sounds.tick();
+    set({ focusedLayer });
+  },
 
   glitchMode: false,
   setGlitchMode: (glitchMode) => set({ glitchMode }),
