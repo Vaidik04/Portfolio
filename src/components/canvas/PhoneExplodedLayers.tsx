@@ -7,6 +7,8 @@ import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 import { sounds } from "@/lib/sound";
 
+const APP_ORDER: ("girvi" | "jewelbill" | "advokosh")[] = ["girvi", "jewelbill", "advokosh"];
+
 interface PhoneExplodedLayersProps {
   onLayerHover?: (layerId: number | null) => void;
   activeLayerOverride?: number | null;
@@ -19,6 +21,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   const {
     scrollProgress,
     activeAppId,
+    setActiveAppId,
     manualExploded,
     focusedLayer,
     setFocusedLayer,
@@ -31,11 +34,14 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   const [screenTexture, setScreenTexture] = useState<THREE.CanvasTexture | null>(null);
   const [hoveredLayer, setHoveredLayer] = useState<number | null>(null);
 
+  // Auto-carousel state (cycles every 5 seconds unless user interacted recently)
+  const lastUserInteraction = useRef<number>(Date.now());
+  const autoCycleTimer = useRef<NodeJS.Timeout | null>(null);
+
   // Drag rotation state for interactive 360 inspection
   const isDragging = useRef(false);
   const prevPointer = useRef({ x: 0, y: 0 });
   const dragRot = useRef({ x: 0, y: 0 });
-  const dragVelocity = useRef({ x: 0, y: 0 });
 
   // References for each layer group to animate their local Z positions
   const layer1Ref = useRef<THREE.Group>(null); // Compose UI + Screen
@@ -49,6 +55,21 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
   const phoneHeight = 4.85;
   const slabDepth = 0.07;
   const cornerRadius = 0.26;
+
+  // Auto-cycle through apps every 5.5s if user hasn't manually clicked recently
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const timeSinceUser = Date.now() - lastUserInteraction.current;
+      // If no interaction in last 7 seconds, auto-cycle
+      if (timeSinceUser > 7000 && !manualExploded) {
+        const currentIndex = APP_ORDER.indexOf(activeAppId);
+        const nextIndex = (currentIndex + 1) % APP_ORDER.length;
+        setActiveAppId(APP_ORDER[nextIndex]);
+      }
+    }, 5500);
+
+    return () => clearInterval(interval);
+  }, [activeAppId, manualExploded, setActiveAppId]);
 
   // Render texture based on activeAppId
   const renderScreen = useCallback((appId: string) => {
@@ -71,63 +92,96 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 1080, 2240);
 
-    // 2. Status Bar
-    ctx.fillStyle = "#EDEFF5";
-    ctx.font = "bold 38px -apple-system, BlinkMacSystemFont, sans-serif";
-    ctx.fillText("09:41", 80, 95);
+    // 2. Stories / App Carousel Segment Indicators at top
+    const segmentWidth = 280;
+    const startX = 80;
+    const gap = 40;
+    const apps = ["girvi", "jewelbill", "advokosh"];
 
-    ctx.font = "bold 30px monospace";
+    apps.forEach((app, i) => {
+      const x = startX + i * (segmentWidth + gap);
+      const isCurrent = app === appId;
+
+      ctx.fillStyle = isCurrent ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.18)";
+      ctx.beginPath();
+      ctx.roundRect(x, 40, segmentWidth, 8, 4);
+      ctx.fill();
+
+      // App Name under segment indicator
+      ctx.fillStyle = isCurrent ? "#EDEFF5" : "#5E667C";
+      ctx.font = isCurrent ? "bold 20px monospace" : "18px monospace";
+      const label = app === "girvi" ? "1. GIRVI OS" : app === "jewelbill" ? "2. JEWELBILL" : "3. ADVOKOSH";
+      ctx.fillText(label, x + 10, 68);
+    });
+
+    // 3. Status Bar
+    ctx.fillStyle = "#EDEFF5";
+    ctx.font = "bold 36px -apple-system, BlinkMacSystemFont, sans-serif";
+    ctx.fillText("09:41", 80, 125);
+
+    ctx.font = "bold 28px monospace";
     ctx.fillStyle = "#9DA4B8";
-    ctx.fillText("5G  100%", 830, 95);
+    ctx.fillText("5G · 100%", 850, 125);
 
     if (appId === "jewelbill") {
-      // JEWELBILL APP UI
+      // JEWELBILL APP UI (JEWELLERY POS & INVOICING)
       ctx.fillStyle = "#D97706";
       ctx.beginPath();
-      ctx.roundRect(80, 140, 60, 60, 16);
+      ctx.roundRect(80, 160, 60, 60, 16);
       ctx.fill();
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 36px sans-serif";
-      ctx.fillText("J", 98, 184);
+      ctx.fillText("J", 98, 204);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 44px sans-serif";
-      ctx.fillText("JewelBill POS", 160, 184);
+      ctx.fillText("JewelBill POS", 160, 204);
 
       // Mode Pill
       ctx.fillStyle = "rgba(217, 119, 6, 0.15)";
       ctx.strokeStyle = "rgba(217, 119, 6, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(80, 225, 430, 48, 24);
+      ctx.roundRect(80, 235, 430, 48, 24);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#F59E0B";
       ctx.font = "bold 24px monospace";
-      ctx.fillText("● OFFLINE COUNTER POS", 104, 258);
+      ctx.fillText("● OFFLINE COUNTER POS", 104, 268);
 
       // Card 1: Active Jewellery Invoice
       ctx.fillStyle = "#161922";
       ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 305, 920, 500, 36);
+      ctx.roundRect(80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#F59E0B";
       ctx.font = "bold 28px monospace";
-      ctx.fillText("TAX INVOICE #JB-2026-89", 120, 370);
+      ctx.fillText("TAX INVOICE #JB-2026-89", 120, 375);
+
+      // Verified pill
+      ctx.fillStyle = "rgba(245, 158, 11, 0.15)";
+      ctx.strokeStyle = "rgba(245, 158, 11, 0.4)";
+      ctx.beginPath();
+      ctx.roundRect(740, 340, 220, 44, 22);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#FBBF24";
+      ctx.font = "bold 22px monospace";
+      ctx.fillText("COUNTER READY", 760, 370);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 46px sans-serif";
-      ctx.fillText("Sunita Verma", 120, 440);
+      ctx.fillText("Sunita Verma", 120, 445);
 
       ctx.fillStyle = "#7D8498";
       ctx.font = "26px sans-serif";
-      ctx.fillText("Customer Tax ID: Verified · Counter #02", 120, 485);
+      ctx.fillText("Customer Tax ID: Verified · Counter #02", 120, 490);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 82px sans-serif";
@@ -153,102 +207,102 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "rgba(217, 119, 6, 0.35)";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 840, 920, 390, 36);
+      ctx.roundRect(80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#F59E0B";
       ctx.font = "bold 34px sans-serif";
-      ctx.fillText("Direct Hardware Bridge", 120, 915);
+      ctx.fillText("Direct Hardware Bridge", 120, 910);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "30px sans-serif";
-      ctx.fillText("80mm ESC/POS Bluetooth Thermal Printing", 120, 985);
+      ctx.fillText("80mm ESC/POS Bluetooth Thermal Printing", 120, 975);
 
       ctx.fillStyle = "#8F9BB3";
       ctx.font = "26px monospace";
-      ctx.fillText("Driver: Raw binary bitmap stream; zero print spoolers", 120, 1045);
-      ctx.fillText("Storage: Encrypted Room SQLite with daily hash-tree export", 120, 1095);
-      ctx.fillText("Offline Uptime: 100% Counter Uptime in low-signal bazaars", 120, 1145);
+      ctx.fillText("Driver: Raw binary bitmap stream; zero print spoolers", 120, 1035);
+      ctx.fillText("Storage: Encrypted Room SQLite with daily hash-tree export", 120, 1085);
+      ctx.fillText("Offline Uptime: 100% Counter Uptime in low-signal bazaars", 120, 1135);
 
       // Card 3: Line Items
       ctx.fillStyle = "#141724";
       ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       ctx.beginPath();
-      ctx.roundRect(80, 1265, 920, 520, 36);
+      ctx.roundRect(80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 36px sans-serif";
-      ctx.fillText("Counter Line Items", 120, 1340);
+      ctx.fillText("Counter Line Items", 120, 1325);
 
       ctx.fillStyle = "#8F9BB3";
       ctx.font = "28px monospace";
-      ctx.fillText("1. 22K Gold Base: ₹2,64,200", 120, 1425);
-      ctx.fillText("2. Making Charges (₹250/g): ₹12,050", 120, 1505);
-      ctx.fillText("3. GST @ 3.00%: ₹8,250", 120, 1585);
-      ctx.fillText("4. Rounding Adjustment: ₹0.00 (Zero Drift)", 120, 1665);
-      ctx.fillText("5. ESC/POS Receipt: Printed in 240ms", 120, 1745);
+      ctx.fillText("1. 22K Gold Base: ₹2,64,200 (Rate: ₹5,480/g)", 120, 1405);
+      ctx.fillText("2. Making Charges (₹250/g): ₹12,050", 120, 1480);
+      ctx.fillText("3. GST @ 3.00%: ₹8,250", 120, 1555);
+      ctx.fillText("4. Rounding Adjustment: ₹0.00 (Zero Drift)", 120, 1630);
+      ctx.fillText("5. ESC/POS Receipt: Printed in 240ms", 120, 1705);
     } else if (appId === "advokosh") {
-      // ADVOKOSH APP UI
+      // ADVOKOSH APP UI (ADVOCATE CASE DIARY)
       ctx.fillStyle = "#6366F1";
       ctx.beginPath();
-      ctx.roundRect(80, 140, 60, 60, 16);
+      ctx.roundRect(80, 160, 60, 60, 16);
       ctx.fill();
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 36px sans-serif";
-      ctx.fillText("§", 98, 184);
+      ctx.fillText("§", 98, 204);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 44px sans-serif";
-      ctx.fillText("AdvoKosh Case Diary", 160, 184);
+      ctx.fillText("AdvoKosh Case Diary", 160, 204);
 
       // Mode Pill
       ctx.fillStyle = "rgba(99, 102, 241, 0.15)";
       ctx.strokeStyle = "rgba(99, 102, 241, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(80, 225, 420, 48, 24);
+      ctx.roundRect(80, 235, 420, 48, 24);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#818CF8";
       ctx.font = "bold 24px monospace";
-      ctx.fillText("● ENCRYPTED LEGAL VAULT", 104, 258);
+      ctx.fillText("● ENCRYPTED LEGAL VAULT", 104, 268);
 
       // Card 1: Active Case Hearing
       ctx.fillStyle = "#151827";
       ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 305, 920, 500, 36);
+      ctx.roundRect(80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#818CF8";
       ctx.font = "bold 28px monospace";
-      ctx.fillText("COURT 4 · ITEM #12", 120, 370);
+      ctx.fillText("COURT 4 · ITEM #12", 120, 375);
 
       // Alert badge
       ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
       ctx.strokeStyle = "rgba(239, 68, 68, 0.4)";
       ctx.beginPath();
-      ctx.roundRect(720, 335, 240, 46, 23);
+      ctx.roundRect(720, 340, 240, 44, 22);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = "#F87171";
       ctx.font = "bold 22px monospace";
-      ctx.fillText("HEARING 10:30 AM", 740, 366);
+      ctx.fillText("HEARING 10:30 AM", 740, 370);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 46px sans-serif";
-      ctx.fillText("State vs. Sharma & Ors.", 120, 440);
+      ctx.fillText("State vs. Sharma & Ors.", 120, 445);
 
       ctx.fillStyle = "#7D8498";
       ctx.font = "26px sans-serif";
-      ctx.fillText("Writ Petition #4821/2025 · Hon'ble High Court", 120, 485);
+      ctx.fillText("Writ Petition #4821/2025 · Hon'ble High Court", 120, 490);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 72px sans-serif";
@@ -274,101 +328,101 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "rgba(99, 102, 241, 0.35)";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 840, 920, 390, 36);
+      ctx.roundRect(80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#818CF8";
       ctx.font = "bold 34px sans-serif";
-      ctx.fillText("Client-Advocate Privilege", 120, 915);
+      ctx.fillText("Client-Advocate Privilege", 120, 910);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "30px sans-serif";
-      ctx.fillText("AES-256 GCM Hardware-Backed Encryption", 120, 985);
+      ctx.fillText("AES-256 GCM Hardware-Backed Encryption", 120, 975);
 
       ctx.fillStyle = "#8F9BB3";
       ctx.font = "26px monospace";
-      ctx.fillText("Confidential briefs and evidence encrypted locally", 120, 1045);
-      ctx.fillText("Zero cloud scraping; no external AI telemetry", 120, 1095);
-      ctx.fillText("Instant biometric release upon court entrance", 120, 1145);
+      ctx.fillText("Confidential briefs and evidence encrypted locally", 120, 1035);
+      ctx.fillText("Zero cloud scraping; no external AI telemetry", 120, 1085);
+      ctx.fillText("Instant biometric release upon court entrance", 120, 1135);
 
       // Card 3: Cause List
       ctx.fillStyle = "#141724";
       ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       ctx.beginPath();
-      ctx.roundRect(80, 1265, 920, 520, 36);
+      ctx.roundRect(80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 36px sans-serif";
-      ctx.fillText("Today's Cause List", 120, 1340);
+      ctx.fillText("Today's Cause List", 120, 1325);
 
       ctx.fillStyle = "#8F9BB3";
       ctx.font = "28px monospace";
-      ctx.fillText("1. Court 4 - State vs Sharma (10:30 AM)", 120, 1425);
-      ctx.fillText("2. Court 2 - Verma vs Verma (11:45 AM)", 120, 1505);
-      ctx.fillText("3. Chamber - Client Briefing (02:00 PM)", 120, 1585);
-      ctx.fillText("4. Evidence Review - Forensic Report (04:30 PM)", 120, 1665);
-      ctx.fillText("5. All Records Synced to Offline Encrypted Ledger", 120, 1745);
+      ctx.fillText("1. Court 4 - State vs Sharma (10:30 AM)", 120, 1405);
+      ctx.fillText("2. Court 2 - Verma vs Verma (11:45 AM)", 120, 1480);
+      ctx.fillText("3. Chamber - Client Briefing (02:00 PM)", 120, 1555);
+      ctx.fillText("4. Evidence Review - Forensic Report (04:30 PM)", 120, 1630);
+      ctx.fillText("5. All Records Synced to Offline Encrypted Ledger", 120, 1705);
     } else {
-      // GIRVI APP UI (DEFAULT)
+      // GIRVI APP UI (GOLD LOAN & PAWN LEDGER)
       ctx.fillStyle = "#2B5BFF";
       ctx.beginPath();
-      ctx.roundRect(80, 140, 60, 60, 16);
+      ctx.roundRect(80, 160, 60, 60, 16);
       ctx.fill();
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 36px sans-serif";
-      ctx.fillText("₹", 98, 184);
+      ctx.fillText("₹", 98, 204);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 44px sans-serif";
-      ctx.fillText("Girvi Pawn Ledger", 160, 184);
+      ctx.fillText("Girvi Pawn Ledger", 160, 204);
 
       // Mode Pill
       ctx.fillStyle = "rgba(43, 91, 255, 0.15)";
       ctx.strokeStyle = "rgba(43, 91, 255, 0.4)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(80, 225, 410, 48, 24);
+      ctx.roundRect(80, 235, 410, 48, 24);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#4D7EFF";
       ctx.font = "bold 24px monospace";
-      ctx.fillText("● OFFLINE SOVEREIGN CORE", 104, 258);
+      ctx.fillText("● OFFLINE SOVEREIGN CORE", 104, 268);
 
       // Card 1: Active Gold Pledge (Fictional Sample Data)
       ctx.fillStyle = "#141724";
       ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 305, 920, 500, 36);
+      ctx.roundRect(80, 310, 920, 495, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#8F9BB3";
       ctx.font = "bold 28px monospace";
-      ctx.fillText("TOKEN #GV-1048", 120, 370);
+      ctx.fillText("TOKEN #GV-1048", 120, 375);
 
       ctx.fillStyle = "rgba(34, 197, 94, 0.15)";
       ctx.strokeStyle = "rgba(34, 197, 94, 0.4)";
       ctx.beginPath();
-      ctx.roundRect(740, 335, 220, 46, 23);
+      ctx.roundRect(740, 340, 220, 44, 22);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = "#4ADE80";
       ctx.font = "bold 22px monospace";
-      ctx.fillText("VERIFIED PLEDGE", 758, 366);
+      ctx.fillText("VERIFIED PLEDGE", 758, 370);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 46px sans-serif";
-      ctx.fillText("Ramesh Kumar", 120, 440);
+      ctx.fillText("Ramesh Kumar", 120, 445);
 
       ctx.fillStyle = "#7D8498";
       ctx.font = "26px sans-serif";
-      ctx.fillText("Fictional Customer Record · Tokenized Vault #04", 120, 485);
+      ctx.fillText("Fictional Customer Record · Tokenized Vault #04", 120, 490);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 82px sans-serif";
@@ -394,43 +448,43 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
       ctx.strokeStyle = "rgba(43, 91, 255, 0.35)";
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.roundRect(80, 840, 920, 390, 36);
+      ctx.roundRect(80, 835, 920, 385, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#4D7EFF";
       ctx.font = "bold 34px sans-serif";
-      ctx.fillText("Cryptographic Boundary", 120, 915);
+      ctx.fillText("Cryptographic Boundary", 120, 910);
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "30px sans-serif";
-      ctx.fillText("SQLCipher 256-bit AES Local Database", 120, 985);
+      ctx.fillText("SQLCipher 256-bit AES Local Database", 120, 975);
 
       ctx.fillStyle = "#8F9BB3";
       ctx.font = "26px monospace";
-      ctx.fillText("Key: Android Keystore Hardware AES-256-GCM MasterKey", 120, 1045);
-      ctx.fillText("PRAGMA cipher_page_size = 4096; Zero Cloud Telemetry", 120, 1095);
-      ctx.fillText("Strict Offline Storage · Biometric Master Release", 120, 1145);
+      ctx.fillText("Key: Android Keystore Hardware AES-256-GCM MasterKey", 120, 1035);
+      ctx.fillText("PRAGMA cipher_page_size = 4096; Zero Cloud Telemetry", 120, 1085);
+      ctx.fillText("Strict Offline Storage · Biometric Master Release", 120, 1135);
 
       // Card 3: Recent Activity Ledger
       ctx.fillStyle = "#141724";
       ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       ctx.beginPath();
-      ctx.roundRect(80, 1265, 920, 520, 36);
+      ctx.roundRect(80, 1250, 920, 520, 36);
       ctx.fill();
       ctx.stroke();
 
       ctx.fillStyle = "#FFFFFF";
       ctx.font = "bold 36px sans-serif";
-      ctx.fillText("Physical Verification Audit", 120, 1340);
+      ctx.fillText("Physical Verification Audit", 120, 1325);
 
       ctx.fillStyle = "#8F9BB3";
       ctx.font = "28px monospace";
-      ctx.fillText("1. Principal Disbursed: ₹1,45,000 (Cash Recorded)", 120, 1425);
-      ctx.fillText("2. Physical Evidence: CameraX Gold Photo ID #482", 120, 1505);
-      ctx.fillText("3. Thermal Receipt: 80mm ESC/POS Generated", 120, 1585);
-      ctx.fillText("4. Backup: AES-GCM Encrypted JSON to SD Card", 120, 1665);
-      ctx.fillText("5. Court Limitation Date: 36 Months Calculated", 120, 1745);
+      ctx.fillText("1. Principal Disbursed: ₹1,45,000 (Cash Recorded)", 120, 1405);
+      ctx.fillText("2. Physical Evidence: CameraX Gold Photo ID #482", 120, 1480);
+      ctx.fillText("3. Thermal Receipt: 80mm ESC/POS Generated", 120, 1555);
+      ctx.fillText("4. Backup: AES-GCM Encrypted JSON to SD Card", 120, 1630);
+      ctx.fillText("5. Court Limitation Date: 36 Months Calculated", 120, 1705);
     }
 
     // Bottom Navigation Bar
@@ -439,7 +493,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
     ctx.roundRect(80, 1830, 920, 130, 36);
     ctx.fill();
 
-    ctx.fillStyle = "#2B5BFF";
+    ctx.fillStyle = appId === "jewelbill" ? "#F59E0B" : appId === "advokosh" ? "#818CF8" : "#2B5BFF";
     ctx.font = "bold 32px sans-serif";
     ctx.textAlign = "center";
     ctx.fillText("Sovereign Trade Ledger Active", 540, 1910);
@@ -688,6 +742,7 @@ export const PhoneExplodedLayers: React.FC<PhoneExplodedLayersProps> = ({
 
   const handlePointerDown = (e: any) => {
     isDragging.current = true;
+    lastUserInteraction.current = Date.now();
     prevPointer.current = { x: e.clientX, y: e.clientY };
   };
 

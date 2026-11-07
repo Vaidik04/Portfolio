@@ -47,7 +47,7 @@ export const HeroSection: React.FC = () => {
           Engineering sovereign mobile tools with Jetpack Compose, Room SQLite, and hardware-backed SQLCipher encryption—designed specifically for India&apos;s trades operating in zero-connectivity environments.
         </motion.p>
 
-        {/* Two Clear Actions: One Primary, One Quiet Secondary */}
+        {/* Primary Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,21 +70,83 @@ export const HeroSection: React.FC = () => {
             <ArrowUpRight className="w-4 h-4 text-brand" />
           </a>
         </motion.div>
+
+        {/* Mobile / Tablet 3D App Controller Bar */}
+        <div className="flex md:hidden flex-col gap-2 pt-3">
+          <div className="flex items-center justify-between text-[11px] font-mono text-typography-muted">
+            <span className="flex items-center gap-1.5">
+              <Sparkles className="w-3 h-3 text-brand" />
+              <span>3D Device Live Screen:</span>
+            </span>
+            <span className="text-brand/80">Auto-cycling</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="flex-1 grid grid-cols-3 gap-1 p-1 rounded-xl bg-surface-elevated border border-surface-border">
+              <button
+                type="button"
+                onClick={() => setActiveAppId("girvi")}
+                className={`py-1.5 px-1 rounded-lg text-[10px] font-mono transition-all text-center ${
+                  activeAppId === "girvi"
+                    ? "bg-brand text-white font-semibold"
+                    : "text-typography-muted"
+                }`}
+              >
+                Girvi
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveAppId("jewelbill")}
+                className={`py-1.5 px-1 rounded-lg text-[10px] font-mono transition-all text-center ${
+                  activeAppId === "jewelbill"
+                    ? "bg-amber-600 text-white font-semibold"
+                    : "text-typography-muted"
+                }`}
+              >
+                JewelBill
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveAppId("advokosh")}
+                className={`py-1.5 px-1 rounded-lg text-[10px] font-mono transition-all text-center ${
+                  activeAppId === "advokosh"
+                    ? "bg-indigo-600 text-white font-semibold"
+                    : "text-typography-muted"
+                }`}
+              >
+                AdvoKosh
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={toggleManualExploded}
+              className={`p-2 rounded-xl border text-xs font-mono transition-all ${
+                manualExploded
+                  ? "bg-[#D95C36] text-white border-[#D95C36]"
+                  : "bg-surface-elevated text-typography-secondary border-surface-border"
+              }`}
+              title="Toggle 3D exploded view"
+            >
+              <Layers className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Floating 3D Interactive Controller Dock (Desktop) */}
+      {/* Floating 3D Interactive Controller Dock (Desktop & Tablets) */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-auto hidden xl:flex flex-col gap-2.5 absolute right-6 bottom-16 z-20 bg-[#121419]/90 border border-white/10 backdrop-blur-xl p-3.5 rounded-2xl shadow-2xl min-w-[280px]"
+        className="pointer-events-auto hidden md:flex flex-col gap-2.5 absolute right-6 bottom-16 z-20 bg-[#121419]/90 border border-white/10 backdrop-blur-xl p-3.5 rounded-2xl shadow-2xl min-w-[280px]"
       >
         <div className="flex items-center justify-between gap-3 border-b border-white/5 pb-2">
           <span className="text-[10px] font-mono uppercase tracking-wider text-typography-muted flex items-center gap-1.5 font-medium">
             <Sparkles className="w-3 h-3 text-brand" />
             <span>Interactive 3D Device</span>
           </span>
-          <span className="text-[9px] font-mono text-brand/90 animate-pulse">Drag 360°</span>
+          <span className="text-[9px] font-mono text-brand/90 animate-pulse">Drag 360° · Auto-cycle</span>
         </div>
 
         {/* App Switcher Tabs */}
@@ -135,7 +197,7 @@ export const HeroSection: React.FC = () => {
           }`}
         >
           <Layers className="w-3.5 h-3.5" />
-          <span>{manualExploded ? "Assemble Phone" : "Explode 5 Layers"}</span>
+          <span>{manualExploded ? "Assemble Phone Chassis" : "Explode 5 Architecture Slabs"}</span>
         </button>
       </motion.div>
 

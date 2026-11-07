@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PROJECTS, Project } from "@/data/projects";
+import { useWorldStore } from "@/store/useWorldStore";
 import {
   Play,
   Github,
@@ -14,6 +15,7 @@ import {
   Layers,
   ArrowDown,
   ExternalLink,
+  Sparkles,
 } from "lucide-react";
 
 // The 3 Flagship Published Google Play Applications
@@ -22,6 +24,7 @@ const FLAGSHIP_IDS = ["girvi", "jewelbill", "advokosh"];
 export const ProjectsSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const { setActiveAppId } = useWorldStore();
 
   const flagships = PROJECTS.filter((p) => FLAGSHIP_IDS.includes(p.id));
   const archiveProjects = PROJECTS.filter((p) => !FLAGSHIP_IDS.includes(p.id));
@@ -170,19 +173,50 @@ export const ProjectsSection: React.FC = () => {
                 </span>
               </div>
 
-              <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-[#0A0C10] flex items-center justify-center p-3">
-                <Image
-                  src={project.icon}
-                  alt={project.name}
-                  width={140}
-                  height={140}
-                  className="object-contain rounded-2xl shadow-xl transition-transform duration-500 group-hover:scale-105"
-                />
+              <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-[#0A0C10] flex items-center justify-center p-3 group/preview">
+                {project.id === "advokosh" ? (
+                  <Image
+                    src="/assets/advokosh_screen1.png"
+                    alt="AdvoKosh Android App Screenshot"
+                    fill
+                    className="object-cover object-top transition-transform duration-500 group-hover/preview:scale-105"
+                  />
+                ) : project.id === "jewelbill" ? (
+                  <Image
+                    src="/assets/jewelbill_screen.png"
+                    alt="JewelBill Android App Screenshot"
+                    fill
+                    className="object-cover object-top transition-transform duration-500 group-hover/preview:scale-105"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center gap-3">
+                    <Image
+                      src={project.icon}
+                      alt={project.name}
+                      width={130}
+                      height={130}
+                      className="object-contain rounded-3xl shadow-2xl transition-transform duration-500 group-hover/preview:scale-105"
+                    />
+                    <span className="text-[11px] font-mono text-typography-muted">
+                      Girvi Core · Token #GV-1048
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="pt-4 mt-4 border-t border-surface-border text-[11px] font-mono text-typography-muted flex items-center justify-between">
-                <span>Architecture: MVVM + Compose</span>
-                <span className="text-brand">Production</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveAppId(project.id as "girvi" | "jewelbill" | "advokosh");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center gap-1.5 text-brand hover:underline font-semibold"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Inspect in 3D Phone ↑</span>
+                </button>
+                <span className="text-typography-muted">Google Play</span>
               </div>
             </div>
           </article>

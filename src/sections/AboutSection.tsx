@@ -74,17 +74,27 @@ export const AboutSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Column: Clean Architectural Portrait Card */}
+        {/* Right Column: Clean Architectural Portrait Card with 3D Lookalike Avatar */}
         <div className="lg:col-span-5 flex flex-col gap-4">
-          <div className="rounded-3xl overflow-hidden border border-surface-border bg-surface p-3 shadow-xl relative group">
+          <div className="rounded-3xl overflow-hidden border border-surface-border bg-surface p-3.5 shadow-2xl relative group hover:border-brand/40 transition-all">
             <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#0A0D14]">
               <Image
-                src="/assets/vaidik_portrait_pro.jpg"
-                alt="Vaidik Gandhi · Founder of VaidikTech"
+                src="/assets/vaidik_3d_avatar_portrait.jpg"
+                alt="Vaidik Gandhi · 3D Lookalike Avatar"
                 fill
-                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                 priority
               />
+              {/* Subtle architectural gradient vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0D14] via-transparent to-transparent opacity-60" />
+              
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-white/90 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Sovereign Architect</span>
+                </span>
+                <span className="text-white/60">LNCT Bhopal '26</span>
+              </div>
             </div>
 
             <div className="p-4 flex items-center justify-between">
@@ -96,7 +106,7 @@ export const AboutSection: React.FC = () => {
                   href="https://vaidiktech.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-mono text-brand hover:underline flex items-center gap-1"
+                  className="text-xs font-mono text-brand hover:underline flex items-center gap-1 mt-0.5"
                 >
                   <span>vaidiktech.app</span>
                   <ArrowUpRight className="w-3 h-3" />
