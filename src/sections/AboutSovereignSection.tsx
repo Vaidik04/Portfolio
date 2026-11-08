@@ -6,7 +6,7 @@ import { ArrowUpRight, MapPin, GraduationCap, Building2, Shield, Sparkles, UserC
 import { proceduralAudio } from "@/lib/proceduralAudio";
 
 export const AboutSovereignSection: React.FC = () => {
-  const [avatarMode, setAvatarMode] = useState<"authentic" | "avatar">("authentic");
+  const [avatarMode, setAvatarMode] = useState<"avatar" | "authentic">("avatar");
 
   return (
     <section

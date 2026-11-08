@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import confetti from "canvas-confetti";
 import { Mail, Send, Check, Copy, ArrowUpRight, Github, Linkedin, Play, Sparkles, Globe, Terminal } from "lucide-react";
 import { proceduralAudio } from "@/lib/proceduralAudio";
@@ -61,6 +62,30 @@ export const DeployBeaconSection: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         {/* Left Column: Direct Access Points (6 Cols) */}
         <div className="lg:col-span-6 flex flex-col gap-6">
+          {/* Founder Identity Card with 3D Lookalike Avatar */}
+          <div className="p-4 rounded-3xl bg-surface border border-white/10 flex items-center gap-4 shadow-xl">
+            <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-accent-android/40 flex-shrink-0 bg-black/40">
+              <Image
+                src="/assets/vaidik_3d_avatar_square.jpg"
+                alt="Vaidik Gandhi 3D Lookalike Avatar"
+                fill
+                sizes="56px"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <div className="font-heading font-bold text-sm text-typography-primary">
+                Vaidik Gandhi
+              </div>
+              <div className="text-xs font-mono text-accent-android mt-0.5">
+                Founder @ VaidikTech · Sovereign Android Architect
+              </div>
+              <div className="text-[11px] font-sans text-typography-muted mt-0.5">
+                LNCT Bhopal &apos;26 · 100% Offline Software
+              </div>
+            </div>
+          </div>
+
           {/* Quick Copy Email Box */}
           <div className="p-6 rounded-3xl bg-surface border border-white/10 flex flex-col gap-4 shadow-xl">
             <span className="text-xs font-mono text-typography-muted uppercase tracking-wider">

@@ -75,13 +75,13 @@ export const Navbar: React.FC = () => {
             href="/"
             className="pointer-events-auto group flex items-center gap-3 py-1.5 focus:outline-none"
           >
-            <span className="inline-flex w-8 h-8 rounded-full bg-surface-elevated border border-surface-border items-center justify-center p-1.5 transition-transform duration-300 group-hover:scale-105 group-hover:border-accent-android/50">
+            <span className="relative w-8 h-8 rounded-full overflow-hidden border border-surface-border items-center justify-center transition-transform duration-300 group-hover:scale-105 group-hover:border-accent-android/50 flex-shrink-0">
               <Image
-                src="/assets/vaidiktech_symbol.svg"
-                alt="VaidikTech Symbol"
-                width={20}
-                height={20}
-                className="w-full h-full object-contain"
+                src="/assets/vaidik_3d_avatar_square.jpg"
+                alt="Vaidik Gandhi 3D Avatar"
+                fill
+                sizes="32px"
+                className="object-cover"
               />
             </span>
             <span className="flex flex-col">

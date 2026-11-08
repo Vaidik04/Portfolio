@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Play, Layers, Sparkles, Shield, Cpu, Terminal, CheckCircle2 } from "lucide-react";
 import { useWorldStore } from "@/store/useWorldStore";
@@ -30,13 +31,22 @@ export const HeroSection: React.FC = () => {
     >
       {/* Top Headline & Lead Copy */}
       <div className="max-w-xl lg:max-w-2xl flex flex-col gap-6 my-auto pointer-events-auto">
-        {/* Editorial Brand Kicker */}
+        {/* Editorial Brand Kicker with 3D Lookalike Avatar */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-surface-elevated/80 border border-white/10 text-xs font-mono text-typography-secondary w-fit backdrop-blur-md shadow-sm"
+          className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-surface-elevated/80 border border-white/10 text-xs font-mono text-typography-secondary w-fit backdrop-blur-md shadow-sm"
         >
+          <div className="relative w-6 h-6 rounded-full overflow-hidden border border-accent-android/40 flex-shrink-0">
+            <Image
+              src="/assets/vaidik_3d_avatar_square.jpg"
+              alt="Vaidik Gandhi 3D Lookalike Avatar"
+              width={24}
+              height={24}
+              className="object-cover w-full h-full"
+            />
+          </div>
           <span className="w-2 h-2 rounded-full bg-accent-android shadow-[0_0_8px_#3DDC84] animate-pulse" />
           <span className="tracking-wide">Vaidik Gandhi · Founder @ VaidikTech · Bhopal, IN</span>
         </motion.div>
