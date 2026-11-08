@@ -89,7 +89,7 @@ export default function AboutPage() {
 
             <div className="pt-4 flex flex-wrap gap-3">
               <Link
-                href="/#work"
+                href="/#flight-deck"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent hover:bg-accent-hover text-accent-on text-xs font-sans font-semibold shadow-brass transition-all hover:scale-105"
               >
                 <span>View Flagship Apps</span>

@@ -39,7 +39,7 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-border">
           <Link
-            href="/#work"
+            href="/#flight-deck"
             className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
