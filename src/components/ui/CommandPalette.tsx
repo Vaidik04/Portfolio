@@ -98,7 +98,7 @@ export const CommandPalette: React.FC = () => {
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <Sparkles className="w-3.5 h-3.5 text-accent-android" />
-                <span>01 // Hero & Assembling Phone</span>
+                <span>01 // The Trinity Hero (3 Devices)</span>
               </button>
 
               <button

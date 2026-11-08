@@ -16,6 +16,7 @@ const config: Config = {
           DEFAULT: "var(--surface-1)",
           1: "var(--surface-1)",
           2: "var(--surface-2)",
+          elevated: "rgba(255, 255, 255, 0.06)",
           border: "var(--border)",
           "border-hover": "var(--border-hover)",
         },
@@ -30,6 +31,10 @@ const config: Config = {
           hover: "var(--accent-hover)",
           press: "var(--accent-press)",
           on: "var(--accent-on)",
+          android: "#3DDC84",
+          cyan: "#22D3EE",
+          violet: "#7C5CFF",
+          gold: "#F5C26B",
         },
         brand: {
           DEFAULT: "var(--accent)",

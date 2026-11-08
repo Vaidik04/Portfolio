@@ -168,14 +168,18 @@ export const FlightDeckSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex items-center justify-between pt-4 border-t border-white/5 gap-2">
+              {/* Action Buttons with High Contrast Affordances */}
+              <div className="flex items-center justify-between pt-4 border-t border-white/10 gap-2">
                 <a
                   href={app.playStoreUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-accent-android text-[#05060A] text-xs font-mono font-bold hover:shadow-[0_0_20px_rgba(61,220,132,0.4)] transition-all"
+                  style={{
+                    backgroundColor: app.accent,
+                    color: app.id === "advokosh" ? "#FFFFFF" : "#05060A",
+                  }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-mono font-black tracking-wide shadow-md transition-all hover:scale-[1.03] active:scale-95 hover:brightness-110"
                 >
                   <Play className="w-3 h-3 fill-current" />
                   <span>Google Play</span>
@@ -184,10 +188,10 @@ export const FlightDeckSection: React.FC = () => {
                 <Link
                   href={`/projects/${app.id}`}
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-1 text-xs font-mono text-typography-secondary hover:text-white transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/[0.06] hover:bg-white/10 border border-white/10 hover:border-white/30 text-xs font-mono font-semibold text-white transition-all shadow-sm"
                 >
                   <span>Case Study</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-accent-cyan" />
                 </Link>
               </div>
             </div>

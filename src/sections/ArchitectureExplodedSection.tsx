@@ -120,8 +120,11 @@ export const ArchitectureExplodedSection: React.FC = () => {
         {/* Toggle 3D Freeze / Explode Button */}
         <div className="pt-2">
           <button
-            onClick={toggleManualExploded}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-surface border border-accent-violet/40 hover:border-accent-violet text-xs font-mono text-typography-primary transition-all shadow-lg"
+            onClick={() => {
+              proceduralAudio.tick();
+              toggleManualExploded();
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[#12141C] border border-[#7C5CFF]/60 hover:border-[#7C5CFF] text-xs font-mono font-bold text-white transition-all shadow-[0_0_18px_rgba(124,92,255,0.25)] hover:scale-[1.02] active:scale-95"
           >
             <Sparkles className="w-3.5 h-3.5 text-accent-violet" />
             <span>{manualExploded ? "Assemble Back to Phone" : "Explode All 5 Slabs in 3D"}</span>

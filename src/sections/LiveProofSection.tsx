@@ -379,13 +379,14 @@ export const LiveProofSection: React.FC = () => {
               </div>
             </div>
 
-            {/* 240ms ESC/POS Thermal Print Trigger */}
+            {/* 240ms ESC/POS Thermal Print Trigger (Prominent High Contrast Gold CTA) */}
             <button
               onClick={handleTriggerThermalPrint}
               disabled={printingState === "printing"}
-              className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/[0.05] hover:bg-[#F5C26B]/20 border border-white/10 hover:border-[#F5C26B]/40 text-xs font-mono text-white transition-all shadow-md active:scale-95"
+              style={{ backgroundColor: "#F5C26B", color: "#05060A" }}
+              className="flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-mono font-black text-xs tracking-wide transition-all shadow-[0_0_20px_rgba(245,194,107,0.35)] hover:scale-[1.02] active:scale-95 hover:brightness-105 disabled:opacity-75 disabled:cursor-wait"
             >
-              <Printer className="w-3.5 h-3.5 text-[#F5C26B]" />
+              <Printer className="w-4 h-4 text-black stroke-[2.5]" />
               <span>
                 {printingState === "printing"
                   ? "Transmitting ESC/POS 240ms..."

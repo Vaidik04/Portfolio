@@ -117,7 +117,7 @@ export const Navbar: React.FC = () => {
                 proceduralAudio.tick();
                 openTerminal();
               }}
-              className="w-9 h-9 rounded-full border border-white/10 bg-surface-elevated text-typography-muted hover:text-white flex items-center justify-center transition-all"
+              className="w-9 h-9 rounded-full border border-white/15 bg-[#12141C] text-typography-secondary hover:text-white hover:border-accent-cyan/50 flex items-center justify-center transition-all shadow-sm"
               title="Open Developer Terminal (`)"
               aria-label="Open CLI Terminal"
             >
@@ -130,8 +130,8 @@ export const Navbar: React.FC = () => {
               onClick={toggleSound}
               className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${
                 soundEnabled
-                  ? "bg-accent-android/15 border-accent-android/40 text-accent-android shadow-[0_0_12px_rgba(61,220,132,0.3)]"
-                  : "bg-surface-elevated border-white/10 text-typography-muted hover:text-typography-primary"
+                  ? "bg-[#3DDC84]/20 border-[#3DDC84]/60 text-[#3DDC84] shadow-[0_0_12px_rgba(61,220,132,0.35)]"
+                  : "bg-[#12141C] border-white/15 text-typography-muted hover:text-white hover:border-white/30"
               }`}
               title={soundEnabled ? "Audio On (Click to Mute)" : "Muted (Click to Enable Audio)"}
               aria-label="Toggle ambient sound"
@@ -139,7 +139,7 @@ export const Navbar: React.FC = () => {
               {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
             </button>
 
-            {/* Primary Action Button */}
+            {/* Primary Action Button (Guaranteed High Contrast) */}
             <Link
               href="/#contact"
               onClick={(e) => {
@@ -148,17 +148,18 @@ export const Navbar: React.FC = () => {
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-accent-android hover:bg-accent-android/90 text-[#05060A] text-xs font-mono font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(61,220,132,0.3)] hover:scale-[1.02]"
+              style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-mono font-black text-xs tracking-wide transition-all shadow-[0_0_20px_rgba(61,220,132,0.35)] hover:scale-[1.03] active:scale-95 hover:brightness-105"
             >
               <span>Get in touch</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
             </Link>
 
             {/* Mobile Menu Button */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-typography-secondary hover:text-white"
+              className="md:hidden p-2 rounded-xl border border-white/10 bg-[#12141C] text-typography-primary hover:text-white hover:border-white/30"
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

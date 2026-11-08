@@ -38,9 +38,10 @@ export const CertificationsSection: React.FC = () => {
       <div className="flex items-center gap-2 mb-8 border-b border-border pb-4">
         <button
           onClick={() => setActiveFilter("all")}
+          style={activeFilter === "all" ? { backgroundColor: "#3DDC84", color: "#05060A" } : {}}
           className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors ${
             activeFilter === "all"
-              ? "bg-accent text-accent-on font-semibold"
+              ? "font-bold shadow-sm"
               : "text-text-muted hover:text-text"
           }`}
         >
@@ -48,9 +49,10 @@ export const CertificationsSection: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveFilter("nptel")}
+          style={activeFilter === "nptel" ? { backgroundColor: "#3DDC84", color: "#05060A" } : {}}
           className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors ${
             activeFilter === "nptel"
-              ? "bg-accent text-accent-on font-semibold"
+              ? "font-bold shadow-sm"
               : "text-text-muted hover:text-text"
           }`}
         >
@@ -58,9 +60,10 @@ export const CertificationsSection: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveFilter("other")}
+          style={activeFilter === "other" ? { backgroundColor: "#3DDC84", color: "#05060A" } : {}}
           className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors ${
             activeFilter === "other"
-              ? "bg-accent text-accent-on font-semibold"
+              ? "font-bold shadow-sm"
               : "text-text-muted hover:text-text"
           }`}
         >

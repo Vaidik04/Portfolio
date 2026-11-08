@@ -181,8 +181,36 @@ export const HeroSection: React.FC = () => {
               <strong className="text-white">
                 {APPS.find((a) => a.id === activeAppId)?.subtitle}
               </strong>
-              {isAutoCycling ? " (Auto-showcasing 3 apps)" : " (Paused on click)"}
+              {isAutoCycling ? " (Auto-cycling 3 apps)" : " (Paused on interaction)"}
             </span>
+          </div>
+
+          {/* Primary Action Buttons (High Contrast & Tactile) */}
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                proceduralAudio.tick();
+                document.getElementById("flight-deck")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(61,220,132,0.35)] hover:scale-[1.03] active:scale-95 hover:brightness-105"
+            >
+              <span>Explore 3 Flagship Apps</span>
+              <ArrowDown className="w-3.5 h-3.5 stroke-[2.5]" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                proceduralAudio.tick();
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#141824] hover:bg-[#1A1F30] border border-white/20 hover:border-white/40 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-[1.02] active:scale-95"
+            >
+              <span>Contact & Architecture</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-accent-cyan" />
+            </button>
           </div>
         </motion.div>
 

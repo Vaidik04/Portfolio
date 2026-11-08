@@ -93,9 +93,10 @@ export const AboutSovereignSection: React.FC = () => {
                     proceduralAudio.tick();
                     setAvatarMode("authentic");
                   }}
-                  className={`px-2.5 py-1 rounded-md transition-all ${
+                  style={avatarMode === "authentic" ? { backgroundColor: "#3DDC84", color: "#05060A" } : {}}
+                  className={`px-3 py-1 rounded-md transition-all font-mono font-bold text-[10px] ${
                     avatarMode === "authentic"
-                      ? "bg-accent-android text-black font-bold shadow-sm"
+                      ? "shadow-sm"
                       : "text-typography-muted hover:text-white"
                   }`}
                 >
@@ -107,9 +108,10 @@ export const AboutSovereignSection: React.FC = () => {
                     proceduralAudio.tick();
                     setAvatarMode("avatar");
                   }}
-                  className={`px-2.5 py-1 rounded-md transition-all ${
+                  style={avatarMode === "avatar" ? { backgroundColor: "#7C5CFF", color: "#FFFFFF" } : {}}
+                  className={`px-3 py-1 rounded-md transition-all font-mono font-bold text-[10px] ${
                     avatarMode === "avatar"
-                      ? "bg-accent-violet text-white font-bold shadow-sm"
+                      ? "shadow-sm"
                       : "text-typography-muted hover:text-white"
                   }`}
                 >

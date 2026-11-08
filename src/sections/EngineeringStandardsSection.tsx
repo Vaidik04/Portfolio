@@ -207,7 +207,8 @@ export const EngineeringStandardsSection: React.FC = () => {
           <button
             onClick={runSimulation}
             disabled={testing}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent text-accent-on text-xs font-mono font-semibold transition-all whitespace-nowrap shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+            style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-mono font-bold text-xs transition-all whitespace-nowrap shadow-[0_0_15px_rgba(61,220,132,0.3)] hover:scale-[1.02] active:scale-[0.98] hover:brightness-105"
           >
             {testing ? (
               <>

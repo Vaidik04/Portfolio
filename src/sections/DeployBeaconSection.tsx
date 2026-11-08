@@ -263,9 +263,10 @@ export const DeployBeaconSection: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="mt-2 flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-accent-android hover:bg-accent-android/90 text-[#05060A] font-mono font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(61,220,132,0.3)] hover:scale-[1.01]"
+                  style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
+                  className="mt-2 flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-mono font-black text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(61,220,132,0.35)] hover:scale-[1.02] active:scale-95 hover:brightness-105"
                 >
-                  <Send className="w-3.5 h-3.5" />
+                  <Send className="w-3.5 h-3.5 stroke-[2.5]" />
                   <span>Transmit Inquiry</span>
                 </button>
               </>

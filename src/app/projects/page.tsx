@@ -93,9 +93,10 @@ export default function ProjectsPage() {
             <div className="flex items-center p-1 rounded-full bg-surface-2 border border-border self-start sm:self-auto">
               <button
                 onClick={() => setViewMode("grid")}
+                style={viewMode === "grid" ? { backgroundColor: "#3DDC84", color: "#05060A" } : {}}
                 className={`p-1.5 rounded-full transition-colors ${
                   viewMode === "grid"
-                    ? "bg-accent text-accent-on"
+                    ? "font-bold shadow-sm"
                     : "text-text-muted hover:text-text"
                 }`}
                 title="Grid view"
@@ -104,9 +105,10 @@ export default function ProjectsPage() {
               </button>
               <button
                 onClick={() => setViewMode("list")}
+                style={viewMode === "list" ? { backgroundColor: "#3DDC84", color: "#05060A" } : {}}
                 className={`p-1.5 rounded-full transition-colors ${
                   viewMode === "list"
-                    ? "bg-accent text-accent-on"
+                    ? "font-bold shadow-sm"
                     : "text-text-muted hover:text-text"
                 }`}
                 title="List view"
@@ -123,9 +125,10 @@ export default function ProjectsPage() {
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all whitespace-nowrap ${
+              style={selectedCategory === cat.id ? { backgroundColor: "#3DDC84", color: "#05060A" } : {}}
+              className={`px-4 py-2 rounded-full text-xs font-mono transition-all whitespace-nowrap ${
                 selectedCategory === cat.id
-                  ? "bg-accent text-accent-on shadow-sm font-semibold"
+                  ? "shadow-sm font-bold"
                   : "bg-surface-1 border border-border text-text-muted hover:text-text"
               }`}
             >

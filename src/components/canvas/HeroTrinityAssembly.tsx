@@ -45,12 +45,15 @@ const SinglePhoneMesh: React.FC<DeviceProps> = ({
   useFrame((state, delta) => {
     if (!meshGroup.current) return;
 
-    // Hover pull-forward effect
-    const targetZ = basePos[2] + (isHovered ? 0.35 : isActive ? 0.15 : 0);
-    const targetScale = isHovered ? 1.04 : isActive ? 1.0 : 0.94;
-    const targetRotY = baseRot[1] + (isHovered ? (basePos[0] < 0 ? -0.1 : 0.1) : 0);
+    // Hover & Active pull-forward spotlight effect
+    const targetZ = basePos[2] + (isHovered ? 0.45 : isActive ? 0.35 : 0);
+    const targetScale = isHovered ? 1.05 : isActive ? 1.02 : 0.90;
+    const targetRotY = isActive
+      ? 0
+      : baseRot[1] + (isHovered ? (basePos[0] < 0 ? -0.1 : 0.1) : 0);
+    const targetX = basePos[0] + (isActive && basePos[0] !== 0 ? (basePos[0] < 0 ? 0.2 : -0.2) : 0);
 
-    meshGroup.current.position.x = THREE.MathUtils.damp(meshGroup.current.position.x, basePos[0], 4.0, delta);
+    meshGroup.current.position.x = THREE.MathUtils.damp(meshGroup.current.position.x, targetX, 4.0, delta);
     meshGroup.current.position.y = THREE.MathUtils.damp(
       meshGroup.current.position.y,
       basePos[1] + Math.sin(state.clock.elapsedTime * 1.4 + basePos[0]) * 0.05,
@@ -195,19 +198,19 @@ export const HeroTrinityAssembly: React.FC = () => {
   const [hoveredLayer, setHoveredLayer] = useState<number | null>(null);
 
   // Wireframe-to-Solid Shockwave Assembly Progress
-  const [assemblyProgress, setAssemblyProgress] = useState(0);
+  const [assemblyProgress, setAssemblyProgress] = useState(1.0);
 
   useEffect(() => {
-    let current = 0;
+    let current = 0.2;
     const interval = setInterval(() => {
-      current += 0.04;
+      current += 0.08;
       if (current >= 1.0) {
         setAssemblyProgress(1.0);
         clearInterval(interval);
       } else {
         setAssemblyProgress(current);
       }
-    }, 25);
+    }, 20);
     return () => clearInterval(interval);
   }, []);
 
@@ -281,15 +284,15 @@ export const HeroTrinityAssembly: React.FC = () => {
       explodedStackRef.current.visible = isExploded;
     }
 
-    // Dynamic right-hand anchor position
-    const deskX = Math.min(2.7, Math.max(2.1, viewport.width * 0.26));
+    // Dynamic right-hand anchor position (perfectly balanced away from left copy)
+    const deskX = isMobile ? 0 : Math.min(2.35, Math.max(1.85, viewport.width * 0.23));
     let targetX = isMobile ? 0 : deskX;
     let targetY = 0;
     let targetZ = 0;
     let targetRotX = 0;
     let targetRotY = 0;
     let targetRotZ = 0;
-    let targetScale = isMobile ? 0.58 : 0.78;
+    let targetScale = isMobile ? 0.52 : 0.74;
 
     if (p < 0.16) {
       // Scene 1: The Trinity Hero
@@ -381,15 +384,15 @@ export const HeroTrinityAssembly: React.FC = () => {
   });
 
   // Trinity Depth Arc Base Positions:
-  // Girvi (center-forward), JewelBill (left-back), AdvoKosh (right-back)
-  // On mobile, collapse spacing
-  const spreadX = isMobile ? 1.4 : 2.35;
-  const spreadZ = isMobile ? -0.5 : -0.75;
+  // Girvi (center-forward), JewelBill (left-flank), AdvoKosh (right-flank)
+  // Perfectly proportioned spacing for widescreen and mobile
+  const spreadX = isMobile ? 0.95 : 1.45;
+  const spreadZ = isMobile ? -0.35 : -0.55;
 
   const isExplodedActive = manualExploded || (scrollProgress >= 0.16 && scrollProgress <= 0.44);
 
   return (
-    <group ref={trinityGroupRef} position={[2.4, 0, 0]}>
+    <group ref={trinityGroupRef} position={[2.2, 0, 0]}>
       {/* =======================================================================
           SCENE 1: THE TRINITY HERO (All 3 Flagship Devices Active Simultaneously)
           Only visible when not exploded
@@ -400,7 +403,7 @@ export const HeroTrinityAssembly: React.FC = () => {
           <SinglePhoneMesh
             id="girvi"
             texture={screenTextures.girvi}
-            basePos={[0, 0, 0.1]}
+            basePos={[0, 0.04, 0.2]}
             baseRot={[0, 0, 0]}
             accent="#3DDC84"
             isActive={activeAppId === "girvi"}
@@ -425,7 +428,7 @@ export const HeroTrinityAssembly: React.FC = () => {
             id="jewelbill"
             texture={screenTextures.jewelbill}
             basePos={[-spreadX, -0.06, spreadZ]}
-            baseRot={[0, 0.28, 0.02]}
+            baseRot={[0, 0.32, 0.02]}
             accent="#F5C26B"
             isActive={activeAppId === "jewelbill"}
             isHovered={hoveredApp === "jewelbill"}
@@ -449,7 +452,7 @@ export const HeroTrinityAssembly: React.FC = () => {
             id="advokosh"
             texture={screenTextures.advokosh}
             basePos={[spreadX, -0.06, spreadZ]}
-            baseRot={[0, -0.28, -0.02]}
+            baseRot={[0, -0.32, -0.02]}
             accent="#7C5CFF"
             isActive={activeAppId === "advokosh"}
             isHovered={hoveredApp === "advokosh"}
@@ -610,3 +613,4 @@ export const HeroTrinityAssembly: React.FC = () => {
     </group>
   );
 };
+

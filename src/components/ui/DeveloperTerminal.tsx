@@ -258,7 +258,7 @@ export const DeveloperTerminal: React.FC = () => {
             placeholder="Type 'help', 'work', 'verify', 'sudo hire'..."
             className="flex-1 bg-transparent text-xs text-typography-primary focus:outline-none placeholder:text-typography-muted font-mono"
           />
-          <button type="submit" className="text-typography-muted hover:text-accent-cyan ml-2">
+          <button type="submit" className="p-1.5 rounded-md hover:bg-white/10 text-accent-cyan hover:text-white transition-colors ml-2" title="Execute command">
             <CornerDownLeft className="w-4 h-4" />
           </button>
         </form>

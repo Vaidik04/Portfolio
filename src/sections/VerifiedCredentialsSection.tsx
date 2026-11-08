@@ -205,9 +205,10 @@ export const VerifiedCredentialsSection: React.FC = () => {
                   href={selectedCert.fileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-accent-android text-black font-mono font-bold text-xs hover:shadow-[0_0_20px_rgba(61,220,132,0.4)] transition-all"
+                  style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl font-mono font-black text-xs hover:shadow-[0_0_20px_rgba(61,220,132,0.4)] transition-all hover:scale-[1.02]"
                 >
-                  <FileText className="w-3.5 h-3.5" />
+                  <FileText className="w-3.5 h-3.5 stroke-[2.5]" />
                   <span>Open PDF Certificate</span>
                   <ExternalLink className="w-3 h-3 ml-0.5" />
                 </a>
