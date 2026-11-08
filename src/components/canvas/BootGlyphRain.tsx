@@ -21,7 +21,8 @@ export const BootGlyphRain: React.FC = () => {
       const i3 = i * 3;
       const x = (Math.random() - 0.5) * 16;
       const y = (Math.random() - 0.5) * 14;
-      const z = (Math.random() - 0.5) * 10;
+      // Position particles behind the phones (phones are at z = 0 .. 0.5)
+      const z = -1.2 - Math.random() * 5.8;
 
       pos[i3] = x;
       pos[i3 + 1] = y;
@@ -38,7 +39,8 @@ export const BootGlyphRain: React.FC = () => {
 
   useFrame((state, delta) => {
     if (!pointsRef.current) return;
-    if (isBooted && scrollProgress > 0.08) {
+    // Once boot animation completes or scrolled, hide particle rain to keep hero razor-sharp
+    if (isBooted) {
       pointsRef.current.visible = false;
       return;
     }

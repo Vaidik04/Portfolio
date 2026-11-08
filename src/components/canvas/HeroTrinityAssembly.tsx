@@ -89,54 +89,48 @@ const SinglePhoneMesh: React.FC<DeviceProps> = ({
       {/* Space-Black Titanium Unibody Chassis */}
       <RoundedBox args={[width, height, depth]} radius={radius} smoothness={8}>
         <meshStandardMaterial
-          color="#111319"
-          metalness={0.92}
-          roughness={0.22}
-          envMapIntensity={1.2}
+          color="#0E1017"
+          metalness={0.94}
+          roughness={0.20}
+          emissive={isActive ? accent : "#000000"}
+          emissiveIntensity={isActive ? 0.12 : 0}
         />
       </RoundedBox>
 
       {/* Ceramic Bezel Rim */}
       <mesh position={[0, 0, depth / 2 + 0.001]}>
-        <planeGeometry args={[width - 0.06, height - 0.06]} />
-        <meshBasicMaterial color="#06070B" />
+        <planeGeometry args={[width - 0.04, height - 0.04]} />
+        <meshBasicMaterial color="#05060A" />
       </mesh>
 
       {/* High-DPI AMOLED Screen Texture */}
       <mesh position={[0, 0, depth / 2 + 0.003]}>
-        <planeGeometry args={[width - 0.12, height - 0.12]} />
-        <meshBasicMaterial map={texture || undefined} toneMapped={false} />
-      </mesh>
-
-      {/* Corning Gorilla Glass Victus Specular Sheen Layer */}
-      <mesh position={[0, 0, depth / 2 + 0.004]}>
-        <planeGeometry args={[width - 0.12, height - 0.12]} />
-        <meshPhysicalMaterial
-          color="#FFFFFF"
-          transparent
-          opacity={0.05}
-          roughness={0.06}
-          metalness={0.08}
-          reflectivity={0.9}
-          clearcoat={1.0}
-          clearcoatRoughness={0.04}
-        />
+        <planeGeometry args={[width - 0.10, height - 0.10]} />
+        {texture ? (
+          <meshBasicMaterial
+            key={texture.uuid}
+            map={texture}
+            toneMapped={false}
+          />
+        ) : (
+          <meshBasicMaterial color="#07080D" />
+        )}
       </mesh>
 
       {/* Top Speaker Earpiece Slit */}
-      <mesh position={[0, height / 2 - 0.08, depth / 2 + 0.005]}>
+      <mesh position={[0, height / 2 - 0.08, depth / 2 + 0.004]}>
         <boxGeometry args={[0.32, 0.02, 0.008]} />
         <meshBasicMaterial color="#1A1C24" />
       </mesh>
 
       {/* Center Punch-Hole Camera with Sapphire Ring */}
-      <mesh position={[0, height / 2 - 0.22, depth / 2 + 0.005]}>
+      <mesh position={[0, height / 2 - 0.22, depth / 2 + 0.004]}>
         <circleGeometry args={[0.045, 32]} />
         <meshBasicMaterial color="#000000" />
       </mesh>
-      <mesh position={[0, height / 2 - 0.22, depth / 2 + 0.006]}>
-        <ringGeometry args={[0.045, 0.054, 32]} />
-        <meshBasicMaterial color={accent} transparent opacity={0.7} />
+      <mesh position={[0, height / 2 - 0.22, depth / 2 + 0.005]}>
+        <ringGeometry args={[0.045, 0.056, 32]} />
+        <meshBasicMaterial color={accent} transparent opacity={0.8} />
       </mesh>
 
       {/* Dual Camera Module on Back */}
@@ -214,23 +208,16 @@ export const HeroTrinityAssembly: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Quad HD+ Screen Textures for all 3 apps
-  const [screenTextures, setScreenTextures] = useState<{
-    girvi: THREE.CanvasTexture | null;
-    jewelbill: THREE.CanvasTexture | null;
-    advokosh: THREE.CanvasTexture | null;
-  }>({
-    girvi: null,
-    jewelbill: null,
-    advokosh: null,
-  });
-
-  useEffect(() => {
-    setScreenTextures({
+  // Quad HD+ Screen Textures for all 3 apps - Generated Synchronously on Client
+  const screenTextures = useMemo(() => {
+    if (typeof document === "undefined") {
+      return { girvi: null, jewelbill: null, advokosh: null };
+    }
+    return {
       girvi: generateAppScreenTexture("girvi"),
       jewelbill: generateAppScreenTexture("jewelbill"),
       advokosh: generateAppScreenTexture("advokosh"),
-    });
+    };
   }, []);
 
   // 5 Exploded Glass Materials
@@ -499,10 +486,15 @@ export const HeroTrinityAssembly: React.FC = () => {
           </RoundedBox>
           <mesh position={[0, 0, 0.036 / 2 + 0.003]}>
             <planeGeometry args={[2.3 - 0.14, 4.85 - 0.14]} />
-            <meshBasicMaterial
-              map={screenTextures[activeAppId] || screenTextures.girvi || undefined}
-              toneMapped={false}
-            />
+            {(screenTextures[activeAppId] || screenTextures.girvi) ? (
+              <meshBasicMaterial
+                key={(screenTextures[activeAppId] || screenTextures.girvi)?.uuid}
+                map={screenTextures[activeAppId] || screenTextures.girvi || undefined}
+                toneMapped={false}
+              />
+            ) : (
+              <meshBasicMaterial color="#07080D" />
+            )}
           </mesh>
         </group>
 

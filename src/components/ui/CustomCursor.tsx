@@ -66,15 +66,15 @@ export const CustomCursor: React.FC = () => {
           translateY: "-50%",
         }}
         animate={{
-          scale: activeText ? 2.2 : isHovered ? 1.6 : 1,
-          backgroundColor: isHovered ? "rgba(212, 162, 76, 0.14)" : "transparent",
-          borderColor: isHovered ? "rgba(212, 162, 76, 0.85)" : "rgba(236, 232, 223, 0.2)",
+          scale: activeText ? 2.3 : isHovered ? 1.5 : 1,
+          backgroundColor: isHovered ? "rgba(61, 220, 132, 0.12)" : "transparent",
+          borderColor: isHovered ? "rgba(61, 220, 132, 0.85)" : "rgba(255, 255, 255, 0.2)",
         }}
         transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        className="w-8 h-8 rounded-full border flex items-center justify-center shadow-sm"
+        className="w-8 h-8 rounded-full border flex items-center justify-center shadow-[0_0_12px_rgba(61,220,132,0.25)]"
       >
         {activeText && (
-          <span className="text-[7px] font-mono tracking-wider text-accent uppercase font-bold px-1">
+          <span className="text-[7px] font-mono tracking-wider text-[#3DDC84] uppercase font-bold px-1 whitespace-nowrap">
             {activeText}
           </span>
         )}
@@ -89,10 +89,10 @@ export const CustomCursor: React.FC = () => {
           translateY: "-50%",
         }}
         animate={{
-          scale: isHovered ? 0.4 : 1,
-          opacity: isHovered ? 0.3 : 1,
+          scale: isHovered ? 0.5 : 1,
+          opacity: isHovered ? 0.4 : 1,
         }}
-        className="w-1.5 h-1.5 rounded-full bg-accent"
+        className="w-1.5 h-1.5 rounded-full bg-[#3DDC84]"
       />
     </div>
   );
