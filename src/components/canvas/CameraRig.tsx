@@ -85,7 +85,11 @@ export const CameraRig: React.FC = () => {
     camera.rotation.z = THREE.MathUtils.damp(camera.rotation.z, frame.roll, 4.0, delta);
 
     if (camera instanceof THREE.PerspectiveCamera) {
-      camera.fov = THREE.MathUtils.damp(camera.fov, frame.fov, 3.8, delta);
+      // Fluid FOV adaptation: expand FOV on mobile portrait to prevent narrow zoom clipping
+      const isPortrait = state.size.width < state.size.height;
+      const targetFov = isPortrait ? frame.fov + 8 : frame.fov;
+
+      camera.fov = THREE.MathUtils.damp(camera.fov, targetFov, 3.8, delta);
       camera.updateProjectionMatrix();
     }
   });

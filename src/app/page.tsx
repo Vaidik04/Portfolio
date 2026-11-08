@@ -108,7 +108,7 @@ export default function Home() {
       <Navbar />
 
       {/* 8. Continuous Editorial Scroll Sections (DOM) */}
-      <main className="relative z-10 flex flex-col min-h-screen pointer-events-none">
+      <main className="relative z-10 flex flex-col min-h-screen pointer-events-none w-full max-w-full overflow-x-hidden">
         <HeroSection />
         <ArchitectureExplodedSection />
         <FlightDeckSection />

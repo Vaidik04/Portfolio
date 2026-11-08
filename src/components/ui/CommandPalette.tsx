@@ -64,8 +64,8 @@ export const CommandPalette: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-start justify-center pt-24 px-4 bg-black/80 backdrop-blur-xl animate-fade-in font-mono">
-      <div className="relative w-full max-w-xl bg-[#090C14] border border-white/15 rounded-3xl shadow-[0_0_80px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col max-h-[540px]">
+    <div className="fixed inset-0 z-[120] flex items-start justify-center pt-16 sm:pt-24 px-3 sm:px-4 bg-black/80 backdrop-blur-xl animate-fade-in font-mono">
+      <div className="relative w-full max-w-xl bg-[#090C14] border border-white/15 rounded-3xl shadow-[0_0_80px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col max-h-[82vh] sm:max-h-[540px]">
         {/* Search Input Bar */}
         <div className="flex items-center px-5 py-4 border-b border-white/10 gap-3 bg-surface-elevated/60">
           <Search className="w-4 h-4 text-accent-cyan flex-shrink-0" />

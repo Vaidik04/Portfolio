@@ -197,20 +197,20 @@ export const DeveloperTerminal: React.FC = () => {
   if (!terminalOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-8 bg-black/75 backdrop-blur-xl animate-fade-in">
-      <div className="relative w-full max-w-2xl bg-[#090C14] border border-accent-cyan/40 rounded-3xl shadow-[0_0_60px_rgba(34,211,238,0.2)] overflow-hidden font-mono flex flex-col h-[500px]">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-8 bg-black/75 backdrop-blur-xl animate-fade-in">
+      <div className="relative w-full max-w-2xl bg-[#090C14] border border-accent-cyan/40 rounded-3xl shadow-[0_0_60px_rgba(34,211,238,0.2)] overflow-hidden font-mono flex flex-col h-[85vh] sm:h-[500px]">
         {/* Terminal Header */}
-        <div className="flex items-center justify-between px-5 py-3 bg-surface-elevated/80 border-b border-white/10 select-none">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-surface-elevated/80 border-b border-white/10 select-none">
+          <div className="flex items-center gap-2 overflow-hidden">
             <span
-              className="w-3 h-3 rounded-full bg-red-500/80 cursor-pointer hover:opacity-100"
+              className="w-3 h-3 rounded-full bg-red-500/80 cursor-pointer hover:opacity-100 flex-shrink-0"
               onClick={() => setTerminalOpen(false)}
             />
-            <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <span className="w-3 h-3 rounded-full bg-green-500/80" />
-            <span className="text-xs text-typography-muted ml-3 flex items-center gap-1.5">
-              <TerminalIcon className="w-3.5 h-3.5 text-accent-cyan" />
-              <span>vaidik@vaidiktech-sovereign:~</span>
+            <span className="w-3 h-3 rounded-full bg-yellow-500/80 flex-shrink-0" />
+            <span className="w-3 h-3 rounded-full bg-green-500/80 flex-shrink-0" />
+            <span className="text-xs text-typography-muted ml-2 sm:ml-3 flex items-center gap-1.5 truncate">
+              <TerminalIcon className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" />
+              <span className="truncate">vaidiktech:~</span>
             </span>
           </div>
 

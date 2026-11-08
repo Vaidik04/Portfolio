@@ -65,16 +65,17 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pointer-events-none ${visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-          } ${scrolled ? "py-3" : "py-5"}`}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pointer-events-none ${
+          visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        } ${scrolled ? "py-2.5 sm:py-3" : "py-4 sm:py-5"}`}
       >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Refined Brand Wordmark */}
           <Link
             href="/"
-            className="pointer-events-auto group flex items-center gap-3 py-1.5 focus:outline-none"
+            className="pointer-events-auto group flex items-center gap-2.5 sm:gap-3 py-1 focus:outline-none"
           >
-            <span className="relative w-8 h-8 rounded-full overflow-hidden border border-surface-border items-center justify-center transition-transform duration-300 group-hover:scale-105 group-hover:border-accent-android/50 flex-shrink-0">
+            <span className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-surface-border items-center justify-center transition-transform duration-300 group-hover:scale-105 group-hover:border-accent-android/50 flex-shrink-0">
               <Image
                 src="/assets/vaidik_3d_avatar_square.jpg"
                 alt="Vaidik Gandhi 3D Avatar"
@@ -84,10 +85,10 @@ export const Navbar: React.FC = () => {
               />
             </span>
             <span className="flex flex-col">
-              <span className="font-heading font-bold text-sm tracking-tight text-typography-primary group-hover:text-white transition-colors">
+              <span className="font-heading font-bold text-xs sm:text-sm tracking-tight text-typography-primary group-hover:text-white transition-colors">
                 Vaidik Gandhi
               </span>
-              <span className="text-[10px] font-mono text-typography-muted group-hover:text-accent-android transition-colors">
+              <span className="text-[9px] sm:text-[10px] font-mono text-typography-muted group-hover:text-accent-android transition-colors">
                 Founder · VaidikTech
               </span>
             </span>
@@ -108,15 +109,15 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Actions: Sound Toggle + CLI Toggle + Primary CTA */}
-          <div className="pointer-events-auto flex items-center gap-2.5">
-            {/* Terminal Toggle Button */}
+          <div className="pointer-events-auto flex items-center gap-2 sm:gap-2.5">
+            {/* Terminal Toggle Button (Desktop & Tablet) */}
             <button
               type="button"
               onClick={() => {
                 proceduralAudio.tick();
                 openTerminal();
               }}
-              className="w-9 h-9 rounded-full border border-white/15 bg-[#12141C] text-typography-secondary hover:text-white hover:border-accent-cyan/50 flex items-center justify-center transition-all shadow-sm"
+              className="hidden sm:flex w-9 h-9 rounded-full border border-white/15 bg-[#12141C] text-typography-secondary hover:text-white hover:border-accent-cyan/50 items-center justify-center transition-all shadow-sm"
               title="Open Developer Terminal (`)"
               aria-label="Open CLI Terminal"
             >
@@ -127,10 +128,11 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={toggleSound}
-              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${soundEnabled
+              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center transition-all ${
+                soundEnabled
                   ? "bg-[#3DDC84]/20 border-[#3DDC84]/60 text-[#3DDC84] shadow-[0_0_12px_rgba(61,220,132,0.35)]"
                   : "bg-[#12141C] border-white/15 text-typography-muted hover:text-white hover:border-white/30"
-                }`}
+              }`}
               title={soundEnabled ? "Audio On (Click to Mute)" : "Muted (Click to Enable Audio)"}
               aria-label="Toggle ambient sound"
             >
@@ -157,10 +159,10 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-xl border border-white/10 bg-[#12141C] text-typography-primary hover:text-white hover:border-white/30"
+              className="md:hidden p-1.5 sm:p-2 rounded-xl border border-white/10 bg-[#12141C] text-typography-primary hover:text-white hover:border-white/30"
               aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
             </button>
           </div>
         </div>

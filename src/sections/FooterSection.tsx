@@ -13,7 +13,7 @@ export const FooterSection: React.FC = () => {
   };
 
   return (
-    <footer className="relative py-16 px-6 max-w-6xl mx-auto w-full border-t border-white/10 text-xs font-sans text-typography-muted z-10 pointer-events-auto">
+    <footer className="relative py-12 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto w-full border-t border-white/10 text-xs font-sans text-typography-muted z-10 pointer-events-auto overflow-hidden">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8 pb-12 border-b border-white/5">
         {/* Brand Identification */}
         <div className="flex items-center gap-3">

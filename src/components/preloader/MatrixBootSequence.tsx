@@ -100,9 +100,9 @@ export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComple
           className="fixed inset-0 z-[150] flex flex-col justify-between p-6 sm:p-12 bg-[#05060A] text-typography-primary font-mono select-none cursor-pointer"
         >
           {/* Top Header */}
-          <div className="flex items-center justify-between text-xs text-typography-muted">
-            <span className="text-accent-android font-bold">VAIDIKTECH BOOTLOADER v4.2 // SOVEREIGN</span>
-            <span className="text-accent-cyan">BHOPAL, IN (UTC+5:30)</span>
+          <div className="flex items-center justify-between text-[10px] sm:text-xs text-typography-muted gap-2">
+            <span className="text-accent-android font-bold truncate">VAIDIKTECH BOOTLOADER // SOVEREIGN</span>
+            <span className="text-accent-cyan flex-shrink-0">BHOPAL, IN</span>
           </div>
 
           {/* Central Terminal Output */}
@@ -142,9 +142,9 @@ export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComple
           </div>
 
           {/* Footer Note */}
-          <div className="flex items-center justify-between text-[11px] text-typography-muted">
-            <span>Press [`] for CLI Terminal</span>
-            <span className="animate-pulse">Click anywhere or press any key to fast-forward</span>
+          <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-typography-muted gap-2">
+            <span className="hidden sm:inline">Press [`] for CLI Terminal</span>
+            <span className="animate-pulse text-center w-full sm:w-auto">Tap anywhere to fast-forward ▶</span>
           </div>
         </motion.div>
       )}

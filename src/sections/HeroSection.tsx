@@ -76,29 +76,29 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[92vh] flex flex-col justify-between pt-36 sm:pt-40 pb-16 px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
+      className="relative min-h-[92vh] flex flex-col justify-between pt-24 sm:pt-40 pb-12 sm:pb-16 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
     >
-      {/* Top Headline & Lead Copy Column (Constrained to left side) */}
-      <div className="max-w-lg lg:max-w-xl flex flex-col gap-5 pointer-events-auto">
+      {/* Top Headline & Lead Copy Column (Constrained to left side on desktop, full on mobile) */}
+      <div className="max-w-lg lg:max-w-xl flex flex-col gap-4 sm:gap-5 pointer-events-auto">
         {/* Crisp Non-Duplicated Sovereign Status Kicker */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#12141C]/80 border border-white/10 text-[11px] font-mono text-typography-secondary w-fit backdrop-blur-md shadow-md"
+          className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#12141C]/85 border border-white/10 text-[10px] sm:text-[11px] font-mono text-typography-secondary w-fit max-w-full backdrop-blur-md shadow-md"
         >
-          <span className="w-2 h-2 rounded-full bg-accent-android shadow-[0_0_8px_#3DDC84] animate-pulse" />
-          <span className="font-semibold tracking-wider uppercase text-white">
+          <span className="w-2 h-2 rounded-full bg-accent-android shadow-[0_0_8px_#3DDC84] animate-pulse flex-shrink-0" />
+          <span className="font-semibold tracking-wider uppercase text-white truncate">
             Sovereign Mobile Architecture // Bhopal, IN
           </span>
         </motion.div>
 
-        {/* Confident Headline — Sized for Perfect Balance */}
+        {/* Confident Headline — Sized for Perfect Fluid Responsive Balance */}
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-3xl sm:text-4xl lg:text-[3.25rem] font-heading font-black tracking-tight text-typography-primary leading-[1.12]"
+          className="text-2xl sm:text-4xl lg:text-[3.25rem] font-heading font-black tracking-tight text-typography-primary leading-[1.12]"
         >
           I build native, offline-first Android apps that{" "}
           <span className="text-accent-android block sm:inline">
@@ -111,7 +111,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-sm sm:text-base text-typography-secondary font-sans leading-relaxed max-w-lg"
+          className="text-xs sm:text-base text-typography-secondary font-sans leading-relaxed max-w-lg"
         >
           Sovereign mobile software for India&apos;s traditional trades—pawnbrokers, jewellers, and advocates. Engineered with Kotlin 2.0, Jetpack Compose, Room SQLite, and hardware-backed SQLCipher encryption for zero-connectivity environments.
         </motion.p>
@@ -123,25 +123,25 @@ export const HeroSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col gap-2 pt-1"
         >
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             {APPS.map((app) => {
               const isActive = activeAppId === app.id;
               return (
                 <button
                   key={app.id}
                   onClick={() => handleSelectApp(app.id)}
-                  className={`relative overflow-hidden flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-mono transition-all duration-300 ${
+                  className={`relative overflow-hidden flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border text-[11px] sm:text-xs font-mono transition-all duration-300 ${
                     isActive
                       ? "bg-[#141824] border-accent-android text-white shadow-[0_0_20px_rgba(61,220,132,0.25)] scale-105"
                       : "bg-[#0E1016]/90 border-white/10 text-typography-muted hover:text-white hover:border-white/20"
                   }`}
                 >
                   <span
-                    className="w-2 h-2 rounded-full"
+                    className="w-2 h-2 rounded-full flex-shrink-0"
                     style={{ backgroundColor: app.accent }}
                   />
                   <span className="font-bold">{app.name}</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/5 text-typography-secondary font-semibold">
+                  <span className="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full bg-white/5 text-typography-secondary font-semibold hidden xs:inline">
                     {app.badge}
                   </span>
 
@@ -149,7 +149,7 @@ export const HeroSection: React.FC = () => {
                   {isActive && isAutoCycling && (
                     <div
                       key={app.id}
-                      className="absolute bottom-0 left-0 h-0.5 bg-accent-android animate-[grow_4.2s_linear]"
+                      className="absolute bottom-0 left-0 h-0.5 bg-accent-android"
                       style={{
                         animation: "heroProgress 4.2s linear infinite",
                       }}
@@ -165,7 +165,7 @@ export const HeroSection: React.FC = () => {
                 proceduralAudio.tick();
                 toggleManualExploded();
               }}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/10 hover:border-accent-cyan/50 text-xs font-mono text-accent-cyan transition-all"
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-white/[0.04] border border-white/10 hover:border-accent-cyan/50 text-[11px] sm:text-xs font-mono text-accent-cyan transition-all"
               title="Toggle 3D exploded architecture view"
             >
               <Layers className="w-3.5 h-3.5" />
@@ -175,18 +175,17 @@ export const HeroSection: React.FC = () => {
 
           {/* Active app auto-switch hint */}
           <div className="flex items-center gap-2 text-[10px] font-mono text-typography-muted">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse" />
-            <span>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse flex-shrink-0" />
+            <span className="truncate">
               Live 3D Screen:{" "}
               <strong className="text-white">
                 {APPS.find((a) => a.id === activeAppId)?.subtitle}
               </strong>
-              {isAutoCycling ? " (Auto-cycling 3 apps)" : " (Paused on interaction)"}
             </span>
           </div>
 
-          {/* Primary Action Buttons (High Contrast & Tactile) */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          {/* Primary Action Buttons (Responsive on Mobile & Desktop) */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 pt-2">
             <button
               type="button"
               onClick={() => {
@@ -194,7 +193,7 @@ export const HeroSection: React.FC = () => {
                 document.getElementById("flight-deck")?.scrollIntoView({ behavior: "smooth" });
               }}
               style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(61,220,132,0.35)] hover:scale-[1.03] active:scale-95 hover:brightness-105"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-mono font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(61,220,132,0.35)] hover:scale-[1.03] active:scale-95 hover:brightness-105"
             >
               <span>Explore 3 Flagship Apps</span>
               <ArrowDown className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -206,7 +205,7 @@ export const HeroSection: React.FC = () => {
                 proceduralAudio.tick();
                 document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#141824] hover:bg-[#1A1F30] border border-white/20 hover:border-white/40 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-[1.02] active:scale-95"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#141824] hover:bg-[#1A1F30] border border-white/20 hover:border-white/40 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-[1.02] active:scale-95"
             >
               <span>Contact & Architecture</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-accent-cyan" />
@@ -214,12 +213,12 @@ export const HeroSection: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* 4 Proof Stats — Interactive Provers with Clean Margins */}
+        {/* 4 Proof Stats — Interactive Provers (2-col grid on mobile, 4-col on desktop) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4 border-t border-white/10 mt-1 max-w-lg"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 sm:pt-4 border-t border-white/10 mt-1 max-w-lg w-full"
         >
           <div
             onClick={() => handleStatClick("drift")}

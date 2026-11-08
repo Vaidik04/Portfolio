@@ -271,20 +271,22 @@ export const HeroTrinityAssembly: React.FC = () => {
       explodedStackRef.current.visible = isExploded;
     }
 
-    // Dynamic right-hand anchor position (perfectly balanced away from left copy)
+    // Dynamic right-hand anchor position (perfectly balanced away from left copy on desktop, lowered on mobile)
     const deskX = isMobile ? 0 : Math.min(2.35, Math.max(1.85, viewport.width * 0.23));
     let targetX = isMobile ? 0 : deskX;
-    let targetY = 0;
+    let targetY = isMobile ? -0.42 : 0;
     let targetZ = 0;
     let targetRotX = 0;
     let targetRotY = 0;
     let targetRotZ = 0;
-    let targetScale = isMobile ? 0.52 : 0.74;
+    let targetScale = isMobile ? 0.44 : 0.74;
 
     if (p < 0.16) {
       // Scene 1: The Trinity Hero
       targetX = isMobile ? 0 : deskX;
-      targetY = 0.05 + Math.sin(state.clock.elapsedTime * 1.3) * 0.05;
+      targetY = isMobile
+        ? -0.45 + Math.sin(state.clock.elapsedTime * 1.3) * 0.03
+        : 0.05 + Math.sin(state.clock.elapsedTime * 1.3) * 0.05;
       targetZ = 0;
 
       // Cursor Parallax Spring Physics
@@ -292,20 +294,20 @@ export const HeroTrinityAssembly: React.FC = () => {
       targetRotX = -pointer.y * 0.20;
       targetRotY = pointer.x * 0.25;
       targetRotZ = -pointer.x * 0.03;
-      targetScale = isMobile ? 0.58 : 0.78;
+      targetScale = isMobile ? 0.45 : 0.76;
     } else if (p <= 0.44 || manualExploded) {
       // Scene 2: The Exploded Stack
       targetX = isMobile ? 0 : deskX - 0.5;
-      targetY = Math.sin(state.clock.elapsedTime * 1.1) * 0.04;
+      targetY = isMobile ? -0.2 : Math.sin(state.clock.elapsedTime * 1.1) * 0.04;
       targetZ = 0.2;
       targetRotX = -0.16;
-      targetRotY = 0.58;
+      targetRotY = isMobile ? 0.35 : 0.58;
       targetRotZ = -0.06;
 
       if (focusedLayer !== null) {
-        targetRotY = 0.42;
+        targetRotY = isMobile ? 0.25 : 0.42;
       }
-      targetScale = isMobile ? 0.54 : 0.72;
+      targetScale = isMobile ? 0.42 : 0.72;
     } else {
       // Fade out on scroll to lower scenes
       const fade = (p - 0.44) / 0.12;
@@ -372,9 +374,9 @@ export const HeroTrinityAssembly: React.FC = () => {
 
   // Trinity Depth Arc Base Positions:
   // Girvi (center-forward), JewelBill (left-flank), AdvoKosh (right-flank)
-  // Perfectly proportioned spacing for widescreen and mobile
-  const spreadX = isMobile ? 0.95 : 1.45;
-  const spreadZ = isMobile ? -0.35 : -0.55;
+  // Perfectly proportioned spacing for widescreen and mobile viewports
+  const spreadX = isMobile ? 0.62 : 1.45;
+  const spreadZ = isMobile ? -0.38 : -0.55;
 
   const isExplodedActive = manualExploded || (scrollProgress >= 0.16 && scrollProgress <= 0.44);
 

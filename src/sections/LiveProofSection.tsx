@@ -176,7 +176,7 @@ export const LiveProofSection: React.FC = () => {
   return (
     <section
       id="proof"
-      className="relative py-28 px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto"
+      className="relative py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto overflow-hidden"
     >
       {/* Section Header */}
       <div className="flex flex-col gap-3 mb-12">
@@ -193,23 +193,23 @@ export const LiveProofSection: React.FC = () => {
       </div>
 
       {/* Two Column Layout: Code Engine (Left) & Real-time Interactive Provers (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full min-w-0">
         {/* Left Column: Tabbed Kotlin Architecture Snippets (7 Cols) */}
-        <div className="lg:col-span-7 flex flex-col rounded-3xl bg-[#090C14] border border-white/10 shadow-2xl overflow-hidden">
+        <div className="lg:col-span-7 flex flex-col rounded-3xl bg-[#090C14] border border-white/10 shadow-2xl overflow-hidden min-w-0 max-w-full">
           {/* Window Bar with Tabs */}
-          <div className="flex items-center justify-between px-4 py-3 bg-[#0E121E] border-b border-white/10">
+          <div className="flex items-center justify-between px-3 sm:px-4 py-3 bg-[#0E121E] border-b border-white/10">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-[#FF5F56]/80" />
               <span className="w-3 h-3 rounded-full bg-[#FFBD2E]/80" />
               <span className="w-3 h-3 rounded-full bg-[#27C93F]/80" />
-              <span className="text-xs font-mono text-typography-muted ml-2">
+              <span className="text-[11px] sm:text-xs font-mono text-typography-muted ml-1 sm:ml-2 truncate max-w-[140px] sm:max-w-none">
                 src/main/kotlin/sovereign/
               </span>
             </div>
 
             <button
               onClick={handleCopyCode}
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.05] hover:bg-white/10 text-[11px] font-mono text-typography-secondary hover:text-white transition-colors"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg bg-white/[0.05] hover:bg-white/10 text-[10px] sm:text-[11px] font-mono text-typography-secondary hover:text-white transition-colors"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-accent-android" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? "Copied!" : "Copy Code"}</span>
@@ -217,7 +217,7 @@ export const LiveProofSection: React.FC = () => {
           </div>
 
           {/* Sub-Tabs */}
-          <div className="flex items-center border-b border-white/10 bg-[#0A0D16] px-4 gap-2">
+          <div className="flex items-center border-b border-white/10 bg-[#0A0D16] px-3 sm:px-4 gap-1.5 sm:gap-2 overflow-x-auto scrollbar-none max-w-full">
             {(["money", "security", "statute"] as const).map((tab) => (
               <button
                 key={tab}
@@ -225,7 +225,7 @@ export const LiveProofSection: React.FC = () => {
                   proceduralAudio.tick();
                   setActiveTab(tab);
                 }}
-                className={`py-2.5 px-3 text-xs font-mono border-b-2 transition-all flex items-center gap-1.5 ${
+                className={`py-2.5 px-2.5 sm:px-3 text-[11px] sm:text-xs font-mono border-b-2 transition-all flex items-center gap-1.5 whitespace-nowrap ${
                   activeTab === tab
                     ? "border-accent-android text-white font-bold"
                     : "border-transparent text-typography-muted hover:text-typography-primary"
@@ -238,12 +238,12 @@ export const LiveProofSection: React.FC = () => {
           </div>
 
           {/* Description banner */}
-          <div className="px-5 py-2.5 bg-white/[0.02] border-b border-white/5 text-xs font-mono text-typography-muted">
+          <div className="px-4 sm:px-5 py-2.5 bg-white/[0.02] border-b border-white/5 text-[11px] sm:text-xs font-mono text-typography-muted">
             {KOTLIN_SNIPPETS[activeTab].description}
           </div>
 
           {/* Code Body */}
-          <div className="p-5 font-mono text-xs overflow-x-auto text-typography-primary leading-relaxed bg-[#06080F] max-h-[460px]">
+          <div className="p-4 sm:p-5 font-mono text-xs overflow-x-auto text-typography-primary leading-relaxed bg-[#06080F] max-h-[460px] max-w-full min-w-0">
             <pre className="text-emerald-400">
               <code>{KOTLIN_SNIPPETS[activeTab].code}</code>
             </pre>
@@ -251,7 +251,7 @@ export const LiveProofSection: React.FC = () => {
         </div>
 
         {/* Right Column: Real-time Interactive Verification Widgets (5 Cols) */}
-        <div className="lg:col-span-5 flex flex-col gap-6">
+        <div className="lg:col-span-5 flex flex-col gap-6 min-w-0 max-w-full">
           {/* Widget 1: Float Drift Accumulator */}
           <div className="p-5 rounded-3xl bg-surface border border-white/10 flex flex-col gap-4 shadow-xl">
             <div className="flex items-center justify-between border-b border-white/5 pb-3">

@@ -35,6 +35,7 @@ export const WorldCanvas: React.FC = () => {
   return (
     <div
       aria-hidden="true"
+      style={{ touchAction: "pan-y" }}
       className={`fixed inset-0 pointer-events-auto z-0 overflow-hidden bg-[#05060A] transition-all duration-500 ${
         glitchMode
           ? "filter invert-[0.1] contrast-125 saturate-150 [text-shadow:_0_0_8px_#3DDC84]"
@@ -43,6 +44,7 @@ export const WorldCanvas: React.FC = () => {
     >
       <Canvas
         camera={{ position: [0, 0, 7.2], fov: 42 }}
+        style={{ touchAction: "pan-y" }}
         dpr={typeof window !== "undefined" ? Math.min(window.devicePixelRatio || 1, 2) : 1.5}
         gl={{
           antialias: profile.tier !== "low",

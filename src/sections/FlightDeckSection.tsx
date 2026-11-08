@@ -70,7 +70,7 @@ export const FlightDeckSection: React.FC = () => {
   return (
     <section
       id="flight-deck"
-      className="relative min-h-screen py-32 px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
+      className="relative min-h-screen py-20 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
     >
       <div className="max-w-2xl flex flex-col gap-4 pointer-events-auto mb-12">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-elevated/80 border border-white/10 text-xs font-mono text-accent-cyan w-fit backdrop-blur-md">

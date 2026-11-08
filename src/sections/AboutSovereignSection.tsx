@@ -11,7 +11,7 @@ export const AboutSovereignSection: React.FC = () => {
   return (
     <section
       id="about"
-      className="relative py-28 px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto"
+      className="relative py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto overflow-hidden"
     >
       {/* Kicker */}
       <div className="flex flex-col gap-3 mb-12">

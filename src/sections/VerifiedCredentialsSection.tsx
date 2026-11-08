@@ -17,7 +17,7 @@ export const VerifiedCredentialsSection: React.FC = () => {
   return (
     <section
       id="credentials"
-      className="relative py-28 px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto"
+      className="relative py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto overflow-hidden"
     >
       {/* Header */}
       <div className="flex flex-col gap-3 mb-10">
@@ -48,7 +48,7 @@ export const VerifiedCredentialsSection: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#0E1118]/80 border border-white/10 backdrop-blur-xl mb-8 w-fit">
+      <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#0E1118]/80 border border-white/10 backdrop-blur-xl mb-8 w-fit max-w-full overflow-x-auto scrollbar-none">
         {[
           { id: "all" as const, label: "All Records", count: CERTIFICATES.length },
           { id: "nptel" as const, label: "Premier IITs NPTEL", count: CERTIFICATES.filter((c) => c.category === "nptel").length },

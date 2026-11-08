@@ -100,7 +100,7 @@ export const ArchitectureExplodedSection: React.FC = () => {
   return (
     <section
       id="architecture"
-      className="relative min-h-[140vh] py-32 px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
+      className="relative min-h-[140vh] py-20 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
     >
       {/* Section Header */}
       <div className="max-w-xl flex flex-col gap-4 pointer-events-auto mb-16">
