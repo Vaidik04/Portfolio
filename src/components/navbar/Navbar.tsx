@@ -65,9 +65,8 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pointer-events-none ${
-          visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        } ${scrolled ? "py-3" : "py-5"}`}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pointer-events-none ${visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+          } ${scrolled ? "py-3" : "py-5"}`}
       >
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
           {/* Refined Brand Wordmark */}
@@ -128,11 +127,10 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={toggleSound}
-              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${
-                soundEnabled
+              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${soundEnabled
                   ? "bg-[#3DDC84]/20 border-[#3DDC84]/60 text-[#3DDC84] shadow-[0_0_12px_rgba(61,220,132,0.35)]"
                   : "bg-[#12141C] border-white/15 text-typography-muted hover:text-white hover:border-white/30"
-              }`}
+                }`}
               title={soundEnabled ? "Audio On (Click to Mute)" : "Muted (Click to Enable Audio)"}
               aria-label="Toggle ambient sound"
             >
