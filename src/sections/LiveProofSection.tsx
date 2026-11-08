@@ -130,12 +130,10 @@ export const LiveProofSection: React.FC = () => {
   // GST Calculation in pure integer paise
   const gstMath = useMemo(() => {
     const netWeight = Math.max(0, goldWeightGrams - stoneDeductionGrams);
-    // Rate in paise per gram
     const rateInPaise = goldRatePerGram * 100;
     const pureGoldPaise = Math.round(netWeight * rateInPaise);
     const makingPaise = Math.round(pureGoldPaise * (makingChargesPercent / 100));
     const taxablePaise = pureGoldPaise + makingPaise;
-    // 3% GST = 1.5% CGST + 1.5% SGST
     const cgstPaise = Math.round(taxablePaise * 0.015);
     const sgstPaise = Math.round(taxablePaise * 0.015);
     const grandTotalPaise = taxablePaise + cgstPaise + sgstPaise;
@@ -172,7 +170,6 @@ export const LiveProofSection: React.FC = () => {
     setTimeout(() => {
       proceduralAudio.shockwave();
       setPrintingState("printed");
-      setTimeout(() => setPrintingState("idle"), 4000);
     }, 1200);
   };
 
@@ -305,11 +302,11 @@ export const LiveProofSection: React.FC = () => {
 
             <div className="flex items-center justify-between text-[11px] font-mono text-typography-muted pt-2 border-t border-white/5">
               <span>Iterated Entries: {transactionsCount.toLocaleString()}</span>
-              <span className="text-accent-android">100% Invariant</span>
+              <span className="text-accent-android font-bold">[PASS // ZERO DRIFT]</span>
             </div>
           </div>
 
-          {/* Widget 2: Real-time JewelBill GST Splitter */}
+          {/* Widget 2: Real-time JewelBill GST Splitter & Thermal Receipt */}
           <div className="p-5 rounded-3xl bg-surface border border-white/10 flex flex-col gap-4 shadow-xl">
             <div className="flex items-center justify-between border-b border-white/5 pb-3">
               <div className="flex items-center gap-2">
@@ -327,7 +324,7 @@ export const LiveProofSection: React.FC = () => {
             <div className="flex flex-col gap-3 font-mono text-xs">
               <div>
                 <div className="flex justify-between text-typography-muted mb-1">
-                  <span>Gross Weight</span>
+                  <span>Gross Gold Weight</span>
                   <span className="text-white font-bold">{goldWeightGrams} g</span>
                 </div>
                 <input
@@ -386,17 +383,61 @@ export const LiveProofSection: React.FC = () => {
             <button
               onClick={handleTriggerThermalPrint}
               disabled={printingState === "printing"}
-              className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/[0.05] hover:bg-[#F5C26B]/20 border border-white/10 hover:border-[#F5C26B]/40 text-xs font-mono text-white transition-all"
+              className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/[0.05] hover:bg-[#F5C26B]/20 border border-white/10 hover:border-[#F5C26B]/40 text-xs font-mono text-white transition-all shadow-md active:scale-95"
             >
               <Printer className="w-3.5 h-3.5 text-[#F5C26B]" />
               <span>
                 {printingState === "printing"
                   ? "Transmitting ESC/POS 240ms..."
                   : printingState === "printed"
-                  ? "Receipt Printed via Bluetooth ESC/POS"
+                  ? "Receipt Printed via Bluetooth ESC/POS (Click to Re-print)"
                   : "Simulate 240ms Bluetooth ESC/POS Print"}
               </span>
             </button>
+
+            {/* Simulated 58mm Thermal Printed Paper Strip */}
+            {printingState !== "idle" && (
+              <div className="p-4 rounded-2xl bg-[#FAF6EE] text-[#141414] font-mono text-[11px] leading-relaxed shadow-2xl border border-neutral-300 animate-fade-in relative overflow-hidden">
+                <div className="text-center pb-2 border-b border-dashed border-neutral-400">
+                  <div className="font-bold text-xs uppercase text-neutral-900">SHREE GANESH JEWELLERS</div>
+                  <div className="text-[9px] text-neutral-600">Sarafa Bazaar, Bhopal · GSTIN: 23AABCU9603R1ZM</div>
+                  <div className="text-[9px] text-neutral-500 mt-1">HSN 7113 · Direct ESC/POS Bluetooth 58mm</div>
+                </div>
+
+                <div className="py-2.5 space-y-1 border-b border-dashed border-neutral-400 text-[10px]">
+                  <div className="flex justify-between">
+                    <span>22K Gold ({gstMath.netWeight}g @ ₹{goldRatePerGram}):</span>
+                    <span className="font-bold">{gstMath.pureGoldFormatted}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Making Charges (8%):</span>
+                    <span>{gstMath.makingFormatted}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>CGST (1.5%):</span>
+                    <span>{gstMath.cgstFormatted}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>SGST (1.5%):</span>
+                    <span>{gstMath.sgstFormatted}</span>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex justify-between font-bold text-xs text-neutral-900">
+                  <span>TOTAL DUE:</span>
+                  <span>{gstMath.grandTotalFormatted}</span>
+                </div>
+
+                <div className="mt-3 text-center text-[9px] text-neutral-600 flex flex-col items-center gap-1">
+                  <div className="font-mono tracking-widest text-xs font-bold text-neutral-800">
+                    ||| | |||| ||| ||||| |||| |||
+                  </div>
+                  <span className="text-[8px] font-semibold text-emerald-700">
+                    STATUS: 240ms DISPATCH · 0.0000% DRIFT VERIFIED
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

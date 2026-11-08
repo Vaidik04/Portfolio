@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowDown, Layers, Sparkles } from "lucide-react";
+import { ArrowDown, Layers, ArrowUpRight, CheckCircle2, Shield, Printer, Activity } from "lucide-react";
 import { useWorldStore } from "@/store/useWorldStore";
 import { proceduralAudio } from "@/lib/proceduralAudio";
 
 export const HeroSection: React.FC = () => {
-  const { activeAppId, setActiveAppId, manualExploded, toggleManualExploded, setScrollProgress } =
+  const { activeAppId, setActiveAppId, manualExploded, toggleManualExploded, setScrollProgress, setFocusedLayer } =
     useWorldStore();
 
   const [counterTriggered, setCounterTriggered] = useState(false);
@@ -23,6 +23,25 @@ export const HeroSection: React.FC = () => {
     { id: "jewelbill" as const, name: "JewelBill · POS", badge: "240ms Print", accent: "#F5C26B" },
     { id: "advokosh" as const, name: "AdvoKosh · एडवोकोश", badge: "256-bit AES", accent: "#7C5CFF" },
   ];
+
+  const handleStatClick = (type: "drift" | "telemetry" | "strongbox" | "printer") => {
+    proceduralAudio.tick();
+    if (type === "drift") {
+      setScrollProgress(0.72);
+      document.getElementById("proof")?.scrollIntoView({ behavior: "smooth" });
+    } else if (type === "telemetry") {
+      setScrollProgress(0.28);
+      setFocusedLayer(3);
+      document.getElementById("architecture")?.scrollIntoView({ behavior: "smooth" });
+    } else if (type === "strongbox") {
+      setScrollProgress(0.32);
+      setFocusedLayer(5);
+      document.getElementById("architecture")?.scrollIntoView({ behavior: "smooth" });
+    } else if (type === "printer") {
+      setScrollProgress(0.72);
+      document.getElementById("proof")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section
@@ -124,47 +143,79 @@ export const HeroSection: React.FC = () => {
           </button>
         </motion.div>
 
-        {/* 4 Proof Stats with Clean Micro-Border */}
+        {/* 4 Proof Stats — Interactive Provers Linking to Live Demonstrations */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-white/10 mt-3"
         >
-          <div className="p-3.5 rounded-2xl bg-[#0D1017]/90 border border-white/10">
-            <div className="text-xl sm:text-2xl font-mono font-black text-accent-android">
-              0.0000%
+          <div
+            onClick={() => handleStatClick("drift")}
+            className="group p-3.5 rounded-2xl bg-[#0D1017]/90 border border-white/10 hover:border-accent-android/60 transition-all duration-300 cursor-pointer hover:scale-[1.02] shadow-sm relative overflow-hidden"
+            title="Click to run live mathematical Float Drift verification"
+          >
+            <div className="flex items-center justify-between">
+              <div className="text-xl sm:text-2xl font-mono font-black text-accent-android">
+                0.0000%
+              </div>
+              <ArrowUpRight className="w-3.5 h-3.5 text-accent-android opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <div className="text-[11px] font-mono text-typography-muted mt-0.5">
-              Float Drift (Long Paise)
+            <div className="text-[11px] font-mono text-typography-muted mt-0.5 flex items-center gap-1">
+              <span>Float Drift (Long)</span>
             </div>
+            <span className="text-[9px] font-mono text-accent-android/70 block mt-1">Live Verifier →</span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-[#0D1017]/90 border border-white/10">
-            <div className="text-xl sm:text-2xl font-mono font-black text-white">
-              0 KB
+          <div
+            onClick={() => handleStatClick("telemetry")}
+            className="group p-3.5 rounded-2xl bg-[#0D1017]/90 border border-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer hover:scale-[1.02] shadow-sm relative overflow-hidden"
+            title="Click to inspect 100% air-gapped sovereign architecture"
+          >
+            <div className="flex items-center justify-between">
+              <div className="text-xl sm:text-2xl font-mono font-black text-white">
+                0 KB
+              </div>
+              <ArrowUpRight className="w-3.5 h-3.5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="text-[11px] font-mono text-typography-muted mt-0.5">
-              Cloud Telemetry Required
+              Cloud Telemetry
             </div>
+            <span className="text-[9px] font-mono text-typography-muted/70 block mt-1">Air-Gapped →</span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-[#0D1017]/90 border border-white/10">
-            <div className="text-xl sm:text-2xl font-mono font-black text-accent-violet">
-              256-bit
+          <div
+            onClick={() => handleStatClick("strongbox")}
+            className="group p-3.5 rounded-2xl bg-[#0D1017]/90 border border-white/10 hover:border-accent-violet/60 transition-all duration-300 cursor-pointer hover:scale-[1.02] shadow-sm relative overflow-hidden"
+            title="Click to inspect hardware StrongBox Keystore enclave"
+          >
+            <div className="flex items-center justify-between">
+              <div className="text-xl sm:text-2xl font-mono font-black text-accent-violet">
+                256-bit
+              </div>
+              <ArrowUpRight className="w-3.5 h-3.5 text-accent-violet opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="text-[11px] font-mono text-typography-muted mt-0.5">
-              AES StrongBox Keystore
+              AES StrongBox
             </div>
+            <span className="text-[9px] font-mono text-accent-violet/70 block mt-1">Keymaster →</span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-[#0D1017]/90 border border-white/10">
-            <div className="text-xl sm:text-2xl font-mono font-black text-[#F5C26B]">
-              240ms
+          <div
+            onClick={() => handleStatClick("printer")}
+            className="group p-3.5 rounded-2xl bg-[#0D1017]/90 border border-white/10 hover:border-[#F5C26B]/60 transition-all duration-300 cursor-pointer hover:scale-[1.02] shadow-sm relative overflow-hidden"
+            title="Click to simulate 240ms direct thermal print"
+          >
+            <div className="flex items-center justify-between">
+              <div className="text-xl sm:text-2xl font-mono font-black text-[#F5C26B]">
+                240ms
+              </div>
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#F5C26B] opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="text-[11px] font-mono text-typography-muted mt-0.5">
-              Direct ESC/POS Print
+              Direct ESC/POS
             </div>
+            <span className="text-[9px] font-mono text-[#F5C26B]/70 block mt-1">Thermal POS →</span>
           </div>
         </motion.div>
       </div>

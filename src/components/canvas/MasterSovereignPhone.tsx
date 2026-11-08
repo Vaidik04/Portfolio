@@ -2,7 +2,7 @@
 
 import React, { useRef, useMemo, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { RoundedBox } from "@react-three/drei";
+import { RoundedBox, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 import { generateAppScreenTexture } from "@/lib/proceduralPhoneScreens";
@@ -24,6 +24,22 @@ export const MasterSovereignPhone: React.FC = () => {
   const { viewport } = useThree();
 
   const [hoveredLayer, setHoveredLayer] = useState<number | null>(null);
+
+  // App Switch Tactile Recoil Impulse
+  const prevAppId = useRef(activeAppId);
+  const recoilRotX = useRef(0);
+  const recoilRotY = useRef(0);
+  const recoilScale = useRef(1.0);
+
+  useEffect(() => {
+    if (prevAppId.current !== activeAppId) {
+      prevAppId.current = activeAppId;
+      // Satisfying spring kick on app switch
+      recoilRotY.current = 0.22;
+      recoilRotX.current = -0.12;
+      recoilScale.current = 1.04;
+    }
+  }, [activeAppId]);
 
   // Phone Dimensions
   const width = 2.4;
@@ -79,6 +95,11 @@ export const MasterSovereignPhone: React.FC = () => {
   const l4Ref = useRef<THREE.Group>(null);
   const l5Ref = useRef<THREE.Group>(null);
 
+  // Instanced Data Packet Trails across layers
+  const packetMeshRef = useRef<THREE.InstancedMesh>(null);
+  const packetCount = 18;
+  const packetDummy = useMemo(() => new THREE.Object3D(), []);
+
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
@@ -95,7 +116,6 @@ export const MasterSovereignPhone: React.FC = () => {
     if (manualExploded) {
       separation = 1.0;
     } else if (p >= 0.16 && p <= 0.44) {
-      // Smooth bell curve during Architecture section
       separation = THREE.MathUtils.smootherstep((p - 0.16) / 0.12, 0, 1);
       if (p > 0.36) {
         separation = 1.0 - THREE.MathUtils.smootherstep((p - 0.36) / 0.08, 0, 1);
@@ -111,18 +131,23 @@ export const MasterSovereignPhone: React.FC = () => {
     let targetRotZ = 0;
     let targetScale = isMobile ? 0.68 : 0.92;
 
+    // Damp recoil impulse back to zero
+    recoilRotX.current = THREE.MathUtils.damp(recoilRotX.current, 0, 6.0, delta);
+    recoilRotY.current = THREE.MathUtils.damp(recoilRotY.current, 0, 6.0, delta);
+    recoilScale.current = THREE.MathUtils.damp(recoilScale.current, 1.0, 6.0, delta);
+
     if (p < 0.16) {
       // Phase 1: Hero Device
       targetX = isMobile ? 0 : 1.85;
       targetY = Math.sin(state.clock.elapsedTime * 1.4) * 0.08;
       targetZ = 0;
 
-      // Soft pointer interactive tilt
+      // Soft pointer interactive tilt + tactile app switch recoil
       const pointer = state.pointer;
-      targetRotX = -pointer.y * 0.22;
-      targetRotY = pointer.x * 0.28 - 0.06;
+      targetRotX = -pointer.y * 0.22 + recoilRotX.current;
+      targetRotY = pointer.x * 0.28 - 0.06 + recoilRotY.current;
       targetRotZ = -pointer.x * 0.04;
-      targetScale = isMobile ? 0.68 : 0.92;
+      targetScale = (isMobile ? 0.68 : 0.92) * recoilScale.current;
     } else if (p <= 0.44 || manualExploded) {
       // Phase 2: Architecture Exploded 5-Layer Stack
       targetX = isMobile ? 0 : 1.15;
@@ -203,6 +228,24 @@ export const MasterSovereignPhone: React.FC = () => {
           THREE.MathUtils.damp(ref.current.scale.x, targetLayerScale, 5.0, delta)
         );
       });
+
+      // Animate flowing data packets across layers
+      if (packetMeshRef.current) {
+        const time = state.clock.elapsedTime * 1.8;
+        for (let i = 0; i < packetCount; i++) {
+          const t = (time + (i / packetCount) * 4.0) % 4.0;
+          // Traverse Z from front UI to back StrongBox
+          const packetZ = THREE.MathUtils.lerp(zOffsets[0], zOffsets[4], t / 4.0);
+          const packetX = Math.sin(t * 3.0 + i) * 0.4;
+          const packetY = Math.cos(t * 2.5 + i) * 0.8;
+
+          packetDummy.position.set(packetX, packetY, packetZ);
+          packetDummy.scale.setScalar(0.045);
+          packetDummy.updateMatrix();
+          packetMeshRef.current.setMatrixAt(i, packetDummy.matrix);
+        }
+        packetMeshRef.current.instanceMatrix.needsUpdate = true;
+      }
     }
   });
 
@@ -278,12 +321,10 @@ export const MasterSovereignPhone: React.FC = () => {
         </group>
 
         {/* Physical Titanium Side Buttons */}
-        {/* Power Button (Right) */}
         <mesh position={[width / 2 + 0.015, 0.35, 0]}>
           <boxGeometry args={[0.03, 0.42, 0.03]} />
           <meshStandardMaterial color="#1E222D" metalness={0.95} roughness={0.2} />
         </mesh>
-        {/* Volume Up & Down Buttons (Left) */}
         <mesh position={[-width / 2 - 0.015, 0.55, 0]}>
           <boxGeometry args={[0.03, 0.32, 0.03]} />
           <meshStandardMaterial color="#1E222D" metalness={0.95} roughness={0.2} />
@@ -296,9 +337,15 @@ export const MasterSovereignPhone: React.FC = () => {
 
       {/* =======================================================================
           MODE B: EXPLODED 5-LAYER ARCHITECTURE STACK (Architecture Scene)
-          Separates along Z only when separation > 0.02
+          Separates along Z with holographic in-scene labels & data packets
       ======================================================================== */}
       <group ref={explodedStackRef} visible={false}>
+        {/* Instanced Glowing Data Packet Flow */}
+        <instancedMesh ref={packetMeshRef} args={[undefined, undefined, packetCount]}>
+          <sphereGeometry args={[0.08, 16, 16]} />
+          <meshBasicMaterial color="#3DDC84" transparent opacity={0.85} />
+        </instancedMesh>
+
         {/* LAYER 1 (Front): Compose M3 UI & AMOLED Display */}
         <group
           ref={l1Ref}
@@ -319,6 +366,14 @@ export const MasterSovereignPhone: React.FC = () => {
               toneMapped={false}
             />
           </mesh>
+
+          {/* 3D Holographic Label */}
+          <Html position={[-width / 2 - 0.38, 0, 0]} transform distanceFactor={5.5} center>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#090C14]/90 border border-[#3DDC84]/50 shadow-[0_0_20px_rgba(61,220,132,0.3)] backdrop-blur-md whitespace-nowrap select-none pointer-events-none">
+              <span className="w-2 h-2 rounded-full bg-[#3DDC84] animate-pulse" />
+              <span className="font-mono text-[11px] font-bold text-white tracking-wide">01 // COMPOSE M3 UI</span>
+            </div>
+          </Html>
         </group>
 
         {/* LAYER 2: ViewModel & StateFlow Logic Board */}
@@ -344,6 +399,14 @@ export const MasterSovereignPhone: React.FC = () => {
               emissiveIntensity={0.5}
             />
           </mesh>
+
+          {/* 3D Holographic Label */}
+          <Html position={[-width / 2 - 0.38, 0, 0]} transform distanceFactor={5.5} center>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#090C14]/90 border border-[#7C5CFF]/50 shadow-[0_0_20px_rgba(124,92,255,0.3)] backdrop-blur-md whitespace-nowrap select-none pointer-events-none">
+              <span className="w-2 h-2 rounded-full bg-[#7C5CFF] animate-pulse" />
+              <span className="font-mono text-[11px] font-bold text-white tracking-wide">02 // STATEFLOW UDF</span>
+            </div>
+          </Html>
         </group>
 
         {/* LAYER 3: Room SQLite Persistence Matrix */}
@@ -369,6 +432,14 @@ export const MasterSovereignPhone: React.FC = () => {
               emissiveIntensity={0.4}
             />
           </mesh>
+
+          {/* 3D Holographic Label */}
+          <Html position={[-width / 2 - 0.38, 0, 0]} transform distanceFactor={5.5} center>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#090C14]/90 border border-[#22D3EE]/50 shadow-[0_0_20px_rgba(34,211,238,0.3)] backdrop-blur-md whitespace-nowrap select-none pointer-events-none">
+              <span className="w-2 h-2 rounded-full bg-[#22D3EE] animate-pulse" />
+              <span className="font-mono text-[11px] font-bold text-white tracking-wide">03 // ROOM SQLITE</span>
+            </div>
+          </Html>
         </group>
 
         {/* LAYER 4: SQLCipher 4.5.5 AES-256 Cryptographic Shield */}
@@ -394,6 +465,14 @@ export const MasterSovereignPhone: React.FC = () => {
               emissiveIntensity={0.5}
             />
           </mesh>
+
+          {/* 3D Holographic Label */}
+          <Html position={[-width / 2 - 0.38, 0, 0]} transform distanceFactor={5.5} center>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#090C14]/90 border border-[#F5C26B]/50 shadow-[0_0_20px_rgba(245,194,107,0.3)] backdrop-blur-md whitespace-nowrap select-none pointer-events-none">
+              <span className="w-2 h-2 rounded-full bg-[#F5C26B] animate-pulse" />
+              <span className="font-mono text-[11px] font-bold text-white tracking-wide">04 // 256-BIT AES SQLCIPHER</span>
+            </div>
+          </Html>
         </group>
 
         {/* LAYER 5 (Back): Titanium Chassis & StrongBox TEE Hardware Security */}
@@ -423,6 +502,14 @@ export const MasterSovereignPhone: React.FC = () => {
               emissiveIntensity={0.6}
             />
           </mesh>
+
+          {/* 3D Holographic Label */}
+          <Html position={[-width / 2 - 0.38, 0, 0]} transform distanceFactor={5.5} center>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#090C14]/90 border border-[#E05638]/50 shadow-[0_0_20px_rgba(224,86,56,0.3)] backdrop-blur-md whitespace-nowrap select-none pointer-events-none">
+              <span className="w-2 h-2 rounded-full bg-[#E05638] animate-pulse" />
+              <span className="font-mono text-[11px] font-bold text-white tracking-wide">05 // STRONGBOX TEE</span>
+            </div>
+          </Html>
         </group>
       </group>
     </group>
