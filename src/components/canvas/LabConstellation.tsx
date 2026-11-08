@@ -150,3 +150,4 @@ export const LabConstellation: React.FC = () => {
     </group>
   );
 };
+

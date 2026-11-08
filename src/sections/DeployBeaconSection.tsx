@@ -251,3 +251,4 @@ export const DeployBeaconSection: React.FC = () => {
     </section>
   );
 };
+

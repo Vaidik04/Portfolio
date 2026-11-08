@@ -286,3 +286,4 @@ export const LabArchiveSection: React.FC = () => {
     </section>
   );
 };
+

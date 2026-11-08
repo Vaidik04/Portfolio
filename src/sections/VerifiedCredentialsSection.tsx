@@ -219,3 +219,4 @@ export const VerifiedCredentialsSection: React.FC = () => {
     </section>
   );
 };
+

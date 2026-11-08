@@ -76,7 +76,10 @@ export const HeroSection: React.FC = () => {
             return (
               <button
                 key={app.id}
-                onClick={() => setActiveAppId(app.id)}
+                onClick={() => {
+                  proceduralAudio.tick();
+                  setActiveAppId(app.id);
+                }}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl border text-xs font-mono transition-all duration-300 ${
                   isActive
                     ? "bg-[#161B26] border-accent-android text-white shadow-[0_0_20px_rgba(61,220,132,0.25)] scale-105"

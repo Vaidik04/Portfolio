@@ -52,3 +52,4 @@ export const WorldBeaconArtifact: React.FC = () => {
     </group>
   );
 };
+

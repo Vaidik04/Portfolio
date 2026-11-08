@@ -38,8 +38,8 @@ export const CameraRig: React.FC = () => {
 
     // Parallax pointer micro-movement
     const pointer = state.pointer;
-    const parallaxX = pointer.x * 0.35;
-    const parallaxY = pointer.y * 0.25;
+    const parallaxX = pointer.x * 0.15;
+    const parallaxY = pointer.y * 0.10;
 
     camera.position.x = THREE.MathUtils.damp(
       camera.position.x,

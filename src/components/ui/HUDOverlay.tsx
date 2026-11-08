@@ -215,3 +215,4 @@ export const HUDOverlay: React.FC = () => {
     </div>
   );
 };
+

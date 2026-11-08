@@ -158,3 +158,4 @@ export const AssemblingPhoneHero: React.FC = () => {
     </group>
   );
 };
+

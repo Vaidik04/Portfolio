@@ -7,8 +7,7 @@ import { useWorldStore } from "@/store/useWorldStore";
 import { qualityGovernor } from "@/lib/qualityGovernor";
 import { CameraRig } from "./CameraRig";
 import { BootGlyphRain } from "./BootGlyphRain";
-import { AssemblingPhoneHero } from "./AssemblingPhoneHero";
-import { ExplodedPhoneStack } from "./ExplodedPhoneStack";
+import { MasterSovereignPhone } from "./MasterSovereignPhone";
 import { FlightDeckRail } from "./FlightDeckRail";
 import { LabConstellation } from "./LabConstellation";
 import { WorldBeaconArtifact } from "./WorldBeaconArtifact";
@@ -77,11 +76,8 @@ export const WorldCanvas: React.FC = () => {
           {/* Scene 0: GPGPU Glyph Rain */}
           <BootGlyphRain />
 
-          {/* Scene 1: Hero Phone Chassis Assembly */}
-          <AssemblingPhoneHero />
-
-          {/* Scene 2: The Exploded 5-Layer Stack */}
-          <ExplodedPhoneStack />
+          {/* Scene 1 & 2: Unified Sovereign Smartphone (Hero & Exploded 5-Layer Stack) */}
+          <MasterSovereignPhone />
 
           {/* Scene 3: Flagship Work Flight Deck */}
           <FlightDeckRail />

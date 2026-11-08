@@ -174,3 +174,4 @@ export const AboutSovereignSection: React.FC = () => {
     </section>
   );
 };
+
