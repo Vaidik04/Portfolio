@@ -282,6 +282,21 @@ export const MasterSovereignPhone: React.FC = () => {
           />
         </mesh>
 
+        {/* Subtle Corning Gorilla Glass Victus Specular Sheen */}
+        <mesh position={[0, 0, phoneDepth / 2 + 0.004]}>
+          <planeGeometry args={[width - 0.12, height - 0.12]} />
+          <meshPhysicalMaterial
+            color="#FFFFFF"
+            transparent
+            opacity={0.05}
+            roughness={0.06}
+            metalness={0.08}
+            reflectivity={0.9}
+            clearcoat={1.0}
+            clearcoatRoughness={0.04}
+          />
+        </mesh>
+
         {/* Top Speaker Earpiece Slit */}
         <mesh position={[0, height / 2 - 0.08, phoneDepth / 2 + 0.005]}>
           <boxGeometry args={[0.34, 0.02, 0.008]} />

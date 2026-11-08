@@ -42,7 +42,7 @@ export const WorldCanvas: React.FC = () => {
     >
       <Canvas
         camera={{ position: [0, 0, 7.5], fov: 42 }}
-        dpr={profile.dpr}
+        dpr={typeof window !== "undefined" ? Math.min(window.devicePixelRatio || 1, 2) : 1.5}
         gl={{
           antialias: profile.tier !== "low",
           powerPreference: "high-performance",

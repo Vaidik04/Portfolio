@@ -99,6 +99,12 @@ export const FlightDeckSection: React.FC = () => {
                 setActiveAppId(app.id);
                 proceduralAudio.tick();
               }}
+              onMouseEnter={() => {
+                if (activeAppId !== app.id) {
+                  setActiveAppId(app.id);
+                  proceduralAudio.tick();
+                }
+              }}
               className={`p-6 sm:p-7 rounded-3xl border flex flex-col justify-between transition-all duration-300 cursor-pointer ${
                 isActive
                   ? "bg-[#141824] border-accent-android shadow-[0_0_40px_rgba(61,220,132,0.2)] scale-[1.03]"
