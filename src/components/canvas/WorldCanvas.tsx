@@ -1,13 +1,14 @@
 "use client";
 
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 import { qualityGovernor } from "@/lib/qualityGovernor";
 import { CameraRig } from "./CameraRig";
 import { BootGlyphRain } from "./BootGlyphRain";
-import { MasterSovereignPhone } from "./MasterSovereignPhone";
+import { WorldEnvironment } from "./WorldEnvironment";
+import { HeroTrinityAssembly } from "./HeroTrinityAssembly";
 import { FlightDeckRail } from "./FlightDeckRail";
 import { LabConstellation } from "./LabConstellation";
 import { WorldBeaconArtifact } from "./WorldBeaconArtifact";
@@ -41,7 +42,7 @@ export const WorldCanvas: React.FC = () => {
       }`}
     >
       <Canvas
-        camera={{ position: [0, 0, 7.5], fov: 42 }}
+        camera={{ position: [0, 0, 7.2], fov: 42 }}
         dpr={typeof window !== "undefined" ? Math.min(window.devicePixelRatio || 1, 2) : 1.5}
         gl={{
           antialias: profile.tier !== "low",
@@ -54,20 +55,8 @@ export const WorldCanvas: React.FC = () => {
         }}
         onError={() => setHasWebGLError(true)}
       >
-        {/* Ambient Warm Studio Lighting */}
-        <ambientLight intensity={0.55} color="#ECE8DF" />
-
-        {/* Primary Key Light */}
-        <directionalLight position={[8, 14, 8]} intensity={1.8} color="#FFFFFF" />
-
-        {/* Soft Neutral Fill Light */}
-        <directionalLight position={[-8, -4, 6]} intensity={0.7} color="#7C5CFF" />
-
-        {/* Android Green Rim Kicker Light */}
-        <directionalLight position={[0, -8, -6]} intensity={2.2} color="#3DDC84" />
-
-        {/* Specular Cyan Glint */}
-        <pointLight position={[3, 5, 4]} intensity={1.1} color="#22D3EE" />
+        {/* Dynamic Studio Atmosphere, Reflective Floor & Lighting */}
+        <WorldEnvironment />
 
         <Suspense fallback={null}>
           {/* Master Timeline Camera Rig */}
@@ -76,8 +65,8 @@ export const WorldCanvas: React.FC = () => {
           {/* Scene 0: GPGPU Glyph Rain */}
           <BootGlyphRain />
 
-          {/* Scene 1 & 2: Unified Sovereign Smartphone (Hero & Exploded 5-Layer Stack) */}
-          <MasterSovereignPhone />
+          {/* Scene 1 & 2: The Trinity 3-Device Hero & Exploded Architecture Stack */}
+          <HeroTrinityAssembly />
 
           {/* Scene 3: Flagship Work Flight Deck */}
           <FlightDeckRail />
