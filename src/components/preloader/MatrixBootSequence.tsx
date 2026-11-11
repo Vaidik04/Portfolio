@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { proceduralAudio } from "@/lib/proceduralAudio";
+import { useWorldStore } from "@/store/useWorldStore";
 
 interface MatrixBootSequenceProps {
   onComplete?: () => void;
@@ -21,6 +22,7 @@ const BOOT_LOGS = [
 ];
 
 export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComplete }) => {
+  const { setBooted } = useWorldStore();
   const [currentLine, setCurrentLine] = useState(0);
   const [progress, setProgress] = useState(0);
   const [complete, setComplete] = useState(false);
@@ -36,6 +38,7 @@ export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComple
     const finish = () => {
       proceduralAudio.shockwave();
       setComplete(true);
+      setBooted(true);
       if (typeof window !== "undefined") {
         sessionStorage.setItem("vaidik_booted", "true");
       }
@@ -95,6 +98,7 @@ export const MatrixBootSequence: React.FC<MatrixBootSequenceProps> = ({ onComple
           onClick={() => {
             proceduralAudio.shockwave();
             setComplete(true);
+            setBooted(true);
             if (onComplete) setTimeout(onComplete, 250);
           }}
           className="fixed inset-0 z-[150] flex flex-col justify-between p-6 sm:p-12 bg-[#05060A] text-typography-primary font-mono select-none cursor-pointer"

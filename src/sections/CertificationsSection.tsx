@@ -56,7 +56,7 @@ export const CertificationsSection: React.FC = () => {
               : "text-text-muted hover:text-text"
           }`}
         >
-          Premier IITs NPTEL (6)
+          Premier IITs NPTEL ({CERTIFICATES.filter((c) => c.category === "nptel").length})
         </button>
         <button
           onClick={() => setActiveFilter("other")}
@@ -67,7 +67,7 @@ export const CertificationsSection: React.FC = () => {
               : "text-text-muted hover:text-text"
           }`}
         >
-          Industry (2)
+          Industry ({CERTIFICATES.filter((c) => c.category !== "nptel").length})
         </button>
       </div>
 

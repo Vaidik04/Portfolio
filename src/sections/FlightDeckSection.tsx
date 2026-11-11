@@ -42,8 +42,8 @@ const FLAGSHIPS: FlagshipApp[] = [
     problem:
       "Traditional jewellery billing requires complex multi-karat deductions, stone-weight subtraction, split GST, and instant printing on thermal roll paper without network lag.",
     solution:
-      "Direct Bluetooth ESC/POS engine driving 58mm/80mm thermal printers in 240ms. Automates HSN 7113 split tax (1.5% CGST + 1.5% SGST) with exact integer-paise precision.",
-    tech: ["Java 21 / Kotlin", "ESC/POS Thermal", "Bluetooth SPP", "Room SQLite", "HSN 7113"],
+      "Direct Bluetooth ESC/POS engine driving 58mm/80mm thermal printers in 240ms. Automates HSN 7113 split tax (1.5% CGST + 1.5% SGST) with exact integer-paise precision, backed by IIT Kharagpur Elite Java concurrency & socket architecture.",
+    tech: ["Java 21 / Kotlin", "ESC/POS Thermal", "Bluetooth SPP", "Room SQLite", "IIT Java Elite"],
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.jewellery.invoice",
     apkBadge: "Google Play · 240ms Print",
     accent: "#F5C26B",
@@ -107,8 +107,8 @@ export const FlightDeckSection: React.FC = () => {
               }}
               className={`p-6 sm:p-7 rounded-3xl border flex flex-col justify-between transition-all duration-300 cursor-pointer ${
                 isActive
-                  ? "bg-[#141824] border-accent-android shadow-[0_0_40px_rgba(61,220,132,0.2)] scale-[1.03]"
-                  : "bg-surface/85 border-white/10 hover:border-white/20 hover:bg-surface-elevated"
+                  ? "bg-[#141824]/95 backdrop-blur-xl border-accent-android shadow-[0_0_40px_rgba(61,220,132,0.2)] scale-[1.03]"
+                  : "bg-[#0E1118]/95 backdrop-blur-xl border-white/10 hover:border-white/25 hover:bg-[#121622]/95"
               }`}
             >
               <div>

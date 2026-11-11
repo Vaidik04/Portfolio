@@ -154,11 +154,13 @@ class GirviInterestEngine {
     keyMetrics: [
       { label: "Play Store Release", value: "Published" },
       { label: "Thermal POS Support", value: "58mm & 80mm ESC/POS" },
+      { label: "Academic Verification", value: "IIT Kharagpur Java Elite" },
       { label: "GST Compliance", value: "3% Split CGST/SGST" },
       { label: "Purity Calculations", value: "24K / 22K / 18K / Silver" }
     ],
     highlights: [
       "Hardware-level ESC/POS raw byte stream printing over classic Bluetooth RFCOMM",
+      "Backed by formal IIT Kharagpur Elite Certification in Java (concurrency, raw I/O streams, bytecode)",
       "Dynamic multi-karat valuation engine computing gross weight, stone weight, and net weight",
       "Complete GST breakdown compliant with Indian tax standards (CGST 1.5% + SGST 1.5%)",
       "Integrated customer ledger (Khata) maintaining debit, credit, and outstanding balance history",

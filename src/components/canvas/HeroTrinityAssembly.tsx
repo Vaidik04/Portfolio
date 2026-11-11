@@ -282,32 +282,38 @@ export const HeroTrinityAssembly: React.FC = () => {
     let targetScale = isMobile ? 0.44 : 0.74;
 
     if (p < 0.16) {
-      // Scene 1: The Trinity Hero
+      // Scene 1: The Trinity Hero (Positioned gracefully lower on mobile to ensure zero text collision)
       targetX = isMobile ? 0 : deskX;
       targetY = isMobile
-        ? -0.45 + Math.sin(state.clock.elapsedTime * 1.3) * 0.03
+        ? -0.78 + Math.sin(state.clock.elapsedTime * 1.3) * 0.02
         : 0.05 + Math.sin(state.clock.elapsedTime * 1.3) * 0.05;
       targetZ = 0;
 
-      // Cursor Parallax Spring Physics
+      // Cursor Parallax Spring Physics (Subtle & stable on touch devices, dynamic on desktop mouse)
       const pointer = state.pointer;
-      targetRotX = -pointer.y * 0.20;
-      targetRotY = pointer.x * 0.25;
-      targetRotZ = -pointer.x * 0.03;
-      targetScale = isMobile ? 0.45 : 0.76;
+      targetRotX = isMobile ? 0.04 : -pointer.y * 0.20;
+      targetRotY = isMobile
+        ? activeAppId === "girvi"
+          ? 0
+          : activeAppId === "jewelbill"
+          ? 0.22
+          : -0.22
+        : pointer.x * 0.25;
+      targetRotZ = isMobile ? 0 : -pointer.x * 0.03;
+      targetScale = isMobile ? 0.36 : 0.76;
     } else if (p <= 0.44 || manualExploded) {
       // Scene 2: The Exploded Stack
       targetX = isMobile ? 0 : deskX - 0.5;
-      targetY = isMobile ? -0.2 : Math.sin(state.clock.elapsedTime * 1.1) * 0.04;
+      targetY = isMobile ? -0.52 : Math.sin(state.clock.elapsedTime * 1.1) * 0.04;
       targetZ = 0.2;
       targetRotX = -0.16;
-      targetRotY = isMobile ? 0.35 : 0.58;
+      targetRotY = isMobile ? 0.28 : 0.58;
       targetRotZ = -0.06;
 
       if (focusedLayer !== null) {
-        targetRotY = isMobile ? 0.25 : 0.42;
+        targetRotY = isMobile ? 0.20 : 0.42;
       }
-      targetScale = isMobile ? 0.42 : 0.72;
+      targetScale = isMobile ? 0.32 : 0.72;
     } else {
       // Fade out on scroll to lower scenes
       const fade = (p - 0.44) / 0.12;

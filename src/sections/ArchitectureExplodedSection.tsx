@@ -147,8 +147,8 @@ export const ArchitectureExplodedSection: React.FC = () => {
               }}
               className={`p-6 rounded-3xl border transition-all duration-300 cursor-pointer ${
                 isFocused
-                  ? "bg-[#141824] border-accent-android shadow-[0_0_35px_rgba(61,220,132,0.25)] scale-[1.02]"
-                  : "bg-surface/90 border-white/10 hover:border-white/20 hover:bg-surface-elevated"
+                  ? "bg-[#141824]/95 backdrop-blur-xl border-accent-android shadow-[0_0_35px_rgba(61,220,132,0.25)] scale-[1.02]"
+                  : "bg-[#0E1118]/95 backdrop-blur-xl border-white/10 hover:border-white/25 hover:bg-[#121622]/95 shadow-xl"
               }`}
             >
               <div className="flex items-center justify-between mb-3">

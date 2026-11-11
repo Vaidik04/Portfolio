@@ -39,8 +39,8 @@ export const BootGlyphRain: React.FC = () => {
 
   useFrame((state, delta) => {
     if (!pointsRef.current) return;
-    // Once boot animation completes or scrolled, hide particle rain to keep hero razor-sharp
-    if (isBooted) {
+    // Once boot animation completes or user starts scrolling, hide particle rain to keep hero razor-sharp
+    if (isBooted || scrollProgress > 0.04) {
       pointsRef.current.visible = false;
       return;
     }

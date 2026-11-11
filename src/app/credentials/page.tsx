@@ -32,7 +32,7 @@ export default function CredentialsPage() {
             Verified Credentials
           </h1>
           <p className="text-text-muted text-base sm:text-lg max-w-3xl mt-4 font-sans leading-relaxed">
-            Formal examinations across Object-Oriented Software Design, Machine Learning, Data Structures, Relational Database Management Systems, and Discrete Mathematics certified by Premier Indian Institutes of Technology (IIT Kharagpur, CMI, IIT Ropar) through the Ministry of Education NPTEL initiative.
+            Formal examinations across Java Systems Programming, Object-Oriented Software Design, Machine Learning, Data Structures, Relational Database Management Systems, and Discrete Mathematics certified by Premier Indian Institutes of Technology (IIT Kharagpur, CMI, IIT Ropar) through the Ministry of Education NPTEL initiative.
           </p>
         </div>
 

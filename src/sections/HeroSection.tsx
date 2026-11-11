@@ -78,14 +78,14 @@ export const HeroSection: React.FC = () => {
       id="hero"
       className="relative min-h-[92vh] flex flex-col justify-between pt-24 sm:pt-40 pb-12 sm:pb-16 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
     >
-      {/* Top Headline & Lead Copy Column (Constrained to left side on desktop, full on mobile) */}
-      <div className="max-w-lg lg:max-w-xl flex flex-col gap-4 sm:gap-5 pointer-events-auto">
+      {/* Top Headline & Lead Copy Column (Protected with subtle dark scrim on mobile for razor-sharp legibility, transparent on desktop) */}
+      <div className="max-w-lg lg:max-w-xl flex flex-col gap-4 sm:gap-5 pointer-events-auto p-4 sm:p-0 rounded-3xl bg-[#05060A]/85 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-white/10 sm:border-transparent shadow-2xl sm:shadow-none">
         {/* Crisp Non-Duplicated Sovereign Status Kicker */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#12141C]/85 border border-white/10 text-[10px] sm:text-[11px] font-mono text-typography-secondary w-fit max-w-full backdrop-blur-md shadow-md"
+          className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#12141C]/90 border border-white/10 text-[10px] sm:text-[11px] font-mono text-typography-secondary w-fit max-w-full backdrop-blur-md shadow-md"
         >
           <span className="w-2 h-2 rounded-full bg-accent-android shadow-[0_0_8px_#3DDC84] animate-pulse flex-shrink-0" />
           <span className="font-semibold tracking-wider uppercase text-white truncate">
@@ -93,12 +93,12 @@ export const HeroSection: React.FC = () => {
           </span>
         </motion.div>
 
-        {/* Confident Headline — Sized for Perfect Fluid Responsive Balance */}
+        {/* Confident Headline — Sized for Perfect Fluid Responsive Balance with Drop-Shadow */}
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-2xl sm:text-4xl lg:text-[3.25rem] font-heading font-black tracking-tight text-typography-primary leading-[1.12]"
+          className="text-2xl sm:text-4xl lg:text-[3.25rem] font-heading font-black tracking-tight text-typography-primary leading-[1.12] drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]"
         >
           I build native, offline-first Android apps that{" "}
           <span className="text-accent-android block sm:inline">
@@ -111,7 +111,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-xs sm:text-base text-typography-secondary font-sans leading-relaxed max-w-lg"
+          className="text-xs sm:text-base text-typography-secondary font-sans leading-relaxed max-w-lg drop-shadow-[0_1px_8px_rgba(0,0,0,0.95)]"
         >
           Sovereign mobile software for India&apos;s traditional trades—pawnbrokers, jewellers, and advocates. Engineered with Kotlin 2.0, Jetpack Compose, Room SQLite, and hardware-backed SQLCipher encryption for zero-connectivity environments.
         </motion.p>

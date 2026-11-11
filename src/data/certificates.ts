@@ -18,6 +18,28 @@ export interface Certificate {
 
 export const CERTIFICATES: Certificate[] = [
   {
+    id: "nptel-java",
+    title: "Programming in Java",
+    issuer: "NPTEL - IIT Kharagpur (Ministry of Education)",
+    category: "nptel",
+    date: "Jul - Oct 2026",
+    score: "69% (Elite)",
+    badge: "Elite Certificate",
+    credits: "4 Credits Recommended",
+    credentialId: "NPTEL26CS153S1252600961",
+    fileUrl: "/certificates/Programming In Java.pdf",
+    fileType: "pdf",
+    skillsLearned: [
+      "Java 21 & JVM Internal Architecture",
+      "Multithreading & Concurrency Control",
+      "Socket Programming & Raw Byte Streams",
+      "Java Collections Framework & Generics",
+      "Robust OOP Exception Architectures",
+      "Bluetooth ESC/POS Thermal Protocol Foundations"
+    ],
+    description: "12-week comprehensive examination certified with Elite distinction by IIT Kharagpur (69%). Covers multithreaded concurrency, socket I/O streams, JVM bytecode mechanics, and collections — the exact systems foundation powering JewelBill's direct 240ms Bluetooth ESC/POS raw socket printing engine."
+  },
+  {
     id: "nptel-oops",
     title: "Fundamentals of Object Oriented Programming",
     issuer: "NPTEL - IIT Kharagpur (Ministry of Education)",

@@ -38,7 +38,10 @@ export const VerifiedCredentialsSection: React.FC = () => {
           {/* Quick Credential Summary */}
           <div className="flex items-center gap-3 text-xs font-mono text-typography-muted">
             <span className="px-3 py-1.5 rounded-xl bg-surface border border-white/5">
-              <strong className="text-accent-android font-bold">6</strong> IIT NPTEL
+              <strong className="text-accent-android font-bold">
+                {CERTIFICATES.filter((c) => c.category === "nptel").length}
+              </strong>{" "}
+              IIT NPTEL
             </span>
             <span className="px-3 py-1.5 rounded-xl bg-surface border border-white/5">
               <strong className="text-accent-violet font-bold">100%</strong> Verified IDs

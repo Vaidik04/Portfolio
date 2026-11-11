@@ -18,7 +18,7 @@ export const ExperienceSection: React.FC = () => {
       period: "2022 - Present",
       role: "B.Tech in Computer Science & Engineering (AI & ML)",
       org: "Lakshmi Narain College of Technology (LNCT), Bhopal",
-      desc: "Specialising in Artificial Intelligence and Machine Learning. Completed 6 formal NPTEL certifications from Premier IITs (including Elite Honors in OOPs, Machine Learning, Data Structures, and DBMS), HackerRank Problem Solving certification, and comprehensive Python engineering bootcamps.",
+      desc: "Specialising in Artificial Intelligence and Machine Learning. Completed 7 formal NPTEL certifications from Premier IITs (including Elite Honors in Programming in Java, OOPs, Machine Learning, Data Structures, and DBMS), HackerRank Problem Solving certification, and comprehensive Python engineering bootcamps.",
       icon: <GraduationCap className="w-4 h-4 text-accent" />,
       badge: "Academic Honors",
     },
