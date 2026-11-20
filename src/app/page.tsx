@@ -4,29 +4,25 @@ import React, { useEffect } from "react";
 import Lenis from "lenis";
 import { WorldCanvas } from "@/components/canvas/WorldCanvas";
 import { CommandPalette } from "@/components/ui/CommandPalette";
-import { HUDOverlay } from "@/components/ui/HUDOverlay";
 import { OfflineBanner } from "@/components/ui/OfflineBanner";
-import { DebugInspector } from "@/components/ui/DebugInspector";
 import { DeveloperTerminal } from "@/components/ui/DeveloperTerminal";
-import { MatrixBootSequence } from "@/components/preloader/MatrixBootSequence";
 import { Navbar } from "@/components/navbar/Navbar";
 
-// Editorial Continuous 8 Scenes
+// Executive Curated Portfolio Layout
 import { HeroSection } from "@/sections/HeroSection";
-import { ArchitectureExplodedSection } from "@/sections/ArchitectureExplodedSection";
-import { FlightDeckSection } from "@/sections/FlightDeckSection";
-import { LabArchiveSection } from "@/sections/LabArchiveSection";
-import { LiveProofSection } from "@/sections/LiveProofSection";
-import { AboutSovereignSection } from "@/sections/AboutSovereignSection";
-import { VerifiedCredentialsSection } from "@/sections/VerifiedCredentialsSection";
-import { DeployBeaconSection } from "@/sections/DeployBeaconSection";
+import { PullThePlugSection } from "@/sections/PullThePlugSection";
+import { HomeFlagshipShowcase } from "@/sections/HomeFlagshipShowcase";
+import { HomeArchitecturePreview } from "@/sections/HomeArchitecturePreview";
+import { HomeLabPreview } from "@/sections/HomeLabPreview";
+import { HomeProofCredentialsPreview } from "@/sections/HomeProofCredentialsPreview";
+import { HomeBeaconTeaser } from "@/sections/HomeBeaconTeaser";
 import { FooterSection } from "@/sections/FooterSection";
 
 import { useWorldStore } from "@/store/useWorldStore";
 import { proceduralAudio } from "@/lib/proceduralAudio";
 
 export default function Home() {
-  const { setScrollProgress, setScrollVelocity, setActiveSection } = useWorldStore();
+  const { setScrollProgress, setScrollVelocity, setActiveSection, displayMode } = useWorldStore();
 
   useEffect(() => {
     // Lenis smooth inertial scrolling with velocity feedback
@@ -48,14 +44,11 @@ export default function Home() {
         proceduralAudio.whoosh(e.velocity);
       }
 
-      // Map progress to active section
-      if (p < 0.12) setActiveSection("hero");
-      else if (p < 0.28) setActiveSection("architecture");
-      else if (p < 0.44) setActiveSection("flight-deck");
-      else if (p < 0.58) setActiveSection("lab");
-      else if (p < 0.72) setActiveSection("proof");
-      else if (p < 0.84) setActiveSection("about");
-      else if (p < 0.94) setActiveSection("credentials");
+      // Map progress to active section smoothly
+      if (p < 0.22) setActiveSection("hero");
+      else if (p < 0.45) setActiveSection("flightdeck");
+      else if (p < 0.68) setActiveSection("architecture");
+      else if (p < 0.85) setActiveSection("proof");
       else setActiveSection("contact");
     });
 
@@ -83,40 +76,40 @@ export default function Home() {
 
   return (
     <>
-      {/* 0. Skippable Gradle Preloader Sequence */}
-      <MatrixBootSequence />
+      {/* 1. Continuous 3D WebGL Studio Canvas (unmounted in Fast Mode for zero GPU overhead) */}
+      {displayMode === "experience" ? (
+        <WorldCanvas />
+      ) : (
+        <div
+          aria-hidden="true"
+          className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#07080C]"
+        >
+          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent-android/5 blur-[160px]" />
+          <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-accent-cyan/5 blur-[160px]" />
+        </div>
+      )}
 
-      {/* 1. Single Continuous 3D WebGL World Canvas */}
-      <WorldCanvas />
-
-      {/* 2. Persistent 4-Corner Telemetry HUD */}
-      <HUDOverlay />
-
-      {/* 3. Offline Sentinel Banner */}
+      {/* 2. Offline Connectivity Sentinel */}
       <OfflineBanner />
 
-      {/* 4. Purposeful Command Palette (Ctrl+K / Cmd+K) */}
+      {/* 3. Command Palette (Ctrl+K / Cmd+K) */}
       <CommandPalette />
 
-      {/* 5. In-Site Developer Terminal (Tilde / Backtick) */}
+      {/* 4. In-Site Developer Terminal (Tilde / Backtick) */}
       <DeveloperTerminal />
 
-      {/* 6. Debug Inspector (?debug=true or command 'debug') */}
-      <DebugInspector />
-
-      {/* 7. Minimal Sovereign Navbar */}
+      {/* 5. Precision Floating Navbar */}
       <Navbar />
 
-      {/* 8. Continuous Editorial Scroll Sections (DOM) */}
+      {/* 6. Curated Editorial Landing Flow */}
       <main className="relative z-10 flex flex-col min-h-screen pointer-events-none w-full max-w-full overflow-x-hidden">
         <HeroSection />
-        <ArchitectureExplodedSection />
-        <FlightDeckSection />
-        <LabArchiveSection />
-        <LiveProofSection />
-        <AboutSovereignSection />
-        <VerifiedCredentialsSection />
-        <DeployBeaconSection />
+        <PullThePlugSection />
+        <HomeFlagshipShowcase />
+        <HomeArchitecturePreview />
+        <HomeLabPreview />
+        <HomeProofCredentialsPreview />
+        <HomeBeaconTeaser />
         <FooterSection />
       </main>
     </>
