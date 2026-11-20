@@ -15,7 +15,7 @@ export const DeployBeaconSection: React.FC = () => {
   const [message, setMessage] = useState("");
 
   const { openTerminal } = useWorldStore();
-  const directEmail = "vaidikgandhi@gmail.com";
+  const directEmail = "vaidik.gandhi1@gmail.com";
 
   const handleCopyEmail = () => {
     proceduralAudio.tick();
@@ -43,10 +43,10 @@ export const DeployBeaconSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto overflow-hidden"
+      className="relative py-10 sm:py-14 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto overflow-hidden"
     >
       {/* Section Header */}
-      <div className="flex flex-col gap-3 mb-12">
+      <div className="flex flex-col gap-3 mb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-accent-android w-fit">
           <Globe className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "12s" }} />
           <span>Scene 08 · Sovereign Deployment Beacon</span>
@@ -66,8 +66,8 @@ export const DeployBeaconSection: React.FC = () => {
           <div className="p-4 rounded-3xl bg-surface border border-white/10 flex items-center gap-4 shadow-xl">
             <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-accent-android/40 flex-shrink-0 bg-black/40">
               <Image
-                src="/assets/vaidik_3d_avatar_square.jpg"
-                alt="Vaidik Gandhi 3D Lookalike Avatar"
+                src="/assets/vaidik_authentic_square.jpg"
+                alt="Vaidik Gandhi Portrait"
                 fill
                 sizes="56px"
                 className="object-cover"
@@ -130,7 +130,7 @@ export const DeployBeaconSection: React.FC = () => {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/vaidik-gandhi/"
+              href="https://in.linkedin.com/in/vaidik-gandhi-395b11378"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 rounded-2xl bg-surface border border-white/5 hover:border-white/20 transition-all flex items-center justify-between group"

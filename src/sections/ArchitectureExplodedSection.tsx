@@ -100,13 +100,13 @@ export const ArchitectureExplodedSection: React.FC = () => {
   return (
     <section
       id="architecture"
-      className="relative min-h-[140vh] py-20 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
+      className="relative py-10 sm:py-14 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto"
     >
       {/* Section Header */}
-      <div className="max-w-xl flex flex-col gap-4 pointer-events-auto mb-16">
+      <div className="max-w-2xl flex flex-col gap-4 mb-8">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-elevated/80 border border-white/10 text-xs font-mono text-accent-violet w-fit backdrop-blur-md">
           <Layers className="w-3.5 h-3.5" />
-          <span>02 // THE EXPLODED ARCHITECTURE STACK</span>
+          <span>The Exploded 5-Layer Stack</span>
         </div>
 
         <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary leading-tight">
@@ -114,7 +114,7 @@ export const ArchitectureExplodedSection: React.FC = () => {
         </h2>
 
         <p className="text-base text-typography-secondary font-sans leading-relaxed">
-          The 3D phone model on the right separates into its five distinct engineering tiers as you scroll. Click any layer card below or tap the 3D slabs to freeze and inspect in 360° orbit.
+          Every layer is physically decoupled and architected for extreme field environments. Click any layer card below to inspect cryptographic boundaries and execution constraints.
         </p>
 
         {/* Toggle 3D Freeze / Explode Button */}
@@ -127,13 +127,13 @@ export const ArchitectureExplodedSection: React.FC = () => {
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[#12141C] border border-[#7C5CFF]/60 hover:border-[#7C5CFF] text-xs font-mono font-bold text-white transition-all shadow-[0_0_18px_rgba(124,92,255,0.25)] hover:scale-[1.02] active:scale-95"
           >
             <Sparkles className="w-3.5 h-3.5 text-accent-violet" />
-            <span>{manualExploded ? "Assemble Back to Phone" : "Explode All 5 Slabs in 3D"}</span>
+            <span>{manualExploded ? "Assemble Stack" : "Highlight All 5 Slabs"}</span>
           </button>
         </div>
       </div>
 
-      {/* Layer Cards Stack (Pinned DOM) */}
-      <div className="max-w-xl flex flex-col gap-6 pointer-events-auto">
+      {/* Layer Cards Stack (Grid on Tablet & Desktop) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {ARCHITECTURE_LAYERS.map((layer) => {
           const isFocused = focusedLayer === layer.id;
 

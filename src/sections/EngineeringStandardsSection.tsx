@@ -143,10 +143,10 @@ export const EngineeringStandardsSection: React.FC = () => {
   return (
     <section
       id="engineering"
-      className="relative py-32 px-6 max-w-6xl mx-auto w-full border-t border-surface-border z-10 pointer-events-auto"
+      className="relative py-10 sm:py-14 px-6 max-w-6xl mx-auto w-full border-t border-surface-border z-10 pointer-events-auto"
     >
       {/* Header */}
-      <div className="flex flex-col gap-4 mb-16">
+      <div className="flex flex-col gap-4 mb-8">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-accent" />
           <span className="text-xs font-mono tracking-wider uppercase text-text-muted">

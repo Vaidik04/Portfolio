@@ -56,27 +56,20 @@ export const HeroSection: React.FC = () => {
 
   const handleStatClick = (type: "drift" | "telemetry" | "strongbox" | "printer") => {
     proceduralAudio.tick();
-    if (type === "drift") {
-      setScrollProgress(0.72);
-      document.getElementById("proof")?.scrollIntoView({ behavior: "smooth" });
-    } else if (type === "telemetry") {
-      setScrollProgress(0.28);
-      setFocusedLayer(3);
-      document.getElementById("architecture")?.scrollIntoView({ behavior: "smooth" });
-    } else if (type === "strongbox") {
-      setScrollProgress(0.32);
-      setFocusedLayer(5);
-      document.getElementById("architecture")?.scrollIntoView({ behavior: "smooth" });
-    } else if (type === "printer") {
-      setScrollProgress(0.72);
-      document.getElementById("proof")?.scrollIntoView({ behavior: "smooth" });
+    if (type === "drift" || type === "printer") {
+      setScrollProgress(0.75);
+      document.getElementById("proof-credentials")?.scrollIntoView({ behavior: "smooth" });
+    } else if (type === "telemetry" || type === "strongbox") {
+      setScrollProgress(0.5);
+      setFocusedLayer(type === "strongbox" ? 5 : 3);
+      document.getElementById("architecture-preview")?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <section
       id="hero"
-      className="relative min-h-[92vh] flex flex-col justify-between pt-24 sm:pt-40 pb-12 sm:pb-16 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
+      className="relative min-h-[85vh] flex flex-col justify-between pt-20 sm:pt-28 pb-8 sm:pb-10 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
     >
       {/* Top Headline & Lead Copy Column (Protected with subtle dark scrim on mobile for razor-sharp legibility, transparent on desktop) */}
       <div className="max-w-lg lg:max-w-xl flex flex-col gap-4 sm:gap-5 pointer-events-auto p-4 sm:p-0 rounded-3xl bg-[#05060A]/85 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-white/10 sm:border-transparent shadow-2xl sm:shadow-none">
@@ -89,7 +82,7 @@ export const HeroSection: React.FC = () => {
         >
           <span className="w-2 h-2 rounded-full bg-accent-android shadow-[0_0_8px_#3DDC84] animate-pulse flex-shrink-0" />
           <span className="font-semibold tracking-wider uppercase text-white truncate">
-            Sovereign Mobile Architecture // Bhopal, IN
+            Independent Android Engineer · Founder @ VaidikTech
           </span>
         </motion.div>
 
@@ -190,7 +183,7 @@ export const HeroSection: React.FC = () => {
               type="button"
               onClick={() => {
                 proceduralAudio.tick();
-                document.getElementById("flight-deck")?.scrollIntoView({ behavior: "smooth" });
+                document.getElementById("flagship-showcase")?.scrollIntoView({ behavior: "smooth" });
               }}
               style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-mono font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(61,220,132,0.35)] hover:scale-[1.03] active:scale-95 hover:brightness-105"
@@ -203,11 +196,11 @@ export const HeroSection: React.FC = () => {
               type="button"
               onClick={() => {
                 proceduralAudio.tick();
-                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                document.getElementById("architecture-preview")?.scrollIntoView({ behavior: "smooth" });
               }}
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#141824] hover:bg-[#1A1F30] border border-white/20 hover:border-white/40 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:scale-[1.02] active:scale-95"
             >
-              <span>Contact & Architecture</span>
+              <span>Systems Architecture</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-accent-cyan" />
             </button>
           </div>
@@ -290,7 +283,7 @@ export const HeroSection: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Bottom Scroll Prompt — Given Clear Separation from Bottom HUD */}
+      {/* Bottom Scroll Prompt */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -300,13 +293,13 @@ export const HeroSection: React.FC = () => {
         <button
           onClick={() => {
             proceduralAudio.tick();
-            setScrollProgress(0.32);
-            document.getElementById("architecture")?.scrollIntoView({ behavior: "smooth" });
+            setScrollProgress(0.35);
+            document.getElementById("flagship-showcase")?.scrollIntoView({ behavior: "smooth" });
           }}
           className="flex items-center gap-2 hover:text-accent-android transition-colors"
         >
           <ArrowDown className="w-4 h-4 animate-bounce text-accent-android" />
-          <span>Scroll down to explode the 5-layer architecture stack</span>
+          <span>Scroll down to explore flagship works & architecture</span>
         </button>
       </motion.div>
     </section>

@@ -38,10 +38,10 @@ export const LabArchiveSection: React.FC = () => {
   return (
     <section
       id="lab"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto overflow-hidden"
+      className="relative py-10 sm:py-14 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto overflow-hidden"
     >
       {/* Section Header */}
-      <div className="flex flex-col gap-3 mb-10">
+      <div className="flex flex-col gap-3 mb-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-accent-cyan w-fit">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Scene 04 · The Engineering Constellation</span>

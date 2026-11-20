@@ -10,7 +10,7 @@ export const ContactSection: React.FC = () => {
   const [formMessage, setFormMessage] = useState("");
   const [formSent, setFormSent] = useState(false);
 
-  const email = "vaidikgandhi@gmail.com";
+  const email = "vaidik.gandhi1@gmail.com";
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
@@ -80,7 +80,7 @@ export const ContactSection: React.FC = () => {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/vaidik-gandhi/"
+              href="https://in.linkedin.com/in/vaidik-gandhi-395b11378"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface border border-surface-border text-typography-secondary hover:text-white hover:border-surface-border-hover text-xs font-sans transition-colors"

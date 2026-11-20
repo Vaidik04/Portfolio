@@ -7,14 +7,35 @@ import { ArrowUp } from "lucide-react";
 import { proceduralAudio } from "@/lib/proceduralAudio";
 
 export const FooterSection: React.FC = () => {
+  const [localTime, setLocalTime] = React.useState("");
+
+  React.useEffect(() => {
+    const update = () => {
+      try {
+        const t = new Intl.DateTimeFormat("en-IN", {
+          timeZone: "Asia/Kolkata",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        }).format(new Date());
+        setLocalTime(t);
+      } catch {
+        setLocalTime("");
+      }
+    };
+    update();
+    const interval = setInterval(update, 15000);
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollToTop = () => {
     proceduralAudio.tick();
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="relative py-12 sm:py-16 px-4 sm:px-6 max-w-6xl mx-auto w-full border-t border-white/10 text-xs font-sans text-typography-muted z-10 pointer-events-auto overflow-hidden">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8 pb-12 border-b border-white/5">
+    <footer className="relative py-8 sm:py-10 px-4 sm:px-6 max-w-6xl mx-auto w-full border-t border-white/10 text-xs font-sans text-typography-muted z-10 pointer-events-auto overflow-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b border-white/5">
         {/* Brand Identification */}
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-surface-elevated border border-white/10 flex items-center justify-center p-2">
@@ -38,26 +59,40 @@ export const FooterSection: React.FC = () => {
 
         {/* Footer Navigation */}
         <div className="flex flex-wrap items-center gap-5 text-typography-secondary text-xs font-mono">
-          <a href="#flight-deck" className="hover:text-accent-android transition-colors">
+          <Link href="/projects" className="hover:text-accent-android transition-colors">
             Work
-          </a>
-          <a href="#architecture" className="hover:text-accent-android transition-colors">
+          </Link>
+          <Link href="/architecture" className="hover:text-accent-android transition-colors">
             Architecture
-          </a>
-          <a href="#lab" className="hover:text-accent-android transition-colors">
+          </Link>
+          <Link href="/lab" className="hover:text-accent-android transition-colors">
             Lab
-          </a>
-          <a href="#proof" className="hover:text-accent-android transition-colors">
+          </Link>
+          <Link href="/proof" className="hover:text-accent-android transition-colors">
             Proof
-          </a>
-          <a href="#about" className="hover:text-accent-android transition-colors">
-            Ethos
-          </a>
-          <a href="#credentials" className="hover:text-accent-android transition-colors">
+          </Link>
+          <Link href="/about" className="hover:text-accent-android transition-colors">
+            About
+          </Link>
+          <Link href="/credentials" className="hover:text-accent-android transition-colors">
             Credentials
-          </a>
-          <a href="#contact" className="hover:text-accent-android transition-colors">
+          </Link>
+          <Link href="/contact" className="hover:text-accent-android transition-colors">
             Contact
+          </Link>
+          <a
+            href="https://in.linkedin.com/in/vaidik-gandhi-395b11378"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-accent-cyan transition-colors"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="mailto:vaidik.gandhi1@gmail.com"
+            className="hover:text-accent-android transition-colors"
+          >
+            Email
           </a>
         </div>
 
@@ -77,8 +112,16 @@ export const FooterSection: React.FC = () => {
         <div>
           © 2026 Vaidik Gandhi · VaidikTech. All rights reserved.
         </div>
-        <div>
-          Deterministic offline-first engineering. 0 KB telemetry.
+        <div className="flex items-center gap-2">
+          <span>Bhopal, India</span>
+          {localTime && (
+            <>
+              <span>·</span>
+              <span className="text-typography-secondary">{localTime} IST</span>
+            </>
+          )}
+          <span>·</span>
+          <span>100% Offline-First Architecture</span>
         </div>
       </div>
     </footer>
