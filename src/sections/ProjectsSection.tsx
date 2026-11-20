@@ -176,15 +176,22 @@ export const ProjectsSection: React.FC = () => {
               <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-bg flex items-center justify-center p-3 group/preview">
                 {project.id === "advokosh" ? (
                   <Image
-                    src="/assets/advokosh_screen1.png"
+                    src="/assets/apps/advokosh/01_dashboard.png"
                     alt="AdvoKosh Android App Screenshot"
                     fill
                     className="object-cover object-top transition-transform duration-500 group-hover/preview:scale-105"
                   />
                 ) : project.id === "jewelbill" ? (
                   <Image
-                    src="/assets/jewelbill_screen.png"
+                    src="/assets/apps/jewelbill/01_dashboard.png"
                     alt="JewelBill Android App Screenshot"
+                    fill
+                    className="object-cover object-top transition-transform duration-500 group-hover/preview:scale-105"
+                  />
+                ) : project.id === "girvi" ? (
+                  <Image
+                    src="/assets/apps/girvi/01_dashboard.png"
+                    alt="Girvi Android App Screenshot"
                     fill
                     className="object-cover object-top transition-transform duration-500 group-hover/preview:scale-105"
                   />
@@ -198,7 +205,7 @@ export const ProjectsSection: React.FC = () => {
                       className="object-contain rounded-3xl shadow-2xl transition-transform duration-500 group-hover/preview:scale-105"
                     />
                     <span className="text-[11px] font-mono text-text-muted">
-                      Girvi Core · Token #GV-1048
+                      {project.name} Native Core
                     </span>
                   </div>
                 )}

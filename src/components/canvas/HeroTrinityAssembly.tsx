@@ -46,25 +46,23 @@ const SinglePhoneMesh: React.FC<DeviceProps> = ({
     if (!meshGroup.current) return;
 
     // Hover & Active pull-forward spotlight effect
-    const targetZ = basePos[2] + (isHovered ? 0.45 : isActive ? 0.35 : 0);
-    const targetScale = isHovered ? 1.05 : isActive ? 1.02 : 0.90;
-    const targetRotY = isActive
-      ? 0
-      : baseRot[1] + (isHovered ? (basePos[0] < 0 ? -0.1 : 0.1) : 0);
-    const targetX = basePos[0] + (isActive && basePos[0] !== 0 ? (basePos[0] < 0 ? 0.2 : -0.2) : 0);
+    const targetZ = basePos[2] + (isHovered ? 0.35 : isActive ? 0.15 : 0);
+    const targetScale = isHovered ? 1.05 : isActive ? 1.02 : 0.88;
+    const targetRotY = baseRot[1] + (isHovered ? (basePos[0] < 0 ? -0.1 : basePos[0] > 0 ? 0.1 : 0) : 0);
+    const targetX = basePos[0];
 
-    meshGroup.current.position.x = THREE.MathUtils.damp(meshGroup.current.position.x, targetX, 4.0, delta);
+    meshGroup.current.position.x = THREE.MathUtils.damp(meshGroup.current.position.x, targetX, 4.5, delta);
     meshGroup.current.position.y = THREE.MathUtils.damp(
       meshGroup.current.position.y,
       basePos[1] + Math.sin(state.clock.elapsedTime * 1.4 + basePos[0]) * 0.05,
       4.0,
       delta
     );
-    meshGroup.current.position.z = THREE.MathUtils.damp(meshGroup.current.position.z, targetZ, 4.0, delta);
+    meshGroup.current.position.z = THREE.MathUtils.damp(meshGroup.current.position.z, targetZ, 4.5, delta);
 
-    meshGroup.current.rotation.x = THREE.MathUtils.damp(meshGroup.current.rotation.x, baseRot[0], 4.0, delta);
-    meshGroup.current.rotation.y = THREE.MathUtils.damp(meshGroup.current.rotation.y, targetRotY, 4.0, delta);
-    meshGroup.current.rotation.z = THREE.MathUtils.damp(meshGroup.current.rotation.z, baseRot[2], 4.0, delta);
+    meshGroup.current.rotation.x = THREE.MathUtils.damp(meshGroup.current.rotation.x, baseRot[0], 4.5, delta);
+    meshGroup.current.rotation.y = THREE.MathUtils.damp(meshGroup.current.rotation.y, targetRotY, 4.5, delta);
+    meshGroup.current.rotation.z = THREE.MathUtils.damp(meshGroup.current.rotation.z, baseRot[2], 4.5, delta);
 
     meshGroup.current.scale.setScalar(
       THREE.MathUtils.damp(meshGroup.current.scale.x, targetScale * Math.min(assemblyProgress, 1.0), 4.5, delta)
@@ -240,9 +238,9 @@ export const HeroTrinityAssembly: React.FC = () => {
     };
 
     setRealTextures({
-      girvi: loadTex("/assets/apps/girvi/01_dashboard.png"),
-      jewelbill: loadTex("/assets/apps/jewelbill/01_dashboard.png"),
-      advokosh: loadTex("/assets/apps/advokosh/01_dashboard.png"),
+      girvi: loadTex("/assets/apps/girvi/01_dashboard.png?v=authentic_2"),
+      jewelbill: loadTex("/assets/apps/jewelbill/01_dashboard.png?v=authentic_2"),
+      advokosh: loadTex("/assets/apps/advokosh/01_dashboard.png?v=authentic_2"),
     });
   }, []);
 
@@ -405,10 +403,40 @@ export const HeroTrinityAssembly: React.FC = () => {
   });
 
   // Trinity Depth Arc Base Positions:
-  // Girvi (center-forward), JewelBill (left-flank), AdvoKosh (right-flank)
   // Perfectly proportioned spacing for widescreen and mobile viewports
   const spreadX = isMobile ? 0.62 : 1.45;
   const spreadZ = isMobile ? -0.38 : -0.55;
+
+  // Dynamic slot assignment based on activeAppId so active app always takes center stage
+  const deviceConfigs = useMemo(() => {
+    const centerPos: [number, number, number] = [0, 0.04, 0.2];
+    const centerRot: [number, number, number] = [0, 0, 0];
+    const leftPos: [number, number, number] = [-spreadX, -0.06, spreadZ];
+    const leftRot: [number, number, number] = [0, 0.32, 0.02];
+    const rightPos: [number, number, number] = [spreadX, -0.06, spreadZ];
+    const rightRot: [number, number, number] = [0, -0.32, -0.02];
+
+    if (activeAppId === "advokosh") {
+      return {
+        advokosh: { pos: centerPos, rot: centerRot },
+        girvi: { pos: leftPos, rot: leftRot },
+        jewelbill: { pos: rightPos, rot: rightRot },
+      };
+    }
+    if (activeAppId === "jewelbill") {
+      return {
+        jewelbill: { pos: centerPos, rot: centerRot },
+        girvi: { pos: leftPos, rot: leftRot },
+        advokosh: { pos: rightPos, rot: rightRot },
+      };
+    }
+    // Default: girvi is center
+    return {
+      girvi: { pos: centerPos, rot: centerRot },
+      jewelbill: { pos: leftPos, rot: leftRot },
+      advokosh: { pos: rightPos, rot: rightRot },
+    };
+  }, [activeAppId, spreadX, spreadZ]);
 
   const isExplodedActive = manualExploded || (scrollProgress >= 0.16 && scrollProgress <= 0.44);
 
@@ -420,12 +448,12 @@ export const HeroTrinityAssembly: React.FC = () => {
       ======================================================================== */}
       {!isExplodedActive && (
         <group>
-          {/* 1. Girvi (Center-Forward · Green #3DDC84) */}
+          {/* 1. Girvi (Green #3DDC84) */}
           <SinglePhoneMesh
             id="girvi"
             texture={realTextures.girvi || screenTextures.girvi}
-            basePos={[0, 0.04, 0.2]}
-            baseRot={[0, 0, 0]}
+            basePos={deviceConfigs.girvi.pos}
+            baseRot={deviceConfigs.girvi.rot}
             accent="#3DDC84"
             isActive={activeAppId === "girvi"}
             isHovered={hoveredApp === "girvi"}
@@ -444,12 +472,12 @@ export const HeroTrinityAssembly: React.FC = () => {
             assemblyProgress={assemblyProgress}
           />
 
-          {/* 2. JewelBill (Left-Back · Gold #F5C26B) */}
+          {/* 2. JewelBill (Gold #F5C26B) */}
           <SinglePhoneMesh
             id="jewelbill"
             texture={realTextures.jewelbill || screenTextures.jewelbill}
-            basePos={[-spreadX, -0.06, spreadZ]}
-            baseRot={[0, 0.32, 0.02]}
+            basePos={deviceConfigs.jewelbill.pos}
+            baseRot={deviceConfigs.jewelbill.rot}
             accent="#F5C26B"
             isActive={activeAppId === "jewelbill"}
             isHovered={hoveredApp === "jewelbill"}
@@ -468,12 +496,12 @@ export const HeroTrinityAssembly: React.FC = () => {
             assemblyProgress={assemblyProgress}
           />
 
-          {/* 3. AdvoKosh (Right-Back · Violet #7C5CFF) */}
+          {/* 3. AdvoKosh (Violet #7C5CFF) */}
           <SinglePhoneMesh
             id="advokosh"
             texture={realTextures.advokosh || screenTextures.advokosh}
-            basePos={[spreadX, -0.06, spreadZ]}
-            baseRot={[0, -0.32, -0.02]}
+            basePos={deviceConfigs.advokosh.pos}
+            baseRot={deviceConfigs.advokosh.rot}
             accent="#7C5CFF"
             isActive={activeAppId === "advokosh"}
             isHovered={hoveredApp === "advokosh"}

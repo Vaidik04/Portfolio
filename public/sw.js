@@ -1,7 +1,7 @@
 // Sovereign Offline Service Worker for Vaidik Gandhi Portfolio
 // "Cloud goes down. Business doesn't."
 
-const CACHE_NAME = "vaidiktech-sovereign-v1";
+const CACHE_NAME = "vaidiktech-sovereign-v4";
 
 const PRECACHE_ASSETS = [
   "/",
@@ -27,7 +27,7 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Activate Event: Clean Old Caches
+// Activate Event: Clean Old Caches immediately
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -38,35 +38,55 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch Event: Stale-While-Revalidate with Offline Fallback
+// Fetch Event: Network-First for Navigation & Scripts, Cache-First for static offline assets
 self.addEventListener("fetch", (event) => {
-  // Only handle GET requests
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
-
-  // Ignore cross-origin non-GET or browser extension schemes
   if (!url.protocol.startsWith("http")) return;
 
+  // HTML navigation and JS chunks: Network First, fallback to cache
+  const isPageOrScript =
+    event.request.mode === "navigate" ||
+    url.pathname.startsWith("/_next/") ||
+    url.pathname.endsWith(".js") ||
+    url.pathname.endsWith(".json");
+
+  if (isPageOrScript) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const clone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match(event.request).then((cached) => {
+            if (cached) return cached;
+            if (event.request.mode === "navigate") {
+              return caches.match("/");
+            }
+            return new Response("Offline", { status: 503, statusText: "Service Unavailable" });
+          });
+        })
+    );
+    return;
+  }
+
+  // Static media / assets: Stale While Revalidate
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseClone);
-            });
+            const clone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
           }
           return networkResponse;
         })
-        .catch(() => {
-          // If offline and request is an HTML navigation, serve cached root or fallback
-          if (event.request.mode === "navigate") {
-            return caches.match(event.request).then((page) => page || caches.match("/"));
-          }
-          return cachedResponse;
-        });
+        .catch(() => cachedResponse);
 
       return cachedResponse || fetchPromise;
     })

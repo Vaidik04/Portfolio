@@ -123,9 +123,17 @@ export const HeroSection: React.FC = () => {
                 <button
                   key={app.id}
                   onClick={() => handleSelectApp(app.id)}
+                  style={
+                    isActive
+                      ? {
+                          borderColor: app.accent,
+                          boxShadow: `0 0 24px ${app.accent}40`,
+                        }
+                      : undefined
+                  }
                   className={`relative overflow-hidden flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border text-[11px] sm:text-xs font-mono transition-all duration-300 ${
                     isActive
-                      ? "bg-[#141824] border-accent-android text-white shadow-[0_0_20px_rgba(61,220,132,0.25)] scale-105"
+                      ? "bg-[#141824] text-white scale-105 font-bold"
                       : "bg-[#0E1016]/90 border-white/10 text-typography-muted hover:text-white hover:border-white/20"
                   }`}
                 >
@@ -142,8 +150,9 @@ export const HeroSection: React.FC = () => {
                   {isActive && isAutoCycling && (
                     <div
                       key={app.id}
-                      className="absolute bottom-0 left-0 h-0.5 bg-accent-android"
+                      className="absolute bottom-0 left-0 h-0.5"
                       style={{
+                        backgroundColor: app.accent,
                         animation: "heroProgress 4.2s linear infinite",
                       }}
                     />

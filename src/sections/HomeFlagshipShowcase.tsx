@@ -124,14 +124,23 @@ export const HomeFlagshipShowcase: React.FC = () => {
                   proceduralAudio.tick();
                 }
               }}
+              style={
+                isActive
+                  ? {
+                      borderColor: `${app.accent}90`,
+                      boxShadow: `0 0 40px ${app.accent}25`,
+                    }
+                  : undefined
+              }
               className={`p-6 sm:p-7 rounded-3xl border flex flex-col justify-between transition-all duration-300 cursor-pointer ${
                 isActive
-                  ? "bg-[#141824]/95 backdrop-blur-xl border-accent-android shadow-[0_0_35px_rgba(61,220,132,0.18)] scale-[1.02]"
+                  ? "bg-[#141824]/95 backdrop-blur-xl scale-[1.02]"
                   : "bg-[#0E1118]/80 backdrop-blur-md border-white/10 hover:border-white/25 hover:bg-[#121520]/90"
               }`}
             >
               <div>
-                <div className="flex items-center gap-3 mb-4">
+                {/* Header Row: Icon on left, Verified APK Badge on right */}
+                <div className="flex items-center justify-between gap-3 mb-3">
                   <div className="w-12 h-12 rounded-2xl bg-surface-2 border border-white/10 p-1 flex-shrink-0 relative overflow-hidden shadow-md">
                     <Image
                       src={app.icon}
@@ -141,22 +150,8 @@ export const HomeFlagshipShowcase: React.FC = () => {
                       className="object-contain rounded-xl"
                     />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="w-2 h-2 rounded-full"
-                        style={{ backgroundColor: app.accent }}
-                      />
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-typography-secondary truncate">
-                        {app.hindiName}
-                      </span>
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-heading font-black text-typography-primary tracking-tight truncate">
-                      {app.name}
-                    </h3>
-                  </div>
                   <span
-                    className="text-[10px] font-mono px-2 py-0.5 rounded-full font-bold uppercase flex-shrink-0"
+                    className="text-[10px] font-mono px-2.5 py-1 rounded-full font-bold uppercase flex-shrink-0"
                     style={{
                       backgroundColor: `${app.accent}15`,
                       color: app.accent,
@@ -167,22 +162,38 @@ export const HomeFlagshipShowcase: React.FC = () => {
                   </span>
                 </div>
 
-                <p className="text-xs font-sans text-typography-secondary mb-3 leading-relaxed font-medium">
+                {/* Title Block: Hindi name + English Name full width */}
+                <div className="mb-3">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <span
+                      className="w-2 h-2 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: app.accent }}
+                    />
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-typography-secondary">
+                      {app.hindiName}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-heading font-black text-typography-primary tracking-tight">
+                    {app.name}
+                  </h3>
+                </div>
+
+                <p className="text-xs font-sans text-typography-secondary mb-4 leading-relaxed font-medium">
                   {app.tagline}
                 </p>
 
                 {/* Real Live Dashboard Preview Thumbnail */}
-                <div className="relative mb-4 h-36 sm:h-40 w-full rounded-2xl overflow-hidden border border-white/10 bg-[#07080D] group/img">
+                <div className="relative mb-4 h-48 sm:h-52 w-full rounded-2xl overflow-hidden border border-white/10 bg-[#07080D] group/img">
                   <Image
                     src={app.previewImage}
                     alt={`${app.name} Dashboard Screenshot`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                    className="object-cover object-[center_12%] transition-transform duration-500 group-hover/img:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E1118]/90 via-transparent to-transparent" />
-                  <div className="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between">
-                    <span className="text-[9px] font-mono px-2 py-0.5 rounded-md bg-[#05060A]/85 border border-white/15 text-typography-secondary backdrop-blur-md">
+                  <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-[#0E1118]/90 via-[#0E1118]/40 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded-md bg-[#05060A]/90 border border-white/15 text-typography-secondary backdrop-blur-md">
                       Native Production Build
                     </span>
                     <span className="text-[9px] font-mono font-semibold" style={{ color: app.accent }}>
