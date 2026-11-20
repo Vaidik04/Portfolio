@@ -12,11 +12,11 @@ export default function SkillsPage() {
     <div className="min-h-screen bg-bg text-text flex flex-col selection:bg-accent selection:text-accent-on">
       <Navbar />
 
-      <main className="flex-1 max-w-6xl mx-auto px-6 pt-32 sm:pt-40 pb-24 w-full">
+      <main className="flex-1 max-w-6xl mx-auto px-6 pt-24 sm:pt-28 pb-14 w-full">
         {/* Navigation Breadcrumb */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent transition-colors mb-6"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Home</span>
