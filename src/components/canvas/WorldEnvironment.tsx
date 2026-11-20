@@ -6,22 +6,41 @@ import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 
 export const WorldEnvironment: React.FC = () => {
-  const { activeAppId, scrollProgress } = useWorldStore();
+  const { activeAppId, scrollProgress, isPlugPulled } = useWorldStore();
   const rimLightRef = useRef<THREE.DirectionalLight>(null);
   const pointLightRef = useRef<THREE.PointLight>(null);
+  const keyLightRef = useRef<THREE.DirectionalLight>(null);
 
-  // Target accent colors based on active app
-  const accentColor = activeAppId === "girvi" ? "#3DDC84" : activeAppId === "jewelbill" ? "#F5C26B" : "#7C5CFF";
+  // Target accent colors based on active app (or emergency sovereign green when plug pulled)
+  const accentColor = isPlugPulled
+    ? "#3DDC84"
+    : activeAppId === "girvi"
+    ? "#3DDC84"
+    : activeAppId === "jewelbill"
+    ? "#F5C26B"
+    : "#7C5CFF";
   const targetColor = useRef(new THREE.Color(accentColor));
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     targetColor.current.set(accentColor);
 
     if (rimLightRef.current) {
       rimLightRef.current.color.lerp(targetColor.current, delta * 3.5);
+      rimLightRef.current.intensity = isPlugPulled
+        ? 3.2 + Math.sin(state.clock.elapsedTime * 6.0) * 0.8
+        : 2.6;
     }
     if (pointLightRef.current) {
       pointLightRef.current.color.lerp(targetColor.current, delta * 3.5);
+    }
+    if (keyLightRef.current) {
+      const targetIntensity = isPlugPulled ? 0.4 : 1.9;
+      keyLightRef.current.intensity = THREE.MathUtils.damp(
+        keyLightRef.current.intensity,
+        targetIntensity,
+        4.0,
+        delta
+      );
     }
   });
 
@@ -32,16 +51,16 @@ export const WorldEnvironment: React.FC = () => {
   return (
     <>
       {/* Volumetric Dark Depth Fog */}
-      <fogExp2 attach="fog" args={["#05060A", 0.09]} />
+      <fogExp2 attach="fog" args={["#05060A", isPlugPulled ? 0.14 : 0.09]} />
 
       {/* Ambient Lighting */}
-      <ambientLight intensity={0.65} color="#ECE8DF" />
+      <ambientLight intensity={isPlugPulled ? 0.25 : 0.65} color="#ECE8DF" />
 
       {/* Studio Key Light */}
-      <directionalLight position={[8, 14, 8]} intensity={1.9} color="#FFFFFF" />
+      <directionalLight ref={keyLightRef} position={[8, 14, 8]} intensity={1.9} color="#FFFFFF" />
 
       {/* Cool Fill Light */}
-      <directionalLight position={[-8, -4, 6]} intensity={0.8} color="#1E2333" />
+      <directionalLight position={[-8, -4, 6]} intensity={isPlugPulled ? 0.2 : 0.8} color="#1E2333" />
 
       {/* Dynamic App-Responsive Rim Kicker Light */}
       <directionalLight ref={rimLightRef} position={[0, -6, -6]} intensity={2.6} color={accentColor} />

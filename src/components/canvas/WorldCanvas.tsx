@@ -9,7 +9,6 @@ import { CameraRig } from "./CameraRig";
 import { BootGlyphRain } from "./BootGlyphRain";
 import { WorldEnvironment } from "./WorldEnvironment";
 import { HeroTrinityAssembly } from "./HeroTrinityAssembly";
-import { FlightDeckRail } from "./FlightDeckRail";
 import { LabConstellation } from "./LabConstellation";
 import { WorldBeaconArtifact } from "./WorldBeaconArtifact";
 
@@ -64,14 +63,8 @@ export const WorldCanvas: React.FC = () => {
           {/* Master Timeline Camera Rig */}
           <CameraRig />
 
-          {/* Scene 0: GPGPU Glyph Rain */}
-          <BootGlyphRain />
-
           {/* Scene 1 & 2: The Trinity 3-Device Hero & Exploded Architecture Stack */}
           <HeroTrinityAssembly />
-
-          {/* Scene 3: Flagship Work Flight Deck */}
-          <FlightDeckRail />
 
           {/* Scene 4: The Lab Constellation */}
           <LabConstellation />

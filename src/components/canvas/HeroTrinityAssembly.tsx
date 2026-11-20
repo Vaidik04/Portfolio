@@ -11,7 +11,7 @@ import { proceduralAudio } from "@/lib/proceduralAudio";
 
 interface DeviceProps {
   id: "girvi" | "jewelbill" | "advokosh";
-  texture: THREE.CanvasTexture | null;
+  texture: THREE.Texture | null;
   basePos: [number, number, number];
   baseRot: [number, number, number];
   accent: string;
@@ -220,6 +220,32 @@ export const HeroTrinityAssembly: React.FC = () => {
     };
   }, []);
 
+  // Real App Screenshot Textures from native production builds
+  const [realTextures, setRealTextures] = useState<{
+    girvi: THREE.Texture | null;
+    jewelbill: THREE.Texture | null;
+    advokosh: THREE.Texture | null;
+  }>({ girvi: null, jewelbill: null, advokosh: null });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const loader = new THREE.TextureLoader();
+    const loadTex = (url: string) => {
+      const tex = loader.load(url);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.generateMipmaps = true;
+      tex.minFilter = THREE.LinearMipmapLinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      return tex;
+    };
+
+    setRealTextures({
+      girvi: loadTex("/assets/apps/girvi/01_dashboard.png"),
+      jewelbill: loadTex("/assets/apps/jewelbill/01_dashboard.png"),
+      advokosh: loadTex("/assets/apps/advokosh/01_dashboard.png"),
+    });
+  }, []);
+
   // 5 Exploded Glass Materials
   const glassMaterials = useMemo(() => {
     return [
@@ -250,7 +276,7 @@ export const HeroTrinityAssembly: React.FC = () => {
     if (!trinityGroupRef.current) return;
 
     const p = scrollProgress;
-    const isVisible = p < 0.65;
+    const isVisible = manualExploded || p < 0.18;
     trinityGroupRef.current.visible = isVisible;
     if (!isVisible) return;
 
@@ -265,7 +291,7 @@ export const HeroTrinityAssembly: React.FC = () => {
       }
     }
 
-    const isExploded = separation > 0.02;
+    const isExploded = separation > 0.02 || manualExploded;
 
     if (explodedStackRef.current) {
       explodedStackRef.current.visible = isExploded;
@@ -281,7 +307,20 @@ export const HeroTrinityAssembly: React.FC = () => {
     let targetRotZ = 0;
     let targetScale = isMobile ? 0.44 : 0.74;
 
-    if (p < 0.16) {
+    if (manualExploded) {
+      // Manual Exploded 5-Layer Stack
+      targetX = isMobile ? 0 : deskX - 0.5;
+      targetY = isMobile ? -0.52 : Math.sin(state.clock.elapsedTime * 1.1) * 0.04;
+      targetZ = 0.2;
+      targetRotX = -0.16;
+      targetRotY = isMobile ? 0.28 : 0.58;
+      targetRotZ = -0.06;
+
+      if (focusedLayer !== null) {
+        targetRotY = isMobile ? 0.20 : 0.42;
+      }
+      targetScale = isMobile ? 0.32 : 0.72;
+    } else if (p < 0.12) {
       // Scene 1: The Trinity Hero (Positioned gracefully lower on mobile to ensure zero text collision)
       targetX = isMobile ? 0 : deskX;
       targetY = isMobile
@@ -301,26 +340,13 @@ export const HeroTrinityAssembly: React.FC = () => {
         : pointer.x * 0.25;
       targetRotZ = isMobile ? 0 : -pointer.x * 0.03;
       targetScale = isMobile ? 0.36 : 0.76;
-    } else if (p <= 0.44 || manualExploded) {
-      // Scene 2: The Exploded Stack
-      targetX = isMobile ? 0 : deskX - 0.5;
-      targetY = isMobile ? -0.52 : Math.sin(state.clock.elapsedTime * 1.1) * 0.04;
-      targetZ = 0.2;
-      targetRotX = -0.16;
-      targetRotY = isMobile ? 0.28 : 0.58;
-      targetRotZ = -0.06;
-
-      if (focusedLayer !== null) {
-        targetRotY = isMobile ? 0.20 : 0.42;
-      }
-      targetScale = isMobile ? 0.32 : 0.72;
     } else {
-      // Fade out on scroll to lower scenes
-      const fade = (p - 0.44) / 0.12;
-      targetX = 1.0;
-      targetY = 0.4;
-      targetZ = THREE.MathUtils.lerp(0.1, -4.0, fade);
-      targetScale = THREE.MathUtils.lerp(0.72, 0.4, fade);
+      // Smoothly sink down into reflective floor as user scrolls into Pull the Plug & Flagships
+      const fade = THREE.MathUtils.clamp((p - 0.12) / 0.05, 0, 1);
+      targetX = isMobile ? 0 : deskX;
+      targetY = THREE.MathUtils.lerp(isMobile ? -0.78 : 0.05, -5.0, fade);
+      targetZ = THREE.MathUtils.lerp(0, -2.0, fade);
+      targetScale = THREE.MathUtils.lerp(isMobile ? 0.36 : 0.76, 0.2, fade);
     }
 
     // Spring damping
@@ -397,7 +423,7 @@ export const HeroTrinityAssembly: React.FC = () => {
           {/* 1. Girvi (Center-Forward · Green #3DDC84) */}
           <SinglePhoneMesh
             id="girvi"
-            texture={screenTextures.girvi}
+            texture={realTextures.girvi || screenTextures.girvi}
             basePos={[0, 0.04, 0.2]}
             baseRot={[0, 0, 0]}
             accent="#3DDC84"
@@ -421,7 +447,7 @@ export const HeroTrinityAssembly: React.FC = () => {
           {/* 2. JewelBill (Left-Back · Gold #F5C26B) */}
           <SinglePhoneMesh
             id="jewelbill"
-            texture={screenTextures.jewelbill}
+            texture={realTextures.jewelbill || screenTextures.jewelbill}
             basePos={[-spreadX, -0.06, spreadZ]}
             baseRot={[0, 0.32, 0.02]}
             accent="#F5C26B"
@@ -445,7 +471,7 @@ export const HeroTrinityAssembly: React.FC = () => {
           {/* 3. AdvoKosh (Right-Back · Violet #7C5CFF) */}
           <SinglePhoneMesh
             id="advokosh"
-            texture={screenTextures.advokosh}
+            texture={realTextures.advokosh || screenTextures.advokosh}
             basePos={[spreadX, -0.06, spreadZ]}
             baseRot={[0, -0.32, -0.02]}
             accent="#7C5CFF"
@@ -494,10 +520,10 @@ export const HeroTrinityAssembly: React.FC = () => {
           </RoundedBox>
           <mesh position={[0, 0, 0.036 / 2 + 0.003]}>
             <planeGeometry args={[2.3 - 0.14, 4.85 - 0.14]} />
-            {(screenTextures[activeAppId] || screenTextures.girvi) ? (
+            {(realTextures[activeAppId] || screenTextures[activeAppId] || realTextures.girvi || screenTextures.girvi) ? (
               <meshBasicMaterial
-                key={(screenTextures[activeAppId] || screenTextures.girvi)?.uuid}
-                map={screenTextures[activeAppId] || screenTextures.girvi || undefined}
+                key={(realTextures[activeAppId] || screenTextures[activeAppId] || realTextures.girvi || screenTextures.girvi)?.uuid}
+                map={(realTextures[activeAppId] || screenTextures[activeAppId] || realTextures.girvi || screenTextures.girvi) || undefined}
                 toneMapped={false}
               />
             ) : (
