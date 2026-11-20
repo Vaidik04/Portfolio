@@ -5,6 +5,7 @@ import { qualityGovernor, QualityTier } from "@/lib/qualityGovernor";
 export type SectionId =
   | "boot"
   | "hero"
+  | "plug"
   | "architecture"
   | "flightdeck"
   | "flight-deck"
@@ -14,7 +15,21 @@ export type SectionId =
   | "credentials"
   | "contact";
 
+export type DisplayMode = "experience" | "fast";
+
 export interface WorldState {
+  // Display Mode: "experience" (Full 3D WebGPU/WebGL2 World) or "fast" (2D Editorial High-Speed)
+  displayMode: DisplayMode;
+  setDisplayMode: (mode: DisplayMode) => void;
+  toggleDisplayMode: () => void;
+
+  // The Big Idea: "Pull the Plug" Signature State
+  isPlugPulled: boolean;
+  plugPullCount: number;
+  togglePlug: () => void;
+  pullPlug: () => void;
+  restorePlug: () => void;
+
   // Global scroll progress (0.0 to 1.0)
   scrollProgress: number;
   setScrollProgress: (progress: number) => void;
@@ -43,7 +58,7 @@ export interface WorldState {
   hudVisible: boolean;
   toggleHUD: () => void;
 
-  // Offline Sentinel (navigator.onLine)
+  // Offline Sentinel (navigator.onLine or simulated)
   isOffline: boolean;
   setIsOffline: (offline: boolean) => void;
 
@@ -63,7 +78,7 @@ export interface WorldState {
   setDebugOpen: (open: boolean) => void;
   toggleDebug: () => void;
 
-  // Active hover label for custom cursor (e.g. "VIEW", "DRAG", "PORTAL", "INSPECT")
+  // Active hover label for custom cursor (e.g. "VIEW", "PULL", "INSPECT")
   cursorText: string;
   setCursorText: (text: string) => void;
 
@@ -83,9 +98,55 @@ export interface WorldState {
   // Glitch mode triggered by Konami code
   glitchMode: boolean;
   setGlitchMode: (glitch: boolean) => void;
+
+  // Game Layer: Achievements
+  achievements: string[];
+  unlockAchievement: (id: string) => void;
 }
 
-export const useWorldStore = create<WorldState>((set) => ({
+export const useWorldStore = create<WorldState>((set, get) => ({
+  displayMode: "experience",
+  setDisplayMode: (displayMode) => {
+    proceduralAudio.tick();
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("vaidik_display_mode", displayMode);
+      } catch {}
+    }
+    set({ displayMode });
+  },
+  toggleDisplayMode: () => {
+    const current = get().displayMode;
+    const next = current === "experience" ? "fast" : "experience";
+    proceduralAudio.tick();
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("vaidik_display_mode", next);
+      } catch {}
+    }
+    set({ displayMode: next });
+  },
+
+  isPlugPulled: false,
+  plugPullCount: 0,
+  pullPlug: () => {
+    proceduralAudio.shockwave();
+    get().unlockAchievement("pull_the_plug");
+    set((state) => ({ isPlugPulled: true, plugPullCount: state.plugPullCount + 1 }));
+  },
+  restorePlug: () => {
+    proceduralAudio.tick();
+    set({ isPlugPulled: false });
+  },
+  togglePlug: () => {
+    const current = get().isPlugPulled;
+    if (!current) {
+      get().pullPlug();
+    } else {
+      get().restorePlug();
+    }
+  },
+
   scrollProgress: 0,
   setScrollProgress: (scrollProgress) => set({ scrollProgress }),
 
@@ -98,7 +159,7 @@ export const useWorldStore = create<WorldState>((set) => ({
   qualityTier: qualityGovernor.getProfile().tier,
   setQualityTier: (qualityTier) => set({ qualityTier }),
 
-  isBooted: false,
+  isBooted: true,
   setBooted: (isBooted) => set({ isBooted }),
 
   soundEnabled: !proceduralAudio.isAudioMuted(),
@@ -114,8 +175,13 @@ export const useWorldStore = create<WorldState>((set) => ({
   hudVisible: true,
   toggleHUD: () => set((state) => ({ hudVisible: !state.hudVisible })),
 
-  isOffline: typeof navigator !== "undefined" ? !navigator.onLine : false,
-  setIsOffline: (isOffline) => set({ isOffline }),
+  isOffline: false,
+  setIsOffline: (isOffline) => {
+    if (isOffline) {
+      get().unlockAchievement("true_offline");
+    }
+    set({ isOffline });
+  },
 
   terminalOpen: false,
   setTerminalOpen: (terminalOpen) => set({ terminalOpen }),
@@ -155,4 +221,13 @@ export const useWorldStore = create<WorldState>((set) => ({
 
   glitchMode: false,
   setGlitchMode: (glitchMode) => set({ glitchMode }),
+
+  achievements: [],
+  unlockAchievement: (id) => {
+    const list = get().achievements;
+    if (!list.includes(id)) {
+      proceduralAudio.tick();
+      set({ achievements: [...list, id] });
+    }
+  },
 }));
