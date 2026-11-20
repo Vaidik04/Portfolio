@@ -149,6 +149,43 @@ class ProceduralAudioEngine {
     } catch {}
   }
 
+  public breakerThud() {
+    if (this.isMuted || !this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      
+      // 1. Heavy physical clank (sub-bass transient)
+      const subOsc = this.ctx.createOscillator();
+      const subGain = this.ctx.createGain();
+      subOsc.type = "sine";
+      subOsc.frequency.setValueAtTime(120, now);
+      subOsc.frequency.exponentialRampToValueAtTime(24, now + 0.35);
+
+      subGain.gain.setValueAtTime(0.3, now);
+      subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+
+      subOsc.connect(subGain);
+      subGain.connect(this.ctx.destination);
+      subOsc.start(now);
+      subOsc.stop(now + 0.4);
+
+      // 2. Electrical arc click & mechanical metal slap
+      const clickOsc = this.ctx.createOscillator();
+      const clickGain = this.ctx.createGain();
+      clickOsc.type = "triangle";
+      clickOsc.frequency.setValueAtTime(2200, now);
+      clickOsc.frequency.exponentialRampToValueAtTime(150, now + 0.08);
+
+      clickGain.gain.setValueAtTime(0.2, now);
+      clickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+
+      clickOsc.connect(clickGain);
+      clickGain.connect(this.ctx.destination);
+      clickOsc.start(now);
+      clickOsc.stop(now + 0.1);
+    } catch {}
+  }
+
   public whoosh(velocity = 1) {
     this.warpWhoosh(velocity);
   }

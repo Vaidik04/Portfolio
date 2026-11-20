@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useWorldStore } from "@/store/useWorldStore";
 import { proceduralAudio } from "@/lib/proceduralAudio";
 import { PROJECTS } from "@/data/projects";
@@ -16,11 +17,14 @@ import {
   X,
   ShieldCheck,
   GitBranch,
+  FlaskConical,
+  BookOpen,
 } from "lucide-react";
 
 export const CommandPalette: React.FC = () => {
-  const { paletteOpen, setPaletteOpen, setScrollProgress } = useWorldStore();
+  const { paletteOpen, setPaletteOpen } = useWorldStore();
   const [query, setQuery] = useState("");
+  const router = useRouter();
 
   // Toggle on Ctrl+K / Cmd+K
   useEffect(() => {
@@ -56,11 +60,10 @@ export const CommandPalette: React.FC = () => {
       c.skillsLearned.some((s) => s.toLowerCase().includes(q))
   );
 
-  const navigateToSection = (progress: number, id: string) => {
+  const navigateToPage = (path: string) => {
     proceduralAudio.tick();
     setPaletteOpen(false);
-    setScrollProgress(progress);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    router.push(path);
   };
 
   return (
@@ -74,7 +77,7 @@ export const CommandPalette: React.FC = () => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search projects, architecture layers, IIT certs..."
+            placeholder="Search projects, architecture layers, IIT certs, pages..."
             className="flex-1 bg-transparent text-sm text-typography-primary focus:outline-none placeholder:text-typography-muted font-sans"
           />
           <button
@@ -90,39 +93,71 @@ export const CommandPalette: React.FC = () => {
           {/* Quick Jump Navigation */}
           <div>
             <span className="text-[10px] text-typography-muted uppercase px-2 tracking-wider">
-              Scenes & Timeline Navigation
+              Explore Pages & Sections
             </span>
-            <div className="grid grid-cols-2 gap-2 mt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
               <button
-                onClick={() => navigateToSection(0.12, "hero")}
+                onClick={() => navigateToPage("/")}
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <Sparkles className="w-3.5 h-3.5 text-accent-android" />
-                <span>01 // The Trinity Hero (3 Devices)</span>
+                <span>01 // Home & Overview</span>
               </button>
 
               <button
-                onClick={() => navigateToSection(0.32, "architecture")}
-                className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
-              >
-                <GitBranch className="w-3.5 h-3.5 text-accent-violet" />
-                <span>02 // Exploded 5-Layer Stack</span>
-              </button>
-
-              <button
-                onClick={() => navigateToSection(0.50, "flight-deck")}
+                onClick={() => navigateToPage("/projects")}
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <Layers className="w-3.5 h-3.5 text-accent-cyan" />
-                <span>03 // Flagship Flight Deck</span>
+                <span>02 // Work & Applications</span>
               </button>
 
               <button
-                onClick={() => navigateToSection(0.82, "proof")}
+                onClick={() => navigateToPage("/architecture")}
+                className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
+              >
+                <GitBranch className="w-3.5 h-3.5 text-accent-violet" />
+                <span>03 // Sovereign Architecture</span>
+              </button>
+
+              <button
+                onClick={() => navigateToPage("/lab")}
+                className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
+              >
+                <FlaskConical className="w-3.5 h-3.5 text-accent-cyan" />
+                <span>04 // R&D Lab Archive</span>
+              </button>
+
+              <button
+                onClick={() => navigateToPage("/proof")}
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <Cpu className="w-3.5 h-3.5 text-[#F5C26B]" />
-                <span>05 // Live Proof IDE & Math</span>
+                <span>05 // Live Proof & Benchmarks</span>
+              </button>
+
+              <button
+                onClick={() => navigateToPage("/about")}
+                className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
+              >
+                <BookOpen className="w-3.5 h-3.5 text-typography-secondary" />
+                <span>06 // Ethos & Founder Story</span>
+              </button>
+
+              <button
+                onClick={() => navigateToPage("/credentials")}
+                className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
+              >
+                <Award className="w-3.5 h-3.5 text-accent-cyan" />
+                <span>07 // Verified IIT Credentials</span>
+              </button>
+
+              <button
+                onClick={() => navigateToPage("/contact")}
+                className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
+              >
+                <Mail className="w-3.5 h-3.5 text-accent-android" />
+                <span>08 // Get in Touch & Beacon</span>
               </button>
             </div>
           </div>
@@ -139,7 +174,7 @@ export const CommandPalette: React.FC = () => {
                     key={p.id}
                     onClick={() => {
                       setPaletteOpen(false);
-                      window.location.href = `/projects/${p.id}`;
+                      router.push(`/projects/${p.id}`);
                     }}
                     className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-white/5 text-left group border border-transparent hover:border-white/10"
                   >
@@ -175,7 +210,7 @@ export const CommandPalette: React.FC = () => {
                 {filteredCerts.slice(0, 3).map((c) => (
                   <button
                     key={c.id}
-                    onClick={() => navigateToSection(0.95, "credentials")}
+                    onClick={() => navigateToPage("/credentials")}
                     className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-white/5 text-left group border border-transparent hover:border-white/10"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">

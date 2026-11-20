@@ -166,10 +166,10 @@ export const DeveloperTerminal: React.FC = () => {
       case "sudo hire":
         newHistory.push({
           type: "success",
-          text: "Priority transmission dispatched to vaidikgandhi@gmail.com. Initializing mail protocol...",
+          text: "Priority transmission dispatched to vaidik.gandhi1@gmail.com. Initializing mail protocol...",
         });
         window.location.href =
-          "mailto:vaidikgandhi@gmail.com?subject=Priority%20Engineering%20Engagement&body=Hi%20Vaidik,%20I%20reviewed%20your%20sovereign%20portfolio...";
+          "mailto:vaidik.gandhi1@gmail.com?subject=Priority%20Engineering%20Engagement&body=Hi%20Vaidik,%20I%20reviewed%20your%20sovereign%20portfolio...";
         break;
       case "debug":
         toggleDebug();

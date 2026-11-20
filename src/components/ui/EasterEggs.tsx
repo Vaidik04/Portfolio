@@ -22,7 +22,7 @@ export const EasterEggs: React.FC = () => {
  Independent Android Developer · Founder @ VaidikTech · Bhopal, India
  Verified Play Store Apps: Girvi | JewelBill | AdvoKosh | SwarmOS
  Interested in building dependable products together? 
- Email: vaidikgandhi@gmail.com | GitHub: github.com/Vaidik04
+ Email: vaidik.gandhi1@gmail.com | GitHub: github.com/Vaidik04
 `,
       "color: #3DDC84; font-family: monospace; font-size: 11px; font-weight: bold;"
     );
