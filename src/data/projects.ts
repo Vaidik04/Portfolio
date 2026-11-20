@@ -46,12 +46,19 @@ export const PROJECTS: Project[] = [
     badge: "Published on Google Play",
     badgeType: "playstore",
     platform: "Native Android · Kotlin 2.0+ & Room 2.6+",
-    icon: "/assets/girvi_icon.png",
-    heroImage: "/assets/girvi_icon.png",
+    icon: "/assets/apps/girvi/logo.png",
+    heroImage: "/assets/apps/girvi/01_dashboard.png",
     screenshots: [
-      "/assets/girvi_icon.png",
-      "/assets/jewelbill_screen.png",
-      "/assets/advokosh_screen1.png"
+      "/assets/apps/girvi/01_dashboard.png",
+      "/assets/apps/girvi/02_calculator_simple.png",
+      "/assets/apps/girvi/03_calculator_compound.png",
+      "/assets/apps/girvi/04_add_transaction.png",
+      "/assets/apps/girvi/05_transactions_list.png",
+      "/assets/apps/girvi/06_reports.png",
+      "/assets/apps/girvi/07_nayi_bahi.png",
+      "/assets/apps/girvi/08_profile_settings.png",
+      "/assets/apps/girvi/09_settings.png",
+      "/assets/apps/girvi/10_about_vaidiktech.png"
     ],
     accentColor: "#3DDC84",
     problem:
@@ -130,11 +137,20 @@ class GirviInterestEngine {
     badge: "Published on Google Play",
     badgeType: "playstore",
     platform: "Native Android · Java 21 & Room SQLite 2.6+",
-    icon: "/assets/jewelbill_icon.png",
-    heroImage: "/assets/jewelbill_screen.png",
+    icon: "/assets/apps/jewelbill/logo.png",
+    heroImage: "/assets/apps/jewelbill/01_dashboard.png",
     screenshots: [
-      "/assets/jewelbill_screen.png",
-      "/assets/jewelbill_icon.png"
+      "/assets/apps/jewelbill/01_dashboard.png",
+      "/assets/apps/jewelbill/02_create_invoice.png",
+      "/assets/apps/jewelbill/03_all_invoices.png",
+      "/assets/apps/jewelbill/04_view_invoice.png",
+      "/assets/apps/jewelbill/05_daybook.png",
+      "/assets/apps/jewelbill/06_reports_analytics.png",
+      "/assets/apps/jewelbill/07_inventory.png",
+      "/assets/apps/jewelbill/08_karigar_workshop.png",
+      "/assets/apps/jewelbill/09_refinery_melting.png",
+      "/assets/apps/jewelbill/10_repair_orders.png",
+      "/assets/apps/jewelbill/14_invoice_celebration.png"
     ],
     accentColor: "#22D3EE",
     problem:
@@ -212,13 +228,20 @@ public class EscPosThermalPrinter {
     badge: "Published on Google Play",
     badgeType: "playstore",
     platform: "Native Android · Jetpack Compose M3 & SQLCipher 4.5+",
-    icon: "/assets/advokosh_logo.png",
-    heroImage: "/assets/advokosh_banner.png",
+    icon: "/assets/apps/advokosh/logo.png",
+    heroImage: "/assets/apps/advokosh/01_dashboard.png",
     screenshots: [
-      "/assets/advokosh_banner.png",
-      "/assets/advokosh_logo.png",
-      "/assets/advokosh_screen1.png",
-      "/assets/advokosh_screen2.png"
+      "/assets/apps/advokosh/01_dashboard.png",
+      "/assets/apps/advokosh/02_cases_screen.png",
+      "/assets/apps/advokosh/03_new_case_form.png",
+      "/assets/apps/advokosh/04_clients_screen.png",
+      "/assets/apps/advokosh/05_prospective_intake.png",
+      "/assets/apps/advokosh/06_calendar_court_board.png",
+      "/assets/apps/advokosh/07_tools_more_screen.png",
+      "/assets/apps/advokosh/08_bns_converter.png",
+      "/assets/apps/advokosh/09_limitation_calculator.png",
+      "/assets/apps/advokosh/10_legal_notices.png",
+      "/assets/apps/advokosh/11_billing_ledger.png"
     ],
     accentColor: "#7C5CFF",
     problem:

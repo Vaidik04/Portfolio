@@ -15,6 +15,7 @@ import {
   ArrowRight,
   Code2,
   Cpu,
+  Smartphone,
 } from "lucide-react";
 
 export function generateStaticParams() {
@@ -35,9 +36,9 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
     <div className="min-h-screen bg-bg text-text flex flex-col selection:bg-accent selection:text-accent-on">
       <Navbar />
 
-      <main className="flex-1 max-w-5xl mx-auto px-6 pt-32 sm:pt-40 pb-24 w-full">
+      <main className="flex-1 max-w-5xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-14 w-full">
         {/* Navigation Breadcrumb */}
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-border">
+        <div className="flex items-center justify-between mb-6 pb-3 border-b border-border">
           <Link
             href="/#flight-deck"
             className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent transition-colors"
@@ -54,7 +55,7 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
         </div>
 
         {/* Project Hero Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-12 border-b border-border">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-border">
           <div className="flex items-start sm:items-center gap-5">
             <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-surface-2 border border-border p-2.5 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xl">
               <Image
@@ -115,13 +116,13 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
         </div>
 
         {/* Fictional Sample Data Note */}
-        <div className="my-6 p-3.5 rounded-xl bg-surface-1 border border-border text-xs font-mono text-text-muted flex items-center gap-2">
+        <div className="my-4 p-3 rounded-xl bg-surface-1 border border-border text-xs font-mono text-text-muted flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-accent" />
           <span>Privacy & Data Sovereignty Note: All customer names, ledger entries, and amounts shown in these case studies are strictly fictional sample data.</span>
         </div>
 
         {/* Problem Statement & Hard Constraint */}
-        <section className="py-12 border-b border-border">
+        <section className="py-8 border-b border-border">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6 rounded-2xl bg-surface-1 border border-border flex flex-col gap-3">
               <span className="text-xs font-mono uppercase tracking-wider text-text-muted">
@@ -143,13 +144,55 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
           </div>
         </section>
 
+        {/* Live Production Screenshots Gallery */}
+        {project.screenshots && project.screenshots.length > 0 && (
+          <section className="py-8 border-b border-border">
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-accent mb-1.5">
+                  <Smartphone className="w-4 h-4" />
+                  <span>Verified Production UI</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-heading font-bold text-text">
+                  Native Android Release Screens ({project.screenshots.length})
+                </h2>
+              </div>
+              <span className="text-xs font-mono text-text-muted hidden sm:inline-block">
+                Captured from Play Store Release Builds
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+              {project.screenshots.map((screen, idx) => (
+                <div
+                  key={idx}
+                  className="group relative aspect-[9/19] rounded-2xl overflow-hidden border border-border bg-[#07080D] shadow-lg hover:border-accent/50 hover:shadow-2xl transition-all duration-300"
+                >
+                  <Image
+                    src={screen}
+                    alt={`${project.name} Screen ${idx + 1}`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                    <span className="text-[10px] font-mono text-white/90 truncate capitalize">
+                      {screen.split("/").pop()?.replace(/_/g, " ").replace(".png", "")}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Key Technical Highlights */}
-        <section className="py-12 border-b border-border">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-accent mb-4">
+        <section className="py-8 border-b border-border">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-accent mb-3">
             <Layers className="w-4 h-4" />
             <span>Architecture Decisions</span>
           </div>
-          <h2 className="text-2xl font-heading font-bold text-text mb-6">
+          <h2 className="text-xl sm:text-2xl font-heading font-bold text-text mb-5">
             Key Capabilities & Hardening
           </h2>
 
@@ -157,7 +200,7 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
             {project.highlights.map((h, i) => (
               <div
                 key={i}
-                className="flex items-start gap-3 text-xs sm:text-sm text-text-muted bg-surface-1 p-4 rounded-xl border border-border"
+                className="flex items-start gap-3 text-xs sm:text-sm text-text-muted bg-surface-1 p-3.5 sm:p-4 rounded-xl border border-border"
               >
                 <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                 <span>{h}</span>
@@ -168,12 +211,12 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
 
         {/* Verified Code Snippet (if available) */}
         {project.codeSnippet && (
-          <section className="py-12 border-b border-border">
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-text-muted mb-4">
+          <section className="py-8 border-b border-border">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-text-muted mb-3">
               <Code2 className="w-4 h-4 text-accent" />
               <span>Verified Source Architecture</span>
             </div>
-            <h2 className="text-2xl font-heading font-bold text-text mb-6">
+            <h2 className="text-xl sm:text-2xl font-heading font-bold text-text mb-5">
               Production Implementation
             </h2>
 
@@ -186,7 +229,7 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
                   {project.codeSnippet.language}
                 </span>
               </div>
-              <pre className="p-6 text-xs sm:text-sm font-mono text-text overflow-x-auto leading-relaxed">
+              <pre className="p-5 sm:p-6 text-xs sm:text-sm font-mono text-text overflow-x-auto leading-relaxed">
                 <code>{project.codeSnippet.code}</code>
               </pre>
             </div>
@@ -194,12 +237,12 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
         )}
 
         {/* Tech Stack */}
-        <section className="py-12 border-b border-border">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-text-muted mb-4">
+        <section className="py-8 border-b border-border">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-text-muted mb-3">
             <Cpu className="w-4 h-4" />
             <span>Technologies Used</span>
           </div>
-          <h2 className="text-2xl font-heading font-bold text-text mb-6">
+          <h2 className="text-xl sm:text-2xl font-heading font-bold text-text mb-5">
             Stack & Dependencies
           </h2>
 
@@ -207,7 +250,7 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
             {project.techStack.map((tech, i) => (
               <span
                 key={i}
-                className="text-xs font-mono px-3.5 py-1.5 rounded-lg bg-surface-2 text-text-muted border border-border"
+                className="text-xs font-mono px-3 py-1 rounded-lg bg-surface-2 text-text-muted border border-border"
               >
                 {tech}
               </span>
@@ -216,7 +259,7 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
         </section>
 
         {/* Previous / Next Navigation */}
-        <div className="py-12 flex items-center justify-between gap-4">
+        <div className="py-8 flex items-center justify-between gap-4">
           <Link
             href={`/projects/${prevProject.id}`}
             className="flex items-center gap-3 p-4 rounded-xl bg-surface-1 border border-border hover:border-border-hover transition-all text-left max-w-[45%]"
