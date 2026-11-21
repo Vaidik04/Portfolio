@@ -71,8 +71,8 @@ export const HeroSection: React.FC = () => {
       id="hero"
       className="relative min-h-[85vh] flex flex-col justify-between pt-20 sm:pt-28 pb-8 sm:pb-10 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-none"
     >
-      {/* Top Headline & Lead Copy Column (Protected with subtle dark scrim on mobile for razor-sharp legibility, transparent on desktop) */}
-      <div className="max-w-lg lg:max-w-xl flex flex-col gap-4 sm:gap-5 pointer-events-auto p-4 sm:p-0 rounded-3xl bg-[#05060A]/85 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-white/10 sm:border-transparent shadow-2xl sm:shadow-none">
+      {/* Top Headline & Lead Copy Column */}
+      <div className="max-w-lg lg:max-w-xl flex flex-col gap-4 sm:gap-5 pointer-events-auto">
         {/* Crisp Non-Duplicated Sovereign Status Kicker */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}

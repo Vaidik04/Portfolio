@@ -54,65 +54,100 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
           </div>
         </div>
 
-        {/* Project Hero Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-border">
-          <div className="flex items-start sm:items-center gap-5">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-surface-2 border border-border p-2.5 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xl">
-              <Image
-                src={project.icon}
-                alt={project.name}
-                width={80}
-                height={80}
-                className="w-full h-full object-contain rounded-xl"
-              />
+        {/* Project Hero Header with Live Featured Screen Mockup */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-8 border-b border-border">
+          <div className="flex-1 max-w-2xl">
+            <div className="flex items-center gap-2 mb-3 flex-wrap">
+              <span className="text-[11px] font-mono px-3 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/30 font-semibold uppercase">
+                {project.badge}
+              </span>
+              <span className="text-xs font-mono text-text-muted">
+                {project.platform}
+              </span>
+              <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-surface-1 text-text-muted border border-border flex items-center gap-1.5">
+                <Calendar className="w-3 h-3 text-accent" />
+                <span>{project.timeline}</span>
+              </span>
             </div>
-            <div>
-              <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <span className="text-[11px] font-mono px-3 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/30 font-semibold uppercase">
-                  {project.badge}
-                </span>
-                <span className="text-xs font-mono text-text-muted">
-                  {project.platform}
-                </span>
-                <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-surface-1 text-text-muted border border-border flex items-center gap-1.5">
-                  <Calendar className="w-3 h-3 text-accent" />
-                  <span>{project.timeline}</span>
-                </span>
+
+            <div className="flex items-center gap-4 mb-3">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-surface-2 border border-border p-2 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-xl">
+                <Image
+                  src={project.icon}
+                  alt={project.name}
+                  width={80}
+                  height={80}
+                  className="w-full h-full object-contain rounded-xl"
+                />
               </div>
               <h1 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-text">
                 {project.name}
               </h1>
-              <p className="text-sm sm:text-base text-text-muted mt-1 font-sans">
-                {project.tagline}
-              </p>
+            </div>
+
+            <p className="text-sm sm:text-base text-text-muted mt-2 font-sans leading-relaxed mb-6">
+              {project.tagline}
+            </p>
+
+            {/* Action CTAs */}
+            <div className="flex flex-wrap items-center gap-3">
+              {project.links.playStore && (
+                <a
+                  href={project.links.playStore}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent hover:bg-accent-hover text-accent-on text-xs font-sans font-semibold tracking-wide transition-all shadow-[0_2px_14px_rgba(212,162,76,0.25)] hover:scale-[1.02]"
+                >
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                  <span>View on Google Play</span>
+                </a>
+              )}
+              {project.links.github && (
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-1 border border-border hover:border-border-hover text-text-muted hover:text-text text-xs font-mono transition-colors"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>Source Code</span>
+                </a>
+              )}
             </div>
           </div>
 
-          {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-3">
-            {project.links.playStore && (
-              <a
-                href={project.links.playStore}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent hover:bg-accent-hover text-accent-on text-xs font-sans font-semibold tracking-wide transition-all shadow-[0_2px_14px_rgba(212,162,76,0.25)] hover:scale-[1.02]"
+          {/* Featured Production Phone Screen Spotlight */}
+          {(project.heroImage || (project.screenshots && project.screenshots.length > 0)) && (
+            <div className="flex-shrink-0 w-[240px] sm:w-[260px] mx-auto lg:mx-0">
+              <div
+                className="relative rounded-[2.2rem] p-2.5 border shadow-2xl bg-[#090B12]"
+                style={{
+                  borderColor: `${project.accentColor || "#7C5CFF"}50`,
+                  boxShadow: `0 0 40px ${project.accentColor || "#7C5CFF"}25`,
+                }}
               >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                <span>View on Google Play</span>
-              </a>
-            )}
-            {project.links.github && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-surface-1 border border-border hover:border-border-hover text-text-muted hover:text-text text-xs font-mono transition-colors"
-              >
-                <Github className="w-3.5 h-3.5" />
-                <span>Source Code</span>
-              </a>
-            )}
-          </div>
+                {/* Punch-hole camera dot */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-black z-20" />
+                {/* Screen frame */}
+                <div className="relative aspect-[9/19.5] rounded-[1.8rem] overflow-hidden bg-black border border-white/10">
+                  <Image
+                    src={project.heroImage || project.screenshots?.[0] || project.icon}
+                    alt={`${project.name} Active Screen`}
+                    fill
+                    priority
+                    sizes="260px"
+                    className="object-cover object-top"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 py-2 px-3 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-center justify-between text-[10px] font-mono">
+                    <span className="text-white/80 font-semibold">Native Release</span>
+                    <span className="font-bold" style={{ color: project.accentColor || "#7C5CFF" }}>
+                      Verified UI
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Fictional Sample Data Note */}

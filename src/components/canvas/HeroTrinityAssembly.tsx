@@ -228,20 +228,27 @@ export const HeroTrinityAssembly: React.FC = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const loader = new THREE.TextureLoader();
-    const loadTex = (url: string) => {
-      const tex = loader.load(url);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.generateMipmaps = true;
-      tex.minFilter = THREE.LinearMipmapLinearFilter;
-      tex.magFilter = THREE.LinearFilter;
-      return tex;
+    const loadTex = (url: string, key: "girvi" | "jewelbill" | "advokosh") => {
+      loader.load(
+        url,
+        (loadedTex) => {
+          loadedTex.colorSpace = THREE.SRGBColorSpace;
+          loadedTex.generateMipmaps = true;
+          loadedTex.minFilter = THREE.LinearMipmapLinearFilter;
+          loadedTex.magFilter = THREE.LinearFilter;
+          loadedTex.needsUpdate = true;
+          setRealTextures((prev) => ({ ...prev, [key]: loadedTex }));
+        },
+        undefined,
+        (err) => {
+          console.warn("Texture fallback to procedural canvas for", key, err);
+        }
+      );
     };
 
-    setRealTextures({
-      girvi: loadTex("/assets/apps/girvi/01_dashboard.png?v=authentic_2"),
-      jewelbill: loadTex("/assets/apps/jewelbill/01_dashboard.png?v=authentic_2"),
-      advokosh: loadTex("/assets/apps/advokosh/01_dashboard.png?v=authentic_2"),
-    });
+    loadTex("/assets/apps/girvi/01_dashboard.png?v=authentic_3", "girvi");
+    loadTex("/assets/apps/jewelbill/01_dashboard.png?v=authentic_3", "jewelbill");
+    loadTex("/assets/apps/advokosh/01_dashboard.png?v=authentic_3", "advokosh");
   }, []);
 
   // 5 Exploded Glass Materials
@@ -267,8 +274,8 @@ export const HeroTrinityAssembly: React.FC = () => {
   const packetCount = 18;
   const packetDummy = useMemo(() => new THREE.Object3D(), []);
 
-  // Responsive device coordinates
-  const isMobile = viewport.width < 7.5;
+  // Responsive device coordinates (Properly distinguish between narrow mobile screens and laptops)
+  const isNarrowViewport = viewport.width < 5.0;
 
   useFrame((state, delta) => {
     if (!trinityGroupRef.current) return;
@@ -295,56 +302,50 @@ export const HeroTrinityAssembly: React.FC = () => {
       explodedStackRef.current.visible = isExploded;
     }
 
-    // Dynamic right-hand anchor position (perfectly balanced away from left copy on desktop, lowered on mobile)
-    const deskX = isMobile ? 0 : Math.min(2.35, Math.max(1.85, viewport.width * 0.23));
-    let targetX = isMobile ? 0 : deskX;
-    let targetY = isMobile ? -0.42 : 0;
+    // Dynamic right-hand anchor position (always clear of typography and buttons)
+    const deskX = isNarrowViewport ? 0 : Math.min(2.75, Math.max(1.75, viewport.width * 0.22));
+    let targetX = deskX;
+    let targetY = isNarrowViewport ? -0.85 : 0.08;
     let targetZ = 0;
     let targetRotX = 0;
     let targetRotY = 0;
     let targetRotZ = 0;
-    let targetScale = isMobile ? 0.44 : 0.74;
+    let targetScale = isNarrowViewport ? 0.38 : Math.min(0.82, Math.max(0.68, viewport.width * 0.09));
 
     if (manualExploded) {
       // Manual Exploded 5-Layer Stack
-      targetX = isMobile ? 0 : deskX - 0.5;
-      targetY = isMobile ? -0.52 : Math.sin(state.clock.elapsedTime * 1.1) * 0.04;
+      targetX = isNarrowViewport ? 0 : deskX - 0.4;
+      targetY = isNarrowViewport ? -0.52 : Math.sin(state.clock.elapsedTime * 1.1) * 0.04;
       targetZ = 0.2;
       targetRotX = -0.16;
-      targetRotY = isMobile ? 0.28 : 0.58;
+      targetRotY = isNarrowViewport ? 0.28 : 0.52;
       targetRotZ = -0.06;
 
       if (focusedLayer !== null) {
-        targetRotY = isMobile ? 0.20 : 0.42;
+        targetRotY = isNarrowViewport ? 0.20 : 0.42;
       }
-      targetScale = isMobile ? 0.32 : 0.72;
+      targetScale = isNarrowViewport ? 0.32 : 0.72;
     } else if (p < 0.12) {
-      // Scene 1: The Trinity Hero (Positioned gracefully lower on mobile to ensure zero text collision)
-      targetX = isMobile ? 0 : deskX;
-      targetY = isMobile
-        ? -0.78 + Math.sin(state.clock.elapsedTime * 1.3) * 0.02
-        : 0.05 + Math.sin(state.clock.elapsedTime * 1.3) * 0.05;
+      // Scene 1: The Trinity Hero (Positioned cleanly on the right half, elevated and clear of any buttons)
+      targetX = deskX;
+      targetY = isNarrowViewport
+        ? -0.85 + Math.sin(state.clock.elapsedTime * 1.3) * 0.02
+        : 0.08 + Math.sin(state.clock.elapsedTime * 1.3) * 0.04;
       targetZ = 0;
 
-      // Cursor Parallax Spring Physics (Subtle & stable on touch devices, dynamic on desktop mouse)
+      // Cursor Parallax Spring Physics
       const pointer = state.pointer;
-      targetRotX = isMobile ? 0.04 : -pointer.y * 0.20;
-      targetRotY = isMobile
-        ? activeAppId === "girvi"
-          ? 0
-          : activeAppId === "jewelbill"
-          ? 0.22
-          : -0.22
-        : pointer.x * 0.25;
-      targetRotZ = isMobile ? 0 : -pointer.x * 0.03;
-      targetScale = isMobile ? 0.36 : 0.76;
+      targetRotX = isNarrowViewport ? 0.02 : -pointer.y * 0.15;
+      targetRotY = isNarrowViewport ? 0 : pointer.x * 0.18;
+      targetRotZ = isNarrowViewport ? 0 : -pointer.x * 0.02;
+      targetScale = isNarrowViewport ? 0.38 : Math.min(0.82, Math.max(0.68, viewport.width * 0.09));
     } else {
       // Smoothly sink down into reflective floor as user scrolls into Pull the Plug & Flagships
       const fade = THREE.MathUtils.clamp((p - 0.12) / 0.05, 0, 1);
-      targetX = isMobile ? 0 : deskX;
-      targetY = THREE.MathUtils.lerp(isMobile ? -0.78 : 0.05, -5.0, fade);
+      targetX = deskX;
+      targetY = THREE.MathUtils.lerp(isNarrowViewport ? -0.85 : 0.08, -5.0, fade);
       targetZ = THREE.MathUtils.lerp(0, -2.0, fade);
-      targetScale = THREE.MathUtils.lerp(isMobile ? 0.36 : 0.76, 0.2, fade);
+      targetScale = THREE.MathUtils.lerp(isNarrowViewport ? 0.38 : 0.76, 0.2, fade);
     }
 
     // Spring damping
@@ -404,8 +405,8 @@ export const HeroTrinityAssembly: React.FC = () => {
 
   // Trinity Depth Arc Base Positions:
   // Perfectly proportioned spacing for widescreen and mobile viewports
-  const spreadX = isMobile ? 0.62 : 1.45;
-  const spreadZ = isMobile ? -0.38 : -0.55;
+  const spreadX = isNarrowViewport ? 0.60 : 1.40;
+  const spreadZ = isNarrowViewport ? -0.35 : -0.52;
 
   // Dynamic slot assignment based on activeAppId so active app always takes center stage
   const deviceConfigs = useMemo(() => {
