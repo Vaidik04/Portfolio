@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Syne, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
+import { Newsreader, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ServiceWorkerSentinel } from "@/components/offline/ServiceWorkerSentinel";
 import "./globals.css";
 
-const syne = Syne({
+const newsreader = Newsreader({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-serif",
   display: "swap",
-  weight: ["500", "600", "700", "800"],
+  adjustFontFallback: false,
 });
 
 const inter = Inter({
@@ -32,22 +32,29 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vaidiktech.app"),
-  title: "Vaidik Gandhi — Independent Android Developer & Founder @ VaidikTech",
+  title: "Vaidik Gandhi — Systems Architect, Applied AI & Founder @ VaidikTech",
   description:
-    "Engineering native, offline-first, encrypted Android software for India's professional trades: Girvi (गिरवी), JewelBill (ज्वेलबिल), and AdvoKosh (एडवोकोश). Kotlin, Jetpack Compose, Room SQLite, SQLCipher.",
+    "Engineering sovereign systems, multi-agent AI architectures, quantum-inspired optimization, and air-gapped commercial platforms. Creator of SwarmOS, QRoute, Girvi, JewelBill, and AdvoKosh.",
   keywords: [
     "Vaidik Gandhi",
+    "Systems Architect",
+    "Applied AI Engineer",
+    "Multi-Agent Systems",
+    "SwarmOS",
+    "QRoute",
+    "GridCare",
+    "Quantum Optimization",
+    "VaidikTech",
+    "Sovereign Systems",
+    "Air-Gapped Computing",
     "Android Developer",
     "Kotlin",
     "Jetpack Compose",
     "Girvi",
     "AdvoKosh",
     "JewelBill",
-    "VaidikTech",
-    "Offline-First",
-    "Room SQLite",
-    "SQLCipher",
-    "India",
+    "Bhopal India",
+    "LNCT Bhopal",
   ],
   authors: [{ name: "Vaidik Gandhi" }],
   icons: {
@@ -55,9 +62,9 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   openGraph: {
-    title: "Vaidik Gandhi — Independent Android Developer & Founder @ VaidikTech",
+    title: "Vaidik Gandhi — Systems Architect, Applied AI & Founder @ VaidikTech",
     description:
-      "Engineering native, offline-first mobile products with Kotlin, Jetpack Compose, Room, and hardware-backed SQLCipher encryption.",
+      "Engineering sovereign systems, multi-agent AI architectures, quantum optimization, and air-gapped commercial platforms with mathematical rigor.",
     url: "https://vaidiktech.app",
     siteName: "Vaidik Gandhi Portfolio",
     locale: "en_IN",
@@ -65,9 +72,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vaidik Gandhi — Independent Android Developer · Founder @ VaidikTech",
+    title: "Vaidik Gandhi — Systems Architect, Applied AI & Founder @ VaidikTech",
     description:
-      "Engineering native, offline-first mobile products with Kotlin, Jetpack Compose, Room, and hardware-backed SQLCipher encryption.",
+      "Engineering sovereign systems, multi-agent AI architectures, quantum optimization, and air-gapped commercial platforms with mathematical rigor.",
   },
 };
 
@@ -78,7 +85,7 @@ const jsonLd = {
       "@type": "Person",
       "@id": "https://vaidiktech.app/#person",
       "name": "Vaidik Gandhi",
-      "jobTitle": "Independent Android Developer & Founder",
+      "jobTitle": "Systems Architect, Applied AI Engineer & Founder",
       "worksFor": {
         "@type": "Organization",
         "name": "VaidikTech",
@@ -94,6 +101,14 @@ const jsonLd = {
         "@type": "CollegeOrUniversity",
         "name": "Lakshmi Narain College of Technology (LNCT), Bhopal",
       },
+      "knowsAbout": [
+        "Distributed Systems Architecture",
+        "Multi-Agent AI & Swarm Intelligence",
+        "Quantum-Inspired Combinatorial Optimization",
+        "Air-Gapped Sovereign Systems",
+        "Native Android Development",
+        "Cryptographic Hardware Security",
+      ],
     },
     {
       "@type": "SoftwareApplication",
@@ -136,7 +151,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansDevanagari.variable} scroll-smooth dark`}
+      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansDevanagari.variable} scroll-smooth dark`}
     >
       <head>
         <script

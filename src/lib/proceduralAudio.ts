@@ -189,25 +189,6 @@ class ProceduralAudioEngine {
   public whoosh(velocity = 1) {
     this.warpWhoosh(velocity);
   }
-
-  // Subtle melodic success chime
-  public success() {
-    if (this.isMuted || !this.ctx) return;
-    try {
-      const now = this.ctx.currentTime;
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(587.33, now);
-      osc.frequency.setValueAtTime(880.0, now + 0.08);
-      gain.gain.setValueAtTime(0.08, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.25);
-    } catch {}
-  }
 }
 
 export const proceduralAudio = new ProceduralAudioEngine();

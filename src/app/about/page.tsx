@@ -19,28 +19,28 @@ import {
 export default function AboutPage() {
   const pillars = [
     {
-      title: "Offline-First Data Sovereignty",
-      desc: "Applications engineered with Room and SQLite that require zero permanent network connection to operate, keeping sensitive business ledgers 100% local and private.",
+      title: "Offline-First Sovereign Systems",
+      desc: "Air-gapped platforms and P2P protocols engineered to operate reliably with zero network connectivity, keeping mission-critical data sovereign and immune to cloud outages.",
       icon: ShieldCheck,
       accent: "#3DDC84",
     },
     {
-      title: "Problem-Oriented Engineering",
-      desc: "Prioritizing the actual workflows of traditional shopkeepers, lawyers, and field supervisors over unnecessary cloud complexity or fragile dependencies.",
+      title: "Distributed Multi-Agent & Swarm AI",
+      desc: "Autonomous agent architectures, decentralized state consensus, and peer-to-peer swarm coordination operating without centralized cloud bottlenecks.",
       icon: Layers,
       accent: "#22D3EE",
     },
     {
-      title: "Mathematical Precision",
-      desc: "Custom integer-paise financial engines eliminating IEEE 754 floating-point compounding rounding errors across high-volume transaction ledgers.",
-      icon: Terminal,
-      accent: "#F5C26B",
-    },
-    {
-      title: "Edge AI & Vision Systems",
-      desc: "On-device ML Kit OCR, MediaPipe computer vision, and local heuristic optimization running smoothly on constrained mobile silicon.",
+      title: "Quantum & Combinatorial Optimization",
+      desc: "Quantum-inspired simulated annealing, Kalman-filtered state tracking, and heuristic graph search solving complex transit and infrastructure routing problems.",
       icon: Cpu,
       accent: "#7C5CFF",
+    },
+    {
+      title: "Mathematical & Cryptographic Rigor",
+      desc: "Zero-drift integer paise financial math eliminating IEEE 754 floating-point errors, enforced alongside hardware StrongBox Keystore cryptography.",
+      icon: Terminal,
+      accent: "#F5C26B",
     },
   ];
 

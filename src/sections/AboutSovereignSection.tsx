@@ -28,7 +28,7 @@ export const AboutSovereignSection: React.FC = () => {
         {/* Left Column: Human Narrative & Principles (7 Cols) */}
         <div className="lg:col-span-7 flex flex-col gap-6 text-base sm:text-lg font-sans text-typography-secondary leading-relaxed">
           <p>
-            I am an independent Android developer based in Bhopal, India, and the founder of{" "}
+            I am a systems architect and applied AI/ML engineer based in Bhopal, India, and the founder of{" "}
             <a
               href="https://vaidiktech.app"
               target="_blank"
@@ -37,15 +37,15 @@ export const AboutSovereignSection: React.FC = () => {
             >
               VaidikTech
             </a>
-            . I engineer native mobile software for trades whose daily livelihood depends on total accuracy: advocates managing statutory court limitation diaries, jewellers calculating gold purity under halogen shop lamps, and pawnbrokers safeguarding gold loan pledges.
+            . My work spans distributed multi-agent swarms, quantum-inspired optimization algorithms, and air-gapped sovereign software platforms running mission-critical commercial workloads.
           </p>
 
           <p>
-            Traditional trade in India does not happen in air-conditioned offices with gigabit fiber. It happens in crowded basements with erratic power, thick concrete walls, and zero cellular reception. When a jeweller prints a tax invoice or an advocate checks a court cause list, a cloud timeout is not an inconvenience—it halts business.
+            Traditional trades and critical field operations in India do not happen in air-conditioned tech hubs with gigabit fiber. They happen in crowded basements with erratic power, thick concrete walls, and zero cellular reception. When a jeweller prints a tax invoice, an advocate inspects a court limitation calendar, or an emergency mesh coordinates field units, a cloud timeout is not an inconvenience—it halts operations.
           </p>
 
           <p>
-            That is why my architecture strictly enforces <strong className="text-typography-primary font-semibold">100% offline data sovereignty</strong>, zero-drift integer-paise math, and hardware-backed SQLCipher encryption. I own the entire lifecycle: from field workflow observation, to Jetpack Compose architecture, to releasing and supporting verified signed builds on the Google Play Store.
+            That is why my architecture strictly enforces <strong className="text-typography-primary font-semibold">deterministic data sovereignty</strong>, zero-drift integer math, hardware-backed cryptographic roots of trust, and edge intelligence. I bridge deep algorithmic theory—from simulated annealing in transit networks to autonomous swarm consensus—with hardened, production-grade software that operates reliably in zero-connectivity environments.
           </p>
 
           {/* Quick Verified Bio Metadata */}
