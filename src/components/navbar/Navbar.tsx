@@ -4,23 +4,23 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { Volume2, VolumeX, ArrowUpRight, Menu, X, Terminal, Sparkles, Zap } from "lucide-react";
+import { Volume2, VolumeX, ArrowUpRight, Menu, X, Terminal, Sparkles, Zap, ShieldCheck } from "lucide-react";
 import { useWorldStore } from "@/store/useWorldStore";
 import { proceduralAudio } from "@/lib/proceduralAudio";
 
 interface NavItem {
   name: string;
   href: string;
+  ticker: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { name: "Work", href: "/projects" },
-  { name: "Architecture", href: "/architecture" },
-  { name: "Lab", href: "/lab" },
-  { name: "Proof", href: "/proof" },
-  { name: "About", href: "/about" },
-  { name: "Credentials", href: "/credentials" },
-  { name: "Contact", href: "/contact" },
+  { name: "Exhibitions", href: "/projects", ticker: "01" },
+  { name: "Architecture", href: "/architecture", ticker: "02" },
+  { name: "Sandbox", href: "/proof", ticker: "03" },
+  { name: "Directory", href: "/lab", ticker: "04" },
+  { name: "Benchmark", href: "/credentials", ticker: "05" },
+  { name: "Studio", href: "/about", ticker: "06" },
 ];
 
 export const Navbar: React.FC = () => {
@@ -39,7 +39,8 @@ export const Navbar: React.FC = () => {
           timeZone: "Asia/Kolkata",
           hour: "2-digit",
           minute: "2-digit",
-          hour12: true,
+          second: "2-digit",
+          hour12: false,
         }).format(new Date());
         setLocalTime(timeStr);
       } catch {
@@ -47,7 +48,7 @@ export const Navbar: React.FC = () => {
       }
     };
     updateTime();
-    const interval = setInterval(updateTime, 15000);
+    const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -57,9 +58,9 @@ export const Navbar: React.FC = () => {
       setScrolled(currentScrollY > 30);
 
       // Hide on scroll down, show on scroll up
-      if (currentScrollY > 150 && currentScrollY > lastScrollY.current + 6) {
+      if (currentScrollY > 150 && currentScrollY > lastScrollY.current + 8) {
         setVisible(false);
-      } else if (currentScrollY < lastScrollY.current - 6 || currentScrollY <= 150) {
+      } else if (currentScrollY < lastScrollY.current - 8 || currentScrollY <= 150) {
         setVisible(true);
       }
       lastScrollY.current = currentScrollY;
@@ -79,198 +80,217 @@ export const Navbar: React.FC = () => {
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 pointer-events-none ${
           visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        } ${
-          scrolled
-            ? "py-2.5 sm:py-3 bg-[#05060A]/85 backdrop-blur-xl border-b border-white/10 shadow-2xl"
-            : "py-4 sm:py-5 bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          {/* Refined Brand Wordmark */}
-          <Link
-            href="/"
-            onClick={handleNavClick}
-            className="pointer-events-auto group flex items-center gap-2.5 sm:gap-3 py-1 focus:outline-none"
-          >
-            <span className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-surface-border items-center justify-center transition-transform duration-300 group-hover:scale-105 group-hover:border-accent-android/50 flex-shrink-0">
-              <Image
-                src="/assets/vaidik_authentic_square.jpg"
-                alt="Vaidik Gandhi Portrait"
-                fill
-                sizes="32px"
-                className="object-cover"
-              />
-            </span>
-            <span className="flex flex-col">
-              <span className="font-heading font-bold text-xs sm:text-sm tracking-tight text-typography-primary group-hover:text-white transition-colors">
-                Vaidik Gandhi
+        {/* Top Technical Utility Ticker (Kairos Atelier Signature) */}
+        <div className="w-full bg-[#08090C]/95 backdrop-blur-md border-b border-[#1E222D] py-1 px-4 sm:px-6 pointer-events-auto">
+          <div className="max-w-7xl mx-auto flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-widest text-[#8E94A5]">
+            <div className="flex items-center gap-2 sm:gap-4 truncate">
+              <span className="flex items-center gap-1.5 text-cyber">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse" />
+                <span className="font-bold">23.2599° N, 77.4126° E</span>
               </span>
-              <span className="text-[9px] sm:text-[10px] font-mono text-typography-muted group-hover:text-accent-android transition-colors flex items-center gap-1.5">
-                <span>Founder · VaidikTech</span>
-                {localTime && (
-                  <>
-                    <span className="w-1 h-1 rounded-full bg-accent-android animate-pulse" />
-                    <span className="text-[9px] text-typography-secondary">{localTime} IST</span>
-                  </>
-                )}
+              <span className="hidden sm:inline text-white/20">/</span>
+              <span className="hidden sm:inline">BHOPAL, INDIA</span>
+              <span className="hidden md:inline text-white/20">/</span>
+              <span className="hidden md:flex items-center gap-1 text-[#3DDC84]">
+                <ShieldCheck className="w-2.5 h-2.5" />
+                <span>AIR-GAPPED SENTINEL [0.0000% DRIFT]</span>
               </span>
-            </span>
-          </Link>
-
-          {/* Desktop Nav Items */}
-          <nav className="pointer-events-auto hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#121419]/85 border border-white/10 backdrop-blur-xl shadow-lg">
-            {NAV_ITEMS.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href));
-
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={handleNavClick}
-                  className={`px-3 py-1.5 text-xs font-sans rounded-full transition-all duration-200 ${
-                    isActive
-                      ? "bg-accent-android/15 text-accent-android border border-accent-android/30 font-semibold shadow-[0_0_12px_rgba(61,220,132,0.25)]"
-                      : "text-typography-secondary hover:text-typography-primary hover:bg-white/[0.06] border border-transparent"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Actions: Mode Toggle + Sound + CLI + Primary CTA */}
-          <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2.5">
-            {/* Dual Mode Switch: 3D Experience vs Fast 2D Editorial */}
-            <div className="flex items-center p-0.5 rounded-full bg-[#12141C] border border-white/15 text-[10px] font-mono shadow-sm">
-              <button
-                type="button"
-                onClick={() => setDisplayMode("experience")}
-                className={`px-2 sm:px-2.5 py-1 rounded-full transition-all flex items-center gap-1 ${
-                  displayMode === "experience"
-                    ? "bg-accent-android text-[#05060A] font-bold shadow-sm"
-                    : "text-typography-muted hover:text-white"
-                }`}
-                title="Full 3D WebGPU/WebGL2 World"
-              >
-                <Sparkles className="w-3 h-3" />
-                <span className="text-[10px]">3D</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setDisplayMode("fast")}
-                className={`px-2 sm:px-2.5 py-1 rounded-full transition-all flex items-center gap-1 ${
-                  displayMode === "fast"
-                    ? "bg-white/20 text-white font-bold shadow-sm"
-                    : "text-typography-muted hover:text-white"
-                }`}
-                title="Ultra-Fast 2D Editorial Mode (Zero WebGL)"
-              >
-                <Zap className="w-3 h-3 text-[#F5C26B]" />
-                <span className="text-[10px]">Fast</span>
-              </button>
             </div>
+            <div className="flex items-center gap-2 sm:gap-4 shrink-0 font-mono">
+              <span className="text-white/40 hidden sm:inline">SYS TIME:</span>
+              <span className="text-white font-bold">{localTime || "12:00:00"} IST</span>
+              <span className="text-white/20">|</span>
+              <span className="text-cyber font-bold tracking-normal">ZERO TELEMETRY</span>
+            </div>
+          </div>
+        </div>
 
-            {/* Terminal Toggle Button (Desktop & Tablet) */}
-            <button
-              type="button"
-              onClick={() => {
-                proceduralAudio.tick();
-                openTerminal();
-              }}
-              className="hidden sm:flex w-9 h-9 rounded-full border border-white/15 bg-[#12141C] text-typography-secondary hover:text-white hover:border-accent-cyan/50 items-center justify-center transition-all shadow-sm"
-              title="Open Developer Terminal (`)"
-              aria-label="Open CLI Terminal"
-            >
-              <Terminal className="w-3.5 h-3.5 text-accent-cyan" />
-            </button>
-
-            {/* Audio Mute Button */}
-            <button
-              type="button"
-              onClick={toggleSound}
-              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center transition-all ${
-                soundEnabled
-                  ? "bg-[#3DDC84]/20 border-[#3DDC84]/60 text-[#3DDC84] shadow-[0_0_12px_rgba(61,220,132,0.35)]"
-                  : "bg-[#12141C] border-white/15 text-typography-muted hover:text-white hover:border-white/30"
-              }`}
-              title={soundEnabled ? "Audio On (Click to Mute)" : "Muted (Click to Enable Audio)"}
-              aria-label="Toggle ambient sound"
-            >
-              {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
-            </button>
-
-            {/* Primary Action Button (Direct to Contact Page) */}
+        {/* Main Navbar Bar */}
+        <div
+          className={`w-full transition-all duration-300 ${
+            scrolled
+              ? "py-2.5 bg-[#08090C]/90 backdrop-blur-xl border-b border-[#1E222D] shadow-2xl"
+              : "py-3 sm:py-4 bg-[#08090C]/40 backdrop-blur-md"
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+            {/* Wordmark */}
             <Link
-              href="/contact"
+              href="/"
               onClick={handleNavClick}
-              style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-mono font-black text-xs tracking-wide transition-all shadow-[0_0_20px_rgba(61,220,132,0.35)] hover:scale-[1.03] active:scale-95 hover:brightness-105"
+              className="pointer-events-auto group flex items-center gap-3 py-1 focus:outline-none"
             >
-              <span>Get in touch</span>
-              <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+              <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-[#2A303F] group-hover:border-cyber transition-all duration-300 shrink-0">
+                <Image
+                  src="/assets/vaidik_authentic_square.jpg"
+                  alt="Vaidik Gandhi Portrait"
+                  fill
+                  sizes="32px"
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-display font-black text-sm sm:text-base tracking-tight text-white group-hover:text-cyber transition-colors">
+                    VAIDIKTECH
+                  </span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.2 border border-cyber/40 text-cyber bg-cyber/10 rounded tracking-wider uppercase font-bold">
+                    LABS
+                  </span>
+                </div>
+                <span className="text-[9px] font-mono tracking-widest text-[#8E94A5] uppercase">
+                  Vaidik Gandhi · Sovereign OS
+                </span>
+              </div>
             </Link>
 
-            {/* Mobile Menu Button */}
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1.5 sm:p-2 rounded-xl border border-white/10 bg-[#12141C] text-typography-primary hover:text-white hover:border-white/30"
-              aria-label="Toggle mobile menu"
-            >
-              {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
-            </button>
+            {/* Desktop Nav Items */}
+            <nav className="pointer-events-auto hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#0E1015]/90 border border-[#1E222D]">
+              {NAV_ITEMS.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  (item.href !== "/" && pathname.startsWith(item.href));
+
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={handleNavClick}
+                    className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded transition-all duration-150 flex items-center gap-1.5 ${
+                      isActive
+                        ? "bg-cyber/15 text-cyber border border-cyber/30 font-bold shadow-[0_0_12px_rgba(200,248,2,0.2)]"
+                        : "text-[#8E94A5] hover:text-white hover:bg-white/[0.04] border border-transparent"
+                    }`}
+                  >
+                    <span className="text-[9px] opacity-40 font-mono">{item.ticker}</span>
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Actions: Mode Toggle + Sound + CLI + Primary CTA */}
+            <div className="pointer-events-auto flex items-center gap-2 sm:gap-3">
+              {/* Dual Mode Switch: 3D Experience vs Fast 2D Editorial */}
+              <div className="flex items-center p-0.5 rounded-lg bg-[#0E1015] border border-[#1E222D] text-[10px] font-mono">
+                <button
+                  type="button"
+                  onClick={() => setDisplayMode("experience")}
+                  className={`px-2 sm:px-2.5 py-1 rounded transition-all flex items-center gap-1 ${
+                    displayMode === "experience"
+                      ? "bg-cyber text-[#08090C] font-bold shadow-sm"
+                      : "text-[#8E94A5] hover:text-white"
+                  }`}
+                  title="Full 3D WebGPU/WebGL2 World"
+                >
+                  <Sparkles className="w-3 h-3" />
+                  <span className="text-[10px] font-bold">3D</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDisplayMode("fast")}
+                  className={`px-2 sm:px-2.5 py-1 rounded transition-all flex items-center gap-1 ${
+                    displayMode === "fast"
+                      ? "bg-white/20 text-white font-bold shadow-sm"
+                      : "text-[#8E94A5] hover:text-white"
+                  }`}
+                  title="Ultra-Fast 2D Editorial Mode"
+                >
+                  <Zap className="w-3 h-3 text-[#FFB800]" />
+                  <span className="text-[10px] font-bold">FAST</span>
+                </button>
+              </div>
+
+              {/* Terminal Toggle Button (Desktop & Tablet) */}
+              <button
+                type="button"
+                onClick={() => {
+                  proceduralAudio.tick();
+                  openTerminal();
+                }}
+                className="hidden sm:flex w-8 h-8 rounded-lg border border-[#1E222D] bg-[#0E1015] text-[#8E94A5] hover:text-cyber hover:border-cyber/40 items-center justify-center transition-all"
+                title="Open Developer Terminal (`)"
+                aria-label="Open CLI Terminal"
+              >
+                <Terminal className="w-3.5 h-3.5" />
+              </button>
+
+              {/* Audio Mute Button */}
+              <button
+                type="button"
+                onClick={toggleSound}
+                className={`w-8 h-8 rounded-lg border flex items-center justify-center transition-all ${
+                  soundEnabled
+                    ? "bg-cyber/15 border-cyber/50 text-cyber shadow-[0_0_12px_rgba(200,248,2,0.25)]"
+                    : "bg-[#0E1015] border-[#1E222D] text-[#8E94A5] hover:text-white hover:border-white/30"
+                }`}
+                title={soundEnabled ? "Audio On" : "Muted"}
+                aria-label="Toggle ambient sound"
+              >
+                {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+              </button>
+
+              {/* Kairos-Style Acid Lime CTA Button */}
+              <Link
+                href="/contact"
+                onClick={handleNavClick}
+                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyber text-[#08090C] font-mono font-black text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(200,248,2,0.3)] hover:bg-[#D4FF00] hover:scale-[1.02] active:scale-95"
+              >
+                <span>INITIATE INQUIRY</span>
+                <ArrowUpRight className="w-3.5 h-3.5 stroke-[3]" />
+              </Link>
+
+              {/* Mobile Menu Button */}
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 rounded-lg border border-[#1E222D] bg-[#0E1015] text-white hover:border-cyber/40"
+                aria-label="Toggle mobile menu"
+              >
+                {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0B0C0E]/95 backdrop-blur-2xl flex flex-col justify-between p-8 md:hidden animate-in fade-in duration-200">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4 mt-16">
-            <span className="text-xs font-mono text-typography-muted uppercase tracking-wider">Navigation</span>
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-1 text-typography-muted hover:text-white"
-            >
-              <X className="w-5 h-5" />
-            </button>
+        <div className="fixed inset-0 z-40 bg-[#08090C]/95 backdrop-blur-2xl flex flex-col pt-24 px-6 pb-8 border-b border-[#1E222D] lg:hidden animate-in fade-in duration-200">
+          <div className="flex flex-col gap-2 mb-8">
+            <span className="text-[10px] font-mono tracking-widest text-[#8E94A5] uppercase mb-2">
+              NAVIGATION DIRECTORY
+            </span>
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={handleNavClick}
+                className={`py-3 px-4 rounded-lg font-mono text-sm uppercase tracking-wider flex items-center justify-between border transition-all ${
+                  pathname === item.href
+                    ? "bg-cyber/10 border-cyber text-cyber font-bold"
+                    : "border-[#1E222D] text-[#8E94A5] hover:text-white hover:bg-white/[0.04]"
+                }`}
+              >
+                <span>{item.name}</span>
+                <span className="text-[10px] opacity-40 font-mono">{item.ticker}</span>
+              </Link>
+            ))}
           </div>
 
-          <div className="flex flex-col gap-4 my-auto">
-            {NAV_ITEMS.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href));
-
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={handleNavClick}
-                  className={`text-2xl font-heading font-bold transition-colors ${
-                    isActive ? "text-accent-android pl-2 border-l-2 border-accent-android" : "text-typography-primary hover:text-accent-android"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
+          <div className="mt-auto flex flex-col gap-3">
             <Link
               href="/contact"
               onClick={handleNavClick}
-              className="w-full text-center py-3.5 rounded-full bg-accent-android text-[#05060A] font-mono font-bold text-sm shadow-lg"
+              className="w-full py-3.5 rounded-lg bg-cyber text-[#08090C] font-mono font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(200,248,2,0.3)]"
             >
-              Get in touch
+              <span>INITIATE INQUIRY</span>
+              <ArrowUpRight className="w-4 h-4 stroke-[3]" />
             </Link>
-            <div className="text-center text-xs font-mono text-typography-muted">
-              vaidik.gandhi1@gmail.com
+            <div className="text-[10px] font-mono text-center text-[#8E94A5] tracking-widest pt-2">
+              23.2599° N, 77.4126° E · BHOPAL, INDIA
             </div>
           </div>
         </div>
