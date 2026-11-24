@@ -48,33 +48,33 @@ export const PullThePlugSection: React.FC = () => {
       />
 
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
-        <div className="max-w-2xl flex flex-col gap-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-1 border border-white/10 text-xs font-mono text-accent-android w-fit backdrop-blur-md">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10 pb-4 border-b border-[#1E222D]">
+        <div className="max-w-2xl flex flex-col gap-2">
+          <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-cyber uppercase font-bold">
             <Radio className="w-3.5 h-3.5 animate-pulse" />
-            <span>The Signature Proof // Live In-Browser Stress Test</span>
+            <span>SIGNATURE PROOF // ZERO-TELEMETRY STRESS TEST</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary leading-tight">
-            Pull the plug. Watch what happens.
+          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase leading-none">
+            PULL THE PLUG.
           </h2>
 
-          <p className="text-sm sm:text-base text-typography-secondary font-sans leading-relaxed">
-            My core engineering promise is <strong className="text-white">data sovereignty</strong> and <strong className="text-white">zero cloud dependencies</strong>. Put that claim to the test right now by pulling the master connectivity switch.
+          <p className="text-xs sm:text-sm font-sans text-[#8E94A5] leading-relaxed">
+            Our core engineering principle: <strong className="text-white">&quot;Cloud goes down. Business doesn&apos;t.&quot;</strong> Put this architecture to the test by pulling the master connectivity switch.
           </p>
         </div>
 
         {/* Real Offline Sentinel Pill */}
-        <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-surface-1 border border-white/10 text-xs font-mono text-typography-muted self-start md:self-auto backdrop-blur-md">
+        <div className="tactical-box flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[#1E222D] text-xs font-mono text-[#8E94A5] self-start md:self-auto">
           {isOffline ? (
             <>
-              <span className="w-2 h-2 rounded-full bg-accent-android animate-ping" />
-              <span className="text-accent-android font-bold">True Hardware Offline Detected</span>
+              <span className="w-2 h-2 rounded-full bg-cyber animate-ping" />
+              <span className="text-cyber font-bold">TRUE HARDWARE OFFLINE DETECTED</span>
             </>
           ) : (
             <>
-              <Wifi className="w-3.5 h-3.5 text-accent-cyan" />
-              <span>Service Worker Active (Precaching Shell)</span>
+              <Wifi className="w-3.5 h-3.5 text-cyber" />
+              <span>SERVICE WORKER ACTIVE [SOVEREIGN]</span>
             </>
           )}
         </div>
