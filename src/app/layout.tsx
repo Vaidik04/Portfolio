@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Newsreader, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
+import { Syne, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ServiceWorkerSentinel } from "@/components/offline/ServiceWorkerSentinel";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-serif",
+  variable: "--font-display",
   display: "swap",
-  adjustFontFallback: false,
+  weight: ["500", "600", "700", "800"],
 });
 
 const inter = Inter({
@@ -136,7 +136,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansDevanagari.variable} scroll-smooth dark`}
+      className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansDevanagari.variable} scroll-smooth dark`}
     >
       <head>
         <script
