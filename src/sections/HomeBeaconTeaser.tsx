@@ -2,32 +2,25 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Mail, Check, Copy, ArrowRight, Github, Linkedin, Play, Sparkles, Globe } from "lucide-react";
+import { Mail, Check, Copy, ArrowRight, Github, Linkedin, Play, Terminal, ArrowUpRight, Send } from "lucide-react";
 import { proceduralAudio } from "@/lib/proceduralAudio";
+
+const CATEGORIES = [
+  "SOVEREIGN ANDROID",
+  "THERMAL POS (ESC/POS)",
+  "ENCLAVE VAULT",
+  "R&D CONSULTING",
+];
 
 export const HomeBeaconTeaser: React.FC = () => {
   const [copied, setCopied] = useState(false);
-  const [localTime, setLocalTime] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("SOVEREIGN ANDROID");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [scope, setScope] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const directEmail = "vaidik.gandhi1@gmail.com";
-
-  React.useEffect(() => {
-    const update = () => {
-      try {
-        const t = new Intl.DateTimeFormat("en-IN", {
-          timeZone: "Asia/Kolkata",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true,
-        }).format(new Date());
-        setLocalTime(t);
-      } catch {
-        setLocalTime("");
-      }
-    };
-    update();
-    const interval = setInterval(update, 15000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleCopyEmail = () => {
     proceduralAudio.tick();
@@ -36,98 +29,235 @@ export const HomeBeaconTeaser: React.FC = () => {
     setTimeout(() => setCopied(false), 2200);
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email) return;
+    setStatus("sending");
+    proceduralAudio.tick();
+
+    // Construct mailto link with encoded parameters
+    const subject = encodeURIComponent(`[Commission Initiation: ${selectedCategory}] - ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nScope: ${scope}\nDomain: ${selectedCategory}\n\nProject Brief:\n${message}`
+    );
+
+    setTimeout(() => {
+      setStatus("sent");
+      proceduralAudio.success();
+      window.location.href = `mailto:${directEmail}?subject=${subject}&body=${body}`;
+    }, 600);
+  };
+
   return (
     <section
       id="contact-teaser"
-      className="relative py-10 sm:py-14 px-4 sm:px-6 max-w-6xl mx-auto w-full z-10 pointer-events-auto"
+      className="relative py-14 sm:py-20 px-4 sm:px-6 max-w-7xl mx-auto w-full z-10 pointer-events-auto"
     >
-      <div className="relative p-8 sm:p-14 rounded-3xl bg-gradient-to-b from-[#101420]/90 to-[#0A0D14]/95 border border-white/15 backdrop-blur-2xl overflow-hidden shadow-2xl">
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-accent-android/10 blur-[120px] pointer-events-none" />
-
-        <div className="relative z-10 max-w-2xl flex flex-col gap-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-android/10 border border-accent-android/30 text-xs font-mono text-accent-android w-fit">
-            <Globe className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "14s" }} />
-            <span className="flex items-center gap-1.5">
-              <span>Open for Selective Engagements</span>
-              {localTime && (
-                <>
-                  <span className="text-typography-muted">·</span>
-                  <span className="text-white">Bhopal {localTime} IST</span>
-                </>
-              )}
-            </span>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Column: Commission Initiation Brief & Direct Channels */}
+        <div className="lg:col-span-5 flex flex-col gap-5">
+          <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-cyber uppercase font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyber animate-pulse" />
+            <span>COMMISSION INQUIRY // 2026 AUDIT // OPEN</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary leading-tight">
-            Let&apos;s build software that never fails in the field.
+          <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase leading-none">
+            COMMISSION INITIATION
           </h2>
 
-          <p className="text-sm sm:text-base text-typography-secondary font-sans leading-relaxed">
-            Available for offline-first architecture contracts, native Android systems development, and sovereign mobile software consulting.
+          <p className="text-xs sm:text-sm font-sans text-[#8E94A5] leading-relaxed">
+            We engineer zero-drift algorithms, high-throughput local architectures, and sovereign Android interfaces for enterprises and founders seeking definitive software independence.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 pt-4">
-            <Link
-              href="/contact"
-              onClick={() => proceduralAudio.tick()}
-              style={{ backgroundColor: "#3DDC84", color: "#05060A" }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-mono font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(61,220,132,0.3)] hover:scale-105 active:scale-95"
-            >
-              <span>Open Deployment Beacon</span>
-              <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-            </Link>
+          {/* Studio Coordinates & Address */}
+          <div className="tactical-box p-4 rounded-xl border border-[#1E222D] bg-[#0E1015] font-mono text-xs space-y-2 mt-2">
+            <div className="text-[10px] text-[#565B6C] uppercase tracking-wider">
+              STUDIO LOCATION // AIR-GAPPED DISPATCH
+            </div>
+            <div className="text-white font-bold">
+              VaidikTech Studio · 23.2599° N, 77.4126° E
+            </div>
+            <div className="text-[#8E94A5] text-[11px]">
+              Bhopal, Madhya Pradesh, India · PIN 462022
+            </div>
+            <div className="flex items-center gap-2 pt-2 border-t border-[#1E222D] text-[10px]">
+              <span className="w-2 h-2 rounded-full bg-cyber animate-pulse" />
+              <span className="text-cyber font-bold">STATUS: ACCEPTING COMMISSIONS</span>
+            </div>
+          </div>
 
+          {/* Quick Copy Direct Channel */}
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={handleCopyEmail}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#141824] border border-white/15 hover:border-white/30 text-xs font-mono text-typography-primary transition-all group"
+              className="tactical-box flex-1 px-4 py-2.5 rounded-xl border border-[#1E222D] hover:border-cyber bg-[#0E1015] text-xs font-mono text-white flex items-center justify-between transition-colors group"
             >
-              {copied ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-accent-android" />
-                  <span className="text-accent-android">Copied to Clipboard</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-typography-muted group-hover:text-white" />
-                  <span>Copy vaidik.gandhi1@gmail.com</span>
-                </>
-              )}
+              <div className="flex items-center gap-2 truncate">
+                <Mail className="w-3.5 h-3.5 text-cyber" />
+                <span className="truncate">{directEmail}</span>
+              </div>
+              <span className="text-[10px] text-[#8E94A5] group-hover:text-cyber">
+                {copied ? "COPIED ✓" : "COPY"}
+              </span>
             </button>
           </div>
 
-          {/* Direct Profile Links */}
-          <div className="flex items-center gap-6 pt-6 mt-4 border-t border-white/10 text-xs font-mono text-typography-muted">
+          {/* Direct Social Links */}
+          <div className="flex items-center gap-3 font-mono text-xs text-[#8E94A5]">
             <a
               href="https://github.com/Vaidik04"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-1.5"
+              className="flex items-center gap-1 hover:text-white transition-colors"
             >
-              <Github className="w-3.5 h-3.5" />
+              <Github className="w-3.5 h-3.5 text-cyber" />
               <span>GitHub</span>
             </a>
-
+            <span>/</span>
             <a
               href="https://in.linkedin.com/in/vaidik-gandhi-395b11378"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors flex items-center gap-1.5"
+              className="flex items-center gap-1 hover:text-white transition-colors"
             >
-              <Linkedin className="w-3.5 h-3.5" />
+              <Linkedin className="w-3.5 h-3.5 text-cyber" />
               <span>LinkedIn</span>
             </a>
-
+            <span>/</span>
             <a
               href="https://play.google.com/store/apps/dev?id=vaidiktech"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-accent-android transition-colors flex items-center gap-1.5"
+              className="flex items-center gap-1 hover:text-white transition-colors"
             >
-              <Play className="w-3.5 h-3.5 fill-current" />
+              <Play className="w-3.5 h-3.5 text-cyber fill-current" />
               <span>Google Play</span>
             </a>
           </div>
+        </div>
+
+        {/* Right Column: Tactical Consultation Form (Kairos Atelier Signature) */}
+        <div className="lg:col-span-7">
+          <form
+            onSubmit={handleSubmit}
+            className="tactical-box p-6 sm:p-8 rounded-2xl border border-[#1E222D] bg-[#0E1015]/95 flex flex-col gap-4"
+          >
+            <div className="flex items-center justify-between pb-3 border-b border-[#1E222D]">
+              <span className="text-[10px] font-mono tracking-widest text-[#8E94A5] uppercase">
+                COMMISSION PROTOCOL // DIRECT DISPATCH
+              </span>
+              <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-cyber/10 border border-cyber/30 text-cyber font-bold">
+                ENCRYPTED TRANSIT
+              </span>
+            </div>
+
+            {/* Form Inputs Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="text-[10px] font-mono text-[#8E94A5] uppercase tracking-wider block mb-1.5">
+                  IDENTITY // FULL NAME *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Vikramaditya Singhal"
+                  className="w-full bg-[#08090C] border border-[#1E222D] focus:border-cyber rounded-lg px-3.5 py-2.5 text-xs font-mono text-white placeholder-[#565B6C] focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-mono text-[#8E94A5] uppercase tracking-wider block mb-1.5">
+                  COMMUNICATION // EMAIL ADDRESS *
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="e.g. vikram@enterprise.in"
+                  className="w-full bg-[#08090C] border border-[#1E222D] focus:border-cyber rounded-lg px-3.5 py-2.5 text-xs font-mono text-white placeholder-[#565B6C] focus:outline-none transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Scope / Timeline */}
+            <div>
+              <label className="text-[10px] font-mono text-[#8E94A5] uppercase tracking-wider block mb-1.5">
+                SCOPE // TIMELINE OR TARGET PLATFORM
+              </label>
+              <input
+                type="text"
+                value={scope}
+                onChange={(e) => setScope(e.target.value)}
+                placeholder="e.g. Android 15 Tablet POS · Q1 2026 Target Launch"
+                className="w-full bg-[#08090C] border border-[#1E222D] focus:border-cyber rounded-lg px-3.5 py-2.5 text-xs font-mono text-white placeholder-[#565B6C] focus:outline-none transition-colors"
+              />
+            </div>
+
+            {/* Sector Category Selector */}
+            <div>
+              <label className="text-[10px] font-mono text-[#8E94A5] uppercase tracking-wider block mb-1.5">
+                SECTOR // ARCHITECTURE CLASSIFICATION
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => {
+                      proceduralAudio.tick();
+                      setSelectedCategory(cat);
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-[10px] font-mono uppercase tracking-wider transition-all ${
+                      selectedCategory === cat
+                        ? "bg-cyber text-[#08090C] font-bold shadow-[0_0_12px_rgba(200,248,2,0.25)]"
+                        : "bg-[#08090C] border border-[#1E222D] text-[#8E94A5] hover:text-white"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Project Brief */}
+            <div>
+              <label className="text-[10px] font-mono text-[#8E94A5] uppercase tracking-wider block mb-1.5">
+                BRIEF // SYSTEM SPECIFICATIONS & CONSTRAINTS
+              </label>
+              <textarea
+                rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Outline your runtime requirements, zero-telemetry constraints, Bluetooth hardware protocols, or cryptographic needs..."
+                className="w-full bg-[#08090C] border border-[#1E222D] focus:border-cyber rounded-lg px-3.5 py-2.5 text-xs font-mono text-white placeholder-[#565B6C] focus:outline-none transition-colors resize-none"
+              />
+            </div>
+
+            {/* Submit Action Button */}
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="mt-2 w-full py-3.5 rounded-xl bg-cyber text-[#08090C] font-mono font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#D4FF00] transition-all shadow-[0_0_20px_rgba(200,248,2,0.3)] active:scale-98"
+            >
+              {status === "sending" ? (
+                <span>DISPATCHING COMMISSION...</span>
+              ) : status === "sent" ? (
+                <span className="flex items-center gap-1.5">
+                  <Check className="w-4 h-4 stroke-[3]" />
+                  <span>TRANSMISSION PREPARED IN CLIENT</span>
+                </span>
+              ) : (
+                <span className="flex items-center gap-1.5">
+                  <span>TRANSMIT COMMISSION REQUEST</span>
+                  <ArrowUpRight className="w-4 h-4 stroke-[3]" />
+                </span>
+              )}
+            </button>
+          </form>
         </div>
       </div>
     </section>
