@@ -7,7 +7,11 @@ import { X, Terminal as TerminalIcon, CornerDownLeft } from "lucide-react";
 
 const AVAILABLE_COMMANDS = [
   "help",
+  "whoami",
   "work",
+  "swarmos",
+  "qroute",
+  "sovereign",
   "stack",
   "verify",
   "archive",
@@ -22,7 +26,11 @@ const AVAILABLE_COMMANDS = [
 
 const HELP_TEXT = `Available Commands:
   help        - Display command manifest
-  work        - Jump to 3D Flagship Flight Deck (Girvi, JewelBill, AdvoKosh)
+  whoami      - Identity, education, and architectural competencies
+  work        - Jump to Commercial Platforms (Girvi, JewelBill, AdvoKosh)
+  swarmos     - Inspect SwarmOS P2P Distributed Device Mesh OS
+  qroute      - Inspect QRoute Quantum-Inspired Transit Engine
+  sovereign   - Print sovereign engineering architectural manifest
   stack       - Inspect 5-layer sovereign architecture stack & Keystore
   verify      - Run live mathematical float drift & GST verification engine
   archive     - Explore The Lab constellation (38+ systems & AI projects)
@@ -46,8 +54,8 @@ export const DeveloperTerminal: React.FC = () => {
 
   const [inputVal, setInputVal] = useState("");
   const [history, setHistory] = useState<Array<{ type: "cmd" | "output" | "success" | "system"; text: string }>>([
-    { type: "system", text: "VaidikTech Sovereign Kernel v4.2.0 (x86_64-android-keystore)" },
-    { type: "output", text: "Type 'help' for commands or 'work' to inspect flagship software." },
+    { type: "system", text: "vaidik@kernel v5.0 — Personal Engineering Shell (LNCT '26 · Bhopal, IN)" },
+    { type: "output", text: "Type 'help' for navigation & diagnostic commands, or 'whoami'." },
   ]);
 
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
@@ -124,28 +132,52 @@ export const DeveloperTerminal: React.FC = () => {
       case "help":
         newHistory.push({ type: "output", text: HELP_TEXT });
         break;
+      case "whoami":
+        newHistory.push({
+          type: "output",
+          text: "Vaidik Gandhi — Systems Architect & Applied AI Engineer.\nFounder @ VaidikTech, Bhopal, India.\nB.Tech CSE (AI & ML) Lakshmi Narain College of Technology (LNCT) '26.\nCore: Distributed Swarms, Quantum-Inspired Routing, Air-Gapped Sovereign Hardware Systems.",
+        });
+        break;
+      case "swarmos":
+        newHistory.push({
+          type: "success",
+          text: "SwarmOS: Air-Gapped P2P Distributed Device Mesh OS (Wi-Fi Direct, Bluetooth SPP, state consensus). Direct inspect: /projects/swarmos",
+        });
+        break;
+      case "qroute":
+        newHistory.push({
+          type: "success",
+          text: "QRoute: Quantum-Inspired Combinatorial Transit Routing (Simulated Annealing, Kalman Filter, GTFS). Direct inspect: /projects/qroute",
+        });
+        break;
+      case "sovereign":
+        newHistory.push({
+          type: "output",
+          text: "SOVEREIGN MANIFEST:\n • Float Drift: 0.0000% (64-bit integer paise currency math)\n • Cloud Telemetry: 0 KB (Zero network permissions on core ledgers)\n • Silicon Enclave: 256-bit AES-GCM under Android StrongBox Keystore\n • Hardware Printing: 240ms direct thermal ESC/POS receipt generation",
+        });
+        break;
       case "work":
-        newHistory.push({ type: "success", text: "Navigating to 3D Flagship Flight Deck..." });
-        setScrollProgress(0.50);
-        document.getElementById("flight-deck")?.scrollIntoView({ behavior: "smooth" });
+        newHistory.push({ type: "success", text: "Jumping to Act II: Selected Engineering Works..." });
+        setScrollProgress(0.28);
+        document.getElementById("selected-works")?.scrollIntoView({ behavior: "smooth" });
         break;
       case "stack":
-        newHistory.push({ type: "success", text: "Expanding 5-layer architecture stack..." });
-        setScrollProgress(0.32);
-        document.getElementById("architecture")?.scrollIntoView({ behavior: "smooth" });
+        newHistory.push({ type: "success", text: "Expanding Act III: 5-Layer Architecture & Code..." });
+        setScrollProgress(0.55);
+        document.getElementById("engineering-craft")?.scrollIntoView({ behavior: "smooth" });
         break;
       case "verify":
-        newHistory.push({ type: "success", text: "Loading Live Proof verification engine..." });
-        setScrollProgress(0.82);
-        document.getElementById("proof")?.scrollIntoView({ behavior: "smooth" });
+        newHistory.push({ type: "success", text: "Jumping to Live Mathematical Prover & Offline Sentinel..." });
+        setScrollProgress(0.62);
+        document.getElementById("engineering-craft")?.scrollIntoView({ behavior: "smooth" });
         break;
       case "archive":
-        newHistory.push({ type: "success", text: "Navigating to The Lab constellation..." });
-        setScrollProgress(0.68);
-        document.getElementById("lab")?.scrollIntoView({ behavior: "smooth" });
+        newHistory.push({ type: "success", text: "Jumping to Orbital Archive & Works Index..." });
+        setScrollProgress(0.35);
+        document.getElementById("selected-works")?.scrollIntoView({ behavior: "smooth" });
         break;
       case "contact":
-        newHistory.push({ type: "success", text: "Deploying sovereign communication beacon..." });
+        newHistory.push({ type: "success", text: "Scrolling to Act V: Direct Contact..." });
         setScrollProgress(0.98);
         document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
         break;
@@ -210,7 +242,7 @@ export const DeveloperTerminal: React.FC = () => {
             <span className="w-3 h-3 rounded-full bg-green-500/80 flex-shrink-0" />
             <span className="text-xs text-typography-muted ml-2 sm:ml-3 flex items-center gap-1.5 truncate">
               <TerminalIcon className="w-3.5 h-3.5 text-accent-cyan flex-shrink-0" />
-              <span className="truncate">vaidiktech:~</span>
+              <span className="truncate">vaidik@portfolio:~</span>
             </span>
           </div>
 

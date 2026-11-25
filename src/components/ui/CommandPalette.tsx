@@ -109,7 +109,7 @@ export const CommandPalette: React.FC = () => {
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <Layers className="w-3.5 h-3.5 text-accent-cyan" />
-                <span>02 // Work & Applications</span>
+                <span>02 // Selected Works & Apps</span>
               </button>
 
               <button
@@ -117,7 +117,7 @@ export const CommandPalette: React.FC = () => {
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <GitBranch className="w-3.5 h-3.5 text-accent-violet" />
-                <span>03 // Sovereign Architecture</span>
+                <span>03 // Systems Architecture</span>
               </button>
 
               <button
@@ -125,7 +125,7 @@ export const CommandPalette: React.FC = () => {
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <FlaskConical className="w-3.5 h-3.5 text-accent-cyan" />
-                <span>04 // R&D Lab Archive</span>
+                <span>04 // AI & Systems Lab</span>
               </button>
 
               <button
@@ -133,7 +133,7 @@ export const CommandPalette: React.FC = () => {
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <Cpu className="w-3.5 h-3.5 text-[#F5C26B]" />
-                <span>05 // Live Proof & Benchmarks</span>
+                <span>05 // Live Math & Cipher Proof</span>
               </button>
 
               <button
@@ -141,7 +141,7 @@ export const CommandPalette: React.FC = () => {
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <BookOpen className="w-3.5 h-3.5 text-typography-secondary" />
-                <span>06 // Ethos & Founder Story</span>
+                <span>06 // About Vaidik & Experience</span>
               </button>
 
               <button
@@ -157,7 +157,7 @@ export const CommandPalette: React.FC = () => {
                 className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-left text-typography-secondary hover:text-typography-primary border border-white/5"
               >
                 <Mail className="w-3.5 h-3.5 text-accent-android" />
-                <span>08 // Get in Touch & Beacon</span>
+                <span>08 // Direct Contact</span>
               </button>
             </div>
           </div>
@@ -166,7 +166,7 @@ export const CommandPalette: React.FC = () => {
           {filteredProjects.length > 0 && (
             <div>
               <span className="text-[10px] text-typography-muted uppercase px-2 tracking-wider">
-                Applications ({filteredProjects.length})
+                Systems, AI & Products ({filteredProjects.length})
               </span>
               <div className="space-y-1.5 mt-2">
                 {filteredProjects.slice(0, 6).map((p) => (
