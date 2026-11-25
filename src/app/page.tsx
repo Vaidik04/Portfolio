@@ -6,15 +6,14 @@ import { WorldCanvas } from "@/components/canvas/WorldCanvas";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { OfflineBanner } from "@/components/ui/OfflineBanner";
 import { DeveloperTerminal } from "@/components/ui/DeveloperTerminal";
+import { EasterEggs } from "@/components/ui/EasterEggs";
 import { Navbar } from "@/components/navbar/Navbar";
 
-// Executive Curated Portfolio Layout
+// Clean-Slate 5-Act Personal Engineering Portfolio
 import { HeroSection } from "@/sections/HeroSection";
-import { PullThePlugSection } from "@/sections/PullThePlugSection";
-import { HomeFlagshipShowcase } from "@/sections/HomeFlagshipShowcase";
-import { HomeArchitecturePreview } from "@/sections/HomeArchitecturePreview";
-import { HomeLabPreview } from "@/sections/HomeLabPreview";
-import { HomeProofCredentialsPreview } from "@/sections/HomeProofCredentialsPreview";
+import { SelectedWorksSection } from "@/sections/SelectedWorksSection";
+import { EngineeringCraftSection } from "@/sections/EngineeringCraftSection";
+import { AboutCredentialsSection } from "@/sections/AboutCredentialsSection";
 import { HomeBeaconTeaser } from "@/sections/HomeBeaconTeaser";
 import { FooterSection } from "@/sections/FooterSection";
 
@@ -25,7 +24,6 @@ export default function Home() {
   const { setScrollProgress, setScrollVelocity, setActiveSection, displayMode } = useWorldStore();
 
   useEffect(() => {
-    // Lenis smooth inertial scrolling with velocity feedback
     const lenis = new Lenis({
       duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -39,20 +37,17 @@ export default function Home() {
       setScrollProgress(p);
       setScrollVelocity(e.velocity || 0);
 
-      // Play subtle whoosh on brisk scroll velocity
       if (Math.abs(e.velocity) > 1.8) {
         proceduralAudio.whoosh(e.velocity);
       }
 
-      // Map progress to active section smoothly
-      if (p < 0.22) setActiveSection("hero");
+      if (p < 0.18) setActiveSection("hero");
       else if (p < 0.45) setActiveSection("flightdeck");
-      else if (p < 0.68) setActiveSection("architecture");
-      else if (p < 0.85) setActiveSection("proof");
+      else if (p < 0.72) setActiveSection("architecture");
+      else if (p < 0.88) setActiveSection("about");
       else setActiveSection("contact");
     });
 
-    // Native scroll fallback listener to ensure 100% sync
     const handleNativeScroll = () => {
       const total = document.documentElement.scrollHeight - window.innerHeight;
       if (total > 0) {
@@ -62,13 +57,15 @@ export default function Home() {
     };
     window.addEventListener("scroll", handleNativeScroll, { passive: true });
 
+    let rafId = 0;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener("scroll", handleNativeScroll);
       lenis.destroy();
     };
@@ -76,39 +73,33 @@ export default function Home() {
 
   return (
     <>
-      {/* 1. Continuous 3D WebGL Studio Canvas (unmounted in Fast Mode for zero GPU overhead) */}
+      {/* 1. Unified 3D World Stage (Unmounted cleanly in Fast 2D Mode) */}
       {displayMode === "experience" ? (
         <WorldCanvas />
       ) : (
         <div
           aria-hidden="true"
-          className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#07080C]"
-        >
-          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-accent-android/5 blur-[160px]" />
-          <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-accent-cyan/5 blur-[160px]" />
-        </div>
+          className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#050608]"
+        />
       )}
 
-      {/* 2. Offline Connectivity Sentinel */}
+      {/* 2. Offline Service Worker & Konami / DevTools Sentinel */}
       <OfflineBanner />
+      <EasterEggs />
 
-      {/* 3. Command Palette (Ctrl+K / Cmd+K) */}
+      {/* 3. Keyboard Power Tools (Cmd+K & Backtick CLI) */}
       <CommandPalette />
-
-      {/* 4. In-Site Developer Terminal (Tilde / Backtick) */}
       <DeveloperTerminal />
 
-      {/* 5. Precision Floating Navbar */}
+      {/* 4. Hairline Swiss Navigation */}
       <Navbar />
 
-      {/* 6. Curated Editorial Landing Flow */}
+      {/* 5. 5-Act Personal Portfolio Flow */}
       <main className="relative z-10 flex flex-col min-h-screen pointer-events-none w-full max-w-full overflow-x-hidden">
         <HeroSection />
-        <PullThePlugSection />
-        <HomeFlagshipShowcase />
-        <HomeArchitecturePreview />
-        <HomeLabPreview />
-        <HomeProofCredentialsPreview />
+        <SelectedWorksSection />
+        <EngineeringCraftSection />
+        <AboutCredentialsSection />
         <HomeBeaconTeaser />
         <FooterSection />
       </main>
