@@ -92,7 +92,7 @@ export const Navbar: React.FC = () => {
           >
             <span className="relative w-7 h-7 rounded-full overflow-hidden border border-white/15 group-hover:border-accent-android/60 transition-colors flex-shrink-0">
               <Image
-                src="/assets/vaidik_authentic_square.jpg"
+                src="/assets/vaidik_portrait_square.jpg"
                 alt="Vaidik Gandhi"
                 fill
                 sizes="28px"

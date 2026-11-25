@@ -110,26 +110,23 @@ export const SovereignMonolith: React.FC = () => {
     const t = state.clock.elapsedTime;
     const clampedDelta = Math.min(delta, 0.05);
 
-    // 1. Visibility window across Acts (fade out smoothly during Lab Constellation / Beacon)
+    // 1. Visibility window across Acts: visible in Hero (right column) and Architecture Exploded Stack; tucked cleanly otherwise
     if (rootRef.current) {
-      const hiddenInDeepScene = scrollProgress > 0.72 && scrollProgress < 0.92;
-      rootRef.current.visible = !hiddenInDeepScene;
+      const hiddenOnScroll = scrollProgress > 0.14 && !manualExploded;
+      rootRef.current.visible = !hiddenOnScroll;
       if (!rootRef.current.visible) return;
 
-      // Desktop right-offset in Hero so left Swiss typography has clean clearance; centers & steps back on scroll
-      const heroBlend = 1 - THREE.MathUtils.smoothstep(scrollProgress, 0.02, 0.22);
       const isCompact = isPortrait || size.width < 1080;
-      const targetX = isCompact ? THREE.MathUtils.lerp(0, 0.9, heroBlend) : THREE.MathUtils.lerp(0, 1.95, heroBlend);
-      const targetY = isCompact ? THREE.MathUtils.lerp(0, 1.25, heroBlend) : 0;
-      const targetZ = THREE.MathUtils.lerp(-2.2, isCompact ? -1.4 : 0, heroBlend);
+      const targetX = manualExploded ? 0 : isCompact ? 1.05 : 2.1;
+      const targetY = manualExploded ? 0 : isCompact ? 1.15 : 0.05;
+      const targetZ = manualExploded ? -0.8 : isCompact ? -2.2 : 0;
 
       rootRef.current.position.x = THREE.MathUtils.damp(rootRef.current.position.x, targetX, 4.5, clampedDelta);
       rootRef.current.position.y = THREE.MathUtils.damp(rootRef.current.position.y, targetY, 4.5, clampedDelta);
       rootRef.current.position.z = THREE.MathUtils.damp(rootRef.current.position.z, targetZ, 4.5, clampedDelta);
 
-      const baseScale = isCompact ? 0.62 : hovered ? 1.05 : 1.0;
-      const scrollScale = THREE.MathUtils.lerp(0.75, 1.0, heroBlend);
-      const nextScale = THREE.MathUtils.damp(rootRef.current.scale.x, baseScale * scrollScale, 5, clampedDelta);
+      const baseScale = isCompact ? 0.52 : hovered ? 1.04 : 0.96;
+      const nextScale = THREE.MathUtils.damp(rootRef.current.scale.x, baseScale, 5, clampedDelta);
       rootRef.current.scale.setScalar(nextScale);
     }
 

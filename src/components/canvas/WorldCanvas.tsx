@@ -8,7 +8,6 @@ import { qualityGovernor } from "@/lib/qualityGovernor";
 import { CameraRig } from "./CameraRig";
 import { WorldEnvironment } from "./WorldEnvironment";
 import { SovereignMonolith } from "./SovereignMonolith";
-import { LabConstellation } from "./LabConstellation";
 import { WorldBeaconArtifact } from "./WorldBeaconArtifact";
 
 export const WorldCanvas: React.FC = () => {
@@ -64,9 +63,6 @@ export const WorldCanvas: React.FC = () => {
 
           {/* Sovereign Compute Core & Exploded Architectural Glass Stack */}
           <SovereignMonolith />
-
-          {/* Scene 4: The Lab Constellation */}
-          <LabConstellation />
 
           {/* Scene 8: Sovereign World Beacon */}
           <WorldBeaconArtifact />

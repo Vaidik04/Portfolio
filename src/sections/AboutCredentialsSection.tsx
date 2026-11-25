@@ -14,16 +14,16 @@ export const AboutCredentialsSection: React.FC = () => {
   return (
     <section
       id="about-me"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 pointer-events-auto"
+      className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 pointer-events-auto"
     >
       {/* Header */}
-      <div className="pb-10 border-b border-white/[0.08] flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+      <div className="pb-6 border-b border-white/[0.08] flex flex-col lg:flex-row lg:items-end justify-between gap-4">
         <div className="max-w-2xl">
-          <div className="text-[11px] font-mono uppercase tracking-widest text-typography-faint mb-3">
-            04 // Engineer Profile &amp; Verified Rigor
+          <div className="text-[11px] font-mono uppercase tracking-widest text-typography-faint mb-2">
+            04 // About Me &amp; Verified Credentials
           </div>
           <h2 className="swiss-heading font-heading font-bold text-white">
-            Building deterministic software for unpredictable environments.
+            Why I obsess over real-world constraints.
           </h2>
         </div>
 
@@ -32,25 +32,25 @@ export const AboutCredentialsSection: React.FC = () => {
           onClick={() => proceduralAudio.tick()}
           className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-accent-android transition-colors self-start lg:self-auto"
         >
-          <span>Full Bio &amp; Experience Timeline</span>
+          <span>Full Bio &amp; Experience</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>
 
       {/* Main 12-Col Hairline Spread */}
       <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-white/[0.08]">
-        {/* Left 7 Cols: Personal Narrative + Verified Credentials Ledger */}
-        <div className="lg:col-span-7 py-8 lg:pr-10 flex flex-col justify-between gap-10">
+        {/* Left 7 Cols: Personal Story + Verified Credentials */}
+        <div className="lg:col-span-7 py-7 lg:pr-10 flex flex-col justify-between gap-8">
           <div className="space-y-4 text-sm sm:text-base text-typography-muted font-sans leading-relaxed">
             <p>
-              I am <strong className="text-white font-semibold">Vaidik Gandhi</strong>, a final-year B.Tech Computer Science (AI &amp; ML) engineer at LNCT Bhopal (&apos;26). My engineering work moves across two interconnected frontiers: <strong className="text-white font-medium">intelligent distributed systems</strong>—such as peer-to-peer SwarmOS meshes, simulated-annealing transit optimization (QRoute), and edge computer vision—and <strong className="text-white font-medium">offline-first native applications</strong> shipped to real businesses under my studio venture, VaidikTech.
+              I&apos;m <strong className="text-white font-semibold">Vaidik Gandhi</strong>, a final-year B.Tech CSE (AI &amp; ML) engineer at LNCT Bhopal (&apos;26). Whether I&apos;m building peer-to-peer SwarmOS device clusters, quantum-inspired routing solvers (QRoute), or edge YOLOv8 vision pipelines, I focus on systems that keep working when assumptions break.
             </p>
             <p>
-              I care deeply about what happens when assumptions break: erratic connectivity in concrete basements, floating-point drift over thousands of ledger entries, and keeping private data isolated inside hardware security modules instead of multi-tenant clouds.
+              That same obsession pushed me to start <strong className="text-white font-medium">VaidikTech</strong>—shipping 100% offline, hardware-encrypted Android software used daily by Indian pawnbrokers, jewellers in concrete basement dead-zones, and High Court advocates whose client files can never sit on public multi-tenant clouds.
             </p>
 
             {/* Clean Metadata Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/[0.08] text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-5 border-t border-white/[0.08] text-xs">
               <div className="flex items-start gap-2.5">
                 <GraduationCap className="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5" />
                 <div>
@@ -62,7 +62,7 @@ export const AboutCredentialsSection: React.FC = () => {
               <div className="flex items-start gap-2.5">
                 <Building2 className="w-4 h-4 text-accent-android flex-shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-white block">Independent Studio</span>
+                  <span className="font-semibold text-white block">Independent Venture</span>
                   <span className="font-mono text-[11px] text-typography-faint">Founder @ VaidikTech</span>
                 </div>
               </div>
@@ -70,19 +70,19 @@ export const AboutCredentialsSection: React.FC = () => {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-typography-muted flex-shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-white block">Location</span>
+                  <span className="font-semibold text-white block">Base</span>
                   <span className="font-mono text-[11px] text-typography-faint">Bhopal, India (IST)</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* NPTEL / IIT Verified Credentials Table (No Box Soup) */}
+          {/* NPTEL / IIT Verified Credentials Ledger */}
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
               <span className="text-[11px] font-mono uppercase tracking-widest text-typography-faint flex items-center gap-1.5">
                 <Award className="w-3.5 h-3.5 text-sky-400" />
-                <span>Proctored IIT / NPTEL Certifications</span>
+                <span>Proctored IIT / NPTEL &amp; Verified Credentials</span>
               </span>
               <Link
                 href="/credentials"
@@ -100,7 +100,7 @@ export const AboutCredentialsSection: React.FC = () => {
                   href={cert.fileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-3 flex items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors group"
+                  className="py-2.5 flex items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors group"
                 >
                   <div className="min-w-0">
                     <div className="text-xs sm:text-sm font-medium text-white group-hover:text-accent-android transition-colors truncate">
@@ -122,12 +122,12 @@ export const AboutCredentialsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Right 5 Cols: Clean Portrait Showcase */}
-        <div className="lg:col-span-5 lg:border-l border-t lg:border-t-0 border-white/[0.08] py-8 lg:pl-10 flex flex-col justify-between">
+        {/* Right 5 Cols: Crisp Compact High-Res Portrait (1024x1024 Native, Zero Upscale Blur) */}
+        <div className="lg:col-span-5 lg:border-l border-t lg:border-t-0 border-white/[0.08] py-7 lg:pl-10 flex flex-col justify-between gap-6">
           <div>
             <div className="flex items-center justify-between mb-4">
               <span className="text-[10px] font-mono uppercase tracking-widest text-typography-faint">
-                Portrait // ID Verification
+                Portrait // Bhopal, IN
               </span>
 
               <div className="flex items-center p-0.5 rounded-md border border-white/10 bg-white/[0.02] text-[10px] font-mono">
@@ -162,26 +162,35 @@ export const AboutCredentialsSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="relative aspect-[4/4.2] w-full max-w-sm lg:max-w-none rounded-lg overflow-hidden border border-white/[0.08] bg-[#080A0F] group">
-              <Image
-                src={
-                  avatarMode === "authentic"
-                    ? "/assets/vaidik_authentic_square.jpg"
-                    : "/assets/vaidik_avatar_3d.png"
-                }
-                alt="Vaidik Gandhi"
-                fill
-                sizes="(max-width: 1024px) 100vw, 35vw"
-                className="object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#050608] via-[#050608]/60 to-transparent flex items-center justify-between text-[11px] font-mono">
-                <span className="text-white">Vaidik Gandhi</span>
-                <span className="text-accent-android">github.com/Vaidik04</span>
+            <div className="flex flex-col sm:flex-row lg:flex-col items-start sm:items-center lg:items-start gap-5">
+              <div className="relative w-52 h-52 sm:w-60 sm:h-60 rounded-xl overflow-hidden border border-white/15 bg-[#080A0F] flex-shrink-0 shadow-xl">
+                <Image
+                  src={
+                    avatarMode === "authentic"
+                      ? "/assets/vaidik_portrait_square.jpg"
+                      : "/assets/vaidik_3d_avatar_square.jpg"
+                  }
+                  alt="Vaidik Gandhi"
+                  fill
+                  sizes="240px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+
+              <div className="space-y-2 text-xs">
+                <div className="font-heading font-bold text-base text-white">Vaidik Gandhi</div>
+                <p className="text-typography-muted font-sans leading-relaxed">
+                  Systems, AI/ML &amp; offline-first engineering. Certified across NPTEL/IIT coursework, HackerRank, and production mobile delivery.
+                </p>
+                <div className="pt-1 font-mono text-[11px] text-accent-android">
+                  github.com/Vaidik04
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-typography-faint">
+          <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-typography-faint">
             <span>Kotlin · Python · C++ · TypeScript · SQL</span>
             <Link href="/skills" className="text-white hover:text-sky-400 transition-colors">
               Skills Matrix →
