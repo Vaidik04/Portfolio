@@ -6,19 +6,19 @@ import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 
 export const WorldEnvironment: React.FC = () => {
-  const { activeAppId, scrollProgress, isPlugPulled } = useWorldStore();
+  const { scrollProgress, isPlugPulled, isOffline } = useWorldStore();
   const rimLightRef = useRef<THREE.DirectionalLight>(null);
   const pointLightRef = useRef<THREE.PointLight>(null);
   const keyLightRef = useRef<THREE.DirectionalLight>(null);
 
-  // Target accent colors based on active app (or emergency sovereign green when plug pulled)
-  const accentColor = isPlugPulled
+  const isDisconnected = isPlugPulled || isOffline;
+
+  // Target accent color shifts from crisp AI Cobalt (#38BDF8) to Sovereign Emerald (#3DDC84) during outage or proof sections
+  const accentColor = isDisconnected
     ? "#3DDC84"
-    : activeAppId === "girvi"
+    : scrollProgress > 0.38
     ? "#3DDC84"
-    : activeAppId === "jewelbill"
-    ? "#F5C26B"
-    : "#7C5CFF";
+    : "#38BDF8";
   const targetColor = useRef(new THREE.Color(accentColor));
 
   useFrame((state, delta) => {
@@ -26,15 +26,15 @@ export const WorldEnvironment: React.FC = () => {
 
     if (rimLightRef.current) {
       rimLightRef.current.color.lerp(targetColor.current, delta * 3.5);
-      rimLightRef.current.intensity = isPlugPulled
-        ? 3.2 + Math.sin(state.clock.elapsedTime * 6.0) * 0.8
-        : 2.6;
+      rimLightRef.current.intensity = isDisconnected
+        ? 3.0 + Math.sin(state.clock.elapsedTime * 5.0) * 0.6
+        : 2.2;
     }
     if (pointLightRef.current) {
       pointLightRef.current.color.lerp(targetColor.current, delta * 3.5);
     }
     if (keyLightRef.current) {
-      const targetIntensity = isPlugPulled ? 0.4 : 1.9;
+      const targetIntensity = isDisconnected ? 0.45 : 1.7;
       keyLightRef.current.intensity = THREE.MathUtils.damp(
         keyLightRef.current.intensity,
         targetIntensity,

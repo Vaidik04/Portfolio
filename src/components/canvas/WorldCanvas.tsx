@@ -6,9 +6,8 @@ import * as THREE from "three";
 import { useWorldStore } from "@/store/useWorldStore";
 import { qualityGovernor } from "@/lib/qualityGovernor";
 import { CameraRig } from "./CameraRig";
-import { BootGlyphRain } from "./BootGlyphRain";
 import { WorldEnvironment } from "./WorldEnvironment";
-import { HeroTrinityAssembly } from "./HeroTrinityAssembly";
+import { SovereignMonolith } from "./SovereignMonolith";
 import { LabConstellation } from "./LabConstellation";
 import { WorldBeaconArtifact } from "./WorldBeaconArtifact";
 
@@ -63,8 +62,8 @@ export const WorldCanvas: React.FC = () => {
           {/* Master Timeline Camera Rig */}
           <CameraRig />
 
-          {/* Scene 1 & 2: The Trinity 3-Device Hero & Exploded Architecture Stack */}
-          <HeroTrinityAssembly />
+          {/* Sovereign Compute Core & Exploded Architectural Glass Stack */}
+          <SovereignMonolith />
 
           {/* Scene 4: The Lab Constellation */}
           <LabConstellation />
