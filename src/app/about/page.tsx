@@ -78,7 +78,7 @@ export default function AboutPage() {
               Engineering Disciplines
             </h3>
             <p className="text-xs sm:text-sm text-typography-secondary font-sans max-w-xl">
-              Non-negotiable technical standards applied across every commercial Android deployment.
+              Core engineering principles applied across distributed systems, AI pipelines, and production mobile deployments.
             </p>
           </div>
 
@@ -130,9 +130,9 @@ export default function AboutPage() {
             </Link>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#141824] border border-white/15 text-white font-mono text-xs hover:border-white/30 transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[#141824] border border-white/15 text-white font-mono text-xs hover:border-white/30 transition-all"
             >
-              <span>Flagship Apps</span>
+              <span>All Projects</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

@@ -40,11 +40,11 @@ export default function ProjectCaseStudyPage({ params }: { params: { id: string 
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between mb-6 pb-3 border-b border-border">
           <Link
-            href="/#flight-deck"
+            href="/#selected-works"
             className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Flagship Work</span>
+            <span>Back to Selected Works</span>
           </Link>
 
           <div className="flex items-center gap-2 text-xs font-mono text-text-muted">

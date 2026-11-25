@@ -47,15 +47,15 @@ export const DeployBeaconSection: React.FC = () => {
     >
       {/* Section Header */}
       <div className="flex flex-col gap-3 mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-accent-android w-fit">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/[0.03] border border-white/10 text-xs font-mono text-accent-android w-fit">
           <Globe className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "12s" }} />
-          <span>Scene 08 · Sovereign Deployment Beacon</span>
+          <span>Direct Contact · Bhopal, India (IST)</span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary">
-          Let&apos;s build something sovereign.
+        <h2 className="text-3xl sm:text-5xl font-heading font-bold tracking-tight text-typography-primary">
+          Let&apos;s engineer something resilient.
         </h2>
         <p className="text-sm sm:text-base text-typography-secondary font-sans max-w-xl leading-relaxed">
-          Available for offline-first architecture contracts, native Android systems development, and sovereign mobile software consulting.
+          Open to software engineering roles, AI &amp; distributed systems research collaborations, and challenging systems engineering problems.
         </p>
       </div>
 
