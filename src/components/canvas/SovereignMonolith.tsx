@@ -110,15 +110,16 @@ export const SovereignMonolith: React.FC = () => {
     const t = state.clock.elapsedTime;
     const clampedDelta = Math.min(delta, 0.05);
 
-    // 1. Visibility window: activate on manual Exploded Stack mode so the Hero canvas stays clean
+    // 1. Visibility window: show cleanly in the Hero right stage and manual Exploded Stack mode
     if (rootRef.current) {
-      rootRef.current.visible = manualExploded;
+      const visibleInHero = scrollProgress <= 0.14;
+      rootRef.current.visible = visibleInHero || manualExploded;
       if (!rootRef.current.visible) return;
 
       const isCompact = isPortrait || size.width < 1080;
-      const targetX = manualExploded ? 0 : isCompact ? 1.4 : 2.35;
-      const targetY = manualExploded ? 0 : 0.15;
-      const targetZ = manualExploded ? -0.8 : -3.8;
+      const targetX = manualExploded ? 0 : isCompact ? 1.5 : 2.55;
+      const targetY = manualExploded ? 0 : 0.08;
+      const targetZ = manualExploded ? -0.8 : -3.6;
 
       rootRef.current.position.x = THREE.MathUtils.damp(rootRef.current.position.x, targetX, 4.5, clampedDelta);
       rootRef.current.position.y = THREE.MathUtils.damp(rootRef.current.position.y, targetY, 4.5, clampedDelta);

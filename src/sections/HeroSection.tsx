@@ -38,7 +38,7 @@ const HERO_APPS = [
 
 export const HeroSection: React.FC = () => {
   const { activeAppId, setActiveAppId, isPlugPulled, isOffline } = useWorldStore();
-  const [spotlightMode, setSpotlightMode] = useState<"portrait" | "app">("portrait");
+  const [showPreview, setShowPreview] = useState(false);
 
   const isDisconnected = isPlugPulled || isOffline;
   const activeApp = HERO_APPS.find((a) => a.id === activeAppId) || HERO_APPS[0];
@@ -46,7 +46,7 @@ export const HeroSection: React.FC = () => {
   const handleSelectApp = (id: "girvi" | "jewelbill" | "advokosh") => {
     proceduralAudio.tick();
     setActiveAppId(id);
-    setSpotlightMode("app");
+    setShowPreview(true);
   };
 
   return (
@@ -75,7 +75,7 @@ export const HeroSection: React.FC = () => {
         </span>
       </motion.div>
 
-      {/* Main 12-Col Hero: Left Personal Voice + Apps | Right Seamless Studio Portrait */}
+      {/* Main 12-Col Hero: Left Personal Voice + Apps | Right 3D Monolith Space / Live App Preview */}
       <div className="my-auto py-4 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center pointer-events-auto">
         {/* Left 7 Cols */}
         <div className="md:col-span-7 flex flex-col">
@@ -112,7 +112,7 @@ export const HeroSection: React.FC = () => {
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {HERO_APPS.map((app) => {
-                const isActive = spotlightMode === "app" && app.id === activeAppId;
+                const isActive = showPreview && app.id === activeAppId;
                 return (
                   <button
                     key={app.id}
@@ -170,42 +170,14 @@ export const HeroSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Right 5 Cols: Seamless Obsidian Studio Portrait or Interactive App Preview */}
+        {/* Right 5 Cols: Open 3D Spatial Canvas or Interactive App Preview */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
           className="md:col-span-5 flex flex-col items-center md:items-end justify-center relative"
         >
-          {spotlightMode === "portrait" ? (
-            <div
-              className="relative w-full max-w-[330px] sm:max-w-[360px] lg:max-w-[390px] aspect-[3/4] overflow-hidden select-none"
-              style={{
-                maskImage: "linear-gradient(to bottom, black 74%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 74%, transparent 100%)",
-              }}
-            >
-              {/* True Alpha Radial Feather So Portrait Melts Effortlessly Into Obsidian Canvas */}
-              <div
-                className="relative w-full h-full"
-                style={{
-                  maskImage:
-                    "radial-gradient(ellipse 74% 84% at 50% 45%, black 45%, rgba(0,0,0,0.75) 66%, transparent 98%)",
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse 74% 84% at 50% 45%, black 45%, rgba(0,0,0,0.75) 66%, transparent 98%)",
-                }}
-              >
-                <Image
-                  src="/assets/vaidik_hero_studio.jpg"
-                  alt="Vaidik Gandhi"
-                  fill
-                  sizes="(max-width: 768px) 330px, 390px"
-                  className="object-cover object-top"
-                  priority
-                />
-              </div>
-            </div>
-          ) : (
+          {showPreview && (
             <div className="w-full max-w-[320px] sm:max-w-[340px] rounded-2xl border border-white/15 bg-[#080A0F]/95 backdrop-blur-xl p-2.5 shadow-2xl">
               <div className="flex items-center justify-between px-1.5 py-1.5 text-[10px] font-mono">
                 <span className="truncate font-semibold text-white">{activeApp.name}</span>
@@ -213,12 +185,12 @@ export const HeroSection: React.FC = () => {
                   type="button"
                   onClick={() => {
                     proceduralAudio.tick();
-                    setSpotlightMode("portrait");
+                    setShowPreview(false);
                   }}
                   className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-white/10 hover:border-white/30 text-typography-muted hover:text-white cursor-pointer"
                 >
                   <X className="w-3 h-3" />
-                  <span>Photo</span>
+                  <span>Close</span>
                 </button>
               </div>
 
