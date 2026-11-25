@@ -116,19 +116,20 @@ export const SovereignMonolith: React.FC = () => {
       rootRef.current.visible = !hiddenInDeepScene;
       if (!rootRef.current.visible) return;
 
-      // Desktop right-offset in Hero so left Swiss typography has clean clearance; centers on scroll
-      const heroBlend = 1 - THREE.MathUtils.smoothstep(scrollProgress, 0.02, 0.2);
-      const targetX = isPortrait ? 0 : THREE.MathUtils.lerp(0, 1.85, heroBlend);
-      const targetY = isPortrait ? THREE.MathUtils.lerp(-0.2, 0.7, heroBlend) : 0;
-      const targetZ = THREE.MathUtils.lerp(0, -1.2, THREE.MathUtils.smoothstep(scrollProgress, 0.16, 0.35));
+      // Desktop right-offset in Hero so left Swiss typography has clean clearance; centers & steps back on scroll
+      const heroBlend = 1 - THREE.MathUtils.smoothstep(scrollProgress, 0.02, 0.22);
+      const isCompact = isPortrait || size.width < 1080;
+      const targetX = isCompact ? THREE.MathUtils.lerp(0, 0.9, heroBlend) : THREE.MathUtils.lerp(0, 1.95, heroBlend);
+      const targetY = isCompact ? THREE.MathUtils.lerp(0, 1.25, heroBlend) : 0;
+      const targetZ = THREE.MathUtils.lerp(-2.2, isCompact ? -1.4 : 0, heroBlend);
 
       rootRef.current.position.x = THREE.MathUtils.damp(rootRef.current.position.x, targetX, 4.5, clampedDelta);
       rootRef.current.position.y = THREE.MathUtils.damp(rootRef.current.position.y, targetY, 4.5, clampedDelta);
       rootRef.current.position.z = THREE.MathUtils.damp(rootRef.current.position.z, targetZ, 4.5, clampedDelta);
 
-      const baseScale = isPortrait ? 0.72 : hovered ? 1.05 : 1.0;
-      const explodeShrink = scrollProgress > 0.45 && scrollProgress < 0.72 ? 0.85 : 1.0;
-      const nextScale = THREE.MathUtils.damp(rootRef.current.scale.x, baseScale * explodeShrink, 5, clampedDelta);
+      const baseScale = isCompact ? 0.62 : hovered ? 1.05 : 1.0;
+      const scrollScale = THREE.MathUtils.lerp(0.75, 1.0, heroBlend);
+      const nextScale = THREE.MathUtils.damp(rootRef.current.scale.x, baseScale * scrollScale, 5, clampedDelta);
       rootRef.current.scale.setScalar(nextScale);
     }
 
@@ -256,7 +257,7 @@ export const SovereignMonolith: React.FC = () => {
             color={activeWireColor}
             wireframe
             transparent
-            opacity={isDisconnected ? 0.55 : 0.32}
+            opacity={scrollProgress > 0.16 ? 0.12 : isDisconnected ? 0.45 : 0.26}
           />
         </mesh>
 

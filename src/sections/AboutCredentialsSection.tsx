@@ -162,7 +162,7 @@ export const AboutCredentialsSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="relative aspect-[4/4.3] w-full rounded-lg overflow-hidden border border-white/[0.08] bg-[#080A0F] group">
+            <div className="relative aspect-[4/4.2] w-full max-w-sm lg:max-w-none rounded-lg overflow-hidden border border-white/[0.08] bg-[#080A0F] group">
               <Image
                 src={
                   avatarMode === "authentic"
