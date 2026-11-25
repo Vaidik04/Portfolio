@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -37,29 +37,16 @@ const HERO_APPS = [
 ];
 
 export const HeroSection: React.FC = () => {
-  const { activeAppId, setActiveAppId, isPlugPulled, isOffline, scrollProgress } = useWorldStore();
-  const [isAutoCycling, setIsAutoCycling] = useState(true);
-  const pauseTimer = useRef<NodeJS.Timeout | null>(null);
+  const { activeAppId, setActiveAppId, isPlugPulled, isOffline } = useWorldStore();
+  const [spotlightMode, setSpotlightMode] = useState<"portrait" | "app">("portrait");
 
   const isDisconnected = isPlugPulled || isOffline;
   const activeApp = HERO_APPS.find((a) => a.id === activeAppId) || HERO_APPS[0];
 
-  useEffect(() => {
-    if (!isAutoCycling || scrollProgress > 0.16) return;
-    const interval = setInterval(() => {
-      const idx = HERO_APPS.findIndex((a) => a.id === activeAppId);
-      const next = HERO_APPS[(idx + 1) % HERO_APPS.length];
-      setActiveAppId(next.id);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, [isAutoCycling, activeAppId, scrollProgress, setActiveAppId]);
-
   const handleSelectApp = (id: "girvi" | "jewelbill" | "advokosh") => {
     proceduralAudio.tick();
     setActiveAppId(id);
-    setIsAutoCycling(false);
-    if (pauseTimer.current) clearTimeout(pauseTimer.current);
-    pauseTimer.current = setTimeout(() => setIsAutoCycling(true), 12000);
+    setSpotlightMode("app");
   };
 
   return (
@@ -88,7 +75,7 @@ export const HeroSection: React.FC = () => {
         </span>
       </motion.div>
 
-      {/* Main 12-Col Hero: Left Personal Voice + App Switcher | Right Live Device Frame */}
+      {/* Main 12-Col Hero: Left Personal Voice + App Switcher | Right 3D Portrait / App Spotlight */}
       <div className="my-auto py-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pointer-events-auto">
         {/* Left 7 Cols */}
         <div className="lg:col-span-7 flex flex-col">
@@ -121,21 +108,17 @@ export const HeroSection: React.FC = () => {
             className="mt-6"
           >
             <div className="text-[10px] font-mono uppercase tracking-widest text-typography-faint mb-2">
-              Shipped on Google Play · Live Preview
+              Shipped on Google Play · Click to preview
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {HERO_APPS.map((app) => {
-                const isActive = app.id === activeAppId;
+                const isActive = spotlightMode === "app" && app.id === activeAppId;
                 return (
                   <button
                     key={app.id}
                     type="button"
                     onClick={() => handleSelectApp(app.id)}
-                    style={
-                      isActive
-                        ? { borderColor: `${app.accent}90` }
-                        : undefined
-                    }
+                    style={isActive ? { borderColor: `${app.accent}90` } : undefined}
                     className={`relative overflow-hidden flex items-center gap-2 px-3 py-2 rounded-md border text-xs font-mono transition-colors cursor-pointer ${
                       isActive
                         ? "bg-white/[0.08] text-white font-semibold"
@@ -147,16 +130,6 @@ export const HeroSection: React.FC = () => {
                       style={{ backgroundColor: app.accent }}
                     />
                     <span>{app.name}</span>
-                    {isActive && isAutoCycling && (
-                      <span
-                        key={app.id}
-                        className="absolute bottom-0 left-0 h-[1.5px]"
-                        style={{
-                          backgroundColor: app.accent,
-                          animation: "heroProgress 4.5s linear infinite",
-                        }}
-                      />
-                    )}
                   </button>
                 );
               })}
@@ -197,37 +170,86 @@ export const HeroSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Right 5 Cols: Crisp Interactive Device Preview Frame */}
+        {/* Right 5 Cols: Vaidik's 3D Portrait Spotlight (with toggle to Live App Screen) */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-5 flex flex-col items-center lg:items-end"
         >
-          <div className="w-full max-w-[280px] sm:max-w-[300px] rounded-2xl border border-white/15 bg-[#080A0F]/90 backdrop-blur-xl p-2.5 shadow-2xl">
-            <div className="flex items-center justify-between px-2 py-1.5 text-[10px] font-mono text-typography-faint">
-              <span className="truncate font-semibold text-white">{activeApp.name}</span>
-              <span style={{ color: activeApp.accent }}>{activeApp.badge}</span>
+          <div className="w-full max-w-[290px] sm:max-w-[320px] rounded-2xl border border-white/15 bg-[#080A0F]/95 backdrop-blur-xl p-2.5 shadow-2xl">
+            <div className="flex items-center justify-between px-1.5 py-1.5 text-[10px] font-mono">
+              <span className="truncate font-semibold text-white">
+                {spotlightMode === "portrait" ? "VAIDIK GANDHI // 3D" : activeApp.name}
+              </span>
+
+              <div className="flex items-center p-0.5 rounded border border-white/10 bg-white/[0.03]">
+                <button
+                  type="button"
+                  onClick={() => {
+                    proceduralAudio.tick();
+                    setSpotlightMode("portrait");
+                  }}
+                  className={`px-2 py-0.5 rounded text-[10px] cursor-pointer transition-colors ${
+                    spotlightMode === "portrait"
+                      ? "bg-white text-[#050608] font-bold"
+                      : "text-typography-faint hover:text-white"
+                  }`}
+                >
+                  3D Photo
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    proceduralAudio.tick();
+                    setSpotlightMode("app");
+                  }}
+                  className={`px-2 py-0.5 rounded text-[10px] cursor-pointer transition-colors ${
+                    spotlightMode === "app"
+                      ? "bg-white text-[#050608] font-bold"
+                      : "text-typography-faint hover:text-white"
+                  }`}
+                >
+                  Live App
+                </button>
+              </div>
             </div>
 
-            <Link
-              href={`/projects/${activeApp.id}`}
-              onClick={() => proceduralAudio.tick()}
-              className="group relative block aspect-[9/16] w-full rounded-xl overflow-hidden border border-white/10 bg-[#050608]"
-            >
-              <Image
-                src={activeApp.screen}
-                alt={`${activeApp.name} live interface`}
-                fill
-                sizes="300px"
-                className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
-                priority
-              />
-              <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#050608] via-[#050608]/80 to-transparent flex items-center justify-between text-[10px] font-mono">
-                <span className="text-typography-muted truncate pr-2">{activeApp.subtitle}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-white flex-shrink-0" />
+            {spotlightMode === "portrait" ? (
+              <div className="group relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-white/10 bg-[#050608]">
+                <Image
+                  src="/assets/vaidik_3d_avatar_portrait.jpg"
+                  alt="Vaidik Gandhi 3D Portrait"
+                  fill
+                  sizes="320px"
+                  className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                  priority
+                />
+                <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#050608] via-[#050608]/75 to-transparent flex items-center justify-between text-[10px] font-mono">
+                  <span className="text-white/90">Bhopal, IN · LNCT &apos;26</span>
+                  <span className="text-accent-android">CSE (AI &amp; ML)</span>
+                </div>
               </div>
-            </Link>
+            ) : (
+              <Link
+                href={`/projects/${activeApp.id}`}
+                onClick={() => proceduralAudio.tick()}
+                className="group relative block aspect-[3/4] w-full rounded-xl overflow-hidden border border-white/10 bg-[#050608]"
+              >
+                <Image
+                  src={activeApp.screen}
+                  alt={`${activeApp.name} live interface`}
+                  fill
+                  sizes="320px"
+                  className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                  priority
+                />
+                <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#050608] via-[#050608]/80 to-transparent flex items-center justify-between text-[10px] font-mono">
+                  <span className="text-typography-muted truncate pr-2">{activeApp.subtitle}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-white flex-shrink-0" />
+                </div>
+              </Link>
+            )}
           </div>
         </motion.div>
       </div>
