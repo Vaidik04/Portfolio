@@ -125,7 +125,7 @@ export const AboutSovereignSection: React.FC = () => {
               <Image
                 src={
                   avatarMode === "authentic"
-                    ? "/assets/vaidik_portrait_pro.jpg"
+                    ? "/assets/vaidik_portrait_square.jpg"
                     : "/assets/vaidik_3d_avatar_portrait.jpg"
                 }
                 alt={avatarMode === "authentic" ? "Vaidik Gandhi · Authentic Portrait" : "Vaidik Gandhi · 3D Lookalike Avatar"}

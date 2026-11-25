@@ -110,22 +110,22 @@ export const SovereignMonolith: React.FC = () => {
     const t = state.clock.elapsedTime;
     const clampedDelta = Math.min(delta, 0.05);
 
-    // 1. Visibility window across Acts: visible in Hero (right column) and Architecture Exploded Stack; tucked cleanly otherwise
+    // 1. Visibility window: show cleanly in Exploded Stack / Deep Space, stay subtle behind Hero cutout
     if (rootRef.current) {
-      const hiddenOnScroll = scrollProgress > 0.14 && !manualExploded;
-      rootRef.current.visible = !hiddenOnScroll;
+      const visibleInHero = scrollProgress <= 0.14;
+      rootRef.current.visible = visibleInHero || manualExploded;
       if (!rootRef.current.visible) return;
 
       const isCompact = isPortrait || size.width < 1080;
-      const targetX = manualExploded ? 0 : isCompact ? 0 : 2.35;
-      const targetY = manualExploded ? 0 : 0;
-      const targetZ = manualExploded ? -0.8 : -3.4;
+      const targetX = manualExploded ? 0 : isCompact ? 1.4 : 2.35;
+      const targetY = manualExploded ? 0 : 0.15;
+      const targetZ = manualExploded ? -0.8 : -3.8;
 
       rootRef.current.position.x = THREE.MathUtils.damp(rootRef.current.position.x, targetX, 4.5, clampedDelta);
       rootRef.current.position.y = THREE.MathUtils.damp(rootRef.current.position.y, targetY, 4.5, clampedDelta);
       rootRef.current.position.z = THREE.MathUtils.damp(rootRef.current.position.z, targetZ, 4.5, clampedDelta);
 
-      const baseScale = isCompact ? 0.45 : hovered ? 0.82 : 0.76;
+      const baseScale = manualExploded ? 0.85 : isCompact ? 0.42 : 0.72;
       const nextScale = THREE.MathUtils.damp(rootRef.current.scale.x, baseScale, 5, clampedDelta);
       rootRef.current.scale.setScalar(nextScale);
     }

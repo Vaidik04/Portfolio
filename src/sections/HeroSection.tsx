@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, X } from "lucide-react";
 import { useWorldStore } from "@/store/useWorldStore";
 import { proceduralAudio } from "@/lib/proceduralAudio";
 import { Magnetic } from "@/components/ui/Magnetic";
@@ -52,7 +52,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[88vh] flex flex-col justify-between pt-24 sm:pt-28 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 pointer-events-none"
+      className="relative min-h-[88vh] flex flex-col justify-between pt-20 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 pointer-events-none"
     >
       {/* Top Identity Strip */}
       <motion.div
@@ -75,10 +75,10 @@ export const HeroSection: React.FC = () => {
         </span>
       </motion.div>
 
-      {/* Main 12-Col Hero: Left Personal Voice + App Switcher | Right 3D Portrait / App Spotlight */}
-      <div className="my-auto py-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pointer-events-auto">
+      {/* Main 12-Col Hero: Left Personal Voice + Apps | Right Clean Cutout Standing in Open Space */}
+      <div className="my-auto pt-6 grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-end pointer-events-auto">
         {/* Left 7 Cols */}
-        <div className="lg:col-span-7 flex flex-col">
+        <div className="md:col-span-7 flex flex-col pb-4">
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -170,77 +170,56 @@ export const HeroSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Right 5 Cols: Vaidik's 3D Portrait Spotlight (with toggle to Live App Screen) */}
+        {/* Right 5 Cols: Transparent Background-Removed Cutout of Vaidik Standing With Folded Hands */}
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 flex flex-col items-center lg:items-end"
+          transition={{ duration: 0.6, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+          className="md:col-span-5 flex flex-col items-center md:items-end justify-end relative"
         >
-          <div className="w-full max-w-[290px] sm:max-w-[320px] rounded-2xl border border-white/15 bg-[#080A0F]/95 backdrop-blur-xl p-2.5 shadow-2xl">
-            <div className="flex items-center justify-between px-1.5 py-1.5 text-[10px] font-mono">
-              <span className="truncate font-semibold text-white">
-                {spotlightMode === "portrait" ? "VAIDIK GANDHI // 3D" : activeApp.name}
-              </span>
-
-              <div className="flex items-center p-0.5 rounded border border-white/10 bg-white/[0.03]">
+          {spotlightMode === "portrait" ? (
+            <div className="relative w-[240px] sm:w-[270px] lg:w-[300px] h-[380px] sm:h-[430px] lg:h-[470px] flex items-end justify-center select-none">
+              {/* Subtle Ambient Halo Behind Shoulders — No Box Border */}
+              <div
+                aria-hidden="true"
+                className="absolute top-12 inset-x-6 h-52 rounded-full bg-sky-500/10 blur-[80px] pointer-events-none"
+              />
+              <Image
+                src="/assets/vaidik_cutout.png"
+                alt="Vaidik Gandhi"
+                fill
+                sizes="(max-width: 768px) 240px, 300px"
+                className="object-contain object-bottom drop-shadow-[0_24px_45px_rgba(0,0,0,0.9)]"
+                priority
+              />
+            </div>
+          ) : (
+            <div className="w-full max-w-[280px] sm:max-w-[300px] rounded-2xl border border-white/15 bg-[#080A0F]/95 backdrop-blur-xl p-2.5 shadow-2xl mb-2">
+              <div className="flex items-center justify-between px-1.5 py-1.5 text-[10px] font-mono">
+                <span className="truncate font-semibold text-white">{activeApp.name}</span>
                 <button
                   type="button"
                   onClick={() => {
                     proceduralAudio.tick();
                     setSpotlightMode("portrait");
                   }}
-                  className={`px-2 py-0.5 rounded text-[10px] cursor-pointer transition-colors ${
-                    spotlightMode === "portrait"
-                      ? "bg-white text-[#050608] font-bold"
-                      : "text-typography-faint hover:text-white"
-                  }`}
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-white/10 hover:border-white/30 text-typography-muted hover:text-white cursor-pointer"
                 >
-                  3D Photo
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    proceduralAudio.tick();
-                    setSpotlightMode("app");
-                  }}
-                  className={`px-2 py-0.5 rounded text-[10px] cursor-pointer transition-colors ${
-                    spotlightMode === "app"
-                      ? "bg-white text-[#050608] font-bold"
-                      : "text-typography-faint hover:text-white"
-                  }`}
-                >
-                  Live App
+                  <X className="w-3 h-3" />
+                  <span>Photo</span>
                 </button>
               </div>
-            </div>
 
-            {spotlightMode === "portrait" ? (
-              <div className="group relative aspect-[3/4] w-full rounded-xl overflow-hidden border border-white/10 bg-[#050608]">
-                <Image
-                  src="/assets/vaidik_3d_avatar_portrait.jpg"
-                  alt="Vaidik Gandhi 3D Portrait"
-                  fill
-                  sizes="320px"
-                  className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
-                  priority
-                />
-                <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#050608] via-[#050608]/75 to-transparent flex items-center justify-between text-[10px] font-mono">
-                  <span className="text-white/90">Bhopal, IN · LNCT &apos;26</span>
-                  <span className="text-accent-android">CSE (AI &amp; ML)</span>
-                </div>
-              </div>
-            ) : (
               <Link
                 href={`/projects/${activeApp.id}`}
                 onClick={() => proceduralAudio.tick()}
-                className="group relative block aspect-[3/4] w-full rounded-xl overflow-hidden border border-white/10 bg-[#050608]"
+                className="group relative block aspect-[9/15] w-full rounded-xl overflow-hidden border border-white/10 bg-[#050608]"
               >
                 <Image
                   src={activeApp.screen}
                   alt={`${activeApp.name} live interface`}
                   fill
-                  sizes="320px"
+                  sizes="300px"
                   className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
                   priority
                 />
@@ -249,8 +228,8 @@ export const HeroSection: React.FC = () => {
                   <ArrowUpRight className="w-3.5 h-3.5 text-white flex-shrink-0" />
                 </div>
               </Link>
-            )}
-          </div>
+            </div>
+          )}
         </motion.div>
       </div>
 
