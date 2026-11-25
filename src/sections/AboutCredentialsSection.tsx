@@ -20,10 +20,10 @@ export const AboutCredentialsSection: React.FC = () => {
       <div className="pb-6 border-b border-white/[0.08] flex flex-col lg:flex-row lg:items-end justify-between gap-4">
         <div className="max-w-2xl">
           <div className="text-[11px] font-mono uppercase tracking-widest text-typography-faint mb-2">
-            04 // About Me &amp; Verified Credentials
+            04 // Who I Am
           </div>
           <h2 className="swiss-heading font-heading font-bold text-white">
-            Why I obsess over real-world constraints.
+            Still early. Building from Bhopal with intent.
           </h2>
         </div>
 
@@ -32,7 +32,7 @@ export const AboutCredentialsSection: React.FC = () => {
           onClick={() => proceduralAudio.tick()}
           className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-accent-android transition-colors self-start lg:self-auto"
         >
-          <span>Full Bio &amp; Experience</span>
+          <span>Full Story &amp; Timeline</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>
@@ -43,10 +43,10 @@ export const AboutCredentialsSection: React.FC = () => {
         <div className="lg:col-span-7 py-7 lg:pr-10 flex flex-col justify-between gap-8">
           <div className="space-y-4 text-sm sm:text-base text-typography-muted font-sans leading-relaxed">
             <p>
-              I&apos;m <strong className="text-white font-semibold">Vaidik Gandhi</strong>, a final-year B.Tech CSE (AI &amp; ML) engineer at LNCT Bhopal (&apos;26). Whether I&apos;m building peer-to-peer SwarmOS device clusters, quantum-inspired routing solvers (QRoute), or edge YOLOv8 vision pipelines, I focus on systems that keep working when assumptions break.
+              I&apos;m <strong className="text-white font-semibold">Vaidik Gandhi</strong>—quietly focused by nature, and restlessly curious whenever something doesn&apos;t make sense yet. When things get messy or unfamiliar, I don&apos;t panic; I break the problem down step by step until I actually understand it from the inside out.
             </p>
             <p>
-              That same obsession pushed me to start <strong className="text-white font-medium">VaidikTech</strong>—shipping 100% offline, hardware-encrypted Android software used daily by Indian pawnbrokers, jewellers in concrete basement dead-zones, and High Court advocates whose client files can never sit on public multi-tenant clouds.
+              What keeps me up at 2 AM isn&apos;t buzzwords—it&apos;s figuring out hard problems nobody handed me a manual for, pushing myself past what I knew yesterday, and seeing something real work in the hands of ordinary people around me in Bhopal.
             </p>
 
             {/* Clean Metadata Row */}

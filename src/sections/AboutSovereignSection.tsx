@@ -20,7 +20,7 @@ export const AboutSovereignSection: React.FC = () => {
           <span>Scene 06 · Sovereign Ethos & Identity</span>
         </div>
         <h2 className="text-3xl sm:text-5xl font-heading font-extrabold tracking-tight text-typography-primary">
-          Why I build for India&apos;s trades.
+          Still early. Building from Bhopal with intent.
         </h2>
       </div>
 
@@ -28,7 +28,11 @@ export const AboutSovereignSection: React.FC = () => {
         {/* Left Column: Human Narrative & Principles (7 Cols) */}
         <div className="lg:col-span-7 flex flex-col gap-6 text-base sm:text-lg font-sans text-typography-secondary leading-relaxed">
           <p>
-            I am a systems architect and applied AI/ML engineer based in Bhopal, India, and the founder of{" "}
+            I&apos;m <strong className="text-white font-semibold">Vaidik Gandhi</strong>—quietly focused, restlessly curious, and happiest when I&apos;m figuring out something nobody handed me a manual for. When things get chaotic or unfamiliar, I slow down, break the problem into pieces, and stay with it until every part makes sense.
+          </p>
+
+          <p>
+            What drives me at 2 AM isn&apos;t hype—it&apos;s pushing past what I knew yesterday and watching software I built actually work for ordinary people around me in Bhopal, from local shopkeepers and pawnbrokers to advocates—alongside my deeper systems and AI experiments under{" "}
             <a
               href="https://vaidiktech.app"
               target="_blank"
@@ -37,15 +41,11 @@ export const AboutSovereignSection: React.FC = () => {
             >
               VaidikTech
             </a>
-            . My work spans distributed multi-agent swarms, quantum-inspired optimization algorithms, and air-gapped sovereign software platforms running mission-critical commercial workloads.
+            .
           </p>
 
           <p>
-            Traditional trades and critical field operations in India do not happen in air-conditioned tech hubs with gigabit fiber. They happen in crowded basements with erratic power, thick concrete walls, and zero cellular reception. When a jeweller prints a tax invoice, an advocate inspects a court limitation calendar, or an emergency mesh coordinates field units, a cloud timeout is not an inconvenience—it halts operations.
-          </p>
-
-          <p>
-            That is why my architecture strictly enforces <strong className="text-typography-primary font-semibold">deterministic data sovereignty</strong>, zero-drift integer math, hardware-backed cryptographic roots of trust, and edge intelligence. I bridge deep algorithmic theory—from simulated annealing in transit networks to autonomous swarm consensus—with hardened, production-grade software that operates reliably in zero-connectivity environments.
+            I care about honesty, high ownership, and letting my work speak louder than claims.
           </p>
 
           {/* Quick Verified Bio Metadata */}

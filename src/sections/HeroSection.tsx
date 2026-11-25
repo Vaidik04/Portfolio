@@ -84,7 +84,7 @@ export const HeroSection: React.FC = () => {
         </div>
 
         <span className="text-[11px] font-mono text-typography-faint tabular-mono">
-          LNCT &apos;26 · B.TECH CSE (AI &amp; ML)
+          STILL EARLY · BUILDING WITH INTENT
         </span>
       </motion.div>
 
@@ -98,9 +98,9 @@ export const HeroSection: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
             className="swiss-display font-heading font-bold text-white"
           >
-            Relentlessly curious.{" "}
+            Quietly focused.{" "}
             <span className="text-typography-muted font-normal block sm:inline">
-              Built from first principles.
+              Restlessly curious.
             </span>
           </motion.h1>
 
@@ -110,7 +110,7 @@ export const HeroSection: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
             className="mt-5 text-sm sm:text-base text-typography-muted font-sans leading-relaxed max-w-xl"
           >
-            I&apos;m <strong className="text-white font-semibold">Vaidik</strong>—a CS (AI &amp; ML) undergrad who likes taking hard problems apart until every byte makes sense. Whether it&apos;s distributed agent meshes, routing optimization, or offline software trusted by real shops every day, I don&apos;t ship half-measures.
+            I&apos;m <strong className="text-white font-semibold">Vaidik</strong>—I observe deeply, stay calm when things get chaotic, and can&apos;t leave a hard question alone until I truly understand it. Still early in my journey, building out of Bhopal with intent: figuring out problems without a manual, pushing past yesterday, and making real things work for ordinary people around me.
           </motion.p>
 
           {/* Flagship Apps Switcher Kept Right in Hero */}
@@ -232,7 +232,7 @@ export const HeroSection: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Bottom Hairline Specification Strip */}
+      {/* Bottom Hairline Personal Principles Strip */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -241,28 +241,28 @@ export const HeroSection: React.FC = () => {
       >
         <div>
           <div className="text-[10px] font-mono uppercase tracking-widest text-typography-faint">
-            01 // Focus
+            01 // Temperament
           </div>
           <div className="text-xs sm:text-sm font-sans font-medium text-white mt-1">
-            AI/ML · Distributed Systems · Mobile
+            Calm under chaos
           </div>
         </div>
 
         <div>
           <div className="text-[10px] font-mono uppercase tracking-widest text-typography-faint">
-            02 // Shipped
+            02 // Habit
           </div>
-          <div className="text-xs sm:text-sm font-sans font-medium text-white mt-1 tabular-mono">
-            3 Play Store Releases · 37+ Builds
+          <div className="text-xs sm:text-sm font-sans font-medium text-white mt-1">
+            Let actions do the talking
           </div>
         </div>
 
         <div>
           <div className="text-[10px] font-mono uppercase tracking-widest text-typography-faint">
-            03 // Verified
+            03 // Drive
           </div>
           <div className="text-xs sm:text-sm font-sans font-medium text-white mt-1">
-            IIT Kharagpur &amp; Madras (NPTEL)
+            Hard problems, no manual
           </div>
         </div>
 
@@ -270,15 +270,15 @@ export const HeroSection: React.FC = () => {
           type="button"
           onClick={() => {
             proceduralAudio.tick();
-            document.getElementById("engineering-craft")?.scrollIntoView({ behavior: "smooth" });
+            document.getElementById("selected-works")?.scrollIntoView({ behavior: "smooth" });
           }}
           className="text-left group cursor-pointer"
         >
           <div className="text-[10px] font-mono uppercase tracking-widest text-typography-faint group-hover:text-accent-android transition-colors">
-            04 // Interactive Proofs ↓
+            04 // Proof ↓
           </div>
-          <div className="text-xs sm:text-sm font-mono font-medium text-accent-android mt-1 tabular-mono">
-            Outage Switch · Math · Thermal POS
+          <div className="text-xs sm:text-sm font-mono font-medium text-accent-android mt-1">
+            See what curiosity built
           </div>
         </button>
       </motion.div>

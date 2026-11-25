@@ -28,11 +28,11 @@ export const HomeBeaconTeaser: React.FC = () => {
         </div>
 
         <h2 className="swiss-heading font-heading font-bold text-white max-w-3xl">
-          Let&apos;s build something that lasts.
+          Always up for hard problems and honest conversations.
         </h2>
 
         <p className="mt-6 text-sm sm:text-base text-typography-muted font-sans max-w-xl leading-relaxed">
-          Open to software engineering roles, AI &amp; distributed systems research collaborations, and challenging backend or edge-architecture work.
+          If you&apos;re hiring for a software or AI team, building something ambitious, or want someone calm and curious in your corner—reach out.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
