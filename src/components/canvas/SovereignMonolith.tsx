@@ -110,10 +110,9 @@ export const SovereignMonolith: React.FC = () => {
     const t = state.clock.elapsedTime;
     const clampedDelta = Math.min(delta, 0.05);
 
-    // 1. Visibility window: show cleanly in Exploded Stack / Deep Space, stay subtle behind Hero cutout
+    // 1. Visibility window: activate on manual Exploded Stack mode so the Hero canvas stays clean
     if (rootRef.current) {
-      const visibleInHero = scrollProgress <= 0.14;
-      rootRef.current.visible = visibleInHero || manualExploded;
+      rootRef.current.visible = manualExploded;
       if (!rootRef.current.visible) return;
 
       const isCompact = isPortrait || size.width < 1080;

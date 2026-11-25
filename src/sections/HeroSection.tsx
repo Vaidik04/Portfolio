@@ -75,10 +75,10 @@ export const HeroSection: React.FC = () => {
         </span>
       </motion.div>
 
-      {/* Main 12-Col Hero: Left Personal Voice + Apps | Right Clean Cutout Standing in Open Space */}
-      <div className="my-auto pt-6 grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-end pointer-events-auto">
+      {/* Main 12-Col Hero: Left Personal Voice + Apps | Right Seamless Studio Portrait */}
+      <div className="my-auto py-4 sm:py-6 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center pointer-events-auto">
         {/* Left 7 Cols */}
-        <div className="md:col-span-7 flex flex-col pb-4">
+        <div className="md:col-span-7 flex flex-col">
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -170,31 +170,43 @@ export const HeroSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Right 5 Cols: Transparent Background-Removed Cutout of Vaidik Standing With Folded Hands */}
+        {/* Right 5 Cols: Seamless Obsidian Studio Portrait or Interactive App Preview */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-          className="md:col-span-5 flex flex-col items-center md:items-end justify-end relative"
+          className="md:col-span-5 flex flex-col items-center md:items-end justify-center relative"
         >
           {spotlightMode === "portrait" ? (
-            <div className="relative w-[240px] sm:w-[270px] lg:w-[300px] h-[380px] sm:h-[430px] lg:h-[470px] flex items-end justify-center select-none">
-              {/* Subtle Ambient Halo Behind Shoulders — No Box Border */}
+            <div
+              className="relative w-full max-w-[330px] sm:max-w-[360px] lg:max-w-[390px] aspect-[3/4] overflow-hidden select-none"
+              style={{
+                maskImage: "linear-gradient(to bottom, black 74%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 74%, transparent 100%)",
+              }}
+            >
+              {/* True Alpha Radial Feather So Portrait Melts Effortlessly Into Obsidian Canvas */}
               <div
-                aria-hidden="true"
-                className="absolute top-12 inset-x-6 h-52 rounded-full bg-sky-500/10 blur-[80px] pointer-events-none"
-              />
-              <Image
-                src="/assets/vaidik_cutout.png"
-                alt="Vaidik Gandhi"
-                fill
-                sizes="(max-width: 768px) 240px, 300px"
-                className="object-contain object-bottom drop-shadow-[0_24px_45px_rgba(0,0,0,0.9)]"
-                priority
-              />
+                className="relative w-full h-full"
+                style={{
+                  maskImage:
+                    "radial-gradient(ellipse 74% 84% at 50% 45%, black 45%, rgba(0,0,0,0.75) 66%, transparent 98%)",
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 74% 84% at 50% 45%, black 45%, rgba(0,0,0,0.75) 66%, transparent 98%)",
+                }}
+              >
+                <Image
+                  src="/assets/vaidik_hero_studio.jpg"
+                  alt="Vaidik Gandhi"
+                  fill
+                  sizes="(max-width: 768px) 330px, 390px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
             </div>
           ) : (
-            <div className="w-full max-w-[280px] sm:max-w-[300px] rounded-2xl border border-white/15 bg-[#080A0F]/95 backdrop-blur-xl p-2.5 shadow-2xl mb-2">
+            <div className="w-full max-w-[320px] sm:max-w-[340px] rounded-2xl border border-white/15 bg-[#080A0F]/95 backdrop-blur-xl p-2.5 shadow-2xl">
               <div className="flex items-center justify-between px-1.5 py-1.5 text-[10px] font-mono">
                 <span className="truncate font-semibold text-white">{activeApp.name}</span>
                 <button
