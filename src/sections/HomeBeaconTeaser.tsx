@@ -20,15 +20,15 @@ export const HomeBeaconTeaser: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 pointer-events-auto"
+      className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 pointer-events-auto"
     >
-      <div className="border-t border-white/[0.08] pt-14 pb-8">
-        <div className="text-[11px] font-mono uppercase tracking-widest text-accent-android mb-4">
+      <div className="border-t border-white/[0.08] pt-10 pb-6">
+        <div className="text-[11px] font-mono uppercase tracking-widest text-accent-android mb-3">
           05 // Contact &amp; Collaborations
         </div>
 
-        <h2 className="swiss-display font-heading font-bold text-white max-w-4xl">
-          Let&apos;s engineer something resilient.
+        <h2 className="swiss-heading font-heading font-bold text-white max-w-3xl">
+          Let&apos;s build something that lasts.
         </h2>
 
         <p className="mt-6 text-sm sm:text-base text-typography-muted font-sans max-w-xl leading-relaxed">

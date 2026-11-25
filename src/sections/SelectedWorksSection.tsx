@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Github, Play, Layers } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Github, Play, Layers, CheckCircle2 } from "lucide-react";
 import { PROJECTS, Project } from "@/data/projects";
 import { proceduralAudio } from "@/lib/proceduralAudio";
 import { Magnetic } from "@/components/ui/Magnetic";
@@ -14,16 +14,18 @@ const FEATURED_IDS = [
   "swarmos",
   "qroute",
   "ai-disaster-sos",
+  "gridcare",
+  "jarvis-ai",
   "advokosh",
   "girvi",
   "jewelbill",
 ];
 
 const CATEGORY_LABELS: Record<FilterCategory, string> = {
-  all: "All Selected (06)",
+  all: "All Selected (08)",
   systems: "Systems & Mesh",
   ai: "AI & Optimization",
-  commercial: "Commercial Mobile",
+  commercial: "Shipped Mobile",
 };
 
 export const SelectedWorksSection: React.FC = () => {
@@ -35,6 +37,7 @@ export const SelectedWorksSection: React.FC = () => {
 
   const [filter, setFilter] = useState<FilterCategory>("all");
   const [selectedId, setSelectedId] = useState<string>(featuredProjects[0]?.id || "swarmos");
+  const [screenIdx, setScreenIdx] = useState<number>(0);
 
   const visibleProjects = useMemo(() => {
     if (filter === "all") return featuredProjects;
@@ -50,25 +53,33 @@ export const SelectedWorksSection: React.FC = () => {
   const activeProject =
     visibleProjects.find((p) => p.id === selectedId) || visibleProjects[0] || featuredProjects[0];
 
-  const hasPhotoPreview = Boolean(
-    activeProject?.screenshots &&
-      activeProject.screenshots.length > 0 &&
-      !activeProject.screenshots[0].endsWith(".svg")
-  );
+  const validScreenshots = useMemo(() => {
+    return (activeProject?.screenshots || []).filter((s) => !s.endsWith(".svg"));
+  }, [activeProject]);
+
+  const activeScreen = validScreenshots[screenIdx] || validScreenshots[0];
+
+  const handleSelectProject = (id: string) => {
+    if (selectedId !== id) {
+      setSelectedId(id);
+      setScreenIdx(0);
+      proceduralAudio.tick();
+    }
+  };
 
   return (
     <section
       id="selected-works"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 pointer-events-auto"
+      className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full z-10 pointer-events-auto"
     >
       {/* Swiss Section Header + Filter Controls */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-white/[0.08]">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 pb-6 border-b border-white/[0.08]">
         <div className="max-w-2xl">
-          <div className="text-[11px] font-mono uppercase tracking-widest text-sky-400 mb-3">
+          <div className="text-[11px] font-mono uppercase tracking-widest text-sky-400 mb-2">
             02 // Selected Engineering Works
           </div>
           <h2 className="swiss-heading font-heading font-bold text-white">
-            From distributed swarms to zero-network ledgers.
+            AI systems, distributed meshes &amp; shipped software.
           </h2>
         </div>
 
@@ -83,6 +94,7 @@ export const SelectedWorksSection: React.FC = () => {
                 onClick={() => {
                   proceduralAudio.tick();
                   setFilter(key);
+                  setScreenIdx(0);
                 }}
                 className={`px-3 py-1.5 rounded-md font-mono text-[11px] transition-colors cursor-pointer border ${
                   active
@@ -97,10 +109,10 @@ export const SelectedWorksSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Interactive 12-Column Split Index (Left List / Right Inspection Stage) */}
+      {/* Interactive 12-Column Split Index (Left List / Right Full Inspection Stage) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-white/[0.08]">
-        {/* Left 7 Cols: Interactive Project Index */}
-        <div className="lg:col-span-7 divide-y divide-white/[0.08]">
+        {/* Left 6 Cols: Interactive Project Index */}
+        <div className="lg:col-span-6 divide-y divide-white/[0.08]">
           {visibleProjects.map((project, idx) => {
             const isSelected = activeProject?.id === project.id;
             const num = String(idx + 1).padStart(2, "0");
@@ -110,27 +122,19 @@ export const SelectedWorksSection: React.FC = () => {
                 key={project.id}
                 role="button"
                 tabIndex={0}
-                onMouseEnter={() => {
-                  if (selectedId !== project.id) {
-                    setSelectedId(project.id);
-                    proceduralAudio.tick();
-                  }
-                }}
-                onClick={() => {
-                  setSelectedId(project.id);
-                  proceduralAudio.tick();
-                }}
+                onMouseEnter={() => handleSelectProject(project.id)}
+                onClick={() => handleSelectProject(project.id)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    setSelectedId(project.id);
+                    handleSelectProject(project.id);
                   }
                 }}
-                className={`group py-6 sm:py-7 px-3 sm:px-4 transition-colors cursor-pointer flex items-start sm:items-center justify-between gap-4 ${
-                  isSelected ? "bg-white/[0.03]" : "hover:bg-white/[0.02]"
+                className={`group py-4 sm:py-5 px-3 sm:px-4 transition-colors cursor-pointer flex items-center justify-between gap-4 ${
+                  isSelected ? "bg-white/[0.04]" : "hover:bg-white/[0.02]"
                 }`}
               >
-                <div className="flex items-start gap-4 sm:gap-6 min-w-0">
+                <div className="flex items-start gap-3.5 sm:gap-5 min-w-0">
                   <span
                     className={`text-xs font-mono pt-1 tabular-mono transition-colors ${
                       isSelected ? "text-accent-android font-bold" : "text-typography-faint"
@@ -140,87 +144,107 @@ export const SelectedWorksSection: React.FC = () => {
                   </span>
 
                   <div className="min-w-0">
-                    <div className="flex items-center gap-2.5 flex-wrap">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <h3
-                        className={`text-xl sm:text-2xl font-heading font-bold tracking-tight transition-colors ${
+                        className={`text-base sm:text-lg font-heading font-bold tracking-tight transition-colors ${
                           isSelected ? "text-white" : "text-white/80 group-hover:text-white"
                         }`}
                       >
                         {project.name}
                       </h3>
                       <span className="text-[10px] font-mono uppercase tracking-wider text-typography-faint">
-                        · {project.category}
+                        · {project.badge}
                       </span>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-typography-muted font-sans mt-1 line-clamp-1">
+                    <p className="text-xs text-typography-muted font-sans mt-0.5">
                       {project.tagline}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 flex-shrink-0">
-                  <span className="hidden sm:inline text-[11px] font-mono text-typography-faint">
-                    {project.timeline}
-                  </span>
-                  <Link
-                    href={`/projects/${project.id}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      proceduralAudio.tick();
-                    }}
-                    className={`w-8 h-8 rounded-md border flex items-center justify-center transition-colors ${
-                      isSelected
-                        ? "border-accent-android/60 text-accent-android bg-accent-android/10"
-                        : "border-white/10 text-typography-muted group-hover:border-white/30 group-hover:text-white"
-                    }`}
-                    aria-label={`Open ${project.name} case study`}
-                  >
-                    <ArrowUpRight className="w-4 h-4" />
-                  </Link>
-                </div>
+                <Link
+                  href={`/projects/${project.id}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    proceduralAudio.tick();
+                  }}
+                  className={`w-8 h-8 rounded-md border flex items-center justify-center flex-shrink-0 transition-colors ${
+                    isSelected
+                      ? "border-accent-android/60 text-accent-android bg-accent-android/10"
+                      : "border-white/10 text-typography-muted group-hover:border-white/30 group-hover:text-white"
+                  }`}
+                  aria-label={`Open ${project.name} case study`}
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </Link>
               </div>
             );
           })}
         </div>
 
-        {/* Right 5 Cols: Pinned Live Inspection Stage */}
+        {/* Right 6 Cols: Full Untruncated Inspection Stage */}
         {activeProject && (
-          <div className="lg:col-span-5 lg:border-l border-t lg:border-t-0 border-white/[0.08] p-6 sm:p-8 flex flex-col justify-between bg-[#080A0F]/80 backdrop-blur-md">
+          <div className="lg:col-span-6 lg:border-l border-t lg:border-t-0 border-white/[0.08] p-5 sm:p-7 flex flex-col justify-between bg-[#080A0F]/90">
             <div>
               {/* Stage Header */}
-              <div className="flex items-center justify-between gap-3 pb-4 border-b border-white/[0.08]">
+              <div className="flex items-center justify-between gap-3 pb-3 border-b border-white/[0.08]">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-accent-android">
-                  {activeProject.badge}
+                  {activeProject.badge} · {activeProject.timeline}
                 </span>
                 <span className="text-[10px] font-mono text-typography-faint truncate">
                   {activeProject.platform}
                 </span>
               </div>
 
-              {/* Visual Viewport: Real Device Screen OR Architectural Telemetry Schematic */}
-              {hasPhotoPreview ? (
-                <div className="relative mt-5 h-56 sm:h-64 w-full rounded-lg overflow-hidden border border-white/10 bg-[#050608]">
-                  <Image
-                    src={activeProject.screenshots![0]}
-                    alt={`${activeProject.name} interface preview`}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover object-[center_12%]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080A0F] via-transparent to-transparent pointer-events-none" />
+              {/* Visual Viewport: Real Multi-Screen App Gallery OR Architectural Metrics */}
+              {activeScreen ? (
+                <div className="mt-4">
+                  <div className="relative h-56 sm:h-64 w-full rounded-lg overflow-hidden border border-white/10 bg-[#050608]">
+                    <Image
+                      src={activeScreen}
+                      alt={`${activeProject.name} screen ${screenIdx + 1}`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                      className="object-contain bg-[#050608]"
+                    />
+                  </div>
+                  {validScreenshots.length > 1 && (
+                    <div className="flex items-center justify-between mt-2.5 text-[10px] font-mono text-typography-faint">
+                      <span>Production Build Screens ({screenIdx + 1}/{Math.min(validScreenshots.length, 5)})</span>
+                      <div className="flex items-center gap-1">
+                        {validScreenshots.slice(0, 5).map((_, idx) => (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={() => {
+                              proceduralAudio.tick();
+                              setScreenIdx(idx);
+                            }}
+                            className={`px-2 py-0.5 rounded border cursor-pointer transition-colors ${
+                              screenIdx === idx
+                                ? "bg-white text-[#050608] border-white font-bold"
+                                : "border-white/10 text-typography-muted hover:border-white/30"
+                            }`}
+                          >
+                            0{idx + 1}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
-                <div className="mt-5 p-5 rounded-lg border border-white/[0.08] bg-[#050608] font-mono">
-                  <div className="flex items-center justify-between text-[10px] text-typography-faint pb-3 border-b border-white/[0.06] mb-4">
-                    <span>SYSTEM BENCHMARK &amp; TELEMETRY</span>
+                <div className="mt-4 p-4 rounded-lg border border-white/[0.08] bg-[#050608] font-mono">
+                  <div className="flex items-center justify-between text-[10px] text-typography-faint pb-2.5 border-b border-white/[0.06] mb-3">
+                    <span>ARCHITECTURE &amp; BENCHMARK METRICS</span>
                     <span style={{ color: activeProject.accentColor || "#38BDF8" }}>VERIFIED SPEC</span>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3.5">
                     {activeProject.keyMetrics.slice(0, 4).map((metric) => (
                       <div key={metric.label}>
                         <div className="text-[10px] text-typography-faint uppercase">{metric.label}</div>
-                        <div className="text-sm font-bold text-white mt-0.5 tabular-mono">
+                        <div className="text-xs sm:text-sm font-bold text-white mt-0.5 tabular-mono">
                           {metric.value}
                         </div>
                       </div>
@@ -229,38 +253,49 @@ export const SelectedWorksSection: React.FC = () => {
                 </div>
               )}
 
-              {/* Concise Technical Summary */}
-              <div className="mt-5 space-y-3">
+              {/* Full Untruncated Engineering Breakdown */}
+              <div className="mt-4 space-y-3">
                 <div>
                   <div className="text-[10px] font-mono uppercase tracking-wider text-typography-faint">
-                    Core Challenge
+                    Problem
                   </div>
-                  <p className="text-xs sm:text-sm text-typography-muted font-sans leading-relaxed mt-1 line-clamp-3">
+                  <p className="text-xs sm:text-sm text-typography-muted font-sans leading-relaxed mt-1">
                     {activeProject.problem}
                   </p>
                 </div>
 
                 <div>
                   <div className="text-[10px] font-mono uppercase tracking-wider text-typography-faint">
-                    Architectural Solution
+                    How I Built It
                   </div>
-                  <p className="text-xs sm:text-sm text-white/90 font-sans leading-relaxed mt-1 line-clamp-3">
+                  <p className="text-xs sm:text-sm text-white/90 font-sans leading-relaxed mt-1">
                     {activeProject.solution}
                   </p>
                 </div>
+
+                {activeProject.highlights.length > 0 && (
+                  <ul className="pt-2 space-y-1.5 text-xs text-typography-muted">
+                    {activeProject.highlights.slice(0, 3).map((hl) => (
+                      <li key={hl} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-accent-android flex-shrink-0 mt-0.5" />
+                        <span>{hl}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
-              {/* Minimal Inline Tech Stack */}
-              <div className="mt-4 pt-4 border-t border-white/[0.06] flex flex-wrap gap-x-3 gap-y-1 text-[11px] font-mono text-typography-faint">
-                {activeProject.techStack.slice(0, 6).map((tech) => (
+              {/* Tech Stack */}
+              <div className="mt-4 pt-3 border-t border-white/[0.06] flex flex-wrap gap-x-3 gap-y-1 text-[11px] font-mono text-typography-faint">
+                {activeProject.techStack.slice(0, 7).map((tech) => (
                   <span key={tech}>#{tech.replace(/\s+/g, "")}</span>
                 ))}
               </div>
             </div>
 
             {/* Stage Actions */}
-            <div className="mt-6 pt-5 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3">
-              <Magnetic strength={0.2}>
+            <div className="mt-5 pt-4 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3">
+              <Magnetic strength={0.18}>
                 <Link
                   href={`/projects/${activeProject.id}`}
                   onClick={() => proceduralAudio.tick()}
@@ -291,7 +326,7 @@ export const SelectedWorksSection: React.FC = () => {
                     className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md border border-accent-android/30 hover:border-accent-android text-xs font-mono text-accent-android transition-colors"
                   >
                     <Play className="w-3 h-3 fill-current" />
-                    <span>Play Store</span>
+                    <span>Google Play</span>
                   </a>
                 )}
               </div>
@@ -301,9 +336,9 @@ export const SelectedWorksSection: React.FC = () => {
       </div>
 
       {/* Bottom Archive Gateway */}
-      <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono">
+      <div className="mt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono">
         <span className="text-typography-faint">
-          Showing 06 featured builds from {PROJECTS.length} documented projects across AI, Quantum, Systems &amp; Mobile.
+          Showing 08 featured works from {PROJECTS.length} documented projects (including SkyCanvas, Quantum Optimization Suite &amp; ESP32-CAM).
         </span>
         <div className="flex flex-wrap items-center gap-4">
           <Link
