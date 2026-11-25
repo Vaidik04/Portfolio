@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Terminal, Shield, Cpu, Database, CheckCircle2, Copy, Check, Play, RefreshCw } from "lucide-react";
-import { sounds } from "@/lib/sound";
+import { proceduralAudio } from "@/lib/proceduralAudio";
 
 interface Snippet {
   title: string;
@@ -124,19 +124,19 @@ export const EngineeringStandardsSection: React.FC = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(current.code);
-    sounds.tick();
+    proceduralAudio.tick();
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const runSimulation = () => {
-    sounds.tick();
+    proceduralAudio.tick();
     setTesting(true);
     setTestRun(false);
     setTimeout(() => {
       setTesting(false);
       setTestRun(true);
-      sounds.shockwave();
+      proceduralAudio.shockwave();
     }, 750);
   };
 
@@ -172,7 +172,7 @@ export const EngineeringStandardsSection: React.FC = () => {
                 onClick={() => {
                   setActiveTab(index);
                   setTestRun(false);
-                  sounds.tick();
+                  proceduralAudio.tick();
                 }}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors flex items-center gap-2 whitespace-nowrap ${
                   activeTab === index

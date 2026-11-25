@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { sounds } from "@/lib/sound";
+import { proceduralAudio } from "@/lib/proceduralAudio";
 
 interface MagneticProps {
   children: React.ReactNode;
@@ -25,7 +25,7 @@ export const Magnetic: React.FC<MagneticProps> = ({
   const smoothY = useSpring(y, springConfig);
 
   const handleMouseEnter = () => {
-    sounds.tick();
+    proceduralAudio.tick();
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useWorldStore } from "@/store/useWorldStore";
-import { sounds } from "@/lib/sound";
+import { proceduralAudio } from "@/lib/proceduralAudio";
 
 export const EasterEggs: React.FC = () => {
   const { setGlitchMode, glitchMode } = useWorldStore();
@@ -12,16 +12,14 @@ export const EasterEggs: React.FC = () => {
     console.log(
       "%c" +
         `
- __      __         _      _ _     _____ _              _           _ 
- \\ \\    / /        (_)    | (_)   / ____| |            | |         | |
-  \\ \\  / /_ _ _ __  _  ___| |_   | (___ | |_ __ _ _ __ | |__   ___ | |
-   \\ \\/ / _\` | '_ \\| |/ _ \\ | |   \\___ \\| __/ _\` | '_ \\| '_ \\ / _ \\| |
-    \\  / (_| | | | | |  __/ | |   ____) | || (_| | | | | | | | (_) |_|
-     \\/ \\__,_|_| |_|_|\\___|_|_|  |_____/ \\__\\__,_|_| |_|_| |_|\\___/(_)
-                                                                      
- Independent Android Developer · Founder @ VaidikTech · Bhopal, India
- Verified Play Store Apps: Girvi | JewelBill | AdvoKosh | SwarmOS
- Interested in building dependable products together? 
+ __   __   ___   ___  ___  ___  _  __   ___    ___   _  _  ___   _  _  ___ 
+ \\ \\ / /  / _ \\ |_ _||   \\|_ _|| |/ /  / __|  / _ \\ | \\| ||   \\ | || ||_ _|
+  \\ V /  | |_| | | | | |) || | | ' <  | (_ | | |_| || .\` || |) || __ | | | 
+   \\_/   |_| |_||___||___/|___||_|\\_\\  \\___| |_| |_||_|\\_||___/ |_||_||___|
+
+ Systems & Applied AI Engineer · B.Tech CSE (AI & ML) '26 · Bhopal, India
+ Architecture: SwarmOS · QRoute · GridCare · AdvoKosh · Girvi · JewelBill
+ Press \` (backtick) for CLI HUD or Cmd/Ctrl+K for Command Palette.
  Email: vaidik.gandhi1@gmail.com | GitHub: github.com/Vaidik04
 `,
       "color: #3DDC84; font-family: monospace; font-size: 11px; font-weight: bold;"
@@ -49,7 +47,7 @@ export const EasterEggs: React.FC = () => {
       if (key === expected) {
         konamiIndex++;
         if (konamiIndex === konamiSequence.length) {
-          sounds.shockwave();
+          proceduralAudio.shockwave();
           setGlitchMode(!glitchMode);
           konamiIndex = 0;
           console.log("%c>>> KONAMI OVERRIDE: Holographic glitch mode toggled! <<<", "color: #22D3EE; font-weight: bold;");

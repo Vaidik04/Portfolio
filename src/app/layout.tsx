@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Newsreader, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ServiceWorkerSentinel } from "@/components/offline/ServiceWorkerSentinel";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-serif",
+  variable: "--font-display",
   display: "swap",
-  adjustFontFallback: false,
 });
 
 const inter = Inter({
@@ -27,33 +26,26 @@ const notoSansDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
   variable: "--font-devanagari",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vaidiktech.app"),
-  title: "Vaidik Gandhi — Systems Architect, Applied AI & Founder @ VaidikTech",
+  title: "Vaidik Gandhi — Systems & Applied AI Engineer",
   description:
-    "Engineering sovereign systems, multi-agent AI architectures, quantum-inspired optimization, and air-gapped commercial platforms. Creator of SwarmOS, QRoute, Girvi, JewelBill, and AdvoKosh.",
+    "Personal engineering portfolio of Vaidik Gandhi (B.Tech CSE AI & ML '26). Architecting distributed multi-agent swarms, quantum-inspired routing engines, edge vision systems, and air-gapped mobile software.",
   keywords: [
     "Vaidik Gandhi",
-    "Systems Architect",
+    "Systems Engineer",
     "Applied AI Engineer",
-    "Multi-Agent Systems",
+    "Machine Learning Portfolio",
     "SwarmOS",
     "QRoute",
     "GridCare",
-    "Quantum Optimization",
     "VaidikTech",
-    "Sovereign Systems",
-    "Air-Gapped Computing",
-    "Android Developer",
+    "Distributed Systems",
+    "Quantum Optimization",
     "Kotlin",
-    "Jetpack Compose",
-    "Girvi",
-    "AdvoKosh",
-    "JewelBill",
-    "Bhopal India",
+    "Python",
     "LNCT Bhopal",
   ],
   authors: [{ name: "Vaidik Gandhi" }],
@@ -62,19 +54,19 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   openGraph: {
-    title: "Vaidik Gandhi — Systems Architect, Applied AI & Founder @ VaidikTech",
+    title: "Vaidik Gandhi — Systems & Applied AI Engineer",
     description:
-      "Engineering sovereign systems, multi-agent AI architectures, quantum optimization, and air-gapped commercial platforms with mathematical rigor.",
+      "Distributed multi-agent networks, quantum-inspired optimization, edge AI, and deterministic offline-first systems.",
     url: "https://vaidiktech.app",
-    siteName: "Vaidik Gandhi Portfolio",
+    siteName: "Vaidik Gandhi — Portfolio",
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vaidik Gandhi — Systems Architect, Applied AI & Founder @ VaidikTech",
+    title: "Vaidik Gandhi — Systems & Applied AI Engineer",
     description:
-      "Engineering sovereign systems, multi-agent AI architectures, quantum optimization, and air-gapped commercial platforms with mathematical rigor.",
+      "Distributed multi-agent networks, quantum-inspired optimization, edge AI, and deterministic offline-first systems.",
   },
 };
 
@@ -151,7 +143,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansDevanagari.variable} scroll-smooth dark`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansDevanagari.variable} scroll-smooth dark`}
     >
       <head>
         <script

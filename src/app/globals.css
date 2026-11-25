@@ -3,32 +3,32 @@
 @tailwind utilities;
 
 :root {
-  /* Ink & Brass Palette Tokens (WCAG AAA Verified) */
-  --bg: #0E0F11;
-  --surface-1: #16171A;
-  --surface-2: #1D1F23;
-  --border: #2A2C31;
-  --border-hover: #3E4149;
-  
-  --text: #ECE8DF;
-  --text-muted: #9A9A9F;
-  --text-faint: #6B6C72;
+  /* Swiss Cybernetic Hardware Palette Tokens */
+  --bg: #050608;
+  --surface-1: #090B10;
+  --surface-2: #0F121A;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.2);
 
-  --accent: #D4A24C;
-  --accent-hover: #E4B766;
-  --accent-press: #B98935;
-  --accent-on: #14110A;
+  --text: #F4F4F5;
+  --text-muted: #94A3B8;
+  --text-faint: #64748B;
 
-  --danger: #D95C5C;
-  --success: #4E9A68;
-  --warning: #C88A3E;
+  --accent: #3DDC84;
+  --accent-hover: #4ADE80;
+  --accent-press: #22C55E;
+  --accent-on: #050608;
+
+  --danger: #F43F5E;
+  --success: #3DDC84;
+  --warning: #F59E0B;
 
   /* Editorial Motion Tokens */
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
-  --duration-fast: 180ms;
-  --duration-medium: 350ms;
-  --duration-slow: 700ms;
+  --duration-fast: 160ms;
+  --duration-medium: 280ms;
+  --duration-slow: 600ms;
 }
 
 html {
@@ -93,22 +93,29 @@ body {
   background: var(--accent);
 }
 
-/* Accessible Brass Focus Indicator */
+/* Accessible Focus Indicator */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-/* Fluid responsive typography utilities */
-.clamp-title {
-  font-size: clamp(2.25rem, 5vw + 1rem, 4.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
+/* Swiss Blueprint Hairline Utilities */
+.swiss-display {
+  font-size: clamp(2.4rem, 5.2vw + 0.5rem, 5.25rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
 }
 
-.clamp-subtitle {
-  font-size: clamp(1rem, 1.5vw + 0.5rem, 1.25rem);
-  line-height: 1.6;
+.swiss-heading {
+  font-size: clamp(1.85rem, 3vw + 0.5rem, 3.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+
+.tabular-mono {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
 }
 
 @keyframes heroProgress {

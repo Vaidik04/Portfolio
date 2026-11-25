@@ -52,9 +52,9 @@ const config: Config = {
         warning: "var(--warning)",
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "Newsreader", "Georgia", "serif"],
-        heading: ["var(--font-serif)", "Newsreader", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "Inter", "-apple-system", "sans-serif"],
+        serif: ["var(--font-sans)", "Inter", "sans-serif"],
+        heading: ["var(--font-display)", "var(--font-sans)", "Inter", "-apple-system", "sans-serif"],
+        sans: ["var(--font-sans)", "Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
         mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
         devanagari: ["var(--font-devanagari)", "Noto Sans Devanagari", "sans-serif"],
       },
