@@ -117,15 +117,15 @@ export const SovereignMonolith: React.FC = () => {
       if (!rootRef.current.visible) return;
 
       const isCompact = isPortrait || size.width < 1080;
-      const targetX = manualExploded ? 0 : isCompact ? 1.05 : 2.1;
-      const targetY = manualExploded ? 0 : isCompact ? 1.15 : 0.05;
-      const targetZ = manualExploded ? -0.8 : isCompact ? -2.2 : 0;
+      const targetX = manualExploded ? 0 : isCompact ? 0 : 1.75;
+      const targetY = manualExploded ? 0 : 0;
+      const targetZ = manualExploded ? -0.8 : -2.6;
 
       rootRef.current.position.x = THREE.MathUtils.damp(rootRef.current.position.x, targetX, 4.5, clampedDelta);
       rootRef.current.position.y = THREE.MathUtils.damp(rootRef.current.position.y, targetY, 4.5, clampedDelta);
       rootRef.current.position.z = THREE.MathUtils.damp(rootRef.current.position.z, targetZ, 4.5, clampedDelta);
 
-      const baseScale = isCompact ? 0.52 : hovered ? 1.04 : 0.96;
+      const baseScale = isCompact ? 0.55 : hovered ? 0.92 : 0.85;
       const nextScale = THREE.MathUtils.damp(rootRef.current.scale.x, baseScale, 5, clampedDelta);
       rootRef.current.scale.setScalar(nextScale);
     }
